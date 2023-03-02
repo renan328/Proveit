@@ -19,7 +19,9 @@ CREATE TABLE Usuarios (
   Categorias_id INTEGER UNSIGNED NOT NULL,
   Foto BLOB NULL,
   Receitas_id INTEGER UNSIGNED NULL,
-  PRIMARY KEY(idUsuario)
+  PRIMARY KEY(idUsuario),
+  FOREIGN KEY (Categoria) 
+  -- foreign key
 );
 
 CREATE TABLE Dicas (

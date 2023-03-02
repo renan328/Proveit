@@ -43,6 +43,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.32, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
