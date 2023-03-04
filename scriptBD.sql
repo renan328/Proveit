@@ -10,6 +10,13 @@ CREATE TABLE Ingredientes (
   PRIMARY KEY(idIngredientes)
 );
 
+CREATE TABLE Categorias (
+  idCategoria INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Nome VARCHAR(255) NULL,
+  Foto BLOB NULL,
+  PRIMARY KEY(idCategoria)
+);
+
 CREATE TABLE Usuarios (
   idUsuario INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   Nome VARCHAR(255) NOT NULL,
@@ -20,58 +27,23 @@ CREATE TABLE Usuarios (
   Foto BLOB NULL,
   Receitas_id INTEGER UNSIGNED NULL,
   PRIMARY KEY(idUsuario),
-  FOREIGN KEY (Categoria) 
-  -- foreign key
-);
-
-CREATE TABLE Dicas (
-  idDicas INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Titulo INTEGER UNSIGNED NULL,
-  Categoria_id INTEGER UNSIGNED NULL,
-  Texto_dica INTEGER UNSIGNED NULL,
-  Receita_id INTEGER UNSIGNED NULL,
-  Usuario_id INTEGER UNSIGNED NULL,
-  Aproveitamento BOOL NULL,
-  PRIMARY KEY(idDicas)
+  FOREIGN KEY (Categorias_id) REFERENCES Categorias(idCategoria),
+  FOREIGN KEY (Receitas_id) REFERENCES Receitas(idReceitas)
 );
 
 CREATE TABLE Avaliacoes (
-  idAvaliacoes INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  idAvaliacao INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   Estrelas INTEGER UNSIGNED NOT NULL,
   Comentario VARCHAR(255) NULL,
   Receita_id INTEGER UNSIGNED NULL,
-  Usuario_id INTEGER UNSIGNED NULL,
-  PRIMARY KEY(idAvaliacoes)
-);
-
-CREATE TABLE Categorias (
-  idCategoria INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Nome VARCHAR(255) NULL,
-  Foto BLOB NULL,
-  PRIMARY KEY(idCategoria)
-);
-
-CREATE TABLE Receitas_vistas (
-  idReceitas_vistas INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
-  Receita_id INTEGER UNSIGNED NULL,
-  Usuario_id INTEGER UNSIGNED NULL,
-  PRIMARY KEY(idReceitas_vistas, Usuarios_idUsuario),
-  INDEX Receitas_vistas_FKIndex1(Usuarios_idUsuario)
-);
-
-CREATE TABLE Receitas_favoritas (
-  idReceitas_favoritas INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
-  Receita_id INTEGER UNSIGNED NOT NULL,
-  Usuario_id INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(idReceitas_favoritas, Usuarios_idUsuario),
-  INDEX Receitas_favoritas_FKIndex1(Usuarios_idUsuario)
+  Usuario_id INTEGER UNSIGNED NULL,  
+  FOREIGN KEY (Usuario_id) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (Receitas_id) REFERENCES Receitas(idReceitas),
+  PRIMARY KEY(idAvaliacao)
 );
 
 CREATE TABLE Receitas (
   idReceita INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
   Foto BLOB NOT NULL,
   Nome INTEGER UNSIGNED NOT NULL,
   Categorias_id INTEGER UNSIGNED NOT NULL,
@@ -86,70 +58,97 @@ CREATE TABLE Receitas (
   Avaliacao_id INTEGER UNSIGNED NULL,
   Aproveitamento BOOL NULL,
   PRIMARY KEY(idReceita),
-  INDEX Receitas_FKIndex1(Usuarios_idUsuario)
+  FOREIGN KEY (Usuario_id) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (Ingredientes_id) REFERENCES Ingredientes(idIngredientes),
+  FOREIGN KEY (Categoria_id) REFERENCES Categorias(idCategoria),
+  FOREIGN KEY (Avaliacao_id) REFERENCES Avaliacoes(idAvaliacao)
+  );
+
+CREATE TABLE Dicas (
+  idDicas INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Titulo INTEGER UNSIGNED NULL,
+  Categoria_id INTEGER UNSIGNED NULL,
+  Texto_dica INTEGER UNSIGNED NULL,
+  Receita_id INTEGER UNSIGNED NULL,
+  Usuario_id INTEGER UNSIGNED NULL,
+  Aproveitamento BOOL NULL,
+  FOREIGN KEY (Usuario_id) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (Receitas_id) REFERENCES Receitas(idReceitas),
+  PRIMARY KEY(idDicas)
+);
+
+
+CREATE TABLE Receitas_vistas (
+  idReceitas_vistas INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Receita_id INTEGER UNSIGNED NULL,
+  Usuario_id INTEGER UNSIGNED NULL,
+  FOREIGN KEY (Usuario_id) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (Receitas_id) REFERENCES Receitas(idReceitas),
+  PRIMARY KEY(idReceitas_vistas)
+);
+
+CREATE TABLE Receitas_favoritas (
+  idReceitas_favoritas INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
+  Receita_id INTEGER UNSIGNED NOT NULL,
+  Usuario_id INTEGER UNSIGNED NOT NULL,
+  FOREIGN KEY (Usuario_id) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (Receitas_id) REFERENCES Receitas(idReceitas),
+  PRIMARY KEY(idReceitas_favoritas)
 );
 
 CREATE TABLE Usuario_Categorias (
   Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
   Categorias_idCategoria INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Usuarios_idUsuario, Categorias_idCategoria),
-  INDEX Usuario_has_Categoria_FKIndex1(Usuarios_idUsuario),
-  INDEX Usuario_has_Categoria_FKIndex2(Categorias_idCategoria)
+  FOREIGN KEY (Usuarios_idUsuario) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (Categorias_idCategoria) REFERENCES Categorias(idCategoria)
 );
 
 CREATE TABLE Usuarios_has_Dicas (
   Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
   Dicas_idDicas INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Usuarios_idUsuario, Dicas_idDicas),
-  INDEX Usuarios_has_Dicas_FKIndex1(Usuarios_idUsuario),
-  INDEX Usuarios_has_Dicas_FKIndex2(Dicas_idDicas)
+  FOREIGN KEY (Usuarios_idUsuario) REFERENCES Usuarios(idUsuario), 
+  FOREIGN KEY (Dicas_idDicas) REFERENCES Dicas(idDicas)
 );
 
 CREATE TABLE Usuarios_has_Avaliacoes (
   Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
   Avaliacoes_idAvaliacoes INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Usuarios_idUsuario, Avaliacoes_idAvaliacoes),
-  INDEX Usuarios_has_Avaliacoes_FKIndex1(Usuarios_idUsuario),
-  INDEX Usuarios_has_Avaliacoes_FKIndex2(Avaliacoes_idAvaliacoes)
+  FOREIGN KEY (Usuarios_idUsuario) REFERENCES Usuarios(idUsuario), 
+  FOREIGN KEY (Avaliacoes_idAvaliacoes) REFERENCES Avaliacoes(idAvaliacao) 
 );
 
 CREATE TABLE Receitas_has_Avaliacoes (
   Receitas_idReceita INTEGER UNSIGNED NOT NULL,
   Avaliacoes_idAvaliacoes INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Receitas_idReceita, Avaliacoes_idAvaliacoes),
-  INDEX Receitas_has_Avaliacoes_FKIndex1(Receitas_idReceita),
-  INDEX Receitas_has_Avaliacoes_FKIndex2(Avaliacoes_idAvaliacoes)
+  FOREIGN KEY (Avaliacoes_idAvaliacoes) REFERENCES Avaliacoes(idAvaliacao),
+  FOREIGN KEY (Receitas_idReceita) REFERENCES Receitas(idReceitas)
 );
 
 CREATE TABLE Dicas_has_Categorias (
   Dicas_idDicas INTEGER UNSIGNED NOT NULL,
   Categorias_idCategoria INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Dicas_idDicas, Categorias_idCategoria),
-  INDEX Dicas_has_Categorias_FKIndex1(Dicas_idDicas),
-  INDEX Dicas_has_Categorias_FKIndex2(Categorias_idCategoria)
+  FOREIGN KEY (Dicas_idDicas) REFERENCES Dicas(idDicas),
+  FOREIGN KEY (Categorias_idCategoria) REFERENCES Categorias(idCategoria)
 );
 
 CREATE TABLE Receitas_has_Categorias (
   Receitas_idReceita INTEGER UNSIGNED NOT NULL,
   Categorias_idCategoria INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Receitas_idReceita, Categorias_idCategoria),
-  INDEX Receitas_has_Categorias_FKIndex1(Receitas_idReceita),
-  INDEX Receitas_has_Categorias_FKIndex2(Categorias_idCategoria)
+  FOREIGN KEY (Receitas_idReceita) REFERENCES Receitas(idReceitas),
+  FOREIGN KEY (Categorias_idCategoria) REFERENCES Categorias(idCategoria)
 );
 
 CREATE TABLE Receitas_has_Ingredientes (
   Receitas_idReceita INTEGER UNSIGNED NOT NULL,
   Ingredientes_idIngredientes INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Receitas_idReceita, Ingredientes_idIngredientes),
-  INDEX Receitas_has_Ingredientes_FKIndex1(Receitas_idReceita),
-  INDEX Receitas_has_Ingredientes_FKIndex2(Ingredientes_idIngredientes)
+  FOREIGN KEY (Receitas_idReceita) REFERENCES Receitas(idReceitas),
+  FOREIGN KEY (Ingredientes_idIngredientes) REFERENCES Ingredientes(idIngredientes)
 );
 
 CREATE TABLE Receitas_has_Dicas (
   Receitas_idReceita INTEGER UNSIGNED NOT NULL,
   Dicas_idDicas INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(Receitas_idReceita, Dicas_idDicas),
-  INDEX Receitas_has_Dicas_FKIndex1(Receitas_idReceita),
-  INDEX Receitas_has_Dicas_FKIndex2(Dicas_idDicas)
+  FOREIGN KEY (Receitas_idReceita) REFERENCES Receitas(idReceitas), 
+  FOREIGN KEY (Dicas_idDicas) REFERENCES Dicas(idDicas)
 );
-
