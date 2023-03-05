@@ -11,8 +11,6 @@ namespace proveit.DTO
         public string Senha { get; set; }
         // public Blob Foto { get; set; }
         public int Categorias_id { get; set; }
-        public int Receitas_id { get; set; }
-
 
     }
 }

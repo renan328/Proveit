@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using proveit.DAO;
+using proveit.DTO;
 
 namespace proveit.Controllers
 {
@@ -10,9 +11,29 @@ namespace proveit.Controllers
     {
         public IActionResult ListarUsuarios()
         {
-            UsuarioDAO dao = new UsuarioDAO();
+            var dao = new UsuarioDAO();
             var usuarios = dao.ListarUsuarios();
+
             return Ok(usuarios);
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarUsuario(UsuarioDTO usuario)
+        {
+            var dao = new UsuarioDAO();
+            dao.CadastrarUsuario(usuario);
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public IActionResult AlterarUsuario(UsuarioDTO usuario)
+        {
+            var dao = new UsuarioDAO();
+            dao.AlterarUsuario(usuario);
+
+            return Ok();
+
         }
     }
 }
