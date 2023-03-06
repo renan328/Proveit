@@ -11,7 +11,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT*FROM Usuarios INNER JOIN Categorias ON Categorias.idCategoria = Usuarios.Categorias_id;";
+            var query = "SELECT*FROM Usuarios;";
 
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
@@ -21,7 +21,6 @@ namespace proveit.DAO
             while (dataReader.Read())
             {
                 var usuario = new UsuarioDTO();
-                var categoria = new CategoriaDTO();
 
                 usuario.idUsuario = int.Parse(dataReader["idUsuario"].ToString());
                 usuario.Nome = dataReader["Nome"].ToString();
@@ -29,8 +28,7 @@ namespace proveit.DAO
                 usuario.Email = dataReader["Email"].ToString();
                 usuario.Senha = dataReader["Senha"].ToString();
                 // usuario.Foto = (dataReader["Foto"].ToString());
-                // usuario.Categorias_id = int.Parse(dataReader["Categorias_id"].ToString());
-                categoria.Nome = dataReader["Nome"].ToString();
+                usuario.Categorias_id = int.Parse(dataReader["Categorias_id"].ToString());
 
                 usuarios.Add(usuario);
             }

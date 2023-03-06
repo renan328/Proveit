@@ -149,5 +149,4 @@ CREATE TABLE Receitas_has_Dicas (
   FOREIGN KEY (Dicas_idDicas) REFERENCES Dicas(idDicas)
 );
 
-select*from Usuarios INNER JOIN Categorias ON Categorias.idCategoria = Usuarios.Categorias_id;
 INSERT INTO Categorias (idCategoria, Nome) VALUES (default, 'Salgados'), (default, 'Doces'), (default, 'Japonês'), (default, 'Carnes'), (default, 'Saladas'), (default, 'Vegano'), (default, 'Vegetariano'), (default, 'Sanduíches'), (default, 'Low Carb'), (default, 'Lanches e Snacks'), (default, 'Sopas'), (default, 'Aves'), (default, 'Frutos do mar. peixes e crustáceos'), (default, 'Acompanhamentos e molhos'), (default, 'Massas'), (default, 'Tortas e quiches'), (default, 'Bebidas'), (default, 'Rápidas'), (default, 'Sobremesas'), (default, 'Lanches'), (default, 'Bolos');

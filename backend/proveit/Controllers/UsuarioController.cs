@@ -9,6 +9,7 @@ namespace proveit.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
+        [HttpGet]
         public IActionResult ListarUsuarios()
         {
             var dao = new UsuarioDAO();
