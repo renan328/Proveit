@@ -17,7 +17,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const Titulo = props => {
     return (
-        <Text style={styles.titulo}>{props.name}!</Text>
+        <Text style={styles.titulo}>{props.name}</Text>
     );
 };
 
@@ -31,7 +31,7 @@ const CarrosselCategorias = () => {
                 <Titulo name="Chines" />
             </View>
             <View style={styles.caixaPrincipal}>
-                <Titulo name="churrasco" />
+                <Titulo name="Churrasco" />
             </View>
             <View style={styles.caixaPrincipal}>
                 <Titulo name="Salgados" />
@@ -44,14 +44,26 @@ export default CarrosselCategorias;
 
 const styles = StyleSheet.create({
     caixaPrincipal: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         paddingVertical: '30px',
-        PaddingHorizontal: '15px',
+        minWidth: '70px',
+        maxWidth: '70px',
+        textAlign: 'center',
         borderBottomLeftRadius: 5,
         borderBottomRightRadius: 5,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
         backgroundColor: 'rgba(255, 255, 255, 0.25)',
         marginHorizontal: '5px',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.10,
+        shadowRadius: 4.65,
     },
 
     titulo: {

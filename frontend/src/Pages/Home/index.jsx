@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import CartaoCategoria from '../../components/CartaoReceita/CartaoCategoria';
+import{Raleway_100Thin, Raleway_500Medium, Raleway_700Bold, useFonts}from'@expo-google-fonts/raleway';
+
 
 
 export default function Home() {
@@ -9,13 +11,21 @@ export default function Home() {
         <View style={styles.main}>
             <View style={styles.header}>
                 <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header, styles.shadowProp]}>
-                    <Text style={styles.TextoSecundario}>Bem-vindo(a)</Text>
-                    <Text style={styles.Text}>Convidado</Text>
+                    <View>
+                        <Image
+                            style={{ width: 100, height: 70 }}
+                            source={require('../../assets/proveitLogo.png')}
+                        />
+                    </View>
+                    <View>
+                        <Text style={styles.TextoSecundario}>Bem-vindo(a)</Text>
+                        <Text style={styles.Text}>Convidado</Text>
+                    </View>
                     <CartaoCategoria></CartaoCategoria>
                 </LinearGradient>
             </View>
-            <View style = {styles.listamento}>
-                <Text style = {styles.categoria}>O que há de novo?</Text>
+            <View style={styles.listamento}>
+                <Text style={styles.categoria}>O que há de novo?</Text>
             </View>
         </View>
     )
@@ -23,12 +33,14 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     main: {
+        fontFamily: 'Raleway_700Bold',
         display: 'flex',
         alignItems: 'center',
         backgroundColor: '#fff'
 
     },
     Text: {
+        fontFamily: 'Raleway_700Bold',
         textAlign: 'center',
         fontSize: 40,
         fontWeight: 700,
@@ -52,8 +64,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
-        justifyContent: 'center',
-        position: 'absolute',
+        justifyContent: 'space-between',
         width: 360,
         height: 432,
         left: 0,
@@ -76,6 +87,8 @@ const styles = StyleSheet.create({
     },
 
     shadowProp: {
+        paddingTop:'20px',
+        paddingBottom: '30px',
         shadowOffset: { largura: 100, altura: 100 },
         shadowColor: 'rgba(0, 0, 0, 0.25)',
         shadowOpacity: 0.2,
@@ -89,7 +102,12 @@ const styles = StyleSheet.create({
 
     categoria: {
         fontWeight: '700',
-        fontSize: '40',
+        fontSize: '50',
         color: '#505050',
+    },
+
+    logoMini: {
+        height: '70px',
+        backgroundColor: 'red'
     }
 });
