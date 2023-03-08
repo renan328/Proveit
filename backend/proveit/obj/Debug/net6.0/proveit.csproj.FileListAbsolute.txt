@@ -12,12 +12,6 @@ C:\TCC\backend\proveit\bin\Debug\net6.0\K4os.Hash.xxHash.dll
 C:\TCC\backend\proveit\bin\Debug\net6.0\Microsoft.OpenApi.dll
 C:\TCC\backend\proveit\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\TCC\backend\proveit\bin\Debug\net6.0\MySql.Data.dll
-C:\TCC\backend\proveit\bin\Debug\net6.0\ZstdNet.dll
-C:\TCC\backend\proveit\bin\Debug\net6.0\comerr64.dll
-C:\TCC\backend\proveit\bin\Debug\net6.0\gssapi64.dll
-C:\TCC\backend\proveit\bin\Debug\net6.0\k5sprt64.dll
-C:\TCC\backend\proveit\bin\Debug\net6.0\krb5_64.dll
-C:\TCC\backend\proveit\bin\Debug\net6.0\krbcc64.dll
 C:\TCC\backend\proveit\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 C:\TCC\backend\proveit\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\TCC\backend\proveit\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -53,3 +47,8 @@ C:\TCC\backend\proveit\obj\Debug\net6.0\refint\proveit.dll
 C:\TCC\backend\proveit\obj\Debug\net6.0\proveit.pdb
 C:\TCC\backend\proveit\obj\Debug\net6.0\proveit.genruntimeconfig.cache
 C:\TCC\backend\proveit\obj\Debug\net6.0\ref\proveit.dll
+C:\TCC\backend\proveit\bin\Debug\net6.0\runtimes\win-x64\native\comerr64.dll
+C:\TCC\backend\proveit\bin\Debug\net6.0\runtimes\win-x64\native\gssapi64.dll
+C:\TCC\backend\proveit\bin\Debug\net6.0\runtimes\win-x64\native\k5sprt64.dll
+C:\TCC\backend\proveit\bin\Debug\net6.0\runtimes\win-x64\native\krb5_64.dll
+C:\TCC\backend\proveit\bin\Debug\net6.0\runtimes\win-x64\native\krbcc64.dll

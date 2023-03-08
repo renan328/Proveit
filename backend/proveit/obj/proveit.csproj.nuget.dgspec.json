@@ -1,36 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\intel2\\ProveIt\\backend\\proveit\\proveit.csproj": {}
+    "C:\\TCC\\backend\\proveit\\proveit.csproj": {}
   },
   "projects": {
-    "C:\\intel2\\ProveIt\\backend\\proveit\\proveit.csproj": {
+    "C:\\TCC\\backend\\proveit\\proveit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\intel2\\ProveIt\\backend\\proveit\\proveit.csproj",
+        "projectUniqueName": "C:\\TCC\\backend\\proveit\\proveit.csproj",
         "projectName": "proveit",
-        "projectPath": "C:\\intel2\\ProveIt\\backend\\proveit\\proveit.csproj",
-        "packagesPath": "D:\\home\\aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\intel2\\ProveIt\\backend\\proveit\\obj\\",
+        "projectPath": "C:\\TCC\\backend\\proveit\\proveit.csproj",
+        "packagesPath": "C:\\Users\\Renan\\.nuget\\packages\\",
+        "outputPath": "C:\\TCC\\backend\\proveit\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "D:\\home\\aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Renan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net60"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net60": {
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -41,22 +40,38 @@
         }
       },
       "frameworks": {
-        "net60": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "MySql.Data": {
               "target": "Package",
-              "version": "[8.0.32, )"
+              "version": "[8.0.32.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
             }
-          }
-        }
-      },
-      "runtimes": {
-        "win7-x86": {
-          "#import": []
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

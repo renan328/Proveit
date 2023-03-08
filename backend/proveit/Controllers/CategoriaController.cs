@@ -8,7 +8,7 @@ namespace proveit.Controllers
     [ApiController]
     public class CategoriaController : ControllerBase
     {
-        [HttpGet ("{idCategoria}")]
+        [HttpGet ("{categoria_id}")]
         public IActionResult ListarCategorias()
         {
             var dao = new CategoriaDAO();

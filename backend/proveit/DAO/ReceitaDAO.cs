@@ -44,8 +44,8 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = @"INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Passo_id, Descricao, Usuario_id, Ingrediente_id, Categoria_id, Aproveitamento) VALUES
-						(@nome,@tempoPreparo,@porcoes,@valCalorico, @passo_id, @descricao, @usuario_id, @ingrediente_id, @categoria_id, @aproveitamento)";
+            var query = @"INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Passo_id, Descricao, Usuario_id, Categorias_id, Aproveitamento) VALUES
+						(@nome,@tempoPreparo,@porcoes,@valCalorico, @passo_id, @descricao, @usuario_id, , @categorias_id, @aproveitamento)";
 
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@nome", receita.Nome);
@@ -54,11 +54,61 @@ namespace proveit.DAO
             comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
             comando.Parameters.AddWithValue("@passo_id", receita.Passo_id);
             comando.Parameters.AddWithValue("@descricao", receita.Descricao);
+            comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
+            // comando.Parameters.AddWithValue("@ingredientes_id", receita.Ingrediente_id);
+            comando.Parameters.AddWithValue("@categorias_id", receita.Categoria_id);
+            comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
 
-            comando.Parameters.AddWithValue("@descricao", receita.Descricao);
-            comando.Parameters.AddWithValue("@descricao", receita.Descricao);
-            comando.Parameters.AddWithValue("@descricao", receita.Descricao);
+            comando.ExecuteNonQuery();
+            conexao.Close();
+        }
 
+        public void AlterarReceita(ReceitaDTO receita)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = @"UPDATE Receitas SET 
+                        Nome = @nome,
+                        TempoPreparo = @tempoPreparo,
+                        Porcoes =@porcoes,
+                        ValCalorico =@valCalorico,
+                        Passo_id = @passo_id
+                        Usuario_id =@usuario_id,
+                        Ingrediente_id =@ingrediente_id,
+                        Categorias_id = @categorias_id,
+                        Aproveitamento = @Aproveitamento
+                        WHERE idReceita = @id";
+
+            var comando = new MySqlCommand(query, conexao);
+
+            comando.Parameters.AddWithValue("@id", receita.idRceita);
+            comando.Parameters.AddWithValue("@nome", receita.Nome);
+            comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
+            comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
+            comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
+            comando.Parameters.AddWithValue("@passo_id", receita.Passo_id);
+            comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
+            comando.Parameters.AddWithValue("@ingrediente_id", receita.Ingrediente_id);
+            comando.Parameters.AddWithValue("@categoria_id", receita.Categoria_id);
+            comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
+
+            comando.ExecuteNonQuery();
+            conexao.Close();
+        }
+
+        public void RemoverReceita(int id)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = @"DELETE FROM Receita WHERE idReceita = @id";
+
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", id);
+
+            comando.ExecuteNonQuery();
+            conexao.Close();
         }
     }
 }

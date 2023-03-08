@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "uH9fCvwO+w7TXntlf+53fHgbHk+ysfqtf4LC+tJKRGVaRV4fzsMwcrRjoUksIZTSoaMvqdyyF0cPulu7GUjMBg==",
+  "dgSpecHash": "o8qIvkKSZNgefvmCgpLlg4mQMei/VQulKC5WFVefDzLz32lD7wnaWMCwCskOe2EicITKMvFLs/IshM193MemKw==",
   "success": true,
   "projectFilePath": "C:\\TCC\\backend\\proveit\\proveit.csproj",
   "expectedPackageFiles": [
@@ -13,7 +13,7 @@
     "C:\\Users\\Renan\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Renan\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Renan\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "C:\\Users\\Renan\\.nuget\\packages\\mysql.data\\8.0.32\\mysql.data.8.0.32.nupkg.sha512",
+    "C:\\Users\\Renan\\.nuget\\packages\\mysql.data\\8.0.32.1\\mysql.data.8.0.32.1.nupkg.sha512",
     "C:\\Users\\Renan\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\Renan\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\Renan\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
