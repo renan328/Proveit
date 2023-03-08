@@ -36,7 +36,7 @@ CREATE TABLE Receitas (
   TempoPreparo INTEGER UNSIGNED NOT NULL,
   Porcoes INTEGER UNSIGNED NOT NULL,
   ValCaolorico VARCHAR(255) NULL,
-  Passo LONGTEXT NOT NULL,
+  Passo_id INTEGER NOT NULL,
   Descricao VARCHAR(255) NOT NULL,
   Usuario_id INTEGER UNSIGNED NOT NULL,
   Ingredientes_id INTEGER UNSIGNED NOT NULL,
@@ -46,6 +46,14 @@ CREATE TABLE Receitas (
   FOREIGN KEY (Usuario_id) REFERENCES Usuarios(idUsuario),
   FOREIGN KEY (Ingredientes_id) REFERENCES Ingredientes(idIngredientes),
   FOREIGN KEY (Categorias_id) REFERENCES Categorias(idCategoria)
+  );
+  
+  CREATE TABLE Passos(
+	idPasso INTEGER UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Receita_id INTEGER UNSIGNED NOT NULL,
+    NumPasso INTEGER UNSIGNED NOT NULL,
+    PassoTexto VARCHAR(500) NOT NULL,
+    FOREIGN KEY (Receita_id) REFERENCES Receitas(idReceita)
   );
   
   CREATE TABLE Avaliacoes (
