@@ -12,7 +12,7 @@ namespace proveit.DTO
         public string Descricao { get; set; }
         public int Usuario_id { get; set; }
         public int Ingrediente_id { get; set; }
-        public int Passo_id { get; set; }
+        public List<> Passos { get; set; }
         public int Categoria_id { get; set; }
         public bool Aproveitamento { get; set; }
         public Blob Foto { get; set; }

@@ -39,28 +39,66 @@ namespace proveit.DAO
             return receitas;
         }
 
-        public void CadastrarRceita(ReceitaDTO receita)
+        public void CadastrarRceita(ReceitaDTO receita, Ingredientes_ReceitaDTO ingredientes_Receita, PassoDTO passo)
         {
-            var conexao = ConnectionFactory.Build();
-            conexao.Open();
+            try
+            {
+                var transacao = SqlTransaction.BeginTransaction();
+                var conexao = ConnectionFactory.Build();
+                conexao.Open();
 
-            var query = @"INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Passo_id, Descricao, Usuario_id, Categorias_id, Aproveitamento) VALUES
-						(@nome,@tempoPreparo,@porcoes,@valCalorico, @passo_id, @descricao, @usuario_id, , @categorias_id, @aproveitamento)";
 
-            var comando = new MySqlCommand(query, conexao);
-            comando.Parameters.AddWithValue("@nome", receita.Nome);
-            comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
-            comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
-            comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
-            comando.Parameters.AddWithValue("@passo_id", receita.Passo_id);
-            comando.Parameters.AddWithValue("@descricao", receita.Descricao);
-            comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
-            // comando.Parameters.AddWithValue("@ingredientes_id", receita.Ingrediente_id);
-            comando.Parameters.AddWithValue("@categorias_id", receita.Categoria_id);
-            comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
+                // Inserindo a receita
+                var query = @"INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento) VALUES
+						(@nome,@tempoPreparo,@porcoes,@valCalorico, @descricao, @usuario_id, , @categorias_id, @aproveitamento)";
 
-            comando.ExecuteNonQuery();
-            conexao.Close();
+                var comando = new MySqlCommand(query, conexao, transacao);
+                comando.Parameters.AddWithValue("@nome", receita.Nome);
+                comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
+                comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
+                comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
+                comando.Parameters.AddWithValue("@descricao", receita.Descricao);
+                comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
+                comando.Parameters.AddWithValue("@passos", receita.Usuario_id);
+                comando.Parameters.AddWithValue("@categorias_id", receita.Categoria_id);
+                comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
+
+                comando.ExecuteNonQuery();
+
+
+                // Inserindo os passos
+                query = @"INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES
+						(@receita_id,@NumPasso,@PassoTexto)";
+
+                comando.Parameters.AddWithValue("@Receita_id", passo.Receita_id);
+                comando.Parameters.AddWithValue("@NumPasso", passo.NumPasso);
+                comando.Parameters.AddWithValue("@PassoTexto", passo.PassoTexto);
+
+                comando.ExecuteNonQuery();
+
+
+                // Inserindo em Ingredientes_receita
+                query = @"INSERT INTO Ingredientes_Receita (Quantidade, Medida, Receita_id, Ingredientes_id) VALUES
+						(@quantidade,@medida,@receita_id, @ingredientes_id)";
+
+                comando.Parameters.AddWithValue("@NumPasso", ingredientes_Receita.Quantidade);
+                comando.Parameters.AddWithValue("@NumPasso", ingredientes_Receita.Medida);
+                comando.Parameters.AddWithValue("@NumPasso", ingredientes_Receita.Receita_id);
+                comando.Parameters.AddWithValue("@NumPasso", ingredientes_Receita.Ingredientes_id);
+
+                comando.ExecuteNonQuery();
+                conexao.Close();
+
+                transacao.Commit();
+            }
+            catch(Exception ex)
+            {
+                transacao.Rollbacj();
+                throw ex;
+            }
+
+
+            
         }
 
         public void AlterarReceita(ReceitaDTO receita)

@@ -5,8 +5,6 @@ USE Proveit;
 CREATE TABLE Ingredientes (
   idIngredientes INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   Nome VARCHAR(255) NULL,
-  Quantidade INTEGER UNSIGNED NULL,
-  Medida VARCHAR(255) NULL,
   PRIMARY KEY(idIngredientes)
 );
 
@@ -36,15 +34,12 @@ CREATE TABLE Receitas (
   TempoPreparo INTEGER UNSIGNED NOT NULL,
   Porcoes INTEGER UNSIGNED NOT NULL,
   ValCalorico VARCHAR(255) NULL,
-  Passo_id INTEGER NOT NULL,
   Descricao VARCHAR(255) NOT NULL,
   Usuario_id INTEGER UNSIGNED NOT NULL,
-  Ingredientes_id INTEGER UNSIGNED NOT NULL,
   Categorias_id INTEGER UNSIGNED NULL,
   Aproveitamento BOOL NULL,
   PRIMARY KEY(idReceita),
   FOREIGN KEY (Usuario_id) REFERENCES Usuarios(idUsuario),
-  FOREIGN KEY (Ingredientes_id) REFERENCES Ingredientes(idIngredientes),
   FOREIGN KEY (Categorias_id) REFERENCES Categorias(idCategoria)
   );
   
@@ -54,6 +49,16 @@ CREATE TABLE Receitas (
     NumPasso INTEGER UNSIGNED NOT NULL,
     PassoTexto VARCHAR(500) NOT NULL,
     FOREIGN KEY (Receita_id) REFERENCES Receitas(idReceita)
+  );
+  
+  CREATE TABLE Ingredientes_Receita(
+	idIngredientesReceita INTEGER UNSIGNED NOT NULL,
+	Quantidade INTEGER UNSIGNED NULL,
+	Medida VARCHAR(255) NULL,
+	Receita_id INTEGER UNSIGNED NOT NULL,
+	Ingredientes_id INTEGER UNSIGNED NOT NULL,
+	FOREIGN KEY (Receita_id) REFERENCES Receitas(idReceita),	
+	FOREIGN KEY (Ingredientes_id) REFERENCES Ingredientes(idIngredientes)
   );
   
   CREATE TABLE Avaliacoes (
@@ -157,4 +162,4 @@ CREATE TABLE Receitas_has_Dicas (
   FOREIGN KEY (Dicas_idDicas) REFERENCES Dicas(idDicas)
 );
 
-INSERT INTO Categorias (idCategoria, Nome) VALUES (default, 'Salgados'), (default, 'Doces'), (default, 'Japonês'), (default, 'Carnes'), (default, 'Saladas'), (default, 'Vegano'), (default, 'Vegetariano'), (default, 'Sanduíches'), (default, 'Low Carb'), (default, 'Lanches e Snacks'), (default, 'Sopas'), (default, 'Aves'), (default, 'Frutos do mar. peixes e crustáceos'), (default, 'Acompanhamentos e molhos'), (default, 'Massas'), (default, 'Tortas e quiches'), (default, 'Bebidas'), (default, 'Rápidas'), (default, 'Sobremesas'), (default, 'Lanches'), (default, 'Bolos');
+INSERT INTO Categorias (Nome) VALUES ( 'Salgados'), ('Doces'), ('Japonês'), ('Carnes'), ('Saladas'), ('Vegano'), ('Vegetariano'), ('Sanduíches'), ('Low Carb'), ('Lanches e Snacks'), ('Sopas'), ('Aves'), ('Frutos do mar. peixes e crustáceos'), ('Acompanhamentos e molhos'), ('Massas'), ('Tortas e quiches'), ('Bebidas'), ('Rápidas'), ('Sobremesas'), ('Lanches'), ('Bolos');
