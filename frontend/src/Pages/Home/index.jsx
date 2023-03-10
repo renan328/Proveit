@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import CartaoCategoria from '../../components/CartaoReceita/CartaoCategoria';
-import{Raleway_100Thin, Raleway_500Medium, Raleway_700Bold, useFonts}from'@expo-google-fonts/raleway';
-
+import { Raleway_100Thin, Raleway_500Medium, Raleway_700Bold, useFonts } from '@expo-google-fonts/raleway';
+import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
+import CartaoReceita from '../../components/CartaoReceita/CartaoReceita';
 
 
 export default function Home() {
+
+    const username = "Convidado";
     return (
         <View style={styles.main}>
             <View style={styles.header}>
@@ -19,13 +21,21 @@ export default function Home() {
                     </View>
                     <View>
                         <Text style={styles.TextoSecundario}>Bem-vindo(a)</Text>
-                        <Text style={styles.Text}>Convidado</Text>
+                        <Text style={styles.Text}>{username}</Text>
                     </View>
-                    <CartaoCategoria></CartaoCategoria>
+                    <CarrosselCategorias></CarrosselCategorias>
                 </LinearGradient>
             </View>
             <View style={styles.listamento}>
                 <Text style={styles.categoria}>O que há de novo?</Text>
+            </View>
+            <View style ={{display: 'flex', flexDirection: 'row'}}>
+                <CartaoReceita></CartaoReceita>
+                <CartaoReceita></CartaoReceita>
+                <CartaoReceita></CartaoReceita>
+                <CartaoReceita></CartaoReceita>
+                <CartaoReceita></CartaoReceita>
+                <CartaoReceita></CartaoReceita>
             </View>
         </View>
     )
@@ -34,10 +44,8 @@ export default function Home() {
 const styles = StyleSheet.create({
     main: {
         fontFamily: 'Raleway_700Bold',
-        display: 'flex',
-        alignItems: 'center',
-        backgroundColor: '#fff'
-
+        backgroundColor: '#fff',
+        alignSelf: 'stretch'
     },
     Text: {
         fontFamily: 'Raleway_700Bold',
@@ -51,6 +59,7 @@ const styles = StyleSheet.create({
     },
 
     TextoSecundario: {
+        fontFamily: 'Raleway_700Bold',
         textAlign: 'center',
         fontSize: 36,
         fontWeight: 700,
@@ -65,7 +74,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        width: 360,
+        width: '100%',
         height: 432,
         left: 0,
         top: 0,
@@ -87,7 +96,7 @@ const styles = StyleSheet.create({
     },
 
     shadowProp: {
-        paddingTop:'20px',
+        paddingTop: '20px',
         paddingBottom: '30px',
         shadowOffset: { largura: 100, altura: 100 },
         shadowColor: 'rgba(0, 0, 0, 0.25)',
@@ -102,7 +111,7 @@ const styles = StyleSheet.create({
 
     categoria: {
         fontWeight: '700',
-        fontSize: '50',
+        fontSize: '20px',
         color: '#505050',
     },
 
