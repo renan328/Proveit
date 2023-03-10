@@ -48,7 +48,7 @@ namespace proveit.DAO
                 conexao.Open();
 
 
-                // Inserindo a receita
+                // Inserindo receita
                 var query = @"INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento) VALUES
 						(@nome,@tempoPreparo,@porcoes,@valCalorico, @descricao, @usuario_id, , @categorias_id, @aproveitamento)";
 
