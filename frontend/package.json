@@ -15,6 +15,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
+    "@react-navigation/bottom-tabs": "^6.5.7",
     "expo": "^48.0.6",
     "expo-app-loading": "^2.1.1",
     "expo-font": "~11.1.1",

@@ -1,87 +1,119 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, FlatList, SectionList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Raleway_100Thin, Raleway_500Medium, Raleway_700Bold, useFonts } from '@expo-google-fonts/raleway';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
 import CartaoReceita from '../../components/CartaoReceita/CartaoReceita';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
 
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
+    );
+}
 
 export default function Home() {
-
     const username = "Convidado";
+
     return (
         <View style={styles.main}>
+
+            {/*Header principal*/}
             <View style={styles.header}>
                 <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header, styles.shadowProp]}>
-                    <View>
+
+                    {/*Header secundária (logo e eventual botão)*/}
+                    <View style={styles.subHeader}>
                         <Image
                             style={{ width: 100, height: 70 }}
                             source={require('../../assets/proveitLogo.png')}
                         />
                     </View>
+
+                    {/*Apresentação*/}
                     <View>
-                        <Text style={styles.TextoSecundario}>Bem-vindo(a)</Text>
+                        <Text style={styles.TextoSecundario}>Bem-vindo(a),</Text>
                         <Text style={styles.Text}>{username}</Text>
                     </View>
-                    <CarrosselCategorias></CarrosselCategorias>
+
+                    <View style={{ textAlign: 'center', display: 'flex', justifyContent: 'space-around' }}>
+                        <Text style={styles.subTexto}>O que você deseja hoje?</Text>
+
+                        {/*Scroll categorias*/}
+                        <CarrosselCategorias></CarrosselCategorias>
+                    </View>
+
+                    {/*Input ingredientes*/}
+                    <View style={styles.containerCentralizado}>
+                        <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput> <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#fff' }}/>
+                    </View>
+
                 </LinearGradient>
             </View>
+
             <View style={styles.listamento}>
-                <Text style={styles.categoria}>O que há de novo?</Text>
+                <Text style={styles.categoria}>O que há de <View style={{ color: '#FF7152' }}>novo?</View></Text>
             </View>
-            <View style ={{display: 'flex', flexDirection: 'row'}}>
-                <CartaoReceita></CartaoReceita>
-                <CartaoReceita></CartaoReceita>
-                <CartaoReceita></CartaoReceita>
-                <CartaoReceita></CartaoReceita>
+            <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <CartaoReceita></CartaoReceita>
                 <CartaoReceita></CartaoReceita>
             </View>
+
+            <View style={styles.listamento}>
+                <Text style={styles.categoriaBig}>Popular <View style={{ color: '#FF7152' }}>hoje</View></Text>
+            </View>
+            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <CartaoReceita></CartaoReceita>
+                <CartaoReceita></CartaoReceita>
+                <CartaoReceita></CartaoReceita>
+                <CartaoReceita></CartaoReceita>
+            </View>
+
         </View>
+
     )
 }
 
+
 const styles = StyleSheet.create({
+
+    //principal
     main: {
-        fontFamily: 'Raleway_700Bold',
         backgroundColor: '#fff',
         alignSelf: 'stretch'
     },
-    Text: {
-        fontFamily: 'Raleway_700Bold',
-        textAlign: 'center',
-        fontSize: 40,
-        fontWeight: 700,
-        color: '#fff',
-        textShadowColor: 'rgba(0, 0, 0, 0.25)',
-        textShadowOffset: { width: -1, height: 1 },
-        textShadowRadius: 5
+
+    containerCentralizado: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
-    TextoSecundario: {
-        fontFamily: 'Raleway_700Bold',
-        textAlign: 'center',
-        fontSize: 36,
-        fontWeight: 700,
-        color: 'rgba(255, 255, 255, 0.8)',
-        textShadowColor: 'rgba(0, 0, 0, 0.25)',
-        textShadowOffset: { width: -1, height: 1 },
-        textShadowRadius: 5
+    //header
+    logoMini: {
+        height: '70px',
+        backgroundColor: 'red'
     },
 
     header: {
         display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
         justifyContent: 'space-between',
         width: '100%',
-        height: 432,
+        height: 500,
         left: 0,
         top: 0,
         borderBottomLeftRadius: 65,
         borderBottomRightRadius: 65,
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: 0,
+
         overflow: 'hidden',
         shadowColor: "#000",
         shadowOffset: {
@@ -92,7 +124,14 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 7,
-        // backgroundColor: linear-gradient(180deg, #FF7152 23.3%, #FFB649 100%)
+    },
+
+    subHeader: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItens: 'center',
+        justifyContent: 'center'
     },
 
     shadowProp: {
@@ -104,19 +143,73 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
     },
 
+    Text: {
+        fontFamily: 'Raleway_700Bold',
+        textAlign: 'center',
+        fontSize: 40,
+        fontWeight: 700,
+        color: '#fff',
+        textShadowColor: 'rgba(0, 0, 0, 0.1)',
+        textShadowOffset: { width: -1, height: 3 },
+        textShadowRadius: 3
+    },
+
+    TextoSecundario: {
+        fontFamily: 'Raleway_700Bold',
+        textAlign: 'center',
+        fontSize: 36,
+        fontWeight: 700,
+        color: 'rgba(255, 255, 255, 0.8)',
+        textShadowColor: 'rgba(0, 0, 0, 0.1)',
+        textShadowOffset: { width: -1, height: 3 },
+        textShadowRadius: 3
+    },
+
+    subTexto: {
+        fontFamily: 'Raleway_600SemiBold',
+        color: '#fff',
+        fontWeight: '400'
+    },
+
+    ingredienteInput: {
+        marginHorizontal: '5px',
+        paddingHorizontal: '7px',
+        fontSize: '11px',
+        fontFamily: 'Raleway_600SemiBold',
+        color: '#505050',
+        height: '35px',
+        width: '296px',
+        backgroundColor: '#fff',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+    },
+
+    //listas
     listamento: {
         textAlign: 'center',
         margin: '40px',
     },
 
     categoria: {
-        fontWeight: '700',
+        fontFamily: 'Raleway_800ExtraBold',
         fontSize: '20px',
         color: '#505050',
     },
 
-    logoMini: {
-        height: '70px',
-        backgroundColor: 'red'
+    categoriaBig: {
+        marginTop: '40px',
+        fontFamily: 'Raleway_800ExtraBold',
+        fontSize: '30px',
+        color: '#505050',
     }
+
 });
