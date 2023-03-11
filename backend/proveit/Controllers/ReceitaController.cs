@@ -6,7 +6,7 @@ using proveit.DTO;
 namespace proveit.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    // [ApiController]
     public class ReceitaController : ControllerBase
     {
         [HttpGet]
@@ -19,10 +19,10 @@ namespace proveit.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarRecetas(ReceitaDTO receita)
+        public IActionResult CadastrarRecetas(ReceitaDTO receita,PassoDTO passos, Ingredientes_ReceitaDTO ingredientes_Receita)
         {
             var dao = new ReceitaDAO();
-            dao.CadastrarRceita(receita);
+           dao.CadastrarRceita(receita, passos, ingredientes_Receita);
 
             return Ok();
 

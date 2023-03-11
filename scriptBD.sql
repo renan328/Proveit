@@ -22,14 +22,14 @@ CREATE TABLE Usuarios (
   Email VARCHAR(255) NOT NULL,
   Senha VARCHAR(255) NOT NULL,
   Categorias_id INTEGER UNSIGNED NOT NULL,
-  Foto BLOB NULL,
+  -- Foto BLOB NULL,
   PRIMARY KEY(idUsuario),
   FOREIGN KEY (Categorias_id) REFERENCES Categorias(idCategoria)
 );
 
 CREATE TABLE Receitas (
   idReceita INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  Foto BLOB NULL,
+  -- Foto BLOB NULL,
   Nome VARCHAR(255) NOT NULL,
   TempoPreparo INTEGER UNSIGNED NOT NULL,
   Porcoes INTEGER UNSIGNED NOT NULL,
@@ -37,10 +37,14 @@ CREATE TABLE Receitas (
   Descricao VARCHAR(255) NOT NULL,
   Usuario_id INTEGER UNSIGNED NOT NULL,
   Categorias_id INTEGER UNSIGNED NULL,
+  Passos_id INTEGER UNSIGNED NOT NULL,
+  Ingredientes_Receita_id INTEGER UNSIGNED NOT NULL,
   Aproveitamento BOOL NULL,
   PRIMARY KEY(idReceita),
   FOREIGN KEY (Usuario_id) REFERENCES Usuarios(idUsuario),
-  FOREIGN KEY (Categorias_id) REFERENCES Categorias(idCategoria)
+  FOREIGN KEY (Categorias_id) REFERENCES Categorias(idCategoria),
+  FOREIGN KEY (Passos_id) REFERENCES Passos(idPasso),
+  FOREIGN KEY (Ingredientes_Receita_id) REFERENCES Ingredientes_Receita(idIngredientesReceita)
   );
   
   CREATE TABLE Passos(
