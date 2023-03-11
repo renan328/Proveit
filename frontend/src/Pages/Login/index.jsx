@@ -6,18 +6,18 @@ export default function Login(){
         <View>
             <Image></Image>
             <View>
-                <Image> </Image>
+                <Image></Image>
             </View>
-            <View>
-                <Text>Icon</Text>
-                <Text>Login</Text>
+                <View>
+                    <Text>Icon</Text>
+                    <Text>Login</Text>
 
-                <TextInput>Email ou nome de usuário</TextInput>
-                <TextInput>Senha</TextInput>
+                    <TextInput>Email ou nome de usuário</TextInput>
+                    <TextInput>Senha</TextInput>
 
-                <Text>Esqueci minha senha</Text>
-                <Text>Ainda não tem uma conta?</Text> <Text>Cadastrar</Text>
-            </View>
+                    <Text>Esqueci minha senha</Text>
+                    <Text>Ainda não tem uma conta?</Text> <Text>Cadastrar</Text>
+                </View>
         </View>    
 )};
 const styles = Stylesheet.create({
