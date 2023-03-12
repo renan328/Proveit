@@ -10,10 +10,10 @@ namespace proveit.Controllers
     public class PassoController : ControllerBase
     {
         [HttpGet]
-        public IActionResult ListarPassos()
+        public IActionResult ListarPassos(int id)
         {
             var dao = new PassoDAO();
-            var passos = dao.ListarPassos();
+            var passos = dao.ListarPassos(id);
             return Ok(passos);
         }
         [HttpPost]

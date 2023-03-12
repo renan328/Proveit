@@ -9,7 +9,7 @@ namespace proveit.DTO
     {
         public int idPasso { get; set; }
         public int Receita_id { get; set; }
-        public List<int> NumPasso { get; set; }
-        public List<string> PassoTexto { get; set; }
+        public int NumPasso { get; set; }
+        public string PassoTexto { get; set; }
     }
 }

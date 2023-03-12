@@ -6,14 +6,15 @@ namespace proveit.DAO
 {
     public class Ingredientes_ReceitaDAO
     {
-        public List<Ingredientes_ReceitaDTO> ListarIngredientesReceitas()
+        public List<Ingredientes_ReceitaDTO> ListarIngredientesReceitas(int id)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT*FROM Ingredientes_Receita;";
+            var query = "SELECT idIngredientesReceita, Ingredientes.Nome, Quantidade, Medida, Receita_id, Ingredientes_id FROM Ingredientes_Receita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id WHERE Receita_id = @id;";
 
             var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", id);
             var dataReader = comando.ExecuteReader();
 
             var ingredientes_Receita = new List<Ingredientes_ReceitaDTO>();
@@ -21,6 +22,7 @@ namespace proveit.DAO
             {
                 var ingrediente_Receita = new Ingredientes_ReceitaDTO();
                 ingrediente_Receita.idIngredientesReceita = int.Parse(dataReader["idIngredientesReceita"].ToString());
+                ingrediente_Receita.NomeIngrediente = dataReader["Nome"].ToString();
                 ingrediente_Receita.Quantidade = int.Parse(dataReader["Quantidade"].ToString());
                 ingrediente_Receita.Medida = dataReader["Medida"].ToString();
                 ingrediente_Receita.Receita_id = int.Parse(dataReader["Receita_id"].ToString());

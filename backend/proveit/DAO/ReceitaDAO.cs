@@ -10,7 +10,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT*FROM Receitas;";
+            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento FROM Receitas INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id;\r\n";
 
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
@@ -26,8 +26,7 @@ namespace proveit.DAO
                 receita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
                 receita.ValCalorico = dataReader["ValCalorico"].ToString();
                 receita.Descricao = dataReader["Descricao"].ToString();
-                receita.Usuario_id = int.Parse(dataReader["Usuario_id"].ToString());
-                receita.Categoria_id = int.Parse(dataReader["Categorias_id"].ToString());
+                receita.UsuarioNomeTag = dataReader["NomeTag"].ToString();
                 receita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                 receitas.Add(receita);

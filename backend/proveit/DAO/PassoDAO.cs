@@ -5,14 +5,15 @@ namespace proveit.DAO
 {
     public class PassoDAO
     {
-        public List<PassoDTO> ListarPassos()
+        public List<PassoDTO> ListarPassos(int id)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT*FROM Passos;";
+            var query = "SELECT idPasso, PassoTexto, NumPasso, Receita_id FROM Passos INNER JOIN Receitas on Receitas.idReceita = Passos.Receita_id WHERE Receita_id = @id;";
 
             var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", id); 
             var dataReader = comando.ExecuteReader();
 
             var passos = new List<PassoDTO>();
