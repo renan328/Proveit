@@ -37,14 +37,10 @@ CREATE TABLE Receitas (
   Descricao VARCHAR(255) NOT NULL,
   Usuario_id INTEGER UNSIGNED NOT NULL,
   Categorias_id INTEGER UNSIGNED NULL,
-  Passos_id INTEGER UNSIGNED NOT NULL,
-  Ingredientes_Receita_id INTEGER UNSIGNED NOT NULL,
   Aproveitamento BOOL NULL,
   PRIMARY KEY(idReceita),
   FOREIGN KEY (Usuario_id) REFERENCES Usuarios(idUsuario),
-  FOREIGN KEY (Categorias_id) REFERENCES Categorias(idCategoria),
-  FOREIGN KEY (Passos_id) REFERENCES Passos(idPasso),
-  FOREIGN KEY (Ingredientes_Receita_id) REFERENCES Ingredientes_Receita(idIngredientesReceita)
+  FOREIGN KEY (Categorias_id) REFERENCES Categorias(idCategoria)
   );
   
   CREATE TABLE Passos(
@@ -56,7 +52,7 @@ CREATE TABLE Receitas (
   );
   
   CREATE TABLE Ingredientes_Receita(
-	idIngredientesReceita INTEGER UNSIGNED NOT NULL,
+	idIngredientesReceita INTEGER UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	Quantidade INTEGER UNSIGNED NULL,
 	Medida VARCHAR(255) NULL,
 	Receita_id INTEGER UNSIGNED NOT NULL,
@@ -165,5 +161,9 @@ CREATE TABLE Receitas_has_Dicas (
   FOREIGN KEY (Receitas_idReceita) REFERENCES Receitas(idReceita), 
   FOREIGN KEY (Dicas_idDicas) REFERENCES Dicas(idDicas)
 );
+
+SELECT Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento FROM Receitas INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id;
+SELECT PassoTexto, NumPasso FROM Passos INNER JOIN Receitas on Receitas.idReceita = Passos.Receita_id;
+SELECT Ingredientes.Nome, Quantidade, Medida FROM Ingredientes_Receita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id;
 
 INSERT INTO Categorias (Nome) VALUES ( 'Salgados'), ('Doces'), ('Japonês'), ('Carnes'), ('Saladas'), ('Vegano'), ('Vegetariano'), ('Sanduíches'), ('Low Carb'), ('Lanches e Snacks'), ('Sopas'), ('Aves'), ('Frutos do mar. peixes e crustáceos'), ('Acompanhamentos e molhos'), ('Massas'), ('Tortas e quiches'), ('Bebidas'), ('Rápidas'), ('Sobremesas'), ('Lanches'), ('Bolos');

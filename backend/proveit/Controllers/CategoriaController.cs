@@ -12,9 +12,9 @@ namespace proveit.Controllers
         public IActionResult ListarCategorias()
         {
             var dao = new CategoriaDAO();
-            var usuarios = dao.ListarCategorias();
+            var categorias = dao.ListarCategorias();
 
-            return Ok(usuarios);
+            return Ok(categorias);
         }
     }
 }

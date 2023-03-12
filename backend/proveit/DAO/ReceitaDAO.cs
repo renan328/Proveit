@@ -27,9 +27,7 @@ namespace proveit.DAO
                 receita.ValCalorico = dataReader["ValCalorico"].ToString();
                 receita.Descricao = dataReader["Descricao"].ToString();
                 receita.Usuario_id = int.Parse(dataReader["Usuario_id"].ToString());
-                receita.Ingredientes_Receita_id = int.Parse(dataReader["Ingredientes_Receita_id"].ToString());
-                receita.Passo_id = int.Parse(dataReader["Passos_id"].ToString());
-                receita.Categoria_id = int.Parse(dataReader["Categoria_id"].ToString());
+                receita.Categoria_id = int.Parse(dataReader["Categorias_id"].ToString());
                 receita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                 receitas.Add(receita);
@@ -39,72 +37,28 @@ namespace proveit.DAO
             return receitas;
         }
 
-        public void CadastrarRceita(ReceitaDTO receita, PassoDTO passo, Ingredientes_ReceitaDTO ingredientes_Receita)
+        public void CadastrarRceita(ReceitaDTO receita)
         {
-            MySqlTransaction transacao;
             var conexao = ConnectionFactory.Build();
-            var comando = new MySqlCommand();
-            transacao = conexao.BeginTransaction();
-            comando.Transaction = transacao;
+            conexao.Open();
 
-            try
-            {
-                conexao.Open();
+            // Inserindo receita
+            var query = @"INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento) VALUES
+						(@nome,@tempoPreparo,@porcoes,@valCalorico, @descricao, @usuario_id, @categorias_id, @aproveitamento)";
 
+            var comando = new MySqlCommand(query, conexao);
 
-                // Inserindo receita
-                var query = @"INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Passos_id, Ingredientes_Receita_id, Aproveitamento) VALUES
-						(@nome,@tempoPreparo,@porcoes,@valCalorico, @descricao, @usuario_id, , @categorias_id, @passos_id, @ingredientes_Receita_id @aproveitamento)";
+            comando.Parameters.AddWithValue("@nome", receita.Nome);
+            comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
+            comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
+            comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
+            comando.Parameters.AddWithValue("@descricao", receita.Descricao);
+            comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
+            comando.Parameters.AddWithValue("@categorias_id", receita.Categoria_id);
+            comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
 
-                comando = new MySqlCommand(query, conexao, transacao);
-
-                comando.Parameters.AddWithValue("@nome", receita.Nome);
-                comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
-                comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
-                comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
-                comando.Parameters.AddWithValue("@descricao", receita.Descricao);
-                comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
-                comando.Parameters.AddWithValue("@passos_id", receita.Passo_id);
-                comando.Parameters.AddWithValue("@ingredientes_Receita_id", receita.Ingredientes_Receita_id);
-                comando.Parameters.AddWithValue("@categorias_id", receita.Categoria_id);
-                comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
-                
-                comando.ExecuteNonQuery();
-
-
-                // Inserindo os passos
-                query = @"INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES
-						(@receita_id,@NumPasso,@PassoTexto)";
-
-                    comando.Parameters.AddWithValue("@Receita_id", passo.Receita_id);
-                    comando.Parameters.AddWithValue("@NumPasso", passo.NumPasso);
-                    comando.Parameters.AddWithValue("@PassoTexto", passo.PassoTexto);
-
-                    comando.ExecuteNonQuery();
-                
-
-                // Inserindo em Ingredientes_receita
-                query = @"INSERT INTO Ingredientes_Receita (Quantidade, Medida, Receita_id, Ingredientes_id) VALUES
-						(@quantidade,@medida,@receita_id, @ingredientes_id)";
-
-                comando.Parameters.AddWithValue("@NumPasso", ingredientes_Receita.Quantidade);
-                comando.Parameters.AddWithValue("@NumPasso", ingredientes_Receita.Medida);
-                comando.Parameters.AddWithValue("@NumPasso", ingredientes_Receita.Receita_id);
-                comando.Parameters.AddWithValue("@NumPasso", ingredientes_Receita.Ingredientes_id);
-
-                comando.ExecuteNonQuery();
-                conexao.Close();
-
-                transacao.Commit();
-            }
-            catch(Exception ex)
-            {
-                transacao.Rollback();
-                throw ex;
-            }
-
-
-            
+            comando.ExecuteNonQuery();
+            conexao.Close();
         }
 
         public void AlterarReceita(ReceitaDTO receita)
@@ -131,9 +85,7 @@ namespace proveit.DAO
             comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
             comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
             comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
-            comando.Parameters.AddWithValue("@passo_id", receita.Passo_id);
             comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
-            comando.Parameters.AddWithValue("@ingrediente_id", receita.Ingredientes_Receita_id);
             comando.Parameters.AddWithValue("@categoria_id", receita.Categoria_id);
             comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
 
