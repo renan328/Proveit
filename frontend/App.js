@@ -15,8 +15,6 @@ export default function App() {
       overflow: 'hidden',
       width: '100%',
     }}>
-
-      <StatusBar translucent backgroundColor="transparent" />
       <Home />
     </View>
   );

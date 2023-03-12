@@ -1,31 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, FlatList, SectionList } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, FlatList, SectionList, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Raleway_100Thin, Raleway_500Medium, Raleway_700Bold, useFonts } from '@expo-google-fonts/raleway';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
-import CartaoReceita from '../../components/CartaoReceita/CartaoReceita';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
+import CarrosselReceitas from '../../components/CartaoReceita/CartaoReceita';
+import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 
-
-const Tab = createBottomTabNavigator();
-
-function MyTabs() {
-    return (
-        <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-        </Tab.Navigator>
-    );
-}
 
 export default function Home() {
     const username = "Convidado";
 
     return (
-        <View style={styles.main}>
 
+        <View style={styles.main}>
+             <StatusBar barStyle='light-content' backgroundColor='transparent'/>
             {/*Header principal*/}
             <View style={styles.header}>
                 <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header, styles.shadowProp]}>
@@ -53,35 +43,74 @@ export default function Home() {
 
                     {/*Input ingredientes*/}
                     <View style={styles.containerCentralizado}>
-                        <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput> <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#fff' }}/>
+                        <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput> <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#fff' }} />
                     </View>
 
                 </LinearGradient>
             </View>
 
             <View style={styles.listamento}>
-                <Text style={styles.categoria}>O que há de <View style={{ color: '#FF7152' }}>novo?</View></Text>
+                <Text style={styles.categoria}>O que há de <Text style={{ color: '#FF7152' }}>novo?</Text></Text>
             </View>
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <CartaoReceita></CartaoReceita>
-                <CartaoReceita></CartaoReceita>
+
+            <View>
+                <CarrosselReceitas></CarrosselReceitas>
+            </View>
+
+            <ReceitaEspecial></ReceitaEspecial>
+
+            <View style={styles.listamento}>
+                <Text style={styles.categoriaBig}>Popular <Text style={{ color: '#FF7152' }}>hoje</Text></Text>
+            </View>
+
+            <View>
+                <CarrosselReceitas></CarrosselReceitas>
             </View>
 
             <View style={styles.listamento}>
-                <Text style={styles.categoriaBig}>Popular <View style={{ color: '#FF7152' }}>hoje</View></Text>
+                <Text style={styles.categoria}>Novidades em <Text style={{ color: '#FF7152' }}>doces</Text></Text>
             </View>
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <CartaoReceita></CartaoReceita>
-                <CartaoReceita></CartaoReceita>
-                <CartaoReceita></CartaoReceita>
-                <CartaoReceita></CartaoReceita>
+
+            <View>
+                <CarrosselReceitas></CarrosselReceitas>
             </View>
+
+
+            <View style={styles.listamento}>
+                <Text style={styles.categoriaBig}>Baixas <Text style={{ color: '#FF7152' }}>calorias</Text></Text>
+            </View>
+
+            <View>
+                <CarrosselReceitas></CarrosselReceitas>
+            </View>
+
+
+            <View style={styles.listamento}>
+                <Text style={styles.categoria}>Sem <Text style={{ color: '#FF7152' }}>tempo</Text> perdido</Text>
+            </View>
+
+            <View>
+                <CarrosselReceitas></CarrosselReceitas>
+            </View>
+
 
         </View>
 
     )
 }
 
+/*
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
+    );
+}
+*/
 
 const styles = StyleSheet.create({
 
@@ -206,7 +235,7 @@ const styles = StyleSheet.create({
     },
 
     categoriaBig: {
-        marginTop: '40px',
+        marginTop: '30px',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: '30px',
         color: '#505050',

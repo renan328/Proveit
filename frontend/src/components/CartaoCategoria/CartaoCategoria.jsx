@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View, Text, StyleSheet, Image, SectionList } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
+//Componente único de categoria
 const ListItem = ({ item }) => {
     return (
         <View style={styles.caixaPrincipal}>
@@ -11,11 +11,12 @@ const ListItem = ({ item }) => {
     );
 };
 
+//Função para o slider
 function CarrosselCategorias() {
     return (
         <View style={styles.container}>
             <SectionList
-                contentContainerStyle={{ paddingHorizontal: 10 }} stickySectionHeadersEnabled={false} sections={SECTIONS} renderSectionHeader={({ section }) => (
+                contentContainerStyle={{ paddingHorizontal: 5 }} stickySectionHeadersEnabled={false} sections={SECTIONS} renderSectionHeader={({ section }) => (
                     <>
                         {section.horizontal ? (
                             <FlatList
@@ -38,6 +39,7 @@ function CarrosselCategorias() {
     )
 }
 
+//Imagens usadas
 const slides = {
     aves: require('../../assets/cat_aves.jpg'),
     bebidas: require('../../assets/cat_bebidas.jpg'),
@@ -62,6 +64,7 @@ const slides = {
     vegetariano: require('../../assets/cat_vegetariano.jpg'),
 }
 
+//Lista dos cartões
 const SECTIONS = [
     {
         horizontal: true,
@@ -176,7 +179,8 @@ export default CarrosselCategorias;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginVertical: '8px'
+        marginVertical: '8px',
+        paddingVertical: '2px'
       },
 
     caixaPrincipal: {
