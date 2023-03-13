@@ -49,5 +49,39 @@ namespace proveit.DAO
             comando.ExecuteNonQuery();
             conexao.Close();
         }
+
+        public void AlterarPassos(PassoDTO passo)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = @"UPDATE Passos SET 
+                        NumPasso = @numpasso,
+                        PassoTexto = @PassoTexto,
+                        Receita_id = @Receita_id,
+                        where idPasso = @id";
+
+            var comando = new MySqlCommand(query, conexao);
+
+            comando.Parameters.AddWithValue("@Receita_id", passo.Receita_id);
+            comando.Parameters.AddWithValue("@NumPasso", passo.NumPasso);
+            comando.Parameters.AddWithValue("@PassoTexto", passo.PassoTexto);
+
+            comando.ExecuteNonQuery();
+            conexao.Close();
+        }
+        public void DeletarPassos(int id)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = @"DELETE FROM Passos WHERE idPasso = @id ";
+
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", id);
+
+            comando.ExecuteNonQuery();
+            conexao.Close();
+        }
     }
 }
