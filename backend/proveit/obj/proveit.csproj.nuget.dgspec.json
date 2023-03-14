@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ThinkCentre32\\ProveIt\\backend\\proveit\\proveit.csproj": {}
+    "C:\\ThinlCentre32\\ProveIt\\backend\\proveit\\proveit.csproj": {}
   },
   "projects": {
-    "C:\\ThinkCentre32\\ProveIt\\backend\\proveit\\proveit.csproj": {
+    "C:\\ThinlCentre32\\ProveIt\\backend\\proveit\\proveit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ThinkCentre32\\ProveIt\\backend\\proveit\\proveit.csproj",
+        "projectUniqueName": "C:\\ThinlCentre32\\ProveIt\\backend\\proveit\\proveit.csproj",
         "projectName": "proveit",
-        "projectPath": "C:\\ThinkCentre32\\ProveIt\\backend\\proveit\\proveit.csproj",
+        "projectPath": "C:\\ThinlCentre32\\ProveIt\\backend\\proveit\\proveit.csproj",
         "packagesPath": "D:\\home\\aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\ThinkCentre32\\ProveIt\\backend\\proveit\\obj\\",
+        "outputPath": "C:\\ThinlCentre32\\ProveIt\\backend\\proveit\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\ProgramData\\Xamarin\\NuGet\\",
