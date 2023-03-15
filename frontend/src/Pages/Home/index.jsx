@@ -23,7 +23,7 @@ export default function Home() {
                     {/*Header secundária (logo e eventual botão)*/}
                     <View style={styles.subHeader}>
                         <Image
-                            style={{ width: 100, height: 70 }}
+                            style={{ width: 70, height: 70 }}
                             source={require('../../assets/proveitLogo.png')}
                         />
                     </View>
@@ -98,6 +98,7 @@ export default function Home() {
 
     )
 }
+
 
 /*
 const Tab = createBottomTabNavigator();

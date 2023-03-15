@@ -1,12 +1,14 @@
 import React from 'react';
+import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, useFonts } from '@expo-google-fonts/raleway';
 import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
+import Home from './src/Pages/Home';
+import ReceitaSingle from './src/Pages/ReceitaSingle';
+import Login from './src/Pages/Login';
 
-import AppLoading from 'expo-app-loading';
-import Routes from './src/routes';
-
-import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, useFonts } from '@expo-google-fonts/raleway';
+//import AppLoading from 'expo-app-loading';
+//import Routes from './src/routes';
 
 export default function App() {
 
@@ -19,9 +21,13 @@ export default function App() {
       overflow: 'hidden',
       width: '100%',
     }}>
-      <NavigationContainer>
+
+      {/* <NavigationContainer>
         <Routes />
       </NavigationContainer>
+    </View> */}
+
+      <Login/>
     </View>
   );
 }

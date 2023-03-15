@@ -1,43 +1,44 @@
 import React from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Login() {
     return (
         <View style={styles.container}>
+
             {/* Imagem de fundo */}
             <ImageBackground source={require('../../assets/cat_aves.jpg')} style={styles.background}>
+
                 {/* View Principal com gradiente */}
-                <View style={styles.linearGradient}>
-                    {/* Logo */}
-                    <View style={styles.logo}>
-                        <Image
-                            style={{ width: 100, height: 70 }}
-                            source={require('../../assets/proveitLogo.png')}
-                            resizeMode="contain"
-                        />
-                    </View>
-
-                    {/* View Login e inputs */}
-                    <View style={styles.containerLogin}>
-                        <Text style={styles.loginText}>Login</Text>
-
-                        <View style={styles.containerInput}>
-                            <TextInput style={styles.input} placeholder='Email ou nome de usuário'></TextInput>
-                            <TextInput style={styles.input} placeholder='Senha'></TextInput>
+                <LinearGradient  colors={['#FF7152', '#FFB649']} style={styles.linearGradient}>
+                        {/* Logo */}
+                        <View style={styles.logo}>
+                            <Image
+                                style={{ width: '250px', height: '220px' }}
+                                source={require('../../assets/proveitLogo.png')}
+                            />
                         </View>
-                        {/* Botão */}
-                        <TouchableOpacity style={styles.button}>
-                            <Text style={styles.buttonText}>Entrar</Text>
-                        </TouchableOpacity>
 
-                        <View style={styles.texts}>
-                            <Text>Esqueci minha senha</Text>
-                            <Text>Ainda não tem uma conta?</Text>
-                            <Text>Cadastrar</Text>
+                        {/* View Login e inputs */}
+                        <View style={styles.containerLogin}>
+                            <Text style={styles.loginText}>Login</Text>
+
+                            <View style={styles.containerInput}>
+                                <TextInput style={styles.input} placeholder='Email ou nome de usuário'></TextInput>
+                                <TextInput style={styles.input} placeholder='Senha'></TextInput>
+                            </View>
+                            {/* Botão */}
+                            <TouchableOpacity style={styles.button}>
+                                <Text style={styles.buttonText}>Entrar</Text>
+                            </TouchableOpacity>
+
+                            <View style={styles.texts}>
+                                <Text>Esqueci minha senha</Text>
+                                <Text>Ainda não tem uma conta?</Text>
+                                <Text>Cadastrar</Text>
+                            </View>
                         </View>
-                    </View>
-
-                </View>
+                    </LinearGradient>
             </ImageBackground>
             {/* comentário */}
         </View>
@@ -52,16 +53,15 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     loginText: {
-        backgroundColor: '#777',
-        color: '#000',
+        color: '#505050',
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 24,
-        fontWeight: 'bold'
+        fontSize: 28,
+        fontFamily: 'Raleway_800ExtraBold'
     },
     background: {
-        height: '100%'
+        height: '100%',
     },
     linearGradient: {
         backgroundColor: 'orange',
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: '50px',
-        borderTopLeftRadius: 40,
-        borderTopRightRadius: 40,
+        borderTopLeftRadius: 70,
+        borderTopRightRadius: 70,
         shadowRadius: 3
     },
     containerLogin: {
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     logo: {
         flex: 1,
         width: '100%',
+        height: '300px',
         marginTop: '80px',
         flexDirection: 'row',
         textAlign: 'center',

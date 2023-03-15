@@ -10,14 +10,19 @@ import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
 
 const ListItem = ({ item }) => {
     return (
+
         <View style={styles.caixaPrincipal}>
+
+            {/* Container de imagem e texto */}
             <Image style={styles.imgReceita} source={item.uri} />
             <View style={styles.containerTexto}>
                 <Text style={styles.titulo}>{item.titulo}</Text>
                 <Text style={styles.descricao} numberOfLines={1}>{item.descricao}</Text>
             </View>
 
-            <LinearGradient colors={['#FF7152', '#FFB649']} style={styles.footer}>
+            {/* Informações da footer */}
+            <LinearGradient start={{ x: -1, y: 1 }}
+                end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.footer}>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <FontAwesomeIcon style={styles.legenda} icon={faUtensils} />
                     <Text style={styles.legenda}>{item.porcoes}</Text>
@@ -34,11 +39,17 @@ const ListItem = ({ item }) => {
 
 function CarrosselReceitas() {
     return (
+
+        // Funções do carrossel, container principal
         <View style={styles.container}>
+
+            {/* Container SectionList, quebra as informações para retornar de maneira organizada. */}
             <SectionList
                 contentContainerStyle={{ paddingHorizontal: 0 }} stickySectionHeadersEnabled={false} sections={SECTIONS} renderSectionHeader={({ section }) => (
                     <>
                         {section.horizontal ? (
+
+                            // Componente FlatList, retorna apenas o slider com base no JSON mais abaixo
                             <FlatList
                                 horizontal
                                 data={section.data}
@@ -59,6 +70,8 @@ function CarrosselReceitas() {
     )
 }
 
+
+//Imagens de base, pré-integração, são as mesmas imagens das categorias
 const slides = {
     aves: require('../../assets/cat_aves.jpg'),
     bebidas: require('../../assets/cat_bebidas.jpg'),
@@ -83,6 +96,8 @@ const slides = {
     vegetariano: require('../../assets/cat_vegetariano.jpg'),
 }
 
+
+//JSON para retorno na FlatList
 const SECTIONS = [
     {
         horizontal: true,
@@ -176,7 +191,8 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         fontSize: '11px',
         fontWeight: '700',
-        marginBottom: '3px'
+        marginBottom: '3px',
+        fontFamily: 'Raleway_700Bold'
     },
 
     descricao: {
@@ -202,7 +218,7 @@ const styles = StyleSheet.create({
     legenda: {
         marginHorizontal: '3px',
         fontSize: '12px',
-        fontWeight: '700',
+        fontFamily: 'Raleway_500Medium',
         color: '#fff'
     }
 
