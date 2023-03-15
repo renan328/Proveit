@@ -25,5 +25,22 @@ namespace proveit.Controllers
 
             return Ok();
         }
+
+        [HttpPut]
+        public IActionResult AlterarIngredientes(Ingredientes_ReceitaDTO ingredientes)
+        {
+            var dao = new Ingredientes_ReceitaDAO();
+            dao.AlterarIngredientes_Receita(ingredientes);
+
+            return Ok();
+        }
+        [HttpDelete]
+        public IActionResult DeletarIngredientes(int id)
+        {
+            var dao = new Ingredientes_ReceitaDAO();
+            dao.DeletarIngredientes_Receita(id);
+
+            return Ok();
+        }
     }
 }

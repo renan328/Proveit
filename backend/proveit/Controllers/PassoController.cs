@@ -24,5 +24,21 @@ namespace proveit.Controllers
 
             return Ok();
         }
+        [HttpPut]
+        public IActionResult AlterarPasso(PassoDTO passo)
+        {
+            var dao = new PassoDAO();
+            dao.AlterarPassos(passo);
+
+            return Ok();
+        }
+        [HttpDelete]
+        public IActionResult DeletarPassos(int id)
+        {
+            var dao = new PassoDAO();
+            dao.DeletarPassos(id);
+
+            return Ok();
+        }
     }
 }

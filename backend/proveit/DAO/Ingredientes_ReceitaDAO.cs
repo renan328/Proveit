@@ -55,7 +55,7 @@ namespace proveit.DAO
             conexao.Close();
         }
 
-        public void AlterarIngredientes_Receita(IngredienteDTO ingredientes_Receita)
+        public void AlterarIngredientes_Receita(Ingredientes_ReceitaDTO Ingredientes_Receita)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
@@ -81,7 +81,7 @@ namespace proveit.DAO
             conexao.Close();
         }
 
-        public void DeletarIngredientes_Receita(IngredienteDTO ingredientes_Receita)
+        public void DeletarIngredientes_Receita(int id)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();

@@ -13,10 +13,10 @@ namespace proveit.DTO
         public int Porcoes { get; set; }
         public int MyProperty { get; set; }
         public int ValCalorico { get; set; }
-        public string Descrisao { get; set; }
+        public string Descricao { get; set; }
         public string NomeTag { get; set; }
         public bool Aproveitamento { get; set; }
-        public List <PassoDTO>Passos { get; set; }
+        public List<PassoDTO> Passos { get; set; }
         public List<Ingredientes_ReceitaDTO> Ingredientes { get; set; }
     }
 }

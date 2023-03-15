@@ -163,7 +163,7 @@ CREATE TABLE Receitas_has_Dicas (
 );
 
 SELECT Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento FROM Receitas INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id;
-SELECT PassoTexto, NumPasso FROM Passos INNER JOIN Receitas on Receitas.idReceita = Passos.Receita_id;
-SELECT Ingredientes.Nome, Quantidade, Medida FROM Ingredientes_Receita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id;
+SELECT PassoTexto, NumPasso, Receita_id FROM Passos INNER JOIN Receitas on Receitas.idReceita = Passos.Receita_id WHERE Receita_id = 2;
+SELECT Ingredientes.Nome, Quantidade, Medida FROM Ingredientes_Receita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id WHERE Receita_id = 2;
 
 INSERT INTO Categorias (Nome) VALUES ( 'Salgados'), ('Doces'), ('Japonês'), ('Carnes'), ('Saladas'), ('Vegano'), ('Vegetariano'), ('Sanduíches'), ('Low Carb'), ('Lanches e Snacks'), ('Sopas'), ('Aves'), ('Frutos do mar. peixes e crustáceos'), ('Acompanhamentos e molhos'), ('Massas'), ('Tortas e quiches'), ('Bebidas'), ('Rápidas'), ('Sobremesas'), ('Lanches'), ('Bolos');
