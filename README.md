@@ -3,13 +3,13 @@
 
 
 
-## 🥘 O que é Proveit?
+## 🥘 O que é ProveIt?
 É o projeto de nós, **uma equipe de estudantes da Etec**, para um aplicativo de auxílio culinário. Nosso objetivo é **ajudar as pessoas** em seu ambiente doméstico com as suas refeições e **alimentação em geral**.
 
 
 
 ## 💭 Mas, como?
-A ideia por trás do nosso objetivo se baseia nas _**features**_. Estamos trabalhando para que as funcionalidades do Proveit sejam de fácil uso, e, acima de tudo, **úteis** para o usuário final.
+A ideia por trás do nosso objetivo se baseia nas _**features**_. Estamos trabalhando para que as funcionalidades do ProveIt sejam de fácil uso, e, acima de tudo, **úteis** para o usuário final.
 
 **Principais funcionalidades incluem:**
 
