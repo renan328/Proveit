@@ -5,18 +5,18 @@ import Login from '../Pages/Login'
 
 const Stack = createNativeStackNavigator();
 
-export default function Routes(){
-    return(
+export default function Routes() {
+    return (
         <Stack.Navigator>
             <Stack.Screen
                 name="Login"
                 component={Login}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
-             <Stack.Screen
+            <Stack.Screen
                 name="Home"
                 component={Home}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
         </Stack.Navigator>
     )
