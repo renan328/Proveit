@@ -7,10 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 function ReceitaEspecial() {
 
     return (
-        <LinearGradient colors={['#FF7152', '#FFB649']} style={styles.containerEspecial}>
+
+        //
+        <LinearGradient start={{ x: -1, y: 1 }}
+            end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.containerEspecial}>
             <View style={styles.containerTexto}>
                 <Text style={styles.tituloEspecial}>Nossa </Text>
-                <Text style={styles.tituloEspecial2}>recomendação</Text>
+                <Text style={styles.tituloEspecial2}>seleção</Text>
                 <FontAwesomeIcon icon={'pot-food'} />
             </View>
             <View style={styles.containerReceita}>
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
         height: '220px',
         display: 'flex',
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'space-between',
         overflow: 'hidden',
         shadowColor: "#000",
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     },
 
     tituloEspecial2: {
-        fontSize: '20px',
+        fontSize: '30px',
         color: 'rgba(255, 255, 255, 0.8)',
         fontWeight: '700',
         textShadowColor: 'rgba(0, 0, 0, 0.1)',
