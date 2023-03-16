@@ -10,7 +10,7 @@ namespace proveit.DAO
 {
     public class ReceitaGeralDAO
     {
-        public List<ReceitaGeralDTO> ListarReceitas(int id)
+        public List<ReceitaGeralDTO> ListarReceitas(int id, int quantpassos, int quantingredientes)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
@@ -27,27 +27,30 @@ namespace proveit.DAO
             {
 
                 var receita = new    ReceitaGeralDTO();
+                receita.idReceita = int.Parse(dataReader["idReceita"].ToString());
+                receita.NomeReceita = dataReader["Nome"].ToString();
+                receita.TempoPreparo = int.Parse(dataReader["TempoPreparo"].ToString());
+                receita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
+                receita.ValCalorico = int.Parse(dataReader["ValCalorico"].ToString());
+                receita.Descricao = dataReader["Descricao"].ToString();
+                receita.NomeTag = dataReader["NomeTag"].ToString();
+                receita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
-                if (receita.idReceita == 0)
+                for (int i = 0; i < quantingredientes; i++)
                 {
-                    receita.idReceita = int.Parse(dataReader["idReceita"].ToString());
-                    receita.NomeReceita = dataReader["Nome"].ToString();
-                    receita.TempoPreparo = int.Parse(dataReader["TempoPreparo"].ToString());
-                    receita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
-                    receita.ValCalorico = int.Parse(dataReader["ValCalorico"].ToString());
-                    receita.Descricao = dataReader["Descricao"].ToString();
-                    receita.NomeTag = dataReader["NomeTag"].ToString();
-                    receita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
+
+                    var ingredientes = new Ingredientes_ReceitaDTO();
+                    ingredientes.NomeIngrediente = dataReader["NomeIngrediente"].ToString();
+                    ingredientes.Quantidade = int.Parse(dataReader["Quantidade"].ToString());
+                    ingredientes.Medida = dataReader["Medida"].ToString();
+                    receita.Ingredientes = new List<Ingredientes_ReceitaDTO>();
+                    receita.Ingredientes.Add(ingredientes);
 
                 }
 
-                var ingredientes = new Ingredientes_ReceitaDTO();
-                ingredientes.NomeIngrediente = dataReader["NomeIngrediente"].ToString();
-                ingredientes.Quantidade = int.Parse(dataReader["Quantidade"].ToString());
-                ingredientes.Medida = dataReader["Medida"].ToString();
-                receita.Ingredientes = new List<Ingredientes_ReceitaDTO>();
-                receita.Ingredientes.Add(ingredientes);
-
+                for (int i = 0; i < quantpassos; i++)
+                {
+                    
                 var passo = new PassoDTO();
                // passo.idPasso = int.Parse(dataReader["idPasso"].ToString());
                 passo.NumPasso = int.Parse(dataReader["NumPasso"].ToString());
@@ -55,6 +58,7 @@ namespace proveit.DAO
                 receita.Passos = new List<PassoDTO>();
                 receita.Passos.Add(passo);
 
+                }
                 receitas.Add(receita);
             }
 

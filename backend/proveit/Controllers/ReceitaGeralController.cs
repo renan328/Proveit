@@ -9,10 +9,10 @@ namespace proveit.Controllers
     public class ReceitaGeralController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Listar(int id)
+        public IActionResult Listar(int id, int quantpassos, int quantingredientes)
         {
             var dao = new ReceitaGeralDAO();
-            var receitas = dao.ListarReceitas(id);
+            var receitas = dao.ListarReceitas(id, quantpassos, quantingredientes);
 
             return Ok(receitas);
         }
