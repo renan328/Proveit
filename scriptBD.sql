@@ -163,7 +163,20 @@ CREATE TABLE Receitas_has_Dicas (
 );
 
 SELECT Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento FROM Receitas INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id;
-SELECT PassoTexto, NumPasso, Receita_id FROM Passos INNER JOIN Receitas on Receitas.idReceita = Passos.Receita_id WHERE Receita_id = 2;
-SELECT Ingredientes.Nome, Quantidade, Medida FROM Ingredientes_Receita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id WHERE Receita_id = 2;
+SELECT PassoTexto, NumPasso, Receita_id FROM Passos INNER JOIN Receitas on Receitas.idReceita = Passos.Receita_id WHERE Receita_id = 1;
+SELECT Ingredientes.Nome, Quantidade, Medida FROM Ingredientes_Receita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id WHERE Receita_id = 1;
 
 INSERT INTO Categorias (Nome) VALUES ( 'Salgados'), ('Doces'), ('Japonês'), ('Carnes'), ('Saladas'), ('Vegano'), ('Vegetariano'), ('Sanduíches'), ('Low Carb'), ('Lanches e Snacks'), ('Sopas'), ('Aves'), ('Frutos do mar. peixes e crustáceos'), ('Acompanhamentos e molhos'), ('Massas'), ('Tortas e quiches'), ('Bebidas'), ('Rápidas'), ('Sobremesas'), ('Lanches'), ('Bolos');
+
+INSERT INTO Ingredientes (Nome)
+VALUES ('Farinha de trigo');
+
+INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, Descricao, Usuario_id, Categorias_id, Aproveitamento)
+VALUES ('Bolo de chocolate', 60, 8, 'Um delicioso bolo de chocolate', 1, 2, true);
+
+INSERT INTO Passos (Receita_id, NumPasso, PassoTexto)
+VALUES (LAST_INSERT_ID(), 1, 'Pré-aqueça o forno a 180°C.');
+select * from Ingredientes;
+INSERT INTO Ingredientes_Receita (Quantidade, Medida, Receita_id, Ingredientes_id)
+VALUES (2, 'xícaras', 1, 1);
+
