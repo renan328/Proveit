@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TextInput, FlatList, SectionList, StatusBar, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
 import CarrosselReceitas from '../../components/CartaoReceita/CartaoReceita';
@@ -102,18 +101,6 @@ export default function Home({ navigation }) {
 }
 
 
-/*
-const Tab = createBottomTabNavigator();
-
-function MyTabs() {
-    return (
-        <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-        </Tab.Navigator>
-    );
-}
-*/
 
 const styles = StyleSheet.create({
 
