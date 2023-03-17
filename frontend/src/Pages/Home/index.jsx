@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, FlatList, SectionList, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, FlatList, SectionList, StatusBar, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,25 +7,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
 import CarrosselReceitas from '../../components/CartaoReceita/CartaoReceita';
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
+import Toast from 'react-native-toast-message';
 
 
-export default function Home() {
+export default function Home({ navigation }) {
     const username = "Convidado";
 
     return (
 
         <View style={styles.main}>
-             <StatusBar barStyle='light-content' backgroundColor='transparent'/>
             {/*Header principal*/}
             <View style={styles.header}>
                 <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header, styles.shadowProp]}>
-
                     {/*Header secundária (logo e eventual botão)*/}
                     <View style={styles.subHeader}>
                         <Image
-                            style={{ width: 70, height: 70 }}
+                            style={{ width: 78, height: 70 }}
                             source={require('../../assets/proveitLogo.png')}
                         />
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
+                            <Text>voltar</Text>
+                        </TouchableOpacity>
                     </View>
 
                     {/*Apresentação*/}

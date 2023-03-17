@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Toast } from "react-native-toast-message";
 
-export default function Login() {
+export default function Login( {navigation} ) {
     return (
         <View style={styles.container}>
 
@@ -28,7 +29,7 @@ export default function Login() {
                                 <TextInput style={styles.input} placeholder='Senha'></TextInput>
                             </View>
                             {/* Botão */}
-                            <TouchableOpacity style={styles.button}>
+                            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')} >
                                 <Text style={styles.buttonText}>Entrar</Text>
                             </TouchableOpacity>
 
@@ -44,6 +45,7 @@ export default function Login() {
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {
