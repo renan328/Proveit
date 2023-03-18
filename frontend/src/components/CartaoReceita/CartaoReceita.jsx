@@ -4,11 +4,12 @@ import { FlatList, View, Text, StyleSheet, Image, SectionList, TouchableOpacity 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons/faUtensils';
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 
-const ListItem = ({ item, navigation}) => {
+const ListItem = ({ navigation, item }) => {
     return (
 
         <TouchableOpacity style={styles.caixaPrincipal} onPress={() => navigation.navigate('ReceitaSingle')}>
@@ -37,7 +38,7 @@ const ListItem = ({ item, navigation}) => {
     );
 };
 
-function CarrosselReceitas() {
+function CarrosselReceitas( ) {
     return (
 
         // Funções do carrossel, container principal
