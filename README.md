@@ -30,7 +30,7 @@ O nosso projeto tem bases iniciais bem definidas. Estamos em estágios pós-inic
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-plain.svg" height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height=40/>
 
 ## 📆 Quando?
-O lançamento do aplicativo é previsto para **meados de junho - julho**, estando disponível para dispositivos Android.
+O lançamento do aplicativo é previsto para **meados de junho / julho**, estando disponível para dispositivos Android.
 
 <hr>
 
