@@ -17,7 +17,7 @@ namespace proveit.Controllers
             return Ok(passos);
         }
         [HttpPost]
-        public IActionResult CadastrarPassos([FromBody] PassoDTO passo)
+        public IActionResult CadastrarPassos(PassoDTO passo)
         {
             var dao = new PassoDAO();
             dao.CadastrarPassos(passo);
