@@ -11,7 +11,6 @@ namespace proveit.DTO
         public string NomeReceita { get; set; }
         public int TempoPreparo { get; set; }
         public int Porcoes { get; set; }
-        public int MyProperty { get; set; }
         public int ValCalorico { get; set; }
         public string Descricao { get; set; }
         public string NomeTag { get; set; }

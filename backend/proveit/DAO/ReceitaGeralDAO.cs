@@ -5,18 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
+using Mysqlx.Crud;
 
 namespace proveit.DAO
 {
     public class ReceitaGeralDAO
     {
-        public List<ReceitaGeralDTO> ListarReceitas(int id, int quantpassos, int quantingredientes)
+        public List<ReceitaGeralDTO> ListarReceitas(int id)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
 
-            var query = "select idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Ingredientes.Nome as NomeIngrediente, Ingredientes_receita.Quantidade, Ingredientes_receita.Medida, Categorias.Nome from Receitas inner join Passos on Passos.Receita_id = Receitas.idReceita inner join Ingredientes_receita on Ingredientes_receita.Receita_id = Receitas.idReceita inner join Ingredientes on Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id inner join Usuarios on Receitas.Usuario_id = Usuarios.idUsuario inner join Categorias on Categorias.idCategoria = Receitas.Categorias_id order by NumPasso ASC;";
+            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_receita.Quantidade, Ingredientes_receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_receita ON Ingredientes_receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id ORDER BY NumPasso ASC;\r\n";
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@id", id);
             var dataReader = comando.ExecuteReader();
@@ -25,41 +26,59 @@ namespace proveit.DAO
 
             while (dataReader.Read())
             {
+                var idReceita = int.Parse(dataReader["idReceita"].ToString()); ;
 
-                var receita = new    ReceitaGeralDTO();
-                receita.idReceita = int.Parse(dataReader["idReceita"].ToString());
-                receita.NomeReceita = dataReader["Nome"].ToString();
-                receita.TempoPreparo = int.Parse(dataReader["TempoPreparo"].ToString());
-                receita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
-                receita.ValCalorico = int.Parse(dataReader["ValCalorico"].ToString());
-                receita.Descricao = dataReader["Descricao"].ToString();
-                receita.NomeTag = dataReader["NomeTag"].ToString();
-                receita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
-
-                for (int i = 0; i < quantingredientes; i++)
+                if (receitas.Any(x => x.idReceita == idReceita) == false)
                 {
+                    //Não existe receita na lista
 
+                    var newReceita = new ReceitaGeralDTO();
+
+                    newReceita.idReceita = idReceita;
+                    newReceita.NomeReceita = dataReader["Nome"].ToString();
+                    newReceita.TempoPreparo = int.Parse(dataReader["TempoPreparo"].ToString());
+                    newReceita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
+                    newReceita.ValCalorico = int.Parse(dataReader["ValCalorico"].ToString());
+                    newReceita.Descricao = dataReader["Descricao"].ToString();
+                    newReceita.NomeTag = dataReader["NomeTag"].ToString();
+                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
+
+                    newReceita.Ingredientes = new List<Ingredientes_ReceitaDTO>();
+                    newReceita.Passos = new List<PassoDTO>();
+
+                    receitas.Add(newReceita);
+                }
+
+                var receita = receitas.First(x => x.idReceita == idReceita);
+
+                var listaIngredientes = receita.Ingredientes;
+                var idIngrediente = int.Parse(dataReader["Ingredientes_id"].ToString());
+
+                if (listaIngredientes.Any(x => x.Ingredientes_id == idIngrediente) == false)
+                {
+                    //Não existe ingrediente na lista
                     var ingredientes = new Ingredientes_ReceitaDTO();
+                    ingredientes.Ingredientes_id = idIngrediente;
                     ingredientes.NomeIngrediente = dataReader["NomeIngrediente"].ToString();
                     ingredientes.Quantidade = int.Parse(dataReader["Quantidade"].ToString());
                     ingredientes.Medida = dataReader["Medida"].ToString();
-                    receita.Ingredientes = new List<Ingredientes_ReceitaDTO>();
+
                     receita.Ingredientes.Add(ingredientes);
-
                 }
 
-                for (int i = 0; i < quantpassos; i++)
+
+                var listaPassos = receita.Passos;
+                var idPasso = int.Parse(dataReader["idPasso"].ToString());
+
+                if (listaPassos.Any(x => x.idPasso == idPasso) == false)
                 {
-                    
-                var passo = new PassoDTO();
-               // passo.idPasso = int.Parse(dataReader["idPasso"].ToString());
-                passo.NumPasso = int.Parse(dataReader["NumPasso"].ToString());
-                passo.PassoTexto = dataReader["PassoTexto"].ToString();
-                receita.Passos = new List<PassoDTO>();
-                receita.Passos.Add(passo);
-
+                    var passo = new PassoDTO();
+                    passo.idPasso = idPasso;
+                    passo.NumPasso = int.Parse(dataReader["NumPasso"].ToString());
+                    passo.PassoTexto = dataReader["PassoTexto"].ToString();
+                    receita.Passos.Add(passo);
                 }
-                receitas.Add(receita);
+
             }
 
             conexao.Close();
@@ -67,3 +86,4 @@ namespace proveit.DAO
         }
     }
 }
+
