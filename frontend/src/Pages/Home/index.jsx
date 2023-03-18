@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, FlatList, SectionList, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -15,7 +15,7 @@ export default function Home({ navigation }) {
 
     return (
 
-        <View style={styles.main}>
+        <ScrollView style={styles.main}>
             {/*Header principal*/}
             <View style={styles.header}>
                 <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header, styles.shadowProp]}>
@@ -93,7 +93,7 @@ export default function Home({ navigation }) {
             </View>
 
 
-        </View>
+        </ScrollView>
 
     )
 }
