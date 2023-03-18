@@ -1,6 +1,6 @@
 import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
-import { FlatList, View, Text, StyleSheet, Image, SectionList } from 'react-native';
+import { FlatList, View, Text, StyleSheet, Image, SectionList, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons/faUtensils';
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
@@ -8,10 +8,10 @@ import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
 
 
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, navigation}) => {
     return (
 
-        <View style={styles.caixaPrincipal}>
+        <TouchableOpacity style={styles.caixaPrincipal} onPress={() => navigation.navigate('ReceitaSingle')}>
 
             {/* Container de imagem e texto */}
             <Image style={styles.imgReceita} source={item.uri} />
@@ -33,7 +33,7 @@ const ListItem = ({ item }) => {
                 </View>
             </LinearGradient>
 
-        </View>
+        </TouchableOpacity>
     );
 };
 

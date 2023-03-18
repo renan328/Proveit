@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
+import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Toast } from "react-native-toast-message";
 
 export default function Login({ navigation }) {
@@ -24,8 +25,8 @@ export default function Login({ navigation }) {
 
                     {/* View Login e inputs */}
                     <View style={styles.containerLogin}>
-                        <View style = {styles.loginHeader}>
-                            <FontAwesomeIcon style={styles.userIcon} icon= {faUser} size ={35} />
+                        <View style={styles.loginHeader}>
+                            <FontAwesomeIcon style={styles.userIcon} icon={faUser} size={35} />
                             <Text style={styles.loginText}>Login</Text>
                         </View>
 
@@ -35,7 +36,7 @@ export default function Login({ navigation }) {
                         </View>
 
                         {/* Botão */}
-                        <TouchableOpacity onPress={() => navigation.navigate('Home')} >
+                        <TouchableOpacity onPress={() => navigation.navigate('Main')} >
                             <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                                 end={{ x: 2, y: 1 }} style={styles.button} >
                                 <Text style={styles.buttonText}>Entrar</Text>
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         width: '100%',
         height: '100%',
         justifyContent: 'flex-end',
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
         shadowRadius: 7,
     },
 
-    
+
     logo: {
         flex: 1,
         width: '100%',

@@ -9,6 +9,7 @@ import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 import Toast from 'react-native-toast-message';
 
 
+
 export default function Home({ navigation }) {
     const username = "Convidado";
 
@@ -24,9 +25,6 @@ export default function Home({ navigation }) {
                             style={{ width: 78, height: 70 }}
                             source={require('../../assets/proveitLogo.png')}
                         />
-                        <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Text>voltar</Text>
-                        </TouchableOpacity>
                     </View>
 
                     {/*Apresentação*/}
