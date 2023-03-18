@@ -2,7 +2,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from '../Pages/Home'
 import Login from '../Pages/Login'
-import ReceitaSingle from '../Pages/ReceitaSingle'
+import ReceitaSingle from '../Pages/ReceitaSingle';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 const Stack = createNativeStackNavigator();
 
