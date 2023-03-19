@@ -10,7 +10,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento FROM Receitas INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id;\r\n";
+            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Usuario_id, Receitas.Categorias_id AS CategoriasReceita, Aproveitamento FROM Receitas INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id;\r\n";
 
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
@@ -26,7 +26,9 @@ namespace proveit.DAO
                 receita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
                 receita.ValCalorico = dataReader["ValCalorico"].ToString();
                 receita.Descricao = dataReader["Descricao"].ToString();
+                receita.Usuario_id = int.Parse(dataReader["Usuario_id"].ToString());
                 receita.UsuarioNomeTag = dataReader["NomeTag"].ToString();
+                receita.Categoria_id = int.Parse(dataReader["CategoriasReceita"].ToString());
                 receita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                 receitas.Add(receita);
@@ -70,9 +72,6 @@ namespace proveit.DAO
                         TempoPreparo = @tempoPreparo,
                         Porcoes =@porcoes,
                         ValCalorico =@valCalorico,
-                        Passo_id = @passo_id
-                        Usuario_id =@usuario_id,
-                        Ingrediente_id =@ingrediente_id,
                         Categorias_id = @categorias_id,
                         Aproveitamento = @Aproveitamento
                         WHERE idReceita = @id";
@@ -84,8 +83,7 @@ namespace proveit.DAO
             comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
             comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
             comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
-            comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
-            comando.Parameters.AddWithValue("@categoria_id", receita.Categoria_id);
+            comando.Parameters.AddWithValue("@categorias_id", receita.Categoria_id);
             comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
 
             comando.ExecuteNonQuery();
@@ -97,7 +95,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = @"DELETE FROM Receita WHERE idReceita = @id";
+            var query = @"DELETE FROM Receitas WHERE idReceita = @id";
 
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@id", id);

@@ -58,11 +58,12 @@ namespace proveit.DAO
             var query = @"UPDATE Passos SET 
                         NumPasso = @numpasso,
                         PassoTexto = @PassoTexto,
-                        Receita_id = @Receita_id,
-                        where idPasso = @id";
+                        Receita_id = @Receita_id
+                        WHERE idPasso = @id";
 
             var comando = new MySqlCommand(query, conexao);
 
+            comando.Parameters.AddWithValue("@id", passo.idPasso);
             comando.Parameters.AddWithValue("@Receita_id", passo.Receita_id);
             comando.Parameters.AddWithValue("@NumPasso", passo.NumPasso);
             comando.Parameters.AddWithValue("@PassoTexto", passo.PassoTexto);

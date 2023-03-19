@@ -202,12 +202,13 @@ INSERT INTO Categorias (Nome, Foto) VALUES ( 'Salgados', '../../assets/cat_salga
 
 insert into Ingredientes (Nome) values ('pao'), ('queijo');
 insert into Usuarios (Nome, NomeTag, Email, Senha, Categorias_id) values ('renan', 'renan123', 're@gamil', '123', 1);
-insert into Receitas (Nome, TempoPreparo, Porcoes, Descricao, Usuario_id, Categorias_id) values ('pao com queijo', 2, 1, 'pao com queijo', 1, 1);
+insert into Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento) values ('pao e queijo', 2, 1, 255, 'pao', 1, 1, false);
 insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 1, 'coma o pao');
-insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 2, 'coma o queijo');
-insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 3, 'coma');
-insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 1);
-insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 2);
-
-SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_receita.Quantidade, Ingredientes_receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_receita ON Ingredientes_receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id ORDER BY NumPasso ASC;
+insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 2, 'coma o quijo');
+insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 3, 'coma tudo');
+insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 3);
+insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 4);
+select * from Receitas where idReceita = 1;
+select * from Ingredientes ;
+SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_Receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id where idReceita = 1;
             

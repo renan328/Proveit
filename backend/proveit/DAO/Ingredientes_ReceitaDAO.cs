@@ -61,16 +61,15 @@ namespace proveit.DAO
             conexao.Open();
 
             var query = @"UPDATE Ingredientes_Receita SET 
-                        NomeIngrediente = @NomeIngrediente,
                         Quantidade = @Quantidade,
                         Medida = @Medida,
                         Receita_id = @Receita_id,
-                        Ingredientes_id = @Ingredientes_id,
-                        where idIngredientesReceita = @id";
+                        Ingredientes_id = @Ingredientes_id
+                        WHERE idIngredientesReceita = @id";
 
             var comando = new MySqlCommand(query, conexao);
 
-            comando.Parameters.AddWithValue("@NomeIngrediente", Ingredientes_Receita.NomeIngrediente);
+            comando.Parameters.AddWithValue("@id", Ingredientes_Receita.idIngredientesReceita);
             comando.Parameters.AddWithValue("@Quantidade", Ingredientes_Receita.Quantidade);
             comando.Parameters.AddWithValue("@Medida", Ingredientes_Receita.Medida);
             comando.Parameters.AddWithValue("@Receita_id", Ingredientes_Receita.Receita_id);
