@@ -209,6 +209,6 @@ insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 3, 'coma tudo')
 insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 3);
 insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 4);
 select * from Receitas where idReceita = 1;
-select * from Ingredientes ;
+select * from Ingredientes_Receita;
 SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_Receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id where idReceita = 1;
             
