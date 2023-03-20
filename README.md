@@ -16,7 +16,7 @@ A ideia por trás do nosso objetivo se baseia nas _**features**_. Estamos trabal
 - 🔎 _Pesquisa por ingredientes_
 - 🥪 _Identificação de receitas com ingredientes reaproveitáveis_
 - 🍗 _Identificação de calorias presentes_
-- 👤 _Feedback dos usuário_
+- 👤 _Feedback do usuário_
 
 Entre outras!
 
