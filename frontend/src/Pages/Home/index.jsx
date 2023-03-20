@@ -18,7 +18,7 @@ export default function Home({ navigation }) {
         <ScrollView style={styles.main}>
             {/*Header principal*/}
             <View style={styles.header}>
-                <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header, styles.shadowProp]}>
+                <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header]}>
                     {/*Header secundária (logo e eventual botão)*/}
                     <View style={styles.subHeader}>
                         <Image
