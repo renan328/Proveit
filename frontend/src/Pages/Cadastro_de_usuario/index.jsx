@@ -20,6 +20,8 @@ export default function Cadastro_de_usuario({ navigation }) {
     return (
 
         <View style={styles.container}>
+            
+            {/* Header */}
             <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header, styles.shadowProp]}>
                 <View style={styles.cadastro_de_usuario}>
                     <Text style={styles.texto_cadastro_de}>Cadastro de </Text>
@@ -30,6 +32,8 @@ export default function Cadastro_de_usuario({ navigation }) {
                     source={require('../../assets/usuario96.png')}
                 />
             </LinearGradient>
+            
+            {/* Imagem de perfil */}
             <View style={styles.cadastro}>
                 <Text style={styles.suafoto}>Sua foto</Text>
                 <Image
@@ -38,6 +42,7 @@ export default function Cadastro_de_usuario({ navigation }) {
                 />
             </View>
 
+            {/* Formulário */}  
             <View style={styles.inputs}>
                 <Text style={styles.digite_nome}>Nome</Text>
                 <TextInput style={styles.nomeInput}
@@ -63,13 +68,21 @@ export default function Cadastro_de_usuario({ navigation }) {
                     data={data} 
                     setSelected= {setSelected}
                     placeholder='Alguma categoria'
+                    searchPlaceholder = 'Adicionar  '
                     boxStyles={styles.favcategoriaInput}
                     inputStyles={styles.favcategoriafonteInput}
                     dropdownStyles={styles.favcategorialistaInput}
                     dropdownTextStyles={styles.favcategoriafonteInput}
                 />           
             </View>
-
+                    <View style={styles.botoes}>
+                        <TouchableOpacity onPress={() => navigation.navigate('')} >
+                            <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
+                                end={{ x: 2, y: 1 }} style={styles.button} >
+                                <Text style={styles.buttonText}>Pronto</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    </View>
         </View>
     )
 }
@@ -285,18 +298,53 @@ const styles = StyleSheet.create({
     },
 
     favcategoriaInput: {
-        marginHorizontal: '47px',                      
+        marginHorizontal: '47px',
+        marginTop: 10,    
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,                      
     },
    
     favcategoriafonteInput:{
         fontSize: '11px',
         fontFamily: 'Raleway_600SemiBold',
-        color: '#505050',       
+        color: '#505050',   
+        marginTop: 5,    
     },
 
     favcategorialistaInput:{        
-        marginHorizontal: '47px',
-        paddingHorizontal: '7px',         
+        marginHorizontal: '47px',      
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,        
+    },   
+
+    button: {
+        width: 200,
+        marginTop:30,
+        backgroundColor: 'orange',
+        color: '#FFF',
+        borderRadius: 5,
+        padding: 10,
+        alignSelf: 'center',       
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
     },
 
+    buttonText: {      
+        textAlign: 'center',
+        color: '#FFF',
+        fontFamily: 'Raleway_700Bold',
+    },
 });
