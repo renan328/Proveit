@@ -119,78 +119,6 @@ CREATE TABLE Receitas_favoritas (
     PRIMARY KEY (idReceitas_favoritas)
 );
 
-CREATE TABLE Usuario_Categorias (
-    Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
-    Categorias_idCategoria INTEGER UNSIGNED NOT NULL,
-    FOREIGN KEY (Usuarios_idUsuario)
-        REFERENCES Usuarios (idUsuario),
-    FOREIGN KEY (Categorias_idCategoria)
-        REFERENCES Categorias (idCategoria)
-);
-
-CREATE TABLE Usuarios_has_Dicas (
-    Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
-    Dicas_idDicas INTEGER UNSIGNED NOT NULL,
-    FOREIGN KEY (Usuarios_idUsuario)
-        REFERENCES Usuarios (idUsuario),
-    FOREIGN KEY (Dicas_idDicas)
-        REFERENCES Dicas (idDicas)
-);
-
-CREATE TABLE Usuarios_has_Avaliacoes (
-    Usuarios_idUsuario INTEGER UNSIGNED NOT NULL,
-    Avaliacoes_idAvaliacoes INTEGER UNSIGNED NOT NULL,
-    FOREIGN KEY (Usuarios_idUsuario)
-        REFERENCES Usuarios (idUsuario),
-    FOREIGN KEY (Avaliacoes_idAvaliacoes)
-        REFERENCES Avaliacoes (idAvaliacao)
-);
-
-CREATE TABLE Receitas_has_Avaliacoes (
-    Receitas_idReceita INTEGER UNSIGNED NOT NULL,
-    Avaliacoes_idAvaliacoes INTEGER UNSIGNED NOT NULL,
-    FOREIGN KEY (Avaliacoes_idAvaliacoes)
-        REFERENCES Avaliacoes (idAvaliacao),
-    FOREIGN KEY (Receitas_idReceita)
-        REFERENCES Receitas (idReceita)
-);
-
-CREATE TABLE Dicas_has_Categorias (
-    Dicas_idDicas INTEGER UNSIGNED NOT NULL,
-    Categorias_idCategoria INTEGER UNSIGNED NOT NULL,
-    FOREIGN KEY (Dicas_idDicas)
-        REFERENCES Dicas (idDicas),
-    FOREIGN KEY (Categorias_idCategoria)
-        REFERENCES Categorias (idCategoria)
-);
-
-CREATE TABLE Receitas_has_Categorias (
-    Receitas_idReceita INTEGER UNSIGNED NOT NULL,
-    Categorias_idCategoria INTEGER UNSIGNED NOT NULL,
-    FOREIGN KEY (Receitas_idReceita)
-        REFERENCES Receitas (idReceita),
-    FOREIGN KEY (Categorias_idCategoria)
-        REFERENCES Categorias (idCategoria)
-);
-
-CREATE TABLE Receitas_has_Ingredientes (
-    Receitas_idReceita INTEGER UNSIGNED NOT NULL,
-    Ingredientes_idIngredientes INTEGER UNSIGNED NOT NULL,
-    FOREIGN KEY (Receitas_idReceita)
-        REFERENCES Receitas (idReceita),
-    FOREIGN KEY (Ingredientes_idIngredientes)
-        REFERENCES Ingredientes (idIngredientes)
-);
-
-CREATE TABLE Receitas_has_Dicas (
-    Receitas_idReceita INTEGER UNSIGNED NOT NULL,
-    Dicas_idDicas INTEGER UNSIGNED NOT NULL,
-    FOREIGN KEY (Receitas_idReceita)
-        REFERENCES Receitas (idReceita),
-    FOREIGN KEY (Dicas_idDicas)
-        REFERENCES Dicas (idDicas)
-);
-
 INSERT INTO Categorias (Nome, Foto) VALUES ( 'Salgados', '../../assets/cat_salgados.jpg'), ('Doces', '../../assets/cat_doces.jpg'), ('Japonês', '../../assets/cat_japones.jpg'), ('Carnes', '../../assets/cat_carnes.jpg'), ('Saladas', '../../assets/cat_saladas.jpg'), ('Vegano', '../../assets/cat_vegano.jpg'), ('Vegetariano', '../../assets/cat_vegetariano.jpg'), 
 ('Sanduíches', '../../assets/cat_sanduiches.jpg'), ('Low Carb', '../../assets/cat_lowCarb.jpg'), ('Lanches e Snacks', '../../assets/cat_snacks.jpg'), ('Sopas', '../../assets/cat_sopas.jpg'), ('Aves', '../../assets/cat_aves.jpg'), ('Frutos do mar. peixes e crustáceos', '../../assets/cat_frutosDoMar.jpg'), 
 ('Acompanhamentos e molhos', '../../assets/cat_molhos.jpg'), ('Massas', '../../assets/cat_massas.jpg'), ('Tortas e quiches', '../../assets/cat_torta.jpg'), ('Bebidas', '../../assets/cat_bebidas.jpg'), ('Rápidas', '../../assets/cat_rapidas.jpg'), ('Sobremesas', '../../assets/cat_sobremesa.jpg'), ('Lanches', '../../assets/cat_lanches.jpg'), ('Bolos', '../../assets/cat_bolos.jpg');
@@ -208,7 +136,7 @@ insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 2, 'coma o quij
 insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 3, 'coma tudo');
 insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 3);
 insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 4);
-select * from Receitas where idReceita = 1;
+SELECT * FROM Receitas INNER JOIN Ingredientes_Receita ON Receitas.idReceita = Ingredientes_Receita.Receita_id INNER JOIN Ingredientes ON Ingredientes_Receita.Ingredientes_id = Ingredientes.idIngredientes WHERE idIngredientes  = 1 OR idIngredientes = 2;
 select * from Ingredientes_Receita;
 SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_Receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id where idReceita = 1;
             
