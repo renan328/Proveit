@@ -3,12 +3,10 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-
 function ReceitaEspecial() {
 
     return (
 
-        //
         <LinearGradient start={{ x: -1, y: 1 }}
             end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.containerEspecial}>
             <View style={styles.containerTexto}>

@@ -4,7 +4,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Toast } from "react-native-toast-message";
 
 export default function Login({ navigation }) {
     return (
@@ -44,7 +43,9 @@ export default function Login({ navigation }) {
                         </TouchableOpacity>
 
                         <View style={styles.texts}>
-                            <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Esqueci minha senha</Text>
+                            <TouchableOpacity onPress={() => navigation.navigate('CadastroDeUsuario')} >
+                                <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Esqueci minha senha</Text>
+                            </TouchableOpacity>
                             <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Ainda não tem uma conta? <Text style={{ fontFamily: 'Raleway_700Bold', textDecorationLine: 'underline', color: '#FF7152' }}>Cadastrar</Text></Text>
                         </View>
                     </View>

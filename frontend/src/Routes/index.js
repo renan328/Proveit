@@ -8,16 +8,16 @@ import Home from '../Pages/Home'
 import Login from '../Pages/Login'
 import ReceitaSingle from '../Pages/ReceitaSingle';
 import Perfil from '../Pages/Perfil';
+import CadastroDeUsuario from '../Pages/CadastroDeUsuario';
+import CadastroDeReceita from '../Pages/CadastroDeReceita';
+import Pesquisa from '../Pages/Pesquisa';
+import Favoritos from '../Pages/Favoritos';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass';
-import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
-import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons/faBookmark';
+import { faHome, faBookmark, faMagnifyingGlass, faUser, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 const Tab = createBottomTabNavigator();
@@ -39,13 +39,13 @@ function MainTabNavigator() {
                     ), headerShown: false
                 }} />
 
-                <Tab.Screen name="Adicionar" component={ReceitaStack} options={{
+                <Tab.Screen name="Adicionar" component={CadastroDeReceitaStack} options={{
                     tabBarIcon: ({ focused }) => (
                         <FontAwesomeIcon icon={faPlus} size={22} color={focused ? '#FF7152' : '#505050'} />
                     ), headerShown: false
                 }} />
 
-                <Tab.Screen name='Pesquisar' component={ReceitaStack} options={{
+                <Tab.Screen name='Pesquisar' component={PesquisaStack} options={{
                     tabBarIcon: ({ focused }) => (
                         <LinearGradient start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.searchButton}>
@@ -54,7 +54,7 @@ function MainTabNavigator() {
                     ), headerShown: false
                 }} />
 
-                <Tab.Screen name="Favoritos" component={ReceitaStack} options={{
+                <Tab.Screen name="Favoritos" component={FavoritosStack} options={{
                     tabBarIcon: ({ focused }) => (
                         <FontAwesomeIcon icon={faBookmark} size={22} color={focused ? '#FF7152' : '#505050'} />
                     ), headerShown: false
@@ -75,6 +75,7 @@ function LoginStackScreen() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+            <Stack.Screen name="CadastroDeUsuario" component={CadastroDeUsuario} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }
@@ -85,15 +86,32 @@ function HomeStack() {
         <Stack.Navigator>
             <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
             <Stack.Screen options={{ headerShown: false }} name="ReceitaSingle" component={ReceitaSingle} />
+            <Stack.Screen options={{ headerShown: false }} name="Perfil" component={Perfil} />
         </Stack.Navigator>
     );
 }
 
 //Stack screen das receitas
-function ReceitaStack() {
+function CadastroDeReceitaStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen options={{ headerShown: false }} name="Settings" component={ReceitaSingle} />
+            <Stack.Screen options={{ headerShown: false }} name="Settings" component={CadastroDeReceita} />
+        </Stack.Navigator>
+    );
+}
+
+function PesquisaStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen options={{ headerShown: false }} name="Settings" component={Pesquisa} />
+        </Stack.Navigator>
+    );
+}
+
+function FavoritosStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen options={{ headerShown: false }} name="Settings" component={Favoritos} />
         </Stack.Navigator>
     );
 }

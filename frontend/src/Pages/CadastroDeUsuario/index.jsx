@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list'
 
-export default function Cadastro_de_usuario({ navigation }) {
+export default function CadastroDeUsuario({ navigation }) {
 
     const [selected, setSelected] = React.useState('');
 

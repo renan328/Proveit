@@ -3,10 +3,11 @@ import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView } from 
 import { LinearGradient } from 'expo-linear-gradient';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
-import CarrosselReceitas from '../../components/CartaoReceita/CartaoReceita';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceita';
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 import Toast from 'react-native-toast-message';
+import { TouchableOpacity } from 'react-native-web';
 
 
 
@@ -42,7 +43,10 @@ export default function Home({ navigation }) {
 
                     {/*Input ingredientes*/}
                     <View style={styles.containerCentralizado}>
-                        <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput> <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#fff' }} />
+                        <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput> <FontAwesomeIcon icon={faMagnifyingGlass} style={{
+                            color: '#fff', position: 'relative',
+                            top: -50
+                        }} />
                     </View>
 
                 </LinearGradient>
@@ -53,7 +57,11 @@ export default function Home({ navigation }) {
             </View>
 
             <View>
-                <CarrosselReceitas></CarrosselReceitas>
+                <TouchableOpacity onPress={() => navigation.navigate('ReceitaSingle')}>
+                    <CarrosselReceitas>
+                        
+                    </CarrosselReceitas>
+                </TouchableOpacity>
             </View>
 
             <ReceitaEspecial></ReceitaEspecial>
@@ -208,6 +216,8 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
+        position: 'relative',
+        top: -50
     },
 
     //listas
