@@ -19,7 +19,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <Perfil />
+      <Routes />
     </MenuProvider>
   )
 }

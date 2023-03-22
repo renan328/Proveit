@@ -19,7 +19,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faBookmark, faMagnifyingGlass, faUser, faPlus } from '@fortawesome/free-solid-svg-icons';
 
+import { createDrawerNavigator } from "@react-navigation/drawer"; 
 
+const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
