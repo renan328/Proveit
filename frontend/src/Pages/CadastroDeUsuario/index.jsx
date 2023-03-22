@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
-import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass';
+import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
+import validator from 'validator';
+
 
 export default function CadastroDeUsuario({ navigation }) {
 
@@ -34,6 +36,20 @@ export default function CadastroDeUsuario({ navigation }) {
         { key: '21', value: 'Vegetariano' },
     ];
 
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const validate = (value) => {
+
+        if (validator.isStrongPassword(value, {
+            minLength: 8, minLowercase: 1,
+            minUppercase: 1, minNumbers: 1, minSymbols: 1
+        })) {
+            setErrorMessage('Is Strong Password')
+        } else {
+            setErrorMessage('Is Not Strong Password')
+        }
+    }
+
     return (
 
         <View style={styles.container}>
@@ -53,7 +69,7 @@ export default function CadastroDeUsuario({ navigation }) {
             {/* Imagem de perfil */}
             <View style={styles.cadastro}>
                 <Text style={styles.suafoto}>Sua foto</Text>
-                <Image
+                <Image 
                     style={styles.cadastro_imagem}
                     source={require('../../assets/cadastro_imagem.png')}
                 />
@@ -66,40 +82,44 @@ export default function CadastroDeUsuario({ navigation }) {
                     <TextInput style={styles.nomeInput} placeholder='Digite seu nome'></TextInput>
                 </View>
 
-                <View  style={styles.inputNomeUsuario}>
+                <View style={styles.inputNomeUsuario}>
                     <Text style={styles.digite_nomeusuario}>Nome de usuário</Text>
                     <TextInput style={styles.nomeusuarioInput} placeholder='Digite seu nome de usuário'></TextInput>
                 </View>
-                                  
+
                 <View style={styles.inputEmail}>
                     <Text style={styles.digite_email}>E-mail</Text>
                     <TextInput style={styles.emailInput} placeholder='Digite seu e-mail'></TextInput>
                 </View>
-                                
+
                 <View style={styles.InputSenha}>
                     <Text style={styles.digite_senha}>Senha</Text>
-                    <TextInput style={styles.senhaInput}  placeholder='Digite sua senha'></TextInput>
+                    <TextInput onChange={(e) => validate(e.target.value)} style={styles.senhaInput} placeholder='Digite sua senha'></TextInput> <br />
+                    <span style={{
+          fontWeight: 'bold',
+          color: 'red',
+        }}>{errorMessage}</span>
                     <TextInput style={styles.redigitesenhaInput} placeholder='Redigite sua senha'></TextInput>
                 </View>
-                               
+
                 <View style={styles.InputCategoria}>
-                <Text style={styles.digite_favcategoria}>Suas categorias favoritas</Text>
+                    <Text style={styles.digite_favcategoria}>Suas categorias favoritas</Text>
                     <MultipleSelectList style={styles.favcategoriaInput} data={data}
-                    setSelected={setSelected}
-                    placeholder='Alguma categoria'
-                    searchPlaceholder='Adicionar'
-                    notFoundText='Categoria não encontrada'
-                    fontFamily='Raleway_600SemiBold'
-                    boxStyles={styles.favcategoriaInput}
-                    inputStyles={styles.favcategoriafonteInput}
-                    dropdownStyles={styles.favcategorialistaInput}
-                    dropdownTextStyles={styles.favcategoriafonteInput}>
-                    
+                        setSelected={setSelected}
+                        placeholder='Alguma categoria'
+                        searchPlaceholder='Adicionar'
+                        notFoundText='Categoria não encontrada'
+                        fontFamily='Raleway_600SemiBold'
+                        boxStyles={styles.favcategoriaInput}
+                        inputStyles={styles.favcategoriafonteInput}
+                        dropdownStyles={styles.favcategorialistaInput}
+                        dropdownTextStyles={styles.favcategoriafonteInput}>
+
                     </MultipleSelectList>
                 </View>
-            </View>   
+            </View>
 
-             {/* Botão */}
+            {/* Botão */}
             <View style={styles.botoes}>
                 <TouchableOpacity onPress={() => navigation.navigate('')} >
                     <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
@@ -115,7 +135,8 @@ export default function CadastroDeUsuario({ navigation }) {
 const styles = StyleSheet.create({
 
     container: {
-        flex: 1,
+        display: 'flex',
+        backgroundColor: '#fff'
     },
 
     inputs: {
@@ -185,6 +206,7 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         marginTop: 10,
+        display: 'flex'
     },
 
     nomeInput: {
@@ -215,8 +237,8 @@ const styles = StyleSheet.create({
         marginLeft: 47,
     },
 
-    inputNomeUsuario:{
-        marginTop:10
+    inputNomeUsuario: {
+        marginTop: 10
     },
 
     nomeusuarioInput: {
@@ -247,8 +269,8 @@ const styles = StyleSheet.create({
         marginLeft: 47,
     },
 
-    inputEmail:{
-        marginTop:10
+    inputEmail: {
+        marginTop: 10
     },
 
     emailInput: {
@@ -279,8 +301,8 @@ const styles = StyleSheet.create({
         marginLeft: 47,
     },
 
-    InputSenha:{
-        marginTop:10
+    InputSenha: {
+        marginTop: 10
     },
 
     senhaInput: {
@@ -333,8 +355,8 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
 
-    InputCategoria:{
-        marginTop:10
+    InputCategoria: {
+        marginTop: 10
     },
 
     digite_favcategoria: {
@@ -359,6 +381,7 @@ const styles = StyleSheet.create({
     },
 
     favcategorialistaInput: {
+        display: 'flex',
         width: 296,
         shadowOffset: {
             width: 0,
@@ -366,11 +389,13 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-    },
 
+    },
     button: {
+        display: 'flex',
+        marginBottom: 49,
+        marginTop: 49,
         width: 200,
-        marginTop: 30,
         backgroundColor: 'orange',
         color: '#FFF',
         borderRadius: 5,

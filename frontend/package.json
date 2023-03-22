@@ -42,6 +42,7 @@
     "react-native-svg": "13.4.0",
     "react-native-toast-message": "^2.1.6",
     "react-native-web": "~0.18.10",
+    "validator": "^13.9.0",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
