@@ -2,62 +2,79 @@ import React from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimension } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons/faRightFromBracket'
+import { faRightFromBracket, width } from '@fortawesome/free-solid-svg-icons/faRightFromBracket';
+import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, useFonts } from '@expo-google-fonts/raleway';
 
 export default function Perfil( { navigation } ) {
     return (
+        // Container Geral
         <View style={styles.container}>
-
-            {/* Imagem de fundo */}
-           {/* <Text>Tela de perfil</Text> */}
-            
-                <View style={styles.header}>
-                        <TouchableOpacity style={styles.voltar} onPress={() => navigation.navigate('Login')}>
-                            <LinearGradient colors={['#FF7152', '#FFB649']} style={styles.gradient}>
-                                <FontAwesomeIcon size={30} icon={faRightFromBracket} style={{ color: '#fff' }} />
-                            </LinearGradient>
-                        </TouchableOpacity>
-                </View>
-           <View style={styles.user}>
-                <Image 
-                    style={{ width: '250px', height: '220px' }}
-                    source={require('../../assets/usuario96.png')}
-                ></Image>
-                <Text style={styles.titulo}>Nome</Text>
-                <Text style={styles.subtitulo}>@nomedeusuario</Text>
-           </View>
-           <View style={styles.botoes}>
-                <TouchableOpacity onPress={() => navigation.navigate('Historico')}>Histórico</TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Adicionados')}>Adicionados</TouchableOpacity>
-           </View>
-           <View
-            style={{borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth}}
+            {/* Imagem do Usuário e Dados */}
+            <Image 
+            source={require('../../assets/proveitLogo.png')}
+            style={styles.userImage}
             />
-            </View>
+            <Text style={styles.name}>User</Text>
+            <Text style={styles.userName}>@userName</Text>
+            <Text style={styles.text}>Adicionados</Text>
+            {/* Linha horizontal */}
+            <View
+                style={{
+                    borderBottomColor: '#505050',
+                    opacity: 0.4,
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    width: '330px', height: '5px',
+                    marginTop: '15px'
+                }}
+            />
+            <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita, <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text></Text>
+            <View
+                style={{
+                    borderBottomColor: '#505050',
+                    opacity: 0.4,
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    width: '330px', height: '5px',
+                    marginTop: '15px'
+                }}
+            />
+         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1
+        flex: 1,
+        textAlign: 'center',
+        alignItems: 'center'
     },
-    header:{
-        width: '100%',
-        padding: '40px'
+    userImage:{
+        marginTop: '15px',
+        width: 100,
+        height: 100,
+        maxWidth: '500px'
     },
-    gradient:{
-        display: 'flex',
-        flexDirection: 'row-reverse',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65
+    name:{
+        fontFamily: 'Raleway_800ExtraBold',
+        marginTop: '15px',
+        color: '#FF7152',
+        fontSize: 28,
     },
-    voltar:{
-        flexDirection: 'row-reverse'
+    userName:{
+        fontFamily: 'Raleway_700Bold',
+        color: '#858585',
+        fontSize: 12,
+    },
+    text:{
+        fontFamily: 'Raleway_700Bold',
+        marginTop: '50px',
+        color: '#FF7152',
+    },
+    textUnder:{
+        width: '350px',
+        fontFamily: 'Raleway_700Bold',
+        marginTop: '15px',
+        color: '#000',
+        textAlign: 'justify'
     }
 
 });
