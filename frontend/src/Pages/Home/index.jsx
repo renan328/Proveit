@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -7,7 +7,6 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceita';
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 import Toast from 'react-native-toast-message';
-import { TouchableOpacity } from 'react-native-web';
 
 
 

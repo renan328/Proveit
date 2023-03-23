@@ -43,10 +43,10 @@ export default function Login({ navigation }) {
                         </TouchableOpacity>
 
                         <View style={styles.texts}>
-                            <TouchableOpacity onPress={() => navigation.navigate('CadastroDeUsuario')} >
+                            <TouchableOpacity>
                                 <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Esqueci minha senha</Text>
                             </TouchableOpacity>
-                            <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Ainda não tem uma conta? <Text style={{ fontFamily: 'Raleway_700Bold', textDecorationLine: 'underline', color: '#FF7152' }}>Cadastrar</Text></Text>
+                            <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Ainda não tem uma conta? <Text style={{ fontFamily: 'Raleway_700Bold', textDecorationLine: 'underline', color: '#FF7152' }} onPress={() => navigation.navigate('CadastroDeUsuario')}>Cadastrar</Text></Text>
                         </View>
                     </View>
                 </LinearGradient>

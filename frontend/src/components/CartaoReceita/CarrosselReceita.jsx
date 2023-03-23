@@ -19,7 +19,7 @@ const ListItem = ({ navigation, item }) => {
 
             {/* Informações da footer */}
             <LinearGradient start={{ x: -1, y: 1 }}
-                end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.footer}>
+                end={{ x: 2, y: 1 }} colors={['#FF7152', '#FF7152']} style={styles.footer}>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <FontAwesomeIcon style={styles.legenda} icon={faUtensils} />
                     <Text style={styles.legenda}>{item.porcoes}</Text>
