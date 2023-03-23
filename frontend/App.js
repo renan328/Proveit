@@ -9,6 +9,9 @@ import Routes from './src/Routes';
 import Cadastro_de_usuario from './src/Pages/CadastroDeUsuario';
 import ReceitaSingle from './src/Pages/ReceitaSingle'
 import Perfil from './src/Pages/Perfil';
+import Pesquisar from './src/Pages/Pesquisa';
+
+import Favoritos from './src/Pages/Favoritos';
 import { Route } from 'expo-router/src/Route';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';

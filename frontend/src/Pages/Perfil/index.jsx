@@ -2,22 +2,27 @@ import React from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimension } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faRightFromBracket, width } from '@fortawesome/free-solid-svg-icons/faRightFromBracket';
+import { faRightFromBracket, faUser, faGear } from '@fortawesome/free-solid-svg-icons';
 import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, useFonts } from '@expo-google-fonts/raleway';
 
 
-export default function Perfil( { navigation } ) {
+export default function Perfil({ navigation }) {
     return (
         // Container Geral
         <View style={styles.container}>
-            {/* Imagem do Usuário e Dados */}
-            <Image 
-            source={require('../../assets/proveitLogo.png')}
-            style={styles.userImage}
-            />
-            <Text style={styles.name}>User</Text>
-            <Text style={styles.userName}>@userName</Text>
+            <View style={styles.header}>
+                <FontAwesomeIcon icon={faGear} size={32} color='rgba(50, 50, 50, 0.3)' style={{ marginTop: 15 }} />
+            </View>
+            <View>
+                {/* Imagem do Usuário e Dados */}
+                <View style={styles.userImage}>
+                    <FontAwesomeIcon icon={faUser} size={50} style={styles.userIcon} color='#505050' />
+                </View>
+                <Text style={styles.name}>User</Text>
+                <Text style={styles.userName}>@userName</Text>
+            </View>
             <Text style={styles.text}>Adicionados</Text>
+
             {/* Linha horizontal */}
             <View
                 style={{
@@ -28,7 +33,10 @@ export default function Perfil( { navigation } ) {
                     marginTop: '15px'
                 }}
             />
-            <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita, <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text></Text>
+
+            <View styles={styles.recipes}>
+                <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita, <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text></Text>
+            </View>
             <View
                 style={{
                     borderBottomColor: '#505050',
@@ -38,44 +46,61 @@ export default function Perfil( { navigation } ) {
                     marginTop: '15px'
                 }}
             />
-         </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         textAlign: 'center',
         alignItems: 'center'
     },
-    userImage:{
+
+    header: {
+        width: '90%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+    },
+
+    userImage: {
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
         marginTop: '15px',
         width: 100,
         height: 100,
-        maxWidth: '500px'
+        maxWidth: '500px',
+        backgroundColor: 'rgba(50, 50, 50, 0.2)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    name:{
+    name: {
         fontFamily: 'Raleway_800ExtraBold',
-        marginTop: '15px',
+        marginTop: '10px',
         color: '#FF7152',
         fontSize: 28,
     },
-    userName:{
+    userName: {
         fontFamily: 'Raleway_700Bold',
         color: '#858585',
         fontSize: 12,
     },
-    text:{
+    text: {
         fontFamily: 'Raleway_700Bold',
         marginTop: '50px',
         color: '#FF7152',
     },
-    textUnder:{
+    textUnder: {
         width: '350px',
         fontFamily: 'Raleway_700Bold',
         marginTop: '15px',
-        color: '#000',
-        textAlign: 'justify'
+        color: '#505050',
+        textAlign: 'center'
     }
 
 });
