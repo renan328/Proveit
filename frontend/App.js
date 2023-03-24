@@ -15,6 +15,7 @@ import Favoritos from './src/Pages/Favoritos';
 import { Route } from 'expo-router/src/Route';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
+import CadastroDeReceita from './src/Pages/CadastroDeReceita';
 
 
 export default function App() {
@@ -22,7 +23,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <Routes />
+      <CadastroDeReceita />
     </MenuProvider>
   )
 }
