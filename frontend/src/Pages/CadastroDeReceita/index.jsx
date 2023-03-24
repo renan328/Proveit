@@ -1,7 +1,8 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput, Image } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, Image, CheckBox, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
+import { Button } from 'react-native-web';
 
 export default function CadastroDeReceita({ navigation }) {
 
@@ -46,6 +47,16 @@ export default function CadastroDeReceita({ navigation }) {
         { key: '12', value: '12 horas' }
     ];
 
+    const medida = [
+        { key: '1', value: '1 xícara (chá)' },
+        { key: '2', value: '1/2 xícara (chá)' },
+        { key: '3', value: '1/4 xícara (chá)' },
+        { key: '4', value: '1 colher (sopa)' },
+        { key: '5', value: '1 colher (chá)' }
+    ]
+
+    const [isSelected, setSelection] = useState(false);
+
     return (
         <View style={styles.container} >
             {/* Header */}
@@ -57,7 +68,7 @@ export default function CadastroDeReceita({ navigation }) {
             </LinearGradient>
 
             {/* Fotos e Vídeo */}
-            <View style={{ alignItems: "center" }}>
+            <View style={{ display: 'flex', alignItems: "center" }}>
                 <Text style={{ fontFamily: 'Raleway_600SemiBold', fontSize: 15, marginTop: 26 }}> Foto e vídeo</Text>
                 <View style={{ flexDirection: "row" }}>
                     <Image
@@ -71,34 +82,36 @@ export default function CadastroDeReceita({ navigation }) {
                 </View>
             </View>
 
-            {/* Formulário */}
+            {/* Input Nome */}
             <View styels={styles.inputs}>
-                <View style={{ marginTop: 25 }}>
+                <View style={{ marginTop: 25, display: 'flew' }}>
                     <Text style={styles.TextInput}>Nome</Text>
-                    <TextInput style={styles.nomeInput} placeholder='Digite o nome da receita'></TextInput>
+                    <TextInput style={styles.allInput} placeholder='Digite o nome da receita'></TextInput>
                 </View>
 
-
-                <View style={{ margin: 25, display: 'flex', alignItems: "center" }}>
-                    <Text style={{ display: 'flex', alignSelf: 'stretch', marginLeft: 23, fontFamily: 'Raleway_600SemiBold' }}>Categorias</Text>
-                    <MultipleSelectList style={styles.categoriaInput} data={data}
+                {/* Input Categorias */}
+                <View style={{ margin: 20, display: 'flex', alignItems: 'center' }}>
+                    <Text style={{ display: 'flex', alignSelf: 'stretch', marginLeft: 27, fontFamily: 'Raleway_600SemiBold' }}>Categorias</Text>
+                    <MultipleSelectList data={data}
                         setSelected={setSelected}
                         placeholder='Alguma categoria'
                         searchPlaceholder='Adicionar'
                         notFoundText='Categoria não encontrada'
                         fontFamily='Raleway_600SemiBold'
                         boxStyles={styles.categoriaInput}
-                        inputStyles={{ fontSize: '11px', color: '#505050', marginTop: 5, }}
+                        inputStyles={{ fontSize: '11px', color: '#505050', padding: 5 }}
                         dropdownStyles={styles.categoriaListaInput}
-                        dropdownTextStyles={{ fontSize: '11px', color: '#505050', marginTop: 5 }}>
+                        dropdownTextStyles={{ fontSize: '11px', color: '#505050' }}>
                     </MultipleSelectList>
-                    <Text>+ Adicionar Categorias</Text>
+                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14 }}>+ Adicionar Categorias</Text>
                 </View>
+
+                {/* Input Tempo de Preparo */}
                 <View style={{ flexDirection: 'row', display: 'flex' }}>
                     <Text style={styles.TextInput}>Tempo de preparo</Text>
                     <Text style={styles.textPorcoes}>Porções</Text>
                 </View>
-                <View style={{ flexDirection: 'row', display:'flex' }}>
+                <View style={{ flexDirection: 'row', display: 'flex' }}>
                     <TextInput style={styles.inputTempo} placeholder='Tempo'></TextInput>
                     <MultipleSelectList data={hora}
                         setSelected={setSelected}
@@ -107,12 +120,84 @@ export default function CadastroDeReceita({ navigation }) {
                         notFoundText='Tempo não determinado'
                         fontFamily='Raleway_600SemiBold'
                         boxStyles={styles.horaInput}
-                        inputStyles={{ fontSize: '11px', color: '#505050', marginTop: 5, }}
+                        inputStyles={{ fontSize: '11px', color: '#505050', padding: 5 }}
                         dropdownStyles={styles.horaListaInput}
-                        dropdownTextStyles={{ fontSize: '11px', color: '#505050', marginTop: 5 }}
-                    >
+                        dropdownTextStyles={{ fontSize: '11px', color: '#505050' }}>
                     </MultipleSelectList>
                     <TextInput style={styles.inputQntd} placeholder="Quantidade"></TextInput>
+                </View>
+
+                {/* CheckBox de Aproveitamento */}
+                <View style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    <View style={styles.checkboxContainer}>
+                        <CheckBox value={isSelected} onValueChange={setSelection} style={styles.checkbox} />
+                        <Text style={{ margin: 8, fontSize: "15px", fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
+                        <Button title="?"></Button>
+                    </View>
+                </View>
+
+                {/* Input Valor cal */}
+                <View style={{ display: 'flex', alignItems: 'center' }}>
+                    <Text style={styles.TextInput}>Valor Calórico</Text>
+                    <TextInput style={styles.allInput} placeholder='Ex: Gramas/quilocalorias'></TextInput>
+                </View>
+
+                {/* Input Pequena descrição */}
+                <View style={{ marginTop: 25, display: 'flex', alignItems: 'center' }}>
+                    <Text style={styles.TextInput}>Pequena descrição</Text>
+                    <TextInput style={styles.allInput} placeholder='Ex: Coxinha de frango com catupiry'></TextInput>
+                </View>
+
+                {/* Input Ingredientes */}
+                <View style={{ marginTop: 25, display: 'flex', alignItems: 'center' }}>
+                    <Text style={styles.TextInput}>Ingredientes</Text>
+                    <TextInput style={styles.allInput} placeholder='Primeiro ingrediente'></TextInput>
+                </View>
+
+                {/* Input Quantidade */}
+                <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25 }}>
+                    <Text style={styles.TextInput}>Quantidade</Text>
+                    <Text style={styles.textMedida}>Medida</Text>
+                </View>
+                <View style={{ flexDirection: 'row', display: 'flex' }}>
+                    <TextInput style={styles.inputQuantidade} placeholder='Qntd'></TextInput>
+                    <MultipleSelectList data={medida}
+                        setSelected={setSelected}
+                        placeholder='Medidas'
+                        searchPlaceholder='Adicionar'
+                        notFoundText='Medida não encontrada'
+                        fontFamily='Raleway_600SemiBold'
+                        boxStyles={styles.medidaInput}
+                        inputStyles={{ fontSize: '11px', color: '#505050', marginTop: 5, }}
+                        dropdownStyles={styles.medidaListaInput}
+                        dropdownTextStyles={{ fontSize: '11px', color: '#505050', marginTop: 5 }}>
+                    </MultipleSelectList>
+                </View>
+
+                {/* Adicionar ingredientes */}
+                <View style={{ display: 'flex', alignItems: 'center' }}>
+                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, margin: 15 }}>+ Adicionar ingrediente</Text>
+                </View>
+
+                {/* Input Passos */}
+                <View>
+                    <Text style={styles.TextInput}>Passos</Text>
+                    <TextInput style={styles.allInput} placeholder='Primeiro passo'></TextInput>
+                </View>
+
+                {/* Adicionar Passos */}
+                <View style={{ display: 'flex', alignItems: 'center' }}>
+                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, margin: 15 }}>+ Adicionar passos</Text>
+                </View>
+
+                {/* Botão */}
+                <View>
+                    <TouchableOpacity onPress={() => navigation.navigate('Main')} >
+                        <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
+                            end={{ x: 2, y: 1 }} style={styles.button} >
+                            <Text style={styles.buttonText}>Publicar</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View >
@@ -124,6 +209,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex: 1,
         backgroundColor: '#fff',
+        width: '100%'
     },
 
     header: {
@@ -146,8 +232,8 @@ const styles = StyleSheet.create({
     textAdd: {
         color: 'rgba(255, 255, 255, 0.65)',
         fontFamily: 'Raleway_700Bold',
-        fontSize: 14,
-        marginTop: 30,
+        fontSize: 17,
+        marginTop: 25,
         textShadowColor: 'rgba(0, 0, 0, 0.1)',
         textShadowOffset: { width: -1, height: 3 },
         textShadowRadius: 3
@@ -170,12 +256,13 @@ const styles = StyleSheet.create({
     },
 
     TextInput: {
+        alignSelf: 'baseline',
         marginLeft: 47,
-        fontSize: "14px",
+        fontSize: "15px",
         fontFamily: 'Raleway_600SemiBold'
     },
 
-    nomeInput: {
+    allInput: {
         marginHorizontal: '47px',
         paddingHorizontal: '7px',
         fontSize: '13px',
@@ -295,12 +382,106 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         marginTop: 10,
+        fontFamily: 'Raleway_600SemiBold',
+    },
+
+    textPorcoes: {
+        marginLeft: '65px',
+        fontSize: "15px",
         fontFamily: 'Raleway_600SemiBold'
     },
 
-    textPorcoes:{
-        marginLeft: '73px',
-        fontSize: "14px",
+    checkboxContainer: {
+        flexDirection: 'row',
+        marginBottom: 20,
+        marginTop: 20,
+        width: '300px',
+        alignItems: 'center'
+    },
+
+    checkbox: {
+        alignSelf: 'center',
+    },
+
+    textMedida: {
+        marginLeft: '20px',
+        fontSize: "15px",
         fontFamily: 'Raleway_600SemiBold'
+    },
+
+    inputQuantidade: {
+        marginHorizontal: '-10px',
+        paddingHorizontal: '7px',
+        fontSize: '13px',
+        color: '#505050',
+        height: '50px',
+        width: '85px',
+        backgroundColor: '#fff',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        marginTop: 10,
+        fontFamily: 'Raleway_600SemiBold',
+        marginLeft: 47
+    },
+
+    medidaInput: {
+        overflowX: 'hidden',
+        display: 'flex',
+        height: '50px',
+        width: '200px',
+        marginLeft: '25px',
+        marginTop: 10,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        fontFamily: 'Raleway_600SemiBold'
+    },
+
+    medidaListaInput: {
+        width: '200px',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        marginLeft: '25px',
+    },
+
+    button: {
+        display: 'flex',
+        marginBottom: 25,
+        marginTop: 10,
+        width: 200,
+        backgroundColor: 'orange',
+        color: '#FFF',
+        borderRadius: 5,
+        padding: 10,
+        alignSelf: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+    },
+
+    buttonText: {
+        textAlign: 'center',
+        color: '#FFF',
+        fontFamily: 'Raleway_700Bold',
     },
 })
