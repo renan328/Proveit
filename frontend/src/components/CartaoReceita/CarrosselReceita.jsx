@@ -1,44 +1,18 @@
 import React from "react";
-import { LinearGradient } from 'expo-linear-gradient';
 import { FlatList, View, Text, StyleSheet, Image, SectionList, TouchableOpacity } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUtensils, faClock } from '@fortawesome/free-solid-svg-icons';
+import CartaoReceita from "./CartaoReceita";
 
-
-const ListItem = ({ navigation, item }) => {
+const ListItem = ({ item }) => {
     return (
-
-        <TouchableOpacity style={styles.caixaPrincipal} onPress={() => navigation.navigate('ReceitaSingle')}>
-
-            {/* Container de imagem e texto */}
-            <Image style={styles.imgReceita} source={item.uri} />
-            <View style={styles.containerTexto}>
-                <Text style={styles.titulo}>{item.titulo}</Text>
-                <Text style={styles.descricao} numberOfLines={1}>{item.descricao}</Text>
-            </View>
-
-            {/* Informações da footer */}
-            <LinearGradient start={{ x: -1, y: 1 }}
-                end={{ x: 2, y: 1 }} colors={['#FF7152', '#FF7152']} style={styles.footer}>
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                    <FontAwesomeIcon style={styles.legenda} icon={faUtensils} />
-                    <Text style={styles.legenda}>{item.porcoes}</Text>
-                </View>
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                    <FontAwesomeIcon style={styles.legenda} icon={faClock} />
-                    <Text style={styles.legenda} >{item.preparacao}</Text>
-                </View>
-            </LinearGradient>
-
-        </TouchableOpacity>
+        <CartaoReceita uri={item.uri} title={item.titulo} description={item.descricao} portions={item.porcoes} time={item.preparacao} route={item.navegacao} />
     );
-};
+}
 
-function CarrosselReceitas( ) {
+
+function CarrosselReceitas({ }) {
     return (
-
         // Funções do carrossel, container principal
-        <View style={styles.container}>
+        <View style={{ marginLeft: 10 }}>
 
             {/* Container SectionList, quebra as informações para retornar de maneira organizada. */}
             <SectionList
@@ -101,11 +75,12 @@ const SECTIONS = [
         data: [
             {
                 key: '1',
-                titulo: 'Frango Assado',
+                titulo: 'Frango Assado Assado Assado Assado',
                 descricao: 'Frango assado com limão',
                 uri: slides.aves,
                 porcoes: '7',
-                preparacao: '4' + 'h'
+                preparacao: '4' + 'h',
+                navegacao: 'ReceitaSingle',
             },
             {
                 key: '2',
@@ -113,7 +88,8 @@ const SECTIONS = [
                 descricao: 'Sucos variados de laranja',
                 uri: slides.bebidas,
                 porcoes: '6',
-                preparacao: '10' + 'min'
+                preparacao: '10' + 'min',
+                navegacao: 'ReceitaSingle',
             },
             {
                 key: '3',
@@ -121,7 +97,8 @@ const SECTIONS = [
                 descricao: 'Feito com chocolate e leite em pó',
                 uri: slides.bolos,
                 porcoes: '8',
-                preparacao: '2' + 'h'
+                preparacao: '2' + 'h',
+                navegacao: 'ReceitaSingle',
             },
             {
                 key: '4',
@@ -129,95 +106,12 @@ const SECTIONS = [
                 descricao: 'Utilizando cenoura e carnes',
                 uri: slides.rapidas,
                 porcoes: '10',
-                preparacao: '1' + 'h'
+                preparacao: '1' + 'h',
+                navegacao: 'ReceitaSingle',
+
             },
         ]
     },
 ];
 
 export default CarrosselReceitas;
-
-const styles = StyleSheet.create({
-
-    container: {
-        marginLeft: 10
-    },
-
-    caixaPrincipal: {
-        display: 'flex',
-        alignItems: 'center',
-        marginHorizontal: '6px',
-        justifyContent: 'space-between',
-        width: '131.15px',
-        height: '230px',
-        backgroundColor: '#fff',
-        borderBottomLeftRadius: 14,
-        borderBottomRightRadius: 14,
-        borderTopLeftRadius: 14,
-        borderTopRightRadius: 14,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 2,
-    },
-
-    imgReceita: {
-        borderTopLeftRadius: 14,
-        borderTopRightRadius: 14,
-        height: '62%',
-        width: '100%',
-        marginBottom: '2px'
-    },
-
-    containerTexto: {
-        flexWrap: 'wrap',
-        textAlign: 'center',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: '5px',
-        top: -4,
-        flexShrink: 1
-    },
-
-    titulo: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        fontSize: '11px',
-        fontWeight: '700',
-        marginBottom: '3px',
-        fontFamily: 'Raleway_700Bold'
-    },
-
-    descricao: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        color: '#9e9e9e',
-        fontSize: '9px',
-        flexShrink: 1
-    },
-
-    footer: {
-        paddingVertical: '7px',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'flex-start',
-        flexDirection: 'row',
-        borderBottomLeftRadius: 14,
-        borderBottomRightRadius: 14,
-
-    },
-
-    legenda: {
-        marginHorizontal: '3px',
-        fontSize: '12px',
-        fontFamily: 'Raleway_500Medium',
-        color: '#fff'
-    }
-
-
-});

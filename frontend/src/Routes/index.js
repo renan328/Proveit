@@ -35,7 +35,7 @@ function MainTabNavigator() {
                 <Tab.Screen name="Home" component={HomeStack} options={{
                     tabBarIcon: ({ focused }) => (
                         <FontAwesomeIcon style={styles.button} icon={faHome} size={22} color={focused ? '#FF7152' : '#505050'} />
-                    ), headerShown: false
+                    ), headerShown: false, 
                 }} />
 
                 <Tab.Screen name="Adicionar" component={CadastroDeReceitaStack} options={{
@@ -48,9 +48,9 @@ function MainTabNavigator() {
                     tabBarIcon: ({ focused }) => (
                         <LinearGradient start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.searchButton}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} size={22} color={focused ? '#FF7152' : '#fff'} />
+                            <FontAwesomeIcon icon={faMagnifyingGlass} size={22} color={'#fff'} />
                         </LinearGradient>
-                    ), headerShown: false
+                    ), headerShown: false,  tabBarLabel: ''
                 }} />
 
                 <Tab.Screen name="Favoritos" component={FavoritosStack} options={{
@@ -85,7 +85,6 @@ function HomeStack() {
         <Stack.Navigator>
             <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
             <Stack.Screen options={{ headerShown: false }} name="ReceitaSingle" component={ReceitaSingle} />
-            <Stack.Screen options={{ headerShown: false }} name="Perfil" component={Perfil} />
         </Stack.Navigator>
     );
 }
@@ -171,8 +170,8 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 4,
         borderTopRightRadius: 4,
         shadowRadius: 0,
-        top: -7,
         shadowColor: "#000",
+        top: -2,
         shadowOffset: {
             width: 0,
             height: 1,

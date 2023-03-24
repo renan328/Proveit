@@ -3,7 +3,8 @@ import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, Touch
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
-import { faBookmark, faStar, faAngleLeft, faClock, faUtensils, faHeart, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark, faStar, faAngleLeft, faClock, faUtensils, faHeart, faEllipsisVertical, faCarrot, faKitchenSet } from '@fortawesome/free-solid-svg-icons';
+import PassoReceita from '../../components/PassoReceita/PassoReceita';
 
 
 const screenHeight = Dimensions.get('window').height;
@@ -47,9 +48,10 @@ export default function ReceitaSingle({ navigation }) {
 
                     </View>
 
+
                     <View style={styles.mainTexts}>
                         <Text style={styles.mainTitle}>Bolo de chocolate</Text>
-                        <Text style={styles.description}>Bolo de chocolate com cobertura de chocolate branco</Text>
+                        <Text style={styles.description}>Bolo de chocolate com cobertura cobertura coberturacoberturacoberturacoberturacoberturacoberturacoberturacobertura cobertura cobertura coberturacobertura cobertura cobertura de chocolate branco</Text>
                     </View>
 
 
@@ -63,12 +65,12 @@ export default function ReceitaSingle({ navigation }) {
                     <LinearGradient start={{ x: -1, y: 1 }}
                         end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.detailsContainer}>
                         <View style={styles.subDetail}>
-                            <FontAwesomeIcon icon={faUtensils} size={60} style={styles.detailIcon} />
+                            <FontAwesomeIcon icon={faUtensils} size={70} style={styles.detailIcon} />
                             <Text style={styles.detailText}>12 porções</Text>
                         </View>
                         <View style={styles.divBar}></View>
                         <View style={styles.subDetail}>
-                            <FontAwesomeIcon icon={faClock} size={60} style={styles.detailIcon} />
+                            <FontAwesomeIcon icon={faClock} size={70} style={styles.detailIcon} />
                             <Text style={styles.detailText}>15 horas</Text>
                         </View>
                     </LinearGradient>
@@ -95,16 +97,48 @@ export default function ReceitaSingle({ navigation }) {
                         }}>Salvar</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.detailsContainer}  onPress={() => navigation.navigate('Perfil')}>
+                    <TouchableOpacity style={styles.detailsContainer} onPress={() => navigation.navigate('Perfil')}>
                         <View>
-                            
+
                         </View>
-                        <View style={{marginHorizontal: '8px'}}>
+                        <View style={{ marginHorizontal: '8px' }}>
                             <Text style={styles.mainUserText}>User Name</Text>
                             <Text style={styles.linkUserText}>@username</Text>
                         </View>
                     </TouchableOpacity>
+                    <View
+                        style={{
+                            borderBottomColor: '#505050',
+                            opacity: 0.4,
+                            borderBottomWidth: StyleSheet.hairlineWidth,
+                            width: '330px', height: '5px',
+                            marginTop: '15px'
+                        }} />
                 </View>
+                <View style={styles.steps}>
+
+                    <View style={styles.stepsHeader}>
+                        <FontAwesomeIcon icon={faKitchenSet} size={50} color='#FF7152' />
+                        <Text style={styles.stepsTitle}>Passos</Text>
+                    </View>
+
+                    <View style={styles.stepList}>
+                        <PassoReceita step={1} text={'Leve ao fogo o leite a margarina e o chocolate.'} />
+                        <PassoReceita step={2} text={'Leve ao fogo o leite a margarina e o chocolate. Leve ao fogo o leite a margarina e o chocolate. Leve ao fogo o leite a margarina e o chocolate.'} />
+                        <PassoReceita step={3} text={'Leve ao fogo o leite a margarina e o chocolate.'} />
+                        <PassoReceita step={4} text={'Leve ao fogo o leite a margarina e o chocolate.'} />
+                        <PassoReceita step={5} text={'Leve ao fogo o leite a margarina e o chocolate.'} />
+
+                    </View>
+                </View>
+                <View
+                        style={{
+                            borderBottomColor: '#505050',
+                            opacity: 0.4,
+                            borderBottomWidth: StyleSheet.hairlineWidth,
+                            width: '330px', height: '5px',
+                            marginTop: '15px'
+                        }} />
             </View>
         </View >
     );
@@ -140,7 +174,7 @@ const styles = StyleSheet.create({
     },
 
     mainContainer: {
-        flex: 1,
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#fff',
@@ -160,8 +194,10 @@ const styles = StyleSheet.create({
 
     mainHeader: {
         display: 'flex',
+        flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        maxWidth: '90%'
     },
 
     starsContainer: {
@@ -175,9 +211,10 @@ const styles = StyleSheet.create({
     },
 
     mainTexts: {
-        flex: 1,
+        display: 'flex',
         alignItems: 'center',
-        top: -18
+        top: -18,
+        maxWidth: '100%'
     },
 
     mainTitle: {
@@ -186,13 +223,14 @@ const styles = StyleSheet.create({
         fontSize: '25px',
         textAlign: 'center',
         width: '85%',
+        flexGrow: 1
     },
 
     description: {
         fontSize: 12,
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: 'rgba(0, 0, 0, 0.55)',
         fontFamily: 'Raleway_500Medium',
-        width: '70%',
+        width: '85%',
         textAlign: 'center',
     },
 
@@ -249,7 +287,8 @@ const styles = StyleSheet.create({
     detailText: {
         fontFamily: 'Raleway_700Bold',
         color: '#fff',
-        marginTop: '5px'
+        marginTop: '5px',
+        fontSize: '15px'
     },
 
     detailIcon: {
@@ -280,6 +319,35 @@ const styles = StyleSheet.create({
         fontSize: '15px',
         fontFamily: 'Raleway_700Bold',
         color: '#505050'
+    },
+
+    steps: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+
+    stepsHeader: {
+        marginTop: '17px',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+
+    stepsTitle: {
+        marginLeft: '15px',
+        fontFamily: 'Raleway_800ExtraBold',
+        color: '#505050',
+        fontSize: 25,
+        marginTop: '7px',
+    },
+
+    stepList: {
+        marginTop: '20px',
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%'
     },
 
 

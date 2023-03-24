@@ -8,6 +8,7 @@ import AppLoading from 'expo-app-loading';
 import Routes from './src/Routes';
 import Cadastro_de_usuario from './src/Pages/CadastroDeUsuario';
 import ReceitaSingle from './src/Pages/ReceitaSingle'
+import Home from './src/Pages/Home';
 import Perfil from './src/Pages/Perfil';
 import Pesquisar from './src/Pages/Pesquisa';
 
@@ -23,7 +24,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <CadastroDeReceita />
+      <ReceitaSingle />
     </MenuProvider>
   )
 }

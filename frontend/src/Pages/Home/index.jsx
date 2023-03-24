@@ -5,6 +5,7 @@ import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategori
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceita';
+import CartaoReceita from '../../components/CartaoReceita/CartaoReceita';
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 import Toast from 'react-native-toast-message';
 
@@ -57,9 +58,7 @@ export default function Home({ navigation }) {
 
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('ReceitaSingle')}>
-                    <CarrosselReceitas>
-                        
-                    </CarrosselReceitas>
+                    <CarrosselReceitas></CarrosselReceitas>
                 </TouchableOpacity>
             </View>
 
@@ -70,7 +69,6 @@ export default function Home({ navigation }) {
             </View>
 
             <View>
-                <CarrosselReceitas></CarrosselReceitas>
             </View>
 
             <View style={styles.listamento}>
@@ -78,7 +76,6 @@ export default function Home({ navigation }) {
             </View>
 
             <View>
-                <CarrosselReceitas></CarrosselReceitas>
             </View>
 
 
@@ -87,7 +84,6 @@ export default function Home({ navigation }) {
             </View>
 
             <View>
-                <CarrosselReceitas></CarrosselReceitas>
             </View>
 
 
@@ -96,7 +92,6 @@ export default function Home({ navigation }) {
             </View>
 
             <View>
-                <CarrosselReceitas></CarrosselReceitas>
             </View>
 
 
@@ -104,6 +99,7 @@ export default function Home({ navigation }) {
 
     )
 }
+
 
 
 
