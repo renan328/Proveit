@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <ReceitaSingle />
+      <Routes />
     </MenuProvider>
   )
 }

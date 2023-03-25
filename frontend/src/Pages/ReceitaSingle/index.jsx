@@ -7,6 +7,7 @@ import { faBookmark, faStar, faAngleLeft, faClock, faUtensils, faHeart, faEllips
 import PassoReceita from '../../components/PassoReceita/PassoReceita';
 import IngredienteReceita from '../../components/IngredienteReceita/IngredienteReceita';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Rating, AirbnbRating } from 'react-native-ratings';
 import styles from './receitasingle.module';
 
 
@@ -126,11 +127,11 @@ export default function ReceitaSingle({ navigation }) {
                     </View>
 
                     <View style={styles.ingredientsList}>
-                        <IngredienteReceita id={1} measure = {'500g'} text={'Chocolate'} />
-                        <IngredienteReceita id={2} measure = {'1kg'} text={'Farinha'} />
-                        <IngredienteReceita id={3} measure = {'2kg'} text={'Açúcar'} />
-                        <IngredienteReceita id={4} measure = {'6'} text={'Ovos'} />
-                        <IngredienteReceita id={5} measure = {'50g'} text={'Fermento'} />
+                        <IngredienteReceita id={1} measure={'500g'} text={'Chocolate'} />
+                        <IngredienteReceita id={2} measure={'1kg'} text={'Farinha'} />
+                        <IngredienteReceita id={3} measure={'2kg'} text={'Açúcar'} />
+                        <IngredienteReceita id={4} measure={'6'} text={'Ovos'} />
+                        <IngredienteReceita id={5} measure={'50g'} text={'Fermento'} />
 
                     </View>
                 </View>
@@ -168,6 +169,44 @@ export default function ReceitaSingle({ navigation }) {
                         width: '330px', height: '5px',
                         marginTop: '15px'
                     }} />
+                <View style={styles.ready}>
+                    <Text style={styles.readySubText}>E já está</Text>
+                    <Text style={styles.readyMainText}>PRONTO!</Text>
+                </View>
+                <View
+                    style={{
+                        borderBottomColor: '#505050',
+                        opacity: 0.4,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        width: '330px', height: '5px',
+                        marginTop: '15px'
+                    }} />
+
+                <View style={styles.rating}>
+                    <Text style={styles.ratePresentation}>O que você <Text style={{color: '#FF7152'}}>achou?</Text></Text>
+                    <LinearGradient start={{ x: -1, y: 1 }}
+                        end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.ratingContainer}>
+                        <AirbnbRating
+                            ratingColor='#fff'
+                            count={5}
+                            reviews={[
+                                'Terrível',
+                                'Ruim',
+                                'Okay',
+                                'Ótimo',
+                                'Sensacional!',
+                            ]}
+                            defaultRating={5}
+                            size={35}
+                            selectedColor='#fff'
+                            unSelectedColor='rgb(255,255,255,0.5)'
+                            reviewColor='#fff'
+                        />
+                        <TouchableOpacity style={styles.rateButton} onPress={() => alert(`Avaliado`)}>
+                            <Text style={styles.rateButtonText}>Avaliar</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                </View>
             </View>
         </ScrollView >
     );

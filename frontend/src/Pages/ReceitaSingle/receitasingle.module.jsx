@@ -236,6 +236,84 @@ const styles = StyleSheet.create({
         width: '100%'
     },
 
+    ready: {
+        marginTop: '15px',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column'
+    },
+
+    readySubText: { 
+        fontFamily: 'Raleway_700Bold',
+        color: '#999999',
+        fontSize: '15px'
+    },
+
+    readyMainText: {
+        fontFamily: 'Raleway_900Black',
+        fontSize: '42px',
+        color: '#505050',
+        letterSpacing: '10px'
+    },
+
+    rating: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+
+    ratePresentation: {
+        fontFamily: 'Raleway_800ExtraBold',
+        fontSize: '20px',
+        marginTop: '20px',
+        color: '#505050'
+    },
+
+    ratingContainer: {
+        marginTop: '20px',
+        width:'90%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: 20,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
+    },
+
+    rateButton: { 
+        marginTop: '25px',
+        paddingVertical: '8px',
+        textAlign: 'center',
+        width: '70%',
+        backgroundColor: '#fff',
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.20,
+        shadowRadius: 5,
+    },
+
+    rateButtonText: { 
+        fontFamily: 'Raleway_700Bold',
+        color: '#FF7152'
+    },
+
 });
 
 export default styles;
