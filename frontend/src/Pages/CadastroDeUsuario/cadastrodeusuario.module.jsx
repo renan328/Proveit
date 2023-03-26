@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         color: 'rgba(255, 113, 82, 0.75)'
     },
 
-    BorderIcon:{
+    BorderIcon: {
         display: 'flex',
         width: 140,
         height: 140,
@@ -174,7 +174,19 @@ const styles = StyleSheet.create({
     },
 
     InputSenha: {
+        display:'flex',
         marginTop: 10
+    },
+
+    senhafonteInput: {
+        display: 'flex',
+        alignItems:'flex-start',
+        marginLeft:50,
+        fontFamily: 'Raleway_600SemiBold',
+        display: 'flex',
+        alignContent: 'flex-end',
+        fontWeight: 'bold',
+        color: 'red',
     },
 
     senhaInput: {
@@ -236,6 +248,7 @@ const styles = StyleSheet.create({
     },
 
     favcategoriaInput: {
+        overflowX: 'hidden',
         width: 296,
         marginTop: 10,
         shadowOffset: {

@@ -50,6 +50,7 @@ export default function CadastroDeUsuario({ navigation }) {
         else {
             setErrorMessage('Fraca')
         }
+        
     }
 
     return (
@@ -74,15 +75,15 @@ export default function CadastroDeUsuario({ navigation }) {
             {/* Imagem de perfil */}
             <View style={styles.cadastro}>
                 <Text style={styles.suafoto}>Sua foto</Text>
-                
+
                 <View style={styles.BorderIcon}>
-                    <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58}/>
+                    <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />
                 </View>
             </View>
 
             {/* Formulário */}
             <View style={styles.inputs}>
-                <View style={{marginTop: 35}}>
+                <View style={{ marginTop: 35 }}>
                     <Text style={styles.digite_nome}>Nome</Text>
                     <TextInput style={styles.nomeInput} placeholder='Digite seu nome'></TextInput>
                 </View>
@@ -100,10 +101,9 @@ export default function CadastroDeUsuario({ navigation }) {
                 <View style={styles.InputSenha}>
                     <Text style={styles.digite_senha}>Senha</Text>
                     <TextInput onChange={(e) => validate(e.target.value)} style={styles.senhaInput} placeholder='Digite sua senha'></TextInput> <br />
-                    <span style={{
-                        fontWeight: 'bold',
-                        color: 'red',
-                    }}>{errorMessage}</span>
+                    <View style={styles.senhafonteInput}>
+                        <span style={{}}>{errorMessage}</span>
+                    </View>
                     <TextInput style={styles.redigitesenhaInput} placeholder='Redigite sua senha'></TextInput>
                 </View>
 
@@ -119,7 +119,6 @@ export default function CadastroDeUsuario({ navigation }) {
                         inputStyles={styles.favcategoriafonteInput}
                         dropdownStyles={styles.favcategorialistaInput}
                         dropdownTextStyles={styles.favcategoriafonteInput}>
-
                     </MultipleSelectList>
                 </View>
             </View>
