@@ -9,14 +9,14 @@ export default function Favoritos() {
                 <Text style={styles.firstText}>Meus</Text>
                 <Text style={styles.subText}>Favoritos</Text>
                 <View
-                style={{
-                    borderBottomColor: '#505050',
-                    opacity: 0.4,
-                    borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: '330px', height: '5px',
-                    marginTop: '15px'
-                }}
-            />
+                    style={{
+                        borderBottomColor: '#505050',
+                        opacity: 0.4,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        width: '330px', height: '5px',
+                        marginTop: '15px'
+                    }}
+                />
             </View>
         </View>
     );

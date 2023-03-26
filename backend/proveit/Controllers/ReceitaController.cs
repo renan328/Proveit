@@ -44,7 +44,5 @@ namespace proveit.Controllers
 
             return Ok();
         }
-
-
     }
 }

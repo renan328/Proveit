@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView } from 
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass';
+import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import validator from 'validator';
 import styles from './cadastrodeusuario.module';
@@ -45,9 +45,10 @@ export default function CadastroDeUsuario({ navigation }) {
             minLength: 8, minLowercase: 1,
             minUppercase: 1, minNumbers: 1, minSymbols: 1
         })) {
-            setErrorMessage('Is Strong Password')
-        } else {
-            setErrorMessage('Is Not Strong Password')
+            setErrorMessage('Forte!')
+        }
+        else {
+            setErrorMessage('Fraca')
         }
     }
 
@@ -56,29 +57,32 @@ export default function CadastroDeUsuario({ navigation }) {
         <View style={styles.container}>
 
             {/* Header */}
-            <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header, styles.shadowProp]}>
-                <View style={styles.cadastro_de_usuario}>
-                    <Text style={styles.texto_cadastro_de}>Cadastro de </Text>
-                    <Text style={styles.texto_usuario}>Usuário</Text>
-                </View>
-                <Image
-                    style={styles.usuario_icone}
-                    source={require('../../assets/usuario96.png')}
+            <View style={styles.header}>
+                <Text style={styles.CadastreSe}>Cadastre-se</Text>
+
+                <View
+                    style={{
+                        borderBottomColor: '#505050',
+                        opacity: 0.4,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        width: '330px', height: '5px',
+                        marginTop: '15px'
+                    }}
                 />
-            </LinearGradient>
+            </View>
 
             {/* Imagem de perfil */}
             <View style={styles.cadastro}>
                 <Text style={styles.suafoto}>Sua foto</Text>
-                <Image 
-                    style={styles.cadastro_imagem}
-                    source={require('../../assets/cadastro_imagem.png')}
-                />
+                
+                <View style={styles.BorderIcon}>
+                    <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58}/>
+                </View>
             </View>
 
             {/* Formulário */}
             <View style={styles.inputs}>
-                <View style={styles.inputNome}>
+                <View style={{marginTop: 35}}>
                     <Text style={styles.digite_nome}>Nome</Text>
                     <TextInput style={styles.nomeInput} placeholder='Digite seu nome'></TextInput>
                 </View>
@@ -97,9 +101,9 @@ export default function CadastroDeUsuario({ navigation }) {
                     <Text style={styles.digite_senha}>Senha</Text>
                     <TextInput onChange={(e) => validate(e.target.value)} style={styles.senhaInput} placeholder='Digite sua senha'></TextInput> <br />
                     <span style={{
-          fontWeight: 'bold',
-          color: 'red',
-        }}>{errorMessage}</span>
+                        fontWeight: 'bold',
+                        color: 'red',
+                    }}>{errorMessage}</span>
                     <TextInput style={styles.redigitesenhaInput} placeholder='Redigite sua senha'></TextInput>
                 </View>
 

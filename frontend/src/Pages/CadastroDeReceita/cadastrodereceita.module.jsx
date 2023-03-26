@@ -12,38 +12,41 @@ const styles = StyleSheet.create({
     header: {
         height: 103,
         width: '100%',
-        borderBottomLeftRadius: 30,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        justifyContent: 'space-around',
         flexWrap: 'wrap'
     },
 
     textAdd: {
-        color: 'rgba(255, 255, 255, 0.65)',
-        fontFamily: 'Raleway_700Bold',
-        fontSize: 17,
-        marginTop: 25,
-        textShadowColor: 'rgba(0, 0, 0, 0.1)',
-        textShadowOffset: { width: -1, height: 3 },
-        textShadowRadius: 3
-
+        color: '#FF7152',
+        fontFamily: 'Raleway_800ExtraBold',
+        fontSize: 35,
     },
 
     textReceitas: {
-        color: '#fff',
+        color: 'rgba(0, 0, 0, 0.7)',
         fontFamily: 'Raleway_700Bold',
-        fontSize: 37,
-        textShadowColor: 'rgba(0, 0, 0, 0.1)',
-        textShadowOffset: { width: -1, height: 3 },
-        textShadowRadius: 3
+        fontSize: 35,
+    },
+
+    IconCamera: {
+        color: 'rgba(255, 113, 82, 0.75)'
+    },
+
+    BorderIcon:{
+        display: 'flex',
+        width: 140,
+        height: 140,
+        marginTop: 10,
+        borderWidth: 1.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#FF7152',
+        borderStyle: 'dashed',
+        borderBottomLeftRadius: 70,
+        borderBottomRightRadius: 70,
+        borderTopLeftRadius: 70,
+        borderTopRightRadius: 70
     },
 
     inputs: {

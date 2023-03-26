@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, CheckBox, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, Image, CheckBox, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-native-web';
 import styles from './cadastrodereceita.module';
 
@@ -34,18 +36,9 @@ export default function CadastroDeReceita({ navigation }) {
     ];
 
     const hora = [
-        { key: '1', value: '1 hora' },
-        { key: '2', value: '2 horas' },
-        { key: '3', value: '3 horas' },
-        { key: '4', value: '4 horas' },
-        { key: '5', value: '5 horas' },
-        { key: '6', value: '6 horas' },
-        { key: '7', value: '7 horas' },
-        { key: '8', value: '8 horas' },
-        { key: '9', value: '9 horas' },
-        { key: '10', value: '10 horas' },
-        { key: '11', value: '11 horas' },
-        { key: '12', value: '12 horas' }
+        { key: '1', value: 'minutos(s)' },
+        { key: '2', value: 'hora(s)' },
+        { key: '3', value: 'dia(s)' },
     ];
 
     const medida = [
@@ -53,33 +46,27 @@ export default function CadastroDeReceita({ navigation }) {
         { key: '2', value: '1/2 xícara (chá)' },
         { key: '3', value: '1/4 xícara (chá)' },
         { key: '4', value: '1 colher (sopa)' },
-        { key: '5', value: '1 colher (chá)' }
+        { key: '5', value: '1 colher (chá)' },
+        { key: '6', value: 'Unidade(s)' }
     ]
 
     const [isSelected, setSelection] = useState(false);
 
     return (
-        <View style={styles.container} >
+        <ScrollView style={styles.container} >
+
             {/* Header */}
-            <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header, styles.shadowProp]}>
-                <View style={{ top: -8 }}>
+            <View style={styles.header}>
                     <Text style={styles.textAdd}>Adicionar</Text>
                     <Text style={styles.textReceitas} >Receitas</Text>
-                </View>
-            </LinearGradient>
+            </View>
 
-            {/* Fotos e Vídeo */}
+            {/* Fotos */}
             <View style={{ display: 'flex', alignItems: "center" }}>
-                <Text style={{ fontFamily: 'Raleway_600SemiBold', fontSize: 15, marginTop: 26 }}> Foto e vídeo</Text>
-                <View style={{ flexDirection: "row" }}>
-                    <Image
-                        style={{ width: 128, height: 128, marginTop: 10, flex: 1 }}
-                        source={require('../../assets/camera.png')}
-                    />
-                    {<Image
-                        style={{ width: 130, height: 130, marginTop: 10, flex: 1 }}
-                        source={require('../../assets/video.png')}
-                    />}
+                <Text style={{ fontFamily: 'Raleway_600SemiBold', fontSize: 15, marginTop: 26 }}> Foto </Text>
+
+                <View style={styles.BorderIcon}>
+                    <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58}/>
                 </View>
             </View>
 
@@ -104,7 +91,6 @@ export default function CadastroDeReceita({ navigation }) {
                         dropdownStyles={styles.categoriaListaInput}
                         dropdownTextStyles={{ fontSize: '11px', color: '#505050' }}>
                     </MultipleSelectList>
-                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14 }}>+ Adicionar Categorias</Text>
                 </View>
 
                 {/* Input Tempo de Preparo */}
@@ -201,6 +187,6 @@ export default function CadastroDeReceita({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-        </View >
+        </ScrollView >
     );
 }

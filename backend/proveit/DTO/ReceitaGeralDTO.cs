@@ -17,6 +17,6 @@ namespace proveit.DTO
         public bool Aproveitamento { get; set; }
         public List<PassoDTO> Passos { get; set; }
         public List<Ingredientes_ReceitaDTO> Ingredientes { get; set; }
+        public List<AvaliacaoDTO> Avaliacoes { get; set; }
     }
 }
-//  PassoTexto, NumPasso

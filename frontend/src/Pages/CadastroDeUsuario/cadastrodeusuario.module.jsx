@@ -16,40 +16,44 @@ const styles = StyleSheet.create({
     },
 
     header: {
+        display: 'flex',
         height: 103,
         width: '100%',
-        borderBottomLeftRadius: 30,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        justifyContent: 'space-around',
         flexWrap: 'wrap'
-
-
     },
 
-
-    cadastro_de_usuario: {
-        top: -8
-    },
-
-    usuario_icone: {
-
-        width: 78,
-        height: 70,
-    },
-
-    texto_cadastro_de: {
-        color: 'rgba(255, 255, 255, 0.65)',
+    CadastreSe: {
+        color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
-        fontSize: 14,
-        marginTop: 30,
+        fontSize: 36,
+    },
+
+    CadastreSe: {
+        color: '#FF7152',
+        fontFamily: 'Raleway_800ExtraBold',
+        fontSize: 36,
+    },
+
+    IconCamera: {
+        color: 'rgba(255, 113, 82, 0.75)'
+    },
+
+    BorderIcon:{
+        display: 'flex',
+        width: 140,
+        height: 140,
+        marginTop: 10,
+        borderWidth: 1.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#FF7152',
+        borderStyle: 'dashed',
+        borderBottomLeftRadius: 70,
+        borderBottomRightRadius: 70,
+        borderTopLeftRadius: 70,
+        borderTopRightRadius: 70
     },
 
     texto_usuario: {
