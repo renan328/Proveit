@@ -27,10 +27,7 @@ O nosso projeto tem bases iniciais bem definidas. Estamos em estágios pós-inic
 
 
 ## Tecnologias usadas
-<img src="https://cdn.worldvectorlogo.com/logos/react-native-1.svg" height=40/>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-plain.svg" height=40/>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/1200px-.NET_Core_Logo.svg.png" height=40/>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height=40/>
+<img src="https://cdn.worldvectorlogo.com/logos/react-native-1.svg" height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-plain.svg" height=40/> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/1200px-.NET_Core_Logo.svg.png" height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height=40/>
 
 ## 📆 Quando?
 O lançamento do aplicativo é previsto para **meados de junho / julho**, estando disponível para dispositivos Android.
