@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
     linearGradient: {
         backgroundColor: 'orange',
         width: '100%',
-        height: '95%',
+        height: '85%',
         display: 'flex',
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginTop: '50px',
+        marginTop: '135px',
         borderTopLeftRadius: 70,
         borderTopRightRadius: 70,
         shadowColor: "#000",
@@ -56,15 +56,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
         backgroundColor: '#FFF',
-        borderTopLeftRadius: 40,
-        borderTopRightRadius: 40,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 0,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 7,
     },
 
     loginHeader: {
@@ -78,7 +69,6 @@ const styles = StyleSheet.create({
     },
 
     loginText: {
-        marginTop: '15px',
         color: '#505050',
         fontSize: 28,
         fontFamily: 'Raleway_800ExtraBold'
@@ -140,7 +130,8 @@ const styles = StyleSheet.create({
 
     texts: {
         color: '#505050',
-        marginBottom: '15px'
+        marginBottom: '15px',
+        flexDirection: 'column'
     }
 
 });

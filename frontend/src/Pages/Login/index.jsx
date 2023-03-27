@@ -6,6 +6,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import styles from './login.module';
 
+
 export default function Login({ navigation }) {
     return (
         <View style={styles.container}>
@@ -14,11 +15,11 @@ export default function Login({ navigation }) {
             <ImageBackground source={require('../../assets/cat_aves.jpg')} style={styles.background}>
 
                 {/* View Principal com gradiente */}
-                <LinearGradient colors={['#FF7152', '#FFB649']} style={styles.linearGradient}>
+                <LinearGradient colors={['#FFF', '#FFF']} style={styles.linearGradient}>
                     {/* Logo */}
                     <View style={styles.logo}>
                         <Image
-                            style={{ width: '250px', height: '220px' }}
+                            style={{ width: '200px', height: '170px' }}
                             source={require('../../assets/proveitLogo.png')}
                         />
                     </View>
@@ -26,7 +27,6 @@ export default function Login({ navigation }) {
                     {/* View Login e inputs */}
                     <View style={styles.containerLogin}>
                         <View style={styles.loginHeader}>
-                            <FontAwesomeIcon style={styles.userIcon} icon={faUser} size={35} />
                             <Text style={styles.loginText}>Login</Text>
                         </View>
 
