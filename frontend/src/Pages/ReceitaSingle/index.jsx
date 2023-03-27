@@ -6,8 +6,9 @@ import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-m
 import { faBookmark, faStar, faAngleLeft, faClock, faUtensils, faHeart, faEllipsisVertical, faCarrot, faKitchenSet } from '@fortawesome/free-solid-svg-icons';
 import PassoReceita from '../../components/PassoReceita/PassoReceita';
 import IngredienteReceita from '../../components/IngredienteReceita/IngredienteReceita';
+import ComentarioSingle from '../../components/ComentarioSingle/ComentarioSingle';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import { AirbnbRating } from 'react-native-ratings';
 import styles from './receitasingle.module';
 
 
@@ -183,7 +184,7 @@ export default function ReceitaSingle({ navigation }) {
                     }} />
 
                 <View style={styles.rating}>
-                    <Text style={styles.ratePresentation}>O que você <Text style={{color: '#FF7152'}}>achou?</Text></Text>
+                    <Text style={styles.ratePresentation}>O que <Text style={{ color: '#FF7152' }}>você</Text> achou?</Text>
                     <LinearGradient start={{ x: -1, y: 1 }}
                         end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.ratingContainer}>
                         <AirbnbRating
@@ -207,6 +208,18 @@ export default function ReceitaSingle({ navigation }) {
                         </TouchableOpacity>
                     </LinearGradient>
                 </View>
+
+                <View style={styles.comments}>
+                    <View style={styles.commentsHeader}>
+                        <Text style={styles.commentsTitle}>Comentários</Text>
+                    </View>
+                    <View style={styles.commentsContainer}>
+                        <ComentarioSingle userPicture={'imagem'} userName={'Pedro Silva'} stars={5} comment={'Achei uma ótima receita pra ser bem sincero.'} />
+
+                        <ComentarioSingle userPicture={'imagem'} userName={'Pedro Silva'} stars={5} comment={'Achei uma ótima receita pra ser bem sincero.'} />
+                    </View>
+                </View>
+
             </View>
         </ScrollView >
     );

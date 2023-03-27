@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
 
-    readySubText: { 
+    readySubText: {
         fontFamily: 'Raleway_700Bold',
         color: '#999999',
         fontSize: '15px'
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
 
     ratingContainer: {
         marginTop: '20px',
-        width:'90%',
+        width: '90%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
     },
 
-    rateButton: { 
+    rateButton: {
         marginTop: '25px',
         paddingVertical: '8px',
         textAlign: 'center',
@@ -309,9 +309,56 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
     },
 
-    rateButtonText: { 
+    rateButtonText: {
         fontFamily: 'Raleway_700Bold',
         color: '#FF7152'
+    },
+
+    comments: {
+        marginTop: '40px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+
+    commentsHeader: {
+        paddingVertical: '30px'
+    },
+
+    commentsTitle: {
+        fontSize: '25px',
+        fontFamily: 'Raleway_800ExtraBold',
+        color: '#505050',
+    },
+
+    commentSingle: {
+        paddingVertical: '7px',
+        paddingHorizontal: '7px',
+        textAlign: 'left',
+        fontSize: '13px',
+        color: '#505050',
+        height: '50px',
+        width: '100%',
+        backgroundColor: '#fff',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        marginTop: 10,
+        fontFamily: 'Raleway_600SemiBold',
+    },
+
+    commentsContainer: {
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center'
     },
 
 });
