@@ -7,14 +7,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
 
-    inputs: {
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-
-    },
-
     header: {
         display: 'flex',
         height: 103,
@@ -68,10 +60,10 @@ const styles = StyleSheet.create({
     },
 
     suafoto: {
-        fontFamily: 'Raleway_600SemiBold',
+        fontFamily: 'Raleway_700Bold',
         fontSize: 15,
         marginTop: 26,
-
+        color: '#505050'
     },
 
     cadastro_imagem: {
@@ -81,13 +73,34 @@ const styles = StyleSheet.create({
         display: 'flex'
     },
 
-    nomeInput: {
-        marginHorizontal: '47px',
+
+    inputs: {
+        marginTop: '40px',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+
+    inputSingle: {
+        width: '80%',
+        display: 'flex',
+        justifyContent: 'space-around',
+        marginTop: '20px',
+    },
+
+    inputTitle: {
+        display: 'flex',
+        fontFamily: 'Raleway_800ExtraBold',
+        color: '#505050',
+    },
+
+    defaultInput: {
         paddingHorizontal: '7px',
-        fontSize: '11px',
+        fontSize: '13px',
         color: '#505050',
         height: '50px',
-        width: '296px',
+        width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -100,156 +113,31 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        marginTop: 10
-
-    },
-
-    digite_nome: {
-        display: 'flex',
-        marginLeft: 47,
-    },
-
-    inputNomeUsuario: {
-        marginTop: 10
-    },
-
-    nomeusuarioInput: {
-        marginHorizontal: '47px',
-        paddingHorizontal: '7px',
-        fontSize: '11px',
-        color: '#505050',
-        height: '50px',
-        width: '296px',
-        backgroundColor: '#fff',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        marginTop: 10
-
-    },
-
-    digite_nomeusuario: {
-        display: 'flex',
-        marginLeft: 47,
-    },
-
-    inputEmail: {
-        marginTop: 10
-    },
-
-    emailInput: {
-        marginHorizontal: '47px',
-        paddingHorizontal: '7px',
-        fontSize: '11px',
-        color: '#505050',
-        height: '50px',
-        width: '296px',
-        backgroundColor: '#fff',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        marginTop: 10
-
-    },
-
-    digite_email: {
-        display: 'flex',
-        marginLeft: 47,
-    },
-
-    InputSenha: {
-        display:'flex',
-        marginTop: 10
-    },
-
-    senhafonteInput: {
-        display: 'flex',
-        alignItems:'flex-start',
-        marginLeft:50,
+        marginTop: 10,
         fontFamily: 'Raleway_600SemiBold',
+    },
+
+    validator: {
         display: 'flex',
-        alignContent: 'flex-end',
-        fontWeight: 'bold',
-        color: 'red',
-    },
-
-    senhaInput: {
-        marginHorizontal: '47px',
-        paddingHorizontal: '7px',
-        fontSize: '11px',
-        color: '#505050',
-        height: '50px',
-        width: '296px',
-        backgroundColor: '#fff',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        marginTop: 10
-
-    },
-
-    digite_senha: {
-        display: 'flex',
-        marginLeft: 47,
-    },
-
-    redigitesenhaInput: {
-        marginHorizontal: '47px',
-        paddingHorizontal: '7px',
-        fontSize: '11px',
-        color: '#505050',
-        height: '50px',
-        width: '296px',
-        backgroundColor: '#fff',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        marginTop: 10
+        alignItems: 'center',
+        marginLeft: 50,
+        fontFamily: 'Raleway_800ExtraBold',
+        color: 'rgba(61, 7, 7, 0.78)',
+        backgroundColor: 'rgba(255, 0, 0, 0.24)',
+        width: '20%',
+        borderBottomLeftRadius: 5,
+        borderBottomRightRadius: 5,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
     },
 
     InputCategoria: {
         marginTop: 10
     },
 
-    digite_favcategoria: {
-        display: 'flex',
-    },
-
     favcategoriaInput: {
         overflowX: 'hidden',
-        width: 296,
+        width: '296px',
         marginTop: 10,
         shadowOffset: {
             width: 0,
@@ -257,6 +145,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
+        border: 'none'
     },
 
     favcategoriafonteInput: {
@@ -274,7 +163,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-
     },
     button: {
         display: 'flex',

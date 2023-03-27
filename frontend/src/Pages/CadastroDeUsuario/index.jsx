@@ -74,41 +74,41 @@ export default function CadastroDeUsuario({ navigation }) {
 
             {/* Imagem de perfil */}
             <View style={styles.cadastro}>
-                <Text style={styles.suafoto}>Sua foto</Text>
+                <Text style={styles.suafoto}>Foto de perfil</Text>
 
-                <View style={styles.BorderIcon}>
+                <TouchableOpacity style={styles.BorderIcon}>
                     <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />
-                </View>
+                </TouchableOpacity>
             </View>
 
             {/* Formulário */}
             <View style={styles.inputs}>
-                <View style={{ marginTop: 35 }}>
-                    <Text style={styles.digite_nome}>Nome</Text>
-                    <TextInput style={styles.nomeInput} placeholder='Digite seu nome'></TextInput>
+                <View style={styles.inputSingle}>
+                    <Text style={styles.inputTitle}>Nome</Text>
+                    <TextInput style={styles.defaultInput} placeholder='Digite seu nome'></TextInput>
                 </View>
 
-                <View style={styles.inputNomeUsuario}>
-                    <Text style={styles.digite_nomeusuario}>Nome de usuário</Text>
-                    <TextInput style={styles.nomeusuarioInput} placeholder='Digite seu nome de usuário'></TextInput>
+                <View style={styles.inputSingle}>
+                    <Text style={styles.inputTitle}>Nome de usuário</Text>
+                    <TextInput style={styles.defaultInput} placeholder='Digite seu nome de usuário'></TextInput>
                 </View>
 
-                <View style={styles.inputEmail}>
-                    <Text style={styles.digite_email}>E-mail</Text>
-                    <TextInput style={styles.emailInput} placeholder='Digite seu e-mail'></TextInput>
+                <View style={styles.inputSingle}>
+                    <Text style={styles.inputTitle}>E-mail</Text>
+                    <TextInput style={styles.defaultInput} placeholder='Digite seu e-mail'></TextInput>
                 </View>
 
-                <View style={styles.InputSenha}>
-                    <Text style={styles.digite_senha}>Senha</Text>
-                    <TextInput onChange={(e) => validate(e.target.value)} style={styles.senhaInput} placeholder='Digite sua senha'></TextInput> <br />
-                    <View style={styles.senhafonteInput}>
+                <View style={styles.inputSingle}>
+                    <Text style={styles.inputTitle}>Senha</Text>
+                    <TextInput onChange={(e) => validate(e.target.value)} style={styles.defaultInput} placeholder='Digite sua senha' secureTextEntry={true}></TextInput> <br />
+                    <View style={styles.validator}>
                         <span style={{}}>{errorMessage}</span>
                     </View>
-                    <TextInput style={styles.redigitesenhaInput} placeholder='Redigite sua senha'></TextInput>
+                    <TextInput style={styles.defaultInput} secureTextEntry={true} placeholder='Redigite sua senha'></TextInput>
                 </View>
 
-                <View style={styles.InputCategoria}>
-                    <Text style={styles.digite_favcategoria}>Suas categorias favoritas</Text>
+                <View style={styles.inputSingle}>
+                    <Text style={styles.inputTitle}>Suas categorias favoritas</Text>
                     <MultipleSelectList style={styles.favcategoriaInput} data={data}
                         setSelected={setSelected}
                         placeholder='Alguma categoria'
