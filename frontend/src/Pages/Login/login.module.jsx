@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     },
 
     linearGradient: {
-        backgroundColor: 'orange',
+        backgroundColor: '#fff',
         width: '100%',
         height: '85%',
         display: 'flex',
@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     logo: {
         flex: 1,
         width: '100%',
-        height: '300px',
-        marginTop: '80px',
+        // height: '10px',
+        marginTop: '20px',
         flexDirection: 'row',
         textAlign: 'center',
         alignItens: 'center',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 
     loginText: {
         color: '#505050',
-        fontSize: 28,
+        fontSize: 32,
         fontFamily: 'Raleway_800ExtraBold'
     },
 
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     },
 
     input: {
+        width: 300,
         marginVertical: '5px',
         marginHorizontal: '5px',
         paddingHorizontal: '7px',
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        width: 120,
+        width: 170,
         position: 'absolute',
         backgroundColor: 'orange',
         color: '#FFF',
@@ -131,7 +132,8 @@ const styles = StyleSheet.create({
     texts: {
         color: '#505050',
         marginBottom: '15px',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        gap: 5
     }
 
 });

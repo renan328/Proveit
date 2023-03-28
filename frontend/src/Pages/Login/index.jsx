@@ -15,12 +15,12 @@ export default function Login({ navigation }) {
             <ImageBackground source={require('../../assets/cat_aves.jpg')} style={styles.background}>
 
                 {/* View Principal com gradiente */}
-                <LinearGradient colors={['#FFF', '#FFF']} style={styles.linearGradient}>
+                <View colors={['#FFF', '#FFF']} style={styles.linearGradient}>
                     {/* Logo */}
                     <View style={styles.logo}>
                         <Image
-                            style={{ width: '200px', height: '170px' }}
-                            source={require('../../assets/proveitLogo.png')}
+                            style={{ width: '230px', height: '220px' }}
+                            source={require('../../assets/PROVEITLOGOdarkbgless.png')}
                         />
                     </View>
 
@@ -43,14 +43,17 @@ export default function Login({ navigation }) {
                             </LinearGradient>
                         </TouchableOpacity>
 
-                        <View style={styles.texts}>
-                            <TouchableOpacity>
-                                <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Esqueci minha senha</Text>
-                            </TouchableOpacity>
-                            <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Ainda não tem uma conta? <Text style={{ fontFamily: 'Raleway_700Bold', textDecorationLine: 'underline', color: '#FF7152' }} onPress={() => navigation.navigate('CadastroDeUsuario')}>Cadastrar</Text></Text>
-                        </View>
                     </View>
-                </LinearGradient>
+
+                    <View style={styles.texts}>
+                        <TouchableOpacity>
+                            <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Esqueci minha senha</Text>
+                        </TouchableOpacity>
+                        <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Ainda não tem uma conta?</Text>
+                        <Text style={{ fontFamily: 'Raleway_700Bold', textDecorationLine: 'underline', color: '#FF7152' }} onPress={() => navigation.navigate('CadastroDeUsuario')}>Cadastrar</Text>
+                    </View>
+
+                </View>
             </ImageBackground>
             {/* comentário */}
         </View>
