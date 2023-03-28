@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex: 1,
         backgroundColor: '#fff',
-        width: '100%'
+        width: '100%',
+
     },
 
     header: {
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
         color: 'rgba(255, 113, 82, 0.75)'
     },
 
-    BorderIcon:{
+    BorderIcon: {
         display: 'flex',
         width: 140,
         height: 140,
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
 
     TextInput: {
         alignSelf: 'baseline',
-        marginLeft: 47,
+        justifyContent: 'flex-end',
         fontSize: "15px",
         fontFamily: 'Raleway_600SemiBold'
     },
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
         fontSize: '13px',
         color: '#505050',
         height: '50px',
-        width: '296px',
+        width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -85,9 +86,17 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_600SemiBold'
     },
 
+    defaultInput: {
+        marginTop: 25,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '80%'
+    },
+
     categoriaInput: {
         display: 'flex',
-        marginRight: 5,
+        alignItems: 'center',
         height: '50px',
         width: '296px',
         marginTop: 10,
@@ -101,7 +110,7 @@ const styles = StyleSheet.create({
     },
 
     categoriaListaInput: {
-        width: '296px',
+        width: '100%',
         shadowOffset: {
             width: 0,
             height: 2,
@@ -111,12 +120,13 @@ const styles = StyleSheet.create({
     },
 
     inputTempo: {
-        marginHorizontal: '47px',
-        paddingHorizontal: '7px',
+        marginHorizontal: '45px',
+        paddingHorizontal: '5px',
+        marginLeft: '10%',
         fontSize: '13px',
         color: '#505050',
         height: '50px',
-        width: '58px',
+        width: '17%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -134,12 +144,10 @@ const styles = StyleSheet.create({
     },
 
     horaInput: {
-        overflowX: 'hidden',
         display: 'flex',
-        marginRight: 5,
         height: '50px',
-        width: '115px',
-        marginRight: '20px',
+        width: 120,
+        marginRight: '10px',
         marginLeft: '-35px',
         marginTop: 10,
         shadowOffset: {
@@ -152,23 +160,22 @@ const styles = StyleSheet.create({
     },
 
     horaListaInput: {
-        width: '115px',
+        display: 'flex',
+        width: '120px',
         shadowOffset: {
             width: 0,
             height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        marginLeft: '-40px'
     },
 
     inputQntd: {
-        marginHorizontal: '-10px',
-        paddingHorizontal: '7px',
+        paddingHorizontal: '8px',
         fontSize: '13px',
         color: '#505050',
         height: '50px',
-        width: '100px',
+        width: '24%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -186,16 +193,14 @@ const styles = StyleSheet.create({
     },
 
     textPorcoes: {
-        marginLeft: '65px',
+        marginLeft: '72px',
         fontSize: "15px",
         fontFamily: 'Raleway_600SemiBold'
     },
 
     checkboxContainer: {
         flexDirection: 'row',
-        marginBottom: 20,
-        marginTop: 20,
-        width: '300px',
+        width: '100%',
         alignItems: 'center'
     },
 
@@ -230,14 +235,14 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         marginTop: 10,
         fontFamily: 'Raleway_600SemiBold',
-        marginLeft: 47
+        marginLeft: 40
     },
 
     medidaInput: {
         overflowX: 'hidden',
         display: 'flex',
         height: '50px',
-        width: '200px',
+        width: '212px',
         marginLeft: '25px',
         marginTop: 10,
         shadowOffset: {
@@ -250,7 +255,7 @@ const styles = StyleSheet.create({
     },
 
     medidaListaInput: {
-        width: '200px',
+        width: '212px',
         shadowOffset: {
             width: 0,
             height: 2,
@@ -263,7 +268,7 @@ const styles = StyleSheet.create({
     button: {
         display: 'flex',
         marginBottom: 25,
-        marginTop: 10,
+        marginTop: 20,
         width: 200,
         backgroundColor: 'orange',
         color: '#FFF',

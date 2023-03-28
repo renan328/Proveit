@@ -57,29 +57,30 @@ export default function CadastroDeReceita({ navigation }) {
 
             {/* Header */}
             <View style={styles.header}>
-                    <Text style={styles.textAdd}>Adicionar</Text>
-                    <Text style={styles.textReceitas} >Receitas</Text>
+                <Text style={styles.textAdd}>Adicionar</Text>
+                <Text style={styles.textReceitas} >Receitas</Text>
             </View>
 
             {/* Fotos */}
             <View style={{ display: 'flex', alignItems: "center" }}>
                 <Text style={{ fontFamily: 'Raleway_600SemiBold', fontSize: 15, marginTop: 26 }}> Foto </Text>
-
                 <View style={styles.BorderIcon}>
-                    <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58}/>
+                    <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />
                 </View>
             </View>
 
-            {/* Input Nome */}
-            <View styels={styles.inputs}>
-                <View style={{ marginTop: 25, display: 'flew' }}>
+            {/* Input "Pai" */}
+            <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%' }}>
+
+                {/* Input Nome */}
+                <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Nome</Text>
                     <TextInput style={styles.allInput} placeholder='Digite o nome da receita'></TextInput>
                 </View>
 
                 {/* Input Categorias */}
-                <View style={{ margin: 20, display: 'flex', alignItems: 'center' }}>
-                    <Text style={{ display: 'flex', alignSelf: 'stretch', marginLeft: 27, fontFamily: 'Raleway_600SemiBold' }}>Categorias</Text>
+                <View style={styles.defaultInput}>
+                    <Text style={styles.TextInput}>Categorias</Text>
                     <MultipleSelectList data={data}
                         setSelected={setSelected}
                         placeholder='Alguma categoria'
@@ -94,11 +95,11 @@ export default function CadastroDeReceita({ navigation }) {
                 </View>
 
                 {/* Input Tempo de Preparo */}
-                <View style={{ flexDirection: 'row', display: 'flex' }}>
+                <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '79%' }}>
                     <Text style={styles.TextInput}>Tempo de preparo</Text>
                     <Text style={styles.textPorcoes}>Porções</Text>
                 </View>
-                <View style={{ flexDirection: 'row', display: 'flex' }}>
+                <View style={{ flexDirection: 'row', display: 'flex', width: '100%', justifyContent: 'flex-start' }}>
                     <TextInput style={styles.inputTempo} placeholder='Tempo'></TextInput>
                     <MultipleSelectList data={hora}
                         setSelected={setSelected}
@@ -115,38 +116,38 @@ export default function CadastroDeReceita({ navigation }) {
                 </View>
 
                 {/* CheckBox de Aproveitamento */}
-                <View style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <View style={styles.defaultInput}>
                     <View style={styles.checkboxContainer}>
                         <CheckBox value={isSelected} onValueChange={setSelection} style={styles.checkbox} />
-                        <Text style={{ margin: 8, fontSize: "15px", fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
+                        <Text style={{ margin: 5, fontSize: "15px", fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
                         <Button title="?"></Button>
                     </View>
                 </View>
 
                 {/* Input Valor cal */}
-                <View style={{ display: 'flex', alignItems: 'center' }}>
+                <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Valor Calórico</Text>
                     <TextInput style={styles.allInput} placeholder='Ex: Gramas/quilocalorias'></TextInput>
                 </View>
 
                 {/* Input Pequena descrição */}
-                <View style={{ marginTop: 25, display: 'flex', alignItems: 'center' }}>
+                <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Pequena descrição</Text>
                     <TextInput style={styles.allInput} placeholder='Ex: Coxinha de frango com catupiry'></TextInput>
                 </View>
 
                 {/* Input Ingredientes */}
-                <View style={{ marginTop: 25, display: 'flex', alignItems: 'center' }}>
+                <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Ingredientes</Text>
                     <TextInput style={styles.allInput} placeholder='Primeiro ingrediente'></TextInput>
                 </View>
 
                 {/* Input Quantidade */}
-                <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25 }}>
+                <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
                     <Text style={styles.TextInput}>Quantidade</Text>
                     <Text style={styles.textMedida}>Medida</Text>
                 </View>
-                <View style={{ flexDirection: 'row', display: 'flex' }}>
+                <View style={{ flexDirection: 'row', display: 'flex', width: '100%', justifyContent: 'flex-start' }}>
                     <TextInput style={styles.inputQuantidade} placeholder='Qntd'></TextInput>
                     <MultipleSelectList data={medida}
                         setSelected={setSelected}
@@ -162,19 +163,19 @@ export default function CadastroDeReceita({ navigation }) {
                 </View>
 
                 {/* Adicionar ingredientes */}
-                <View style={{ display: 'flex', alignItems: 'center' }}>
-                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, margin: 15 }}>+ Adicionar ingrediente</Text>
+                <View>
+                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, marginTop: 15 }}>+ Adicionar ingrediente</Text>
                 </View>
 
                 {/* Input Passos */}
-                <View>
+                <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Passos</Text>
                     <TextInput style={styles.allInput} placeholder='Primeiro passo'></TextInput>
                 </View>
 
                 {/* Adicionar Passos */}
-                <View style={{ display: 'flex', alignItems: 'center' }}>
-                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, margin: 15 }}>+ Adicionar passos</Text>
+                <View>
+                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, marginTop: 15 }}>+ Adicionar passos</Text>
                 </View>
 
                 {/* Botão */}
