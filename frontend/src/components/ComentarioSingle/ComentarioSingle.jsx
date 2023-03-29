@@ -2,21 +2,27 @@ import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faQuoteLeft, faQuoteRight, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faQuoteLeft, faQuoteRight, faStar } from '@fortawesome/free-solid-svg-icons';
 
-export default function ComentarioSingle({ userPicture, userName, stars, comment }) {
+export default function ComentarioSingle({ userId, userPicture, userName, stars, comment }) {
+
+    userId = 1;
 
     function StarCounter() {
-        for (let index = 0; index < stars; index++)
-            return (
-                <View style={styles.starsContainer}>
-                    <FontAwesomeIcon icon={faStar} />
-                    <FontAwesomeIcon icon={faStar} />
-                    <FontAwesomeIcon icon={faStar} />
-                    <FontAwesomeIcon icon={faStar} />
-                    <FontAwesomeIcon icon={faStar} />
+
+        const starsBox = [];
+
+        for (let index = 0; index < stars; index++) {
+            starsBox.push(
+                <View key={index}>
+                    <FontAwesomeIcon icon={faStar} color={'#FF7152'}/>
                 </View>
             );
+        }
+
+        return (
+            <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '5px', }}>{starsBox}</View>
+        );
     };
 
     return (
@@ -24,22 +30,22 @@ export default function ComentarioSingle({ userPicture, userName, stars, comment
         <View style={styles.container}>
 
             <View style={styles.imgContainer}>
-                <Text>{userPicture}</Text>
+                <Image source={require('../../assets/user.jpg')} style={styles.userPic}></Image>
             </View>
 
             <View style={styles.textContainer}>
                 <View style={styles.commentHeader}>
-                    <Text>{userName}</Text>
-                    <Text>{StarCounter()}</Text>
+                    <Text style={styles.userName}>{userName}</Text>
+                    <View>{StarCounter()}</View>
                 </View>
-                <View>
-                    <FontAwesomeIcon icon={faQuoteLeft} />
+                <View style={styles.quoteContainer}>
+                    <FontAwesomeIcon icon={faQuoteLeft}  color={'rgba(0,0,0,0.3)'}/>
                 </View>
                 <View style={styles.text}>
-                    <Text>{comment}</Text>
+                    <Text style={styles.comment}>{comment}</Text>
                 </View>
                 <View style={styles.footer}>
-                    <FontAwesomeIcon icon={faQuoteRight} />
+                    <FontAwesomeIcon icon={faQuoteRight} color={'rgba(0,0,0,0.3)'}/>
                 </View>
             </View>
 
@@ -53,21 +59,54 @@ const styles = StyleSheet.create({
         display: 'flex',
         width: '80%',
         color: '#505050',
+        backgroundColor: '#fff',
         flexDirection: 'row',
-        marginTop: '20px',
+        marginTop: '30px',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.45,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+        borderBottomStartRadius: 10,
+        borderTopStartRadius: 10,
+        borderBottomEndRadius: 10,
+        borderTopEndRadius: 10,
     },
 
     imgContainer: {
         flex: 25,
-        backgroundColor: 'blue',
+    },
+
+    userPic: {
+        width: '65px',
+        height: '65px',
+        top: -15,
+        left: 10,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        borderBottomStartRadius: 15,
+        borderTopStartRadius: 15,
+        borderBottomEndRadius: 15,
+        borderTopEndRadius: 15,
+        elevation: 5,
     },
 
     textContainer: {
         flex: 75,
         display: 'flex',
-        backgroundColor: 'red',
         paddingHorizontal: '20px',
         paddingVertical: '10px',
+        borderBottomEndRadius: 20,
+        borderTopEndRadius: 20,
+        zIndex: 0,
     },
 
     commentHeader: {
@@ -76,15 +115,27 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
 
-    starsContainer: {
-        display: 'flex',
-        flexDirection: 'row'
+    userName: {
+        fontFamily: 'Raleway_700Bold',
+        color: '#505050',
+        fontSize: '16px'
+    },
+
+    quoteContainer: {
+        marginVertical: '5px'
+    },
+
+    comment: {
+        fontFamily: 'Raleway_600SemiBold',
+        color: '#505050',
+        fontSize: '14px'
     },
 
     footer: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        marginVertical: '5px'
     }
 
 });

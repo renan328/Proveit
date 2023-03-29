@@ -166,6 +166,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: '30px',
     },
 
+    userPic: {
+        width: '100%',
+        height: '100%'
+    },
+
     mainUserText: {
         fontSize: '25px',
         fontFamily: 'Raleway_800ExtraBold',
@@ -288,6 +293,28 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 5,
+    },
+
+    commentInput: {
+        color: '#505050',
+        backgroundColor: '#fff',
+        fontFamily: 'Raleway_600SemiBold',
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        width: '100%',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
+        padding: '10px',
+        marginTop: '10px',
+        flexGrow: true,
+        height: '100px'
     },
 
     rateButton: {

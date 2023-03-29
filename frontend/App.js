@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <CadastroDeReceita />
+      <ReceitaSingle />
     </MenuProvider>
   )
 }

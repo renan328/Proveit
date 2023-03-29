@@ -16,6 +16,26 @@ const screenHeight = Dimensions.get('window').height;
 
 export default function ReceitaSingle({ navigation }) {
 
+    const stars = 5;
+
+    function StarCounter() {
+
+        const starsBox = [];
+
+        for (let index = 0; index < stars; index++) {
+            starsBox.push(
+                <View key={index}>
+                    <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} ></FontAwesomeIcon>
+                </View>
+            );
+        }
+
+        return (
+            <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '5px', }}>{starsBox}</View>
+        );
+    };
+
+
     const [saved, setSaved] = useState(false);
 
     const addSave = () => {
@@ -45,11 +65,7 @@ export default function ReceitaSingle({ navigation }) {
                 <View style={styles.mainHeader}>
                     <View style={styles.starsContainer}>
 
-                        <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} ></FontAwesomeIcon>
-                        <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} ></FontAwesomeIcon>
-                        <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} ></FontAwesomeIcon>
-                        <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} ></FontAwesomeIcon>
-                        <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} ></FontAwesomeIcon>
+                        {StarCounter()}
 
                     </View>
 
@@ -85,7 +101,6 @@ export default function ReceitaSingle({ navigation }) {
                         marginTop: '10px',
                         display: 'flex',
                         flexDirection: 'row',
-                        width: '42%',
                         borderBottomLeftRadius: 10,
                         borderBottomRightRadius: 10,
                         borderTopLeftRadius: 10,
@@ -96,15 +111,11 @@ export default function ReceitaSingle({ navigation }) {
                         backgroundColor: saved ? '#ffc9bd' : '#fff',
                     }}>
                         <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={25} color={saved ? '#FF7152' : '#505050'} />
-                        <Text style={{
-                            color: saved ? '#FF7152' : '#505050', fontSize: '20px',
-                            fontFamily: 'Raleway_600SemiBold',
-                        }}>Salvar</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.detailsContainer} onPress={() => navigation.navigate('Perfil')}>
                         <View>
-
+                            <Image source={require('../../assets/user.jpg')} style={styles.userPic}></Image>
                         </View>
                         <View style={{ marginHorizontal: '8px' }}>
                             <Text style={styles.mainUserText}>User Name</Text>
@@ -203,6 +214,10 @@ export default function ReceitaSingle({ navigation }) {
                             unSelectedColor='rgb(255,255,255,0.5)'
                             reviewColor='#fff'
                         />
+
+                        <TextInput placeholder={'O que você tem a dizer?'} style={styles.commentInput} textAlignVertical="top"
+                            multiline={true} ></TextInput>
+
                         <TouchableOpacity style={styles.rateButton} onPress={() => alert(`Avaliado`)}>
                             <Text style={styles.rateButtonText}>Avaliar</Text>
                         </TouchableOpacity>
@@ -216,7 +231,7 @@ export default function ReceitaSingle({ navigation }) {
                     <View style={styles.commentsContainer}>
                         <ComentarioSingle userPicture={'imagem'} userName={'Pedro Silva'} stars={5} comment={'Achei uma ótima receita pra ser bem sincero.'} />
 
-                        <ComentarioSingle userPicture={'imagem'} userName={'Pedro Silva'} stars={5} comment={'Achei uma ótima receita pra ser bem sincero.'} />
+                        <ComentarioSingle userPicture={'imagem'} userName={'Especialista em catapultas'} stars={3} comment={'Catapultas são mecanismos de cerco que utilizam uma espécie de colher para lançar um objeto a uma grande distância, evitando assim possíveis obstáculos como muralhas e fossos. Foram criados possivelmente pelos gregos, durante o reinado de Dionísio I, como arma de guerra.'} />
                     </View>
                 </View>
 

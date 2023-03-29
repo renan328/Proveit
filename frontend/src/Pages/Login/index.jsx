@@ -20,7 +20,7 @@ export default function Login({ navigation }) {
                     <View style={styles.logo}>
                         <Image
                             style={{ width: '230px', height: '220px' }}
-                            source={require('../../assets/PROVEITLOGOdarkbgless.png')}
+                            source={require('../../assets/PROVEITLOGObgless.png')}
                         />
                     </View>
 
