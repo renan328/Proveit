@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 
-    linearGradient: {
+    main: {
         backgroundColor: '#fff',
         width: '100%',
         height: '85%',
@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 7,
+        top: "-70"
     },
 
 
     logo: {
         flex: 1,
         width: '100%',
-        // height: '10px',
         marginTop: '20px',
         flexDirection: 'row',
         textAlign: 'center',
@@ -51,11 +51,12 @@ const styles = StyleSheet.create({
 
     containerLogin: {
         width: '85%',
-        height: '350px',
+        height: '300px',
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'space-around',
         backgroundColor: '#FFF',
+        marginBottom: 20
     },
 
     loginHeader: {
