@@ -11,8 +11,8 @@ const screenHeight = Dimensions.get('window').height;
 export default function Login({ navigation }) {
     return (
         <View style={styles.container}>
-            <View style={styles.ImageContainer}>
-                <ImageBackground source={require('../../assets/cat_aves.jpg')} style={{ height: screenHeight * 0.5 }} />
+            <View style={styles.imageContainer}>
+                <ImageBackground source={require('../../assets/headerBG.jpg')} style={{ height: screenHeight * 0.5 }} />
             </View>
 
             <View style={styles.main}>

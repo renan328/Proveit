@@ -155,7 +155,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_600SemiBold',
         fontSize: '10px',
         paddingVertical: '5px',
-
     },
 
     button: {

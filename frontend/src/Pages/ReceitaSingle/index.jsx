@@ -16,7 +16,7 @@ const screenHeight = Dimensions.get('window').height;
 
 export default function ReceitaSingle({ navigation }) {
 
-    const stars = 5;
+    const stars = 8;
 
     function StarCounter() {
 

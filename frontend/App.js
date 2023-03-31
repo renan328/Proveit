@@ -10,13 +10,13 @@ import ReceitaSingle from './src/Pages/ReceitaSingle'
 import Home from './src/Pages/Home';
 import Perfil from './src/Pages/Perfil';
 import Pesquisar from './src/Pages/Pesquisa';
+import CadastroDeReceita from './src/Pages/CadastroDeReceita';
+import CadastroDeUsuario from './src/Pages/CadastroDeUsuario';
 
 import Favoritos from './src/Pages/Favoritos';
 import { Route } from 'expo-router/src/Route';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
-import CadastroDeReceita from './src/Pages/CadastroDeReceita';
-import CadastroDeUsuario from './src/Pages/CadastroDeUsuario';
 
 
 export default function App() {

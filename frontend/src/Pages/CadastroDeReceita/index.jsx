@@ -9,7 +9,14 @@ import styles from './cadastrodereceita.module';
 
 export default function CadastroDeReceita({ navigation }) {
 
+    
+    const [nome, setNome] = useState();
     const [selected, setSelected] = React.useState('');
+    const [tempo, setTempo] = useState();
+    const [quantidade, setQuantidade] = useState();
+    const [valCalorico, setValCalorico] = useState();
+    const [Descricao, setDescricao] = useState();
+
 
     const data = [
         { key: '1', value: 'Aves' },
@@ -51,7 +58,7 @@ export default function CadastroDeReceita({ navigation }) {
     ]
 
     const [isSelected, setSelection] = useState(false);
-
+    
     return (
         <ScrollView style={styles.container} >
 
@@ -163,9 +170,9 @@ export default function CadastroDeReceita({ navigation }) {
                 </View>
 
                 {/* Adicionar ingredientes */}
-                <View>
+                <TouchableOpacity onPress={addIngredient}>
                     <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, marginTop: 15 }}>+ Adicionar ingrediente</Text>
-                </View>
+                </TouchableOpacity>
 
                 {/* Input Passos */}
                 <View style={styles.defaultInput}>

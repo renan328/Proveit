@@ -7,27 +7,28 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex: 1,
         backgroundColor: '#fff',
-        width: '100%',
+        width: '100%' ,
         height: '100%',
         justifyContent: 'flex-end',
 
     },
 
-    background: {
-        height: '100%',
+    imageContainer: {
+        display: 'flex',
+        height: '20%',
     },
 
     main: {
         backgroundColor: '#fff',
         width: '100%',
-        height: '85%',
+        height: '80%',
         display: 'flex',
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginTop: '135px',
-        borderTopLeftRadius: 70,
-        borderTopRightRadius: 70,
+        borderTopLeftRadius: 120,
+        borderTopRightRadius: 120,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -56,6 +57,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
         backgroundColor: '#FFF',
+        borderTopRightRadius: 120,
+        borderTopLeftRadius: 120,
         marginBottom: 20
     },
 
