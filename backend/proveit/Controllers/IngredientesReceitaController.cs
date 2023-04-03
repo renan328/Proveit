@@ -17,15 +17,6 @@ namespace proveit.Controllers
             return Ok(ingredientesReceita);
         }
 
-        [HttpPost]
-        public IActionResult Cadastrar(Ingredientes_ReceitaDTO ingredientes)
-        {
-            var dao = new Ingredientes_ReceitaDAO();
-            dao.CadastrarIngredientesDeReceita(ingredientes);
-
-            return Ok();
-        }
-
         [HttpPut]
         public IActionResult AlterarIngredientes(Ingredientes_ReceitaDTO ingredientes)
         {

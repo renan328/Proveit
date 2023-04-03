@@ -14,6 +14,8 @@ namespace proveit.DTO
         public int ValCalorico { get; set; }
         public string Descricao { get; set; }
         public string NomeTag { get; set; }
+        public int Usuario_id { get; set; }
+        public int Categoria_id { get; set; }
         public bool Aproveitamento { get; set; }
         public List<PassoDTO> Passos { get; set; }
         public List<Ingredientes_ReceitaDTO> Ingredientes { get; set; }

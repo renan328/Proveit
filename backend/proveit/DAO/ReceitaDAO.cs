@@ -20,7 +20,7 @@ namespace proveit.DAO
             {
                 var receita = new ReceitaDTO();
 
-                receita.idRceita = int.Parse(dataReader["idReceita"].ToString());
+                receita.idReceita = int.Parse(dataReader["idReceita"].ToString());
                 receita.Nome = dataReader["Nome"].ToString();
                 receita.TempoPreparo = int.Parse(dataReader["TempoPreparo"].ToString());
                 receita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
@@ -38,7 +38,7 @@ namespace proveit.DAO
             return receitas;
         }
 
-        public void CadastrarRceita(ReceitaDTO receita)
+        public void CadastrarReceita(ReceitaDTO receita)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
@@ -78,7 +78,7 @@ namespace proveit.DAO
 
             var comando = new MySqlCommand(query, conexao);
 
-            comando.Parameters.AddWithValue("@id", receita.idRceita);
+            comando.Parameters.AddWithValue("@id", receita.idReceita);
             comando.Parameters.AddWithValue("@nome", receita.Nome);
             comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
             comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);

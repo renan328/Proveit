@@ -36,25 +36,6 @@ namespace proveit.DAO
 
         }
 
-        public void CadastrarIngredientesDeReceita(Ingredientes_ReceitaDTO ingredientes_Receita)
-        {
-            var conexao = ConnectionFactory.Build();
-            conexao.Open();
-
-            // Inserindo em Ingredientes_receita
-            var query = @"INSERT INTO Ingredientes_Receita (Quantidade, Medida, Receita_id, Ingredientes_id) VALUES
-						(@quantidade,@medida,@receita_id, @ingredientes_id)";
-
-            var comando = new MySqlCommand(query, conexao);
-            comando.Parameters.AddWithValue("@quantidade", ingredientes_Receita.Quantidade);
-            comando.Parameters.AddWithValue("@medida", ingredientes_Receita.Medida);
-            comando.Parameters.AddWithValue("@receita_id", ingredientes_Receita.Receita_id);
-            comando.Parameters.AddWithValue("@ingredientes_id", ingredientes_Receita.Ingredientes_id);
-
-            comando.ExecuteNonQuery();
-            conexao.Close();
-        }
-
         public void AlterarIngredientes_Receita(Ingredientes_ReceitaDTO Ingredientes_Receita)
         {
             var conexao = ConnectionFactory.Build();

@@ -33,23 +33,6 @@ namespace proveit.DAO
 
         }
 
-        public void CadastrarPassos(PassoDTO passo)
-        {
-            var conexao = ConnectionFactory.Build();
-            conexao.Open();
-            // Inserindo os passos
-            var query = @"INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES
-						(@receita_id,@NumPasso,@PassoTexto)";
-
-            var comando = new MySqlCommand(query, conexao);
-            comando.Parameters.AddWithValue("@Receita_id", passo.Receita_id);
-            comando.Parameters.AddWithValue("@NumPasso", passo.NumPasso);
-            comando.Parameters.AddWithValue("@PassoTexto", passo.PassoTexto);
-
-            comando.ExecuteNonQuery();
-            conexao.Close();
-        }
-
         public void AlterarPassos(PassoDTO passo)
         {
             var conexao = ConnectionFactory.Build();

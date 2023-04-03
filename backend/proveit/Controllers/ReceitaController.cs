@@ -10,20 +10,29 @@ namespace proveit.Controllers
     public class ReceitaController : ControllerBase
     {
         [HttpGet]
+        [Route("unica")]
+        public IActionResult ListarReceitaUnica(int id)
+        {
+            var dao = new ReceitaGeralDAO();
+            var receitas = dao.ListarReceitaUnica(id);
+
+            return Ok(receitas);
+        }
+
+        [HttpGet]
         public IActionResult ListarReceitas()
         {
-            var dao = new ReceitaDAO();
-            var receitas = dao.ListarRecetas();
+            var dao = new ReceitaGeralDAO();
+            var receitas = dao.ListarReceitas();
 
             return Ok(receitas);
         }
 
         [HttpPost]
-        public IActionResult CadastrarRecetas([FromBody] ReceitaDTO receita)
+        public IActionResult CadastrarRecetas([FromBody] ReceitaGeralDTO receita)
         {
-            var dao = new ReceitaDAO();
-           dao.CadastrarRceita(receita);
-
+            var receitaDAO = new ReceitaGeralDAO();
+            receitaDAO.CadastrarReceita(receita);
             return Ok();
 
         }

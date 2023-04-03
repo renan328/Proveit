@@ -16,14 +16,7 @@ namespace proveit.Controllers
             var passos = dao.ListarPassos(id);
             return Ok(passos);
         }
-        [HttpPost]
-        public IActionResult CadastrarPassos(PassoDTO passo)
-        {
-            var dao = new PassoDAO();
-            dao.CadastrarPassos(passo);
 
-            return Ok();
-        }
         [HttpPut]
         public IActionResult AlterarPasso(PassoDTO passo)
         {
@@ -32,6 +25,7 @@ namespace proveit.Controllers
 
             return Ok();
         }
+
         [HttpDelete]
         public IActionResult DeletarPassos(int id)
         {

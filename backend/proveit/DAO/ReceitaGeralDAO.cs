@@ -197,6 +197,60 @@ namespace proveit.DAO
             return receitas;
         }
 
+        public void CadastrarReceita(ReceitaGeralDTO receita)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            // Inserindo receita
+            var queryReceita = @"INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento) VALUES
+						(@nome,@tempoPreparo,@porcoes,@valCalorico, @descricao, @usuario_id, @categorias_id, @aproveitamento);   SELECT LAST_INSERT_ID();";
+
+            var comando = new MySqlCommand(queryReceita, conexao);
+
+            comando.Parameters.AddWithValue("@nome", receita.NomeReceita);
+            comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
+            comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
+            comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
+            comando.Parameters.AddWithValue("@descricao", receita.Descricao);
+            comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
+            comando.Parameters.AddWithValue("@categorias_id", receita.Categoria_id);
+            comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
+            int idReceita = Convert.ToInt32(comando.ExecuteScalar());
+
+            // Inserindo ingredientes
+            foreach (var ingrediente in receita.Ingredientes)
+            {
+                var queryIngrediente = @"INSERT INTO Ingredientes_Receita (Quantidade, Medida, Receita_id, Ingredientes_id) VALUES
+						(@quantidade,@medida,@receita_id, @ingredientes_id);";
+
+                var comandoIngrediente = new MySqlCommand(queryIngrediente, conexao);
+                comandoIngrediente.Parameters.AddWithValue("@quantidade", ingrediente.Quantidade);
+                comandoIngrediente.Parameters.AddWithValue("@medida", ingrediente.Medida);
+                comandoIngrediente.Parameters.AddWithValue("@receita_id", idReceita);
+                comandoIngrediente.Parameters.AddWithValue("@ingredientes_id", ingrediente.Ingredientes_id);
+
+                comandoIngrediente.ExecuteNonQuery();
+            }
+
+            // Inserindo passos
+            foreach (var passo in receita.Passos)
+            {
+                var queryPassos = @"INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES
+						(@receita_id,@NumPasso,@PassoTexto)";
+
+                var comandoPassos = new MySqlCommand(queryPassos, conexao);
+                comandoPassos.Parameters.AddWithValue("@Receita_id", idReceita);
+                comandoPassos.Parameters.AddWithValue("@NumPasso", passo.NumPasso);
+                comandoPassos.Parameters.AddWithValue("@PassoTexto", passo.PassoTexto);
+
+                comandoPassos.ExecuteNonQuery();
+            }
+
+
+            conexao.Close();
+        }
+
     }
 }
 

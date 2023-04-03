@@ -4,7 +4,7 @@ namespace proveit.DTO
 {
     public class ReceitaDTO
     {
-        public int idRceita { get; set; }
+        public int idReceita { get; set; }
         public string Nome { get; set;}
         public int TempoPreparo { get; set; }
         public int Porcoes { get; set; }
