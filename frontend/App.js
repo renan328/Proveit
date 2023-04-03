@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      < EsqueciMinhaSenha  />
+      < CadastroDeReceita />
     </MenuProvider>
   )
 }

@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, CheckBox, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Button } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons'
-import { Button } from 'react-native-web';
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import styles from './cadastrodereceita.module';
 
 export default function CadastroDeReceita({ navigation }) {
 
-    
-    const [nome, setNome] = useState();
+
     const [selected, setSelected] = React.useState('');
-    const [tempo, setTempo] = useState();
-    const [quantidade, setQuantidade] = useState();
-    const [valCalorico, setValCalorico] = useState();
-    const [Descricao, setDescricao] = useState();
 
 
     const data = [
@@ -43,7 +37,7 @@ export default function CadastroDeReceita({ navigation }) {
     ];
 
     const hora = [
-        { key: '1', value: 'minutos(s)' },
+        { key: '1', value: 'minuto(s)' },
         { key: '2', value: 'hora(s)' },
         { key: '3', value: 'dia(s)' },
     ];
@@ -58,7 +52,7 @@ export default function CadastroDeReceita({ navigation }) {
     ]
 
     const [isSelected, setSelection] = useState(false);
-    
+
     return (
         <ScrollView style={styles.container} >
 
@@ -102,24 +96,28 @@ export default function CadastroDeReceita({ navigation }) {
                 </View>
 
                 {/* Input Tempo de Preparo */}
-                <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '79%' }}>
+                <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
                     <Text style={styles.TextInput}>Tempo de preparo</Text>
-                    <Text style={styles.textPorcoes}>Porções</Text>
                 </View>
                 <View style={{ flexDirection: 'row', display: 'flex', width: '100%', justifyContent: 'flex-start' }}>
                     <TextInput style={styles.inputTempo} placeholder='Tempo'></TextInput>
                     <MultipleSelectList data={hora}
                         setSelected={setSelected}
                         placeholder='Horas'
-                        searchPlaceholder='Selecione'
-                        notFoundText='Tempo não determinado'
+                        searchPlaceholder='Adicionar'
+                        notFoundText='Horas não encontrada'
                         fontFamily='Raleway_600SemiBold'
                         boxStyles={styles.horaInput}
-                        inputStyles={{ fontSize: '11px', color: '#505050', padding: 5 }}
+                        inputStyles={{ fontSize: '11px', color: '#505050', marginTop: 5, }}
                         dropdownStyles={styles.horaListaInput}
-                        dropdownTextStyles={{ fontSize: '11px', color: '#505050' }}>
+                        dropdownTextStyles={{ fontSize: '11px', color: '#505050', marginTop: 5 }}>
                     </MultipleSelectList>
-                    <TextInput style={styles.inputQntd} placeholder="Quantidade"></TextInput>
+                </View>
+
+                {/* Input Porções */}
+                <View style={styles.defaultInput}>
+                    <Text style={styles.TextInput}>Porções</Text>
+                    <TextInput style={styles.allInput} placeholder="Quantidade"></TextInput>
                 </View>
 
                 {/* CheckBox de Aproveitamento */}
@@ -170,7 +168,7 @@ export default function CadastroDeReceita({ navigation }) {
                 </View>
 
                 {/* Adicionar ingredientes */}
-                <TouchableOpacity onPress={addIngredient}>
+                <TouchableOpacity>
                     <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, marginTop: 15 }}>+ Adicionar ingrediente</Text>
                 </TouchableOpacity>
 

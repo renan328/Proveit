@@ -120,13 +120,12 @@ const styles = StyleSheet.create({
     },
 
     inputTempo: {
-        marginHorizontal: '45px',
-        paddingHorizontal: '5px',
-        marginLeft: '10%',
+        marginHorizontal: '-10px',
+        paddingHorizontal: '7px',
         fontSize: '13px',
         color: '#505050',
         height: '50px',
-        width: '17%',
+        width: '25%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -140,15 +139,16 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         marginTop: 10,
-        fontFamily: 'Raleway_600SemiBold'
+        fontFamily: 'Raleway_600SemiBold',
+        marginLeft: 40
     },
 
     horaInput: {
+        overflowX: 'hidden',
         display: 'flex',
         height: '50px',
-        width: 120,
-        marginRight: '10px',
-        marginLeft: '-35px',
+        width: 197,
+        marginLeft: '25px',
         marginTop: 10,
         shadowOffset: {
             width: 0,
@@ -160,14 +160,16 @@ const styles = StyleSheet.create({
     },
 
     horaListaInput: {
-        display: 'flex',
-        width: '120px',
+        width: 180,
         shadowOffset: {
             width: 0,
             height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
+        marginLeft: '25px',
+        overflowX: 'hidden',
+        border: 'none'
     },
 
     inputQntd: {
@@ -220,7 +222,7 @@ const styles = StyleSheet.create({
         fontSize: '13px',
         color: '#505050',
         height: '50px',
-        width: '85px',
+        width: '30%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -242,7 +244,7 @@ const styles = StyleSheet.create({
         overflowX: 'hidden',
         display: 'flex',
         height: '50px',
-        width: '212px',
+        width: 180,
         marginLeft: '25px',
         marginTop: 10,
         shadowOffset: {
@@ -255,7 +257,7 @@ const styles = StyleSheet.create({
     },
 
     medidaListaInput: {
-        width: '212px',
+        width: 180,
         shadowOffset: {
             width: 0,
             height: 2,
@@ -263,6 +265,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         marginLeft: '25px',
+        overflowX: 'hidden',
+        border: 'none'
     },
 
     button: {
