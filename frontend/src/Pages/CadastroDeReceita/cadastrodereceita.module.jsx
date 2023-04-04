@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         height: '50px',
-        width: '296px',
+        width: 300 ,
         marginTop: 10,
         shadowOffset: {
             width: 0,
@@ -120,12 +120,11 @@ const styles = StyleSheet.create({
     },
 
     inputTempo: {
-        marginHorizontal: '-10px',
-        paddingHorizontal: '7px',
+        padding: 5,
         fontSize: '13px',
         color: '#505050',
         height: '50px',
-        width: '25%',
+        width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -139,16 +138,15 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         marginTop: 10,
-        fontFamily: 'Raleway_600SemiBold',
-        marginLeft: 40
+        fontFamily: 'Raleway_600SemiBold'
     },
 
     horaInput: {
         overflowX: 'hidden',
         display: 'flex',
         height: '50px',
-        width: 197,
-        marginLeft: '25px',
+        width: 180,
+        marginLeft: 25,
         marginTop: 10,
         shadowOffset: {
             width: 0,
@@ -211,18 +209,17 @@ const styles = StyleSheet.create({
     },
 
     textMedida: {
-        marginLeft: '20px',
+        marginLeft: '20%',
         fontSize: "15px",
         fontFamily: 'Raleway_600SemiBold'
     },
 
     inputQuantidade: {
-        marginHorizontal: '-10px',
-        paddingHorizontal: '7px',
+        padding: 5,
         fontSize: '13px',
         color: '#505050',
         height: '50px',
-        width: '30%',
+        width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -236,8 +233,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         marginTop: 10,
-        fontFamily: 'Raleway_600SemiBold',
-        marginLeft: 40
+        fontFamily: 'Raleway_600SemiBold'
     },
 
     medidaInput: {

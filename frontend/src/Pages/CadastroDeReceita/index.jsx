@@ -99,7 +99,7 @@ export default function CadastroDeReceita({ navigation }) {
                 <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
                     <Text style={styles.TextInput}>Tempo de preparo</Text>
                 </View>
-                <View style={{ flexDirection: 'row', display: 'flex', width: '100%', justifyContent: 'flex-start' }}>
+                <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
                     <TextInput style={styles.inputTempo} placeholder='Tempo'></TextInput>
                     <MultipleSelectList data={hora}
                         setSelected={setSelected}
@@ -149,10 +149,9 @@ export default function CadastroDeReceita({ navigation }) {
 
                 {/* Input Quantidade */}
                 <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
-                    <Text style={styles.TextInput}>Quantidade</Text>
-                    <Text style={styles.textMedida}>Medida</Text>
+                    <Text style={styles.TextInput}>Quantidade e Medidas</Text>
                 </View>
-                <View style={{ flexDirection: 'row', display: 'flex', width: '100%', justifyContent: 'flex-start' }}>
+                <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
                     <TextInput style={styles.inputQuantidade} placeholder='Qntd'></TextInput>
                     <MultipleSelectList data={medida}
                         setSelected={setSelected}
