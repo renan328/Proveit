@@ -78,21 +78,33 @@ export default function CartaoFavorito({ titulo, text, buttonText }) {
 
             <View style={styles.cardContent}>
 
-                <Text style={styles.titulo}>{titulo}</Text>
+                <View style={styles.contentContainer}>
 
-                <TouchableOpacity onPress={() => addSave()} style={{ marginLeft: '25px', marginTop: '-16px' }}>
+                    <View style={styles.header}>
 
-                    <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={40} color={saved ? '#FF7152' : '#505050'} verticalAlign={'top'} />
+                        <Text style={styles.titulo}>{titulo}</Text>
 
-                </TouchableOpacity>
+                        <TouchableOpacity onPress={() => addSave()}>
 
-                <Image source={require('/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg')} style={styles.image} />
+                            <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={35} color={saved ? '#FF7152' : '#505050'} verticalAlign={'top'} />
+
+                        </TouchableOpacity>
+
+                    </View>
+
+                    <Text style={styles.text}>{text} uyguigiu</Text>
+
+                    <StarCounter style={styles.starsBox}></StarCounter>
+
+                </View>
+
+                <View style={styles.imageContainer}>
+
+                    <Image source={require('/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg')} style={styles.image} />
+
+                </View>
 
             </View>
-
-            <Text style={styles.text}>{text}</Text>
-
-            <StarCounter style={styles.starsBox}></StarCounter>
 
         </View>
 
@@ -111,8 +123,6 @@ const styles = StyleSheet.create({
 
         borderRadius: 8,
 
-        padding: 16,
-
         shadowColor: '#000',
 
         shadowOffset: { width: 2, height: 2 },
@@ -127,6 +137,8 @@ const styles = StyleSheet.create({
 
         marginTop: '29px',
 
+        overflow: '',
+
     },
 
     cardContent: {
@@ -137,9 +149,39 @@ const styles = StyleSheet.create({
 
     },
 
+    contentContainer: {
+
+        height: '100%',
+
+        flex: 50,
+
+    },
+
+    header: {
+
+        display: 'flex',
+
+        flexDirection: 'row',
+
+        justifyContent: 'space-between',
+
+        margin: '5px',
+
+        height: '100%',
+
+    },
+
+    imageContainer: {
+
+        flex: 50,
+
+        height: '100%',
+
+    },
+
     titulo: {
 
-        fontSize: 24,
+        fontSize: 20,
 
         fontFamily: 'Raleway_700Bold',
 
@@ -150,6 +192,10 @@ const styles = StyleSheet.create({
     },
 
     text: {
+
+        flexWrap: 'wrap',
+
+        flexGrow: 1,
 
         alignItems: 'start',
 
@@ -167,9 +213,9 @@ const styles = StyleSheet.create({
 
     image: {
 
-        width: '54.15%',
+        width: '100%',
 
-        height: '430%',
+        height: '100%',
 
         display: 'flex',
 
@@ -177,7 +223,6 @@ const styles = StyleSheet.create({
 
         borderBottomEndRadius: 8,
 
-        marginTop: '-16px'
 
     },
 
@@ -187,10 +232,8 @@ const styles = StyleSheet.create({
 
         flexDirection: 'row',
 
-        marginTop: '30px',
-
         alignContent: 'flex-start'
 
     }
 
-});
+})
