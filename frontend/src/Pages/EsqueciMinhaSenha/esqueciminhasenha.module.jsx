@@ -31,21 +31,27 @@ const styles = StyleSheet.create({
 
     circuloIcon: {
         display: 'flex',
-        alignContent:'space-around',
         alignItems:'center',
-        flexDirection:"column",
         justifyContent: 'center',
         alignSelf: 'center',
         width: 150,
         height: 150,
-        borderRadius: '70%',
-        backgroundColor: '#FF7152',
+        borderRadius: '50%',
+        backgroundColor: '#fff',
+        top: '20px',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
     },
     
 
     Qualeoseu:{
         color: '#505050',
-        fontFamily: 'Raleway_800ExtraBold',
+        fontFamily: 'Raleway_700Bold',
         fontSize: 40,
     },
 
@@ -53,20 +59,23 @@ const styles = StyleSheet.create({
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 35,
+        textDecorationLine: 'underline',
+        marginBottom: '15px'
     },
-
+    
     Desc:{
         color: '#505050',
         fontFamily: 'Raleway_600SemiBold',
         fontSize: 14,
         opacity: '80%',
+        marginBottom: '15px'
     },
 
     inputSingle: {
         width: '80%',
         display: 'flex',
-        /* justifyContent: 'space-around', */
-        /* marginTop: '20px', */
+        alignSelf: 'center'
+
     },  
 
     defaultInput: {
@@ -117,8 +126,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
     },
 
-    WaveImage:{
-
+    Texts:{
+        display: 'flex',
+        width: '70%',
+        alignSelf: 'center',
+        textAlign: 'center',
     },
 });
 

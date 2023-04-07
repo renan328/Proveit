@@ -28,6 +28,9 @@ export default function EsqueciMinhaSenha() {
                         />
                     </View>
                 </View>
+                <View>
+                    
+                </View>
                 <View style={styles.Texts}>
                     <Text style={styles.Qualeoseu}>Qual é o seu</Text>
                     <Text style={styles.Email}>Email?</Text>
