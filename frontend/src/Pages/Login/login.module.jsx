@@ -138,6 +138,11 @@ const styles = StyleSheet.create({
         marginBottom: '15px',
         flexDirection: 'column',
         gap: 5
+    },
+    textError:{
+        alignSelf: 'center',
+        color: '#ff375b',
+        marginBottom: 8
     }
 
 });

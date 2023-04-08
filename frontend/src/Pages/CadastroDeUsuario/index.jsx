@@ -1,15 +1,79 @@
-import React, { Component, useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, ScrollView, Image} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
-import validator from 'validator';
-import styles from './cadastrodeusuario.module';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup'; import styles from './cadastrodeusuario.module';
+import * as ImagePicker from 'expo-image-picker';
 
+
+const schema = yup.object().shape({
+    nome: yup.string().required('Campo obrigatório'),
+    nomeTag: yup.string().required('Campo obrigatório'),
+    email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
+    senha: yup.string().min(8, 'Mínimo de 8 caracteres').required('Campo obrigatório'),
+    RedigiteSenha: yup.string().min(8, 'Mínimo de 8 caracteres').required('Campo obrigatório').oneOf([yup.ref('senha'), null], 'As senhas não são iguais')
+
+});
+
+const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, errors }) => {
+    return (
+        <View>
+            <Controller
+                control={control}
+                name={fieldName}
+                render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                        style={[
+                            styles.defaultInput, {
+                                borderWidth: errors.email && 1,
+                                borderColor: errors.email && '#ff375b'
+                            }]}
+                        onChangeText={onChange}
+                        onBlur={onBlur}
+                        value={value}
+                        placeholder={placeholder}
+                        secureTextEntry={secureTextEntry}
+                    />
+                )}
+            />
+            {errors[fieldName] && <Text style={styles.textError}>{errors[fieldName].message}</Text>}
+        </View>
+    );
+};
 
 export default function CadastroDeUsuario({ navigation }) {
+
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    })
+
+    function handleRegister(data) {
+        console.log(data);
+        navigation.navigate('Main')
+    }
+
+    const [image, setImage] = useState(null);
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 0.7,
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        }
+    };
 
     const [selected, setSelected] = React.useState('');
 
@@ -37,22 +101,6 @@ export default function CadastroDeUsuario({ navigation }) {
         { key: '21', value: 'Vegetariano' },
     ];
 
-    const [errorMessage, setErrorMessage] = useState('')
-
-    const validate = (value) => {
-
-        if (validator.isStrongPassword(value, {
-            minLength: 8, minLowercase: 1,
-            minUppercase: 1, minNumbers: 1, minSymbols: 1
-        })) {
-            setErrorMessage('Forte!')
-        }
-        else {
-            setErrorMessage('Fraca')
-        }
-        
-    }
-
     return (
 
         <View style={styles.container}>
@@ -76,8 +124,9 @@ export default function CadastroDeUsuario({ navigation }) {
             <View style={styles.cadastro}>
                 <Text style={styles.suafoto}>Foto de perfil</Text>
 
-                <TouchableOpacity style={styles.BorderIcon}>
+                <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
                     <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />
+                    {image && <Image source={{ uri: image }} style={styles.imagemUsu} />}
                 </TouchableOpacity>
             </View>
 
@@ -85,26 +134,29 @@ export default function CadastroDeUsuario({ navigation }) {
             <View style={styles.inputs}>
                 <View style={styles.inputSingle}>
                     <Text style={styles.inputTitle}>Nome</Text>
-                    <TextInput style={styles.defaultInput} placeholder='Digite seu nome'></TextInput>
+                    <CampoFormulario control={control} fieldName="nome" placeholder="Seu nome" errors={errors} />
                 </View>
 
                 <View style={styles.inputSingle}>
                     <Text style={styles.inputTitle}>Nome de usuário</Text>
-                    <TextInput style={styles.defaultInput} placeholder='Digite seu nome de usuário'></TextInput>
+                    <CampoFormulario control={control} fieldName="nomeTag" placeholder="Nome de usuário" errors={errors} />
                 </View>
 
                 <View style={styles.inputSingle}>
                     <Text style={styles.inputTitle}>E-mail</Text>
-                    <TextInput style={styles.defaultInput} placeholder='Digite seu e-mail'></TextInput>
+                    <CampoFormulario control={control} fieldName="email" placeholder="E-mail" errors={errors} />
                 </View>
+
 
                 <View style={styles.inputSingle}>
                     <Text style={styles.inputTitle}>Senha</Text>
-                    <TextInput onChange={(e) => validate(e.target.value)} style={styles.defaultInput} placeholder='Digite sua senha' secureTextEntry={true}></TextInput> <br />
-                    <View style={styles.validator}>
-                        <span style={{}}>{errorMessage}</span>
-                    </View>
-                    <TextInput style={styles.defaultInput} secureTextEntry={true} placeholder='Redigite sua senha'></TextInput>
+                    <CampoFormulario control={control} fieldName="senha" placeholder="Senha" secureTextEntry errors={errors} />
+
+                </View>
+
+                <View style={styles.inputSingle}>
+                    <Text style={styles.inputTitle}>Redigite sua senha</Text>
+                    <CampoFormulario control={control} fieldName="RedigiteSenha" placeholder="Redigite sua senha" secureTextEntry errors={errors} />
                 </View>
 
                 <View style={styles.inputSingle}>
@@ -125,7 +177,7 @@ export default function CadastroDeUsuario({ navigation }) {
 
             {/* Botão */}
             <View style={styles.botoes}>
-                <TouchableOpacity onPress={() => navigation.navigate('Main')} >
+                <TouchableOpacity onPress={handleSubmit(handleRegister)} >
                     <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                         end={{ x: 2, y: 1 }} style={styles.button} >
                         <Text style={styles.buttonText}>Pronto</Text>

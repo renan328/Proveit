@@ -15,6 +15,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
+    "@hookform/resolvers": "^3.0.1",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
@@ -23,6 +24,7 @@
     "expo-app-loading": "^2.1.1",
     "expo-constants": "~14.2.1",
     "expo-font": "~11.1.1",
+    "expo-image-picker": "^14.1.1",
     "expo-linear-gradient": "~12.1.2",
     "expo-linking": "~4.0.1",
     "expo-router": "^1.2.2",
@@ -31,6 +33,7 @@
     "lottie-react-native": "5.1.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-native": "0.71.6",
     "react-native-dropdown-select-list": "^2.0.4",
     "react-native-element-dropdown": "^2.6.0",
@@ -44,7 +47,8 @@
     "react-native-toast-message": "^2.1.6",
     "react-native-web": "~0.18.10",
     "validator": "^13.9.0",
-    "yarn": "^1.22.19"
+    "yarn": "^1.22.19",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
