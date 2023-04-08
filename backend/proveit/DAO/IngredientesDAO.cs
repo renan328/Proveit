@@ -36,7 +36,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            // Inserindo em Ingredientes_receita
+            // Inserindo em Ingredientes
             var query = @"INSERT INTO Ingredientes (Nome) VALUES
 						(@nome)";
 

@@ -100,7 +100,7 @@ export default function CartaoFavorito({ titulo, text, buttonText }) {
 
                 <View style={styles.imageContainer}>
 
-                    <Image source={require('/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg')} style={styles.image} />
+                    <Image source={require('../../assets/cat_salgados.jpg')} style={styles.image} />
 
                 </View>
 

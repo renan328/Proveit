@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         height: '50px',
-        width: 300 ,
+        width: '310px' ,
         marginTop: 10,
         shadowOffset: {
             width: 0,

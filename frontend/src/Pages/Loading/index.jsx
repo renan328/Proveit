@@ -1,28 +1,25 @@
 import React from "react";
-import { View, StyleSheet, Image, Dimensions } from "react-native";
+import { View, StyleSheet, Image, Dimensions, ActivityIndicator } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient'
     ;
 const screenHeight = Dimensions.get('window').height;
 
 export default function Pesquisar() {
     return (
-        // <View style={styles.container}>
         <LinearGradient start={{ x: 2, y: -1 }}
             end={{ x: -5, y: 3 }} colors={['#FF7152', '#FFB649']} style={styles.container}>
 
             <View style={styles.logo}>
                 <Image
-                    style={{ width: '209px', height: '209px' }}
+                    style={{ width: '240px', height: '215px' }}
                     source={require('../../assets/proveitLogo.png')}
                 />
             </View>
 
-            <View>
-                {/* icon rodando */}
+            <View style={styles.circle}>
+                <ActivityIndicator size="large" color="#FFF" />
             </View>
         </LinearGradient>
-
-        // </View>
     );
 }
 
@@ -37,5 +34,9 @@ const styles = StyleSheet.create({
     },
     logo: {
         margin: '100px'
+    },
+    circle:{
+        display: 'flex',
+        alignSelf: 'center'
     }
 });

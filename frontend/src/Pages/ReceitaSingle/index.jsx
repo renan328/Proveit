@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
@@ -7,7 +7,6 @@ import { faBookmark, faStar, faAngleLeft, faClock, faUtensils, faHeart, faEllips
 import PassoReceita from '../../components/PassoReceita/PassoReceita';
 import IngredienteReceita from '../../components/IngredienteReceita/IngredienteReceita';
 import ComentarioSingle from '../../components/ComentarioSingle/ComentarioSingle';
-import { ScrollView } from 'react-native-gesture-handler';
 import { AirbnbRating } from 'react-native-ratings';
 import styles from './receitasingle.module';
 

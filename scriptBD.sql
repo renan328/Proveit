@@ -18,6 +18,7 @@ CREATE TABLE Categorias (
 CREATE TABLE Usuarios (
     idUsuario INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     Nome VARCHAR(255) NOT NULL,
+    Foto BLOB,
     NomeTag VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL,
     Senha VARCHAR(255) NOT NULL,
@@ -31,6 +32,7 @@ CREATE TABLE Receitas (
     idReceita INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     Nome VARCHAR(255) NOT NULL,
     TempoPreparo INTEGER UNSIGNED NOT NULL,
+    Tempo VARCHAR(255) NOT NULL,
     Porcoes INTEGER UNSIGNED NOT NULL,
     ValCalorico VARCHAR(255) NULL,
     Descricao VARCHAR(255) NOT NULL,
@@ -43,7 +45,16 @@ CREATE TABLE Receitas (
     FOREIGN KEY (Categorias_id)
         REFERENCES Categorias (idCategoria)
 );
-  
+
+CREATE TABLE FotosReceita (
+    idFoto INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+    Receita_id INTEGER UNSIGNED NULL,
+    Foto LONGBLOB,
+    FOREIGN KEY (Receita_id)
+        REFERENCES Receitas (idReceita),
+    PRIMARY KEY (idFoto)
+);
+
 CREATE TABLE Passos (
     idPasso INTEGER UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Receita_id INTEGER UNSIGNED NOT NULL,
@@ -129,24 +140,29 @@ INSERT INTO Categorias (Nome, Foto) VALUES ( 'Salgados', '../../assets/cat_salga
 -- SELECT Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento FROM Receitas INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id;
 -- SELECT PassoTexto, NumPasso, Receita_id FROM Passos INNER JOIN Receitas on Receitas.idReceita = Passos.Receita_id WHERE Receita_id = 2;
 -- SELECT Ingredientes.Nome, Quantidade, Medida FROM Ingredientes_Receita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id WHERE Receita_id = 2;
--- SELECT * FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario;
+-- SELECT * FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Receita_id = 1;
 
 -- insert padrão de receita
-insert into Ingredientes (Nome) values ('pao'), ('queijo');
-insert into Usuarios (Nome, NomeTag, Email, Senha, Categorias_id) values ('renan', 'renan123', 're@gamil', '123', 1);
-insert into Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento) values ('pao e queijo', 2, 1, 255, 'pao', 1, 1, false);
-insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 1, 'coma o pao');
-insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 2, 'coma o quijo');
-insert into Passos (Receita_id, NumPasso, PassoTexto) values (1, 3, 'coma tudo');
-insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 3);
-insert into Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) values (1, 'unidade', 1, 4);
+INSERT INTO Ingredientes (Nome) VALUES ('pao'), ('queijo');
+INSERT INTO Usuarios (Nome, NomeTag, Email, Senha, Categorias_id) VALUES ('renan', 'renan123', 're@gamil', '123', 1);
+INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento) VALUES ('pao e queijo', 2, 1, 255, 'pao', 1, 1, FALSE);
+INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (1, 1, 'coma o pao');
+INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (1, 2, 'coma o quijo');
+INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (1, 3, 'coma tudo');
+INSERT INTO Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) VALUES (1, 'unidade', 1, 3);
+INSERT INTO Ingredientes_Receita (Quantidade , Medida, Receita_id, Ingredientes_id) VALUES (1, 'unidade', 1, 4);
+INSERT INTO FotosReceita (Receita_id, Foto) VALUES (1, 'base64');
+
 
 -- Select receitas por ingredientes
 SELECT * FROM Receitas INNER JOIN Ingredientes_Receita ON Receitas.idReceita = Ingredientes_Receita.Receita_id INNER JOIN Ingredientes ON Ingredientes_Receita.Ingredientes_id = Ingredientes.idIngredientes WHERE idIngredientes  = 1 OR idIngredientes = 2 OR idIngredientes = 3 OR idIngredientes = 4 OR idIngredientes = 5;
 
--- Select tabela unica (testes)
-select * from Ingredientes_Receita;
+-- Select Fotos de uma receita
+SELECT * FROM FotosReceita inner join Receitas on FotosReceita.Receita_id = Receitas.idReceita where idReceita = 1;
 
--- Select geral de receita
-SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_Receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id where idReceita = 1;
+-- Select tabela unica (testes)
+SELECT * FROM FotosReceita;
+
+-- Select receita single
+SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome, Avaliacao.idAvaliacao, Avaliacao.Estrelas, Avaliacao.Comentario, Avaliacao.Receita_id, Avaliacao.Usuario_id, FotosReceita.idFoto, FotosReceita.Foto FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_Receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id INNER JOIN Avaliacao ON Avaliacao.Receita_id = Receitas.idReceita inner join FotosReceita on FotosReceita.Receita_id = Receitas.idReceita;
             

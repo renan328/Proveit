@@ -17,7 +17,7 @@ namespace proveit.DAO
             conexao.Open();
 
 
-            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome, Avaliacao.idAvaliacao, Avaliacao.Estrelas, Avaliacao.Comentario, Avaliacao.Receita_id, Avaliacao.Usuario_id FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_Receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id INNER JOIN Avaliacao ON Avaliacao.Receita_id = Receitas.idReceita WHERE idReceita = @id";
+            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome, Avaliacao.idAvaliacao, Avaliacao.Estrelas, Avaliacao.Comentario, Avaliacao.Receita_id, Avaliacao.Usuario_id, FotosReceita.idFoto, FotosReceita.Foto FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_Receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id INNER JOIN Avaliacao ON Avaliacao.Receita_id = Receitas.idReceita inner join FotosReceita on FotosReceita.Receita_id = Receitas.idReceita WHERE idReceita = @id";
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@id", id);
             var dataReader = comando.ExecuteReader();
@@ -37,6 +37,7 @@ namespace proveit.DAO
                     newReceita.idReceita = idReceita;
                     newReceita.NomeReceita = dataReader["Nome"].ToString();
                     newReceita.TempoPreparo = int.Parse(dataReader["TempoPreparo"].ToString());
+                    newReceita.Tempo = dataReader["Tempo"].ToString();
                     newReceita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
                     newReceita.ValCalorico = int.Parse(dataReader["ValCalorico"].ToString());
                     newReceita.Descricao = dataReader["Descricao"].ToString();
@@ -46,6 +47,7 @@ namespace proveit.DAO
                     newReceita.Ingredientes = new List<Ingredientes_ReceitaDTO>();
                     newReceita.Passos = new List<PassoDTO>();
                     newReceita.Avaliacoes = new List<AvaliacaoDTO>();
+                    newReceita.Fotos = new List<FotoReceitaDTO>();
 
                     receitas.Add(newReceita);
                 }
@@ -98,6 +100,33 @@ namespace proveit.DAO
                     receita.Avaliacoes.Add(avaliacao);
                 }
 
+                int somaEstrelas = 0;
+
+                foreach (var avaliacao in listaAvaliacoes)
+                {
+                    somaEstrelas += avaliacao.Estrelas;
+                }
+
+                int mediaEstrelas = 0;
+                if (listaAvaliacoes.Count > 0)
+                {
+                    mediaEstrelas = (int)somaEstrelas / listaAvaliacoes.Count;
+                }
+                receita.mediaEstrelas = mediaEstrelas;
+
+                var listaFotos = receita.Fotos;
+                var idFoto = int.Parse(dataReader["idFoto"].ToString());
+
+                if (listaFotos.Any(x => x.idFoto == idFoto) == false)
+                {
+                    // Não existe foto na lista
+
+                    var foto = new FotoReceitaDTO();
+                    foto.idFoto = idFoto;
+                    foto.Foto= dataReader["Foto"].ToString();
+                    foto.Receita_id = int.Parse(dataReader["Receita_id"].ToString());
+                    receita.Fotos.Add(foto);
+                }
             }
 
             conexao.Close();
@@ -111,7 +140,7 @@ namespace proveit.DAO
             conexao.Open();
 
 
-            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome, Avaliacao.idAvaliacao, Avaliacao.Estrelas, Avaliacao.Comentario, Avaliacao.Receita_id, Avaliacao.Usuario_id FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_Receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id INNER JOIN Avaliacao ON Avaliacao.Receita_id = Receitas.idReceita";
+            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo,Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Ingredientes_Receita.Ingredientes_id, Categorias.Nome, Avaliacao.idAvaliacao, Avaliacao.Estrelas, Avaliacao.Comentario, Avaliacao.Receita_id, Avaliacao.Usuario_id, FotosReceita.idFoto, FotosReceita.Foto FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_Receita.Ingredientes_id INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id INNER JOIN Avaliacao ON Avaliacao.Receita_id = Receitas.idReceita inner join FotosReceita on FotosReceita.Receita_id = Receitas.idReceita";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
 
@@ -130,6 +159,7 @@ namespace proveit.DAO
                     newReceita.idReceita = idReceita;
                     newReceita.NomeReceita = dataReader["Nome"].ToString();
                     newReceita.TempoPreparo = int.Parse(dataReader["TempoPreparo"].ToString());
+                    newReceita.Tempo = dataReader["Tempo"].ToString();
                     newReceita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
                     newReceita.ValCalorico = int.Parse(dataReader["ValCalorico"].ToString());
                     newReceita.Descricao = dataReader["Descricao"].ToString();
@@ -139,6 +169,7 @@ namespace proveit.DAO
                     newReceita.Ingredientes = new List<Ingredientes_ReceitaDTO>();
                     newReceita.Passos = new List<PassoDTO>();
                     newReceita.Avaliacoes = new List<AvaliacaoDTO>();
+                    newReceita.Fotos = new List<FotoReceitaDTO>();
 
                     receitas.Add(newReceita);
                 }
@@ -191,6 +222,33 @@ namespace proveit.DAO
                     receita.Avaliacoes.Add(avaliacao);
                 }
 
+                int somaEstrelas = 0;
+
+                foreach (var avaliacao in listaAvaliacoes)
+                {
+                    somaEstrelas += avaliacao.Estrelas;
+                }
+
+                int mediaEstrelas = 0;
+                if (listaAvaliacoes.Count > 0)
+                {
+                    mediaEstrelas = (int)somaEstrelas / listaAvaliacoes.Count;
+                }
+                receita.mediaEstrelas = mediaEstrelas;
+
+                var listaFotos = receita.Fotos;
+                var idFoto = int.Parse(dataReader["idFoto"].ToString());
+
+                if (listaFotos.Any(x => x.idFoto == idFoto) == false)
+                {
+                    // Não existe foto na lista
+
+                    var foto = new FotoReceitaDTO();
+                    foto.idFoto = idFoto;
+                    foto.Foto = dataReader["Foto"].ToString();
+                    foto.Receita_id = int.Parse(dataReader["Receita_id"].ToString());
+                    receita.Fotos.Add(foto);
+                }
             }
 
             conexao.Close();
@@ -203,13 +261,14 @@ namespace proveit.DAO
             conexao.Open();
 
             // Inserindo receita
-            var queryReceita = @"INSERT INTO Receitas (Nome, TempoPreparo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento) VALUES
-						(@nome,@tempoPreparo,@porcoes,@valCalorico, @descricao, @usuario_id, @categorias_id, @aproveitamento);   SELECT LAST_INSERT_ID();";
+            var queryReceita = @"INSERT INTO Receitas (Nome, TempoPreparo, Tempo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento) VALUES
+						(@nome,@tempoPreparo, @tempo, @porcoes,@valCalorico, @descricao, @usuario_id, @categorias_id, @aproveitamento);   SELECT LAST_INSERT_ID();";
 
             var comando = new MySqlCommand(queryReceita, conexao);
 
             comando.Parameters.AddWithValue("@nome", receita.NomeReceita);
             comando.Parameters.AddWithValue("@tempoPreparo", receita.TempoPreparo);
+            comando.Parameters.AddWithValue("@tempo", receita.Tempo);
             comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
             comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
             comando.Parameters.AddWithValue("@descricao", receita.Descricao);
@@ -247,6 +306,18 @@ namespace proveit.DAO
                 comandoPassos.ExecuteNonQuery();
             }
 
+            // Inserindo fotos
+            foreach (var foto in receita.Fotos)
+            {
+                var queryFotos = @"INSERT INTO FotosReceita (Receita_id, Foto) VALUES 
+						(@receita_id, @foto)";
+
+                var comandoFotos = new MySqlCommand(queryFotos, conexao);
+                comandoFotos.Parameters.AddWithValue("@receita_id", idReceita);
+                comandoFotos.Parameters.AddWithValue("@NumPasso", foto.Foto);
+
+                comandoFotos.ExecuteNonQuery();
+            }
 
             conexao.Close();
         }

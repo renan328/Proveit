@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Button } from "react-native";
+import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -8,9 +8,34 @@ import styles from './cadastrodereceita.module';
 
 export default function CadastroDeReceita({ navigation }) {
 
+    {/* UseState errados nos MultipleSelectList */ }
+    const [Nome, setNome] = useState();
+    const [selected, setSelected] = React.useState(''); // Categoria
+    const [TempoPreparo, setTempoPreparo] = useState();
+    const [Tempo, setTempo] = useState();
+    const [Porcoes, setPorcoes] = useState();
+    const [Aproveitamento, setAproveitamento] = useState(false);
+    const [ValCalorico, setValCalorico] = useState();
+    const [Descricao, setDescricao] = useState();
+    const [Ingredientes, setIngredientes] = useState([]);
+    const [Passos, setPassos] = useState([]);
 
-    const [selected, setSelected] = React.useState('');
+    const cadastrarReceita = (e) => {
+        e.preventDefault();
 
+        const body = { Nome, selected, TempoPreparo, Tempo, Porcoes, Aproveitamento, ValCalorico, Descricao, Ingredientes, Passos };
+
+        fetch("https://localhost:7219/api/Receita", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        })
+            .then((response) => { alert("Receita cadastrado com sucesso"); })
+            .catch((error) => {
+                console.log(error);
+                alert("Erro ao buscar resultado");
+            });
+    }
 
     const data = [
         { key: '1', value: 'Aves' },
@@ -39,7 +64,6 @@ export default function CadastroDeReceita({ navigation }) {
     const hora = [
         { key: '1', value: 'minuto(s)' },
         { key: '2', value: 'hora(s)' },
-        { key: '3', value: 'dia(s)' },
     ];
 
     const medida = [
@@ -51,7 +75,6 @@ export default function CadastroDeReceita({ navigation }) {
         { key: '6', value: 'Unidade(s)' }
     ]
 
-    const [isSelected, setSelection] = useState(false);
 
     return (
         <ScrollView style={styles.container} >
@@ -76,12 +99,13 @@ export default function CadastroDeReceita({ navigation }) {
                 {/* Input Nome */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Nome</Text>
-                    <TextInput style={styles.allInput} placeholder='Digite o nome da receita'></TextInput>
+                    <TextInput style={styles.allInput} placeholder='Digite o nome da receita' value={Nome} onChange={(e) => setNome(e.target.value)} />
                 </View>
 
                 {/* Input Categorias */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Categorias</Text>
+                    {/* UseState errados nos MultipleSelectList */}
                     <MultipleSelectList data={data}
                         setSelected={setSelected}
                         placeholder='Alguma categoria'
@@ -100,7 +124,9 @@ export default function CadastroDeReceita({ navigation }) {
                     <Text style={styles.TextInput}>Tempo de preparo</Text>
                 </View>
                 <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
-                    <TextInput style={styles.inputTempo} placeholder='Tempo'></TextInput>
+                    <TextInput style={styles.inputTempo} placeholder='Tempo' value={TempoPreparo} onChange={(e) => setTempoPreparo(e.target.value)} />
+
+                    {/* UseState errados nos MultipleSelectList */}
                     <MultipleSelectList data={hora}
                         setSelected={setSelected}
                         placeholder='Horas'
@@ -117,30 +143,31 @@ export default function CadastroDeReceita({ navigation }) {
                 {/* Input Porções */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Porções</Text>
-                    <TextInput style={styles.allInput} placeholder="Quantidade"></TextInput>
+                    <TextInput style={styles.allInput} placeholder="Quantidade" value={Porcoes} onChange={(e) => setPorcoes(e.target.value)} />
                 </View>
 
                 {/* CheckBox de Aproveitamento */}
                 <View style={styles.defaultInput}>
                     <View style={styles.checkboxContainer}>
-                        <CheckBox value={isSelected} onValueChange={setSelection} style={styles.checkbox} />
+                        <CheckBox value={Aproveitamento} onValueChange={setAproveitamento} style={styles.checkbox} />
                         <Text style={{ margin: 5, fontSize: "15px", fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
-                        <Button title="?"></Button>
+                        <TouchableOpacity title="?" />
                     </View>
                 </View>
 
                 {/* Input Valor cal */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Valor Calórico</Text>
-                    <TextInput style={styles.allInput} placeholder='Ex: Gramas/quilocalorias'></TextInput>
+                    <TextInput style={styles.allInput} placeholder='Ex: Gramas/quilocalorias' value={ValCalorico} onChange={(e) => setValCalorico(e.target.value)}/>
                 </View>
 
                 {/* Input Pequena descrição */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Pequena descrição</Text>
-                    <TextInput style={styles.allInput} placeholder='Ex: Coxinha de frango com catupiry'></TextInput>
+                    <TextInput style={styles.allInput} placeholder='Ex: Coxinha de frango com catupiry' value={Descricao} onChange={(e) => setDescricao(e.target.value)}/>
                 </View>
 
+                {/* Colocar em componente ingredientes e passos */}
                 {/* Input Ingredientes */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Ingredientes</Text>
