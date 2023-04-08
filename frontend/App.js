@@ -13,6 +13,7 @@ import CadastroDeReceita from './src/Pages/CadastroDeReceita';
 import CadastroDeUsuario from './src/Pages/CadastroDeUsuario';
 import EsqueciMinhaSenha from './src/Pages/EsqueciMinhaSenha';
 import Favoritos from './src/Pages/Favoritos';
+import Configuracoes from './src/Pages/Configuracoes';
 import { Route } from 'expo-router/src/Route';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
@@ -27,7 +28,11 @@ export default function App() {
   else {
     return (
       <MenuProvider>
+<<<<<<< HEAD
         <CadastroDeUsuario/>
+=======
+        <Configuracoes/>
+>>>>>>> b79faa52b471e2fdd51fc6cfcc7682c8a2d1c94b
       </MenuProvider>
     )
   }
