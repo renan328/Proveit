@@ -102,7 +102,6 @@ export default function CadastroDeUsuario({ navigation }) {
     ];
 
     return (
-
         <View style={styles.container}>
 
             {/* Header */}
