@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Image } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import * as ImagePicker from 'expo-image-picker';
 import styles from './cadastrodereceita.module';
 
 export default function CadastroDeReceita({ navigation }) {
@@ -19,6 +20,20 @@ export default function CadastroDeReceita({ navigation }) {
     const [Descricao, setDescricao] = useState();
     const [Ingredientes, setIngredientes] = useState([]);
     const [Passos, setPassos] = useState([]);
+
+    const [lengthIngredient, setLengthIngredient] = useState(1);
+    const [lengthStep, setLengthStep] = useState(1);
+
+
+    // Novo ingrediente
+    const addIngredient = () => {
+        setLengthIngredient(lengthIngredient + 1);
+    };
+
+    // Novo passo
+    const addStep = () => {
+        setLengthStep(lengthStep + 1);
+    };
 
     const cadastrarReceita = (e) => {
         e.preventDefault();
@@ -36,6 +51,26 @@ export default function CadastroDeReceita({ navigation }) {
                 alert("Erro ao buscar resultado");
             });
     }
+
+
+    //Configurações das imagens
+    const [image, setImage] = useState(null);
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 0.7,
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        }
+    };
 
     const data = [
         { key: '1', value: 'Aves' },
@@ -88,9 +123,10 @@ export default function CadastroDeReceita({ navigation }) {
             {/* Fotos */}
             <View style={{ display: 'flex', alignItems: "center" }}>
                 <Text style={{ fontFamily: 'Raleway_600SemiBold', fontSize: 15, marginTop: 26 }}> Foto </Text>
-                <View style={styles.BorderIcon}>
+                <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
                     <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />
-                </View>
+                    {image && <Image source={{ uri: image }} style={styles.imagemReceita} />}
+                </TouchableOpacity>
             </View>
 
             {/* Input "Pai" */}
@@ -141,7 +177,8 @@ export default function CadastroDeReceita({ navigation }) {
                 </View>
 
                 {/* Input Porções */}
-                <View style={styles.defaultInput}>
+                <View style={styles.defaultInput} >
+
                     <Text style={styles.TextInput}>Porções</Text>
                     <TextInput style={styles.allInput} placeholder="Quantidade" value={Porcoes} onChange={(e) => setPorcoes(e.target.value)} />
                 </View>
@@ -158,56 +195,64 @@ export default function CadastroDeReceita({ navigation }) {
                 {/* Input Valor cal */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Valor Calórico</Text>
-                    <TextInput style={styles.allInput} placeholder='Ex: Gramas/quilocalorias' value={ValCalorico} onChange={(e) => setValCalorico(e.target.value)}/>
+                    <TextInput style={styles.allInput} placeholder='Ex: Gramas/quilocalorias' value={ValCalorico} onChange={(e) => setValCalorico(e.target.value)} />
                 </View>
 
                 {/* Input Pequena descrição */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Pequena descrição</Text>
-                    <TextInput style={styles.allInput} placeholder='Ex: Coxinha de frango com catupiry' value={Descricao} onChange={(e) => setDescricao(e.target.value)}/>
+                    <TextInput style={styles.allInput} placeholder='Ex: Coxinha de frango com catupiry' value={Descricao} onChange={(e) => setDescricao(e.target.value)} />
                 </View>
 
                 {/* Colocar em componente ingredientes e passos */}
                 {/* Input Ingredientes */}
-                <View style={styles.defaultInput}>
-                    <Text style={styles.TextInput}>Ingredientes</Text>
-                    <TextInput style={styles.allInput} placeholder='Primeiro ingrediente'></TextInput>
-                </View>
+                {Array.from({ length: lengthIngredient }, (_, index) => (
+                    <View style={styles.addableComponent}>
+                        <View style={styles.defaultInput}>
+                            <Text style={styles.TextInput}>Ingrediente</Text>
+                            <TextInput style={styles.allInput} placeholder=' Ingrediente'></TextInput>
+                        </View>
 
-                {/* Input Quantidade */}
-                <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
-                    <Text style={styles.TextInput}>Quantidade e Medidas</Text>
-                </View>
-                <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
-                    <TextInput style={styles.inputQuantidade} placeholder='Qntd'></TextInput>
-                    <MultipleSelectList data={medida}
-                        setSelected={setSelected}
-                        placeholder='Medidas'
-                        searchPlaceholder='Adicionar'
-                        notFoundText='Medida não encontrada'
-                        fontFamily='Raleway_600SemiBold'
-                        boxStyles={styles.medidaInput}
-                        inputStyles={{ fontSize: '11px', color: '#505050', marginTop: 5, }}
-                        dropdownStyles={styles.medidaListaInput}
-                        dropdownTextStyles={{ fontSize: '11px', color: '#505050', marginTop: 5 }}>
-                    </MultipleSelectList>
-                </View>
+                        {/* Input Quantidade */}
+                        <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
+                            <Text style={styles.TextInput}>Quantidade e Medidas</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
+                            <TextInput style={styles.inputQuantidade} placeholder='Quantidade'></TextInput>
+                            <MultipleSelectList data={medida}
+                                setSelected={setSelected}
+                                placeholder='Medidas'
+                                searchPlaceholder='Adicionar'
+                                notFoundText='Medida não encontrada'
+                                fontFamily='Raleway_600SemiBold'
+                                boxStyles={styles.medidaInput}
+                                inputStyles={{ fontSize: '11px', color: '#505050', marginTop: 5, }}
+                                dropdownStyles={styles.medidaListaInput}
+                                dropdownTextStyles={{ fontSize: '11px', color: '#505050', marginTop: 5 }}>
+                            </MultipleSelectList>
+                        </View>
+                    </View>
+
+                ))}
 
                 {/* Adicionar ingredientes */}
-                <TouchableOpacity>
-                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, marginTop: 15 }}>+ Adicionar ingrediente</Text>
+                < TouchableOpacity onPress={addIngredient} style={styles.addButton}>
+                    <Text style={styles.addButtonText}>+ Adicionar ingrediente</Text>
                 </TouchableOpacity>
 
                 {/* Input Passos */}
-                <View style={styles.defaultInput}>
-                    <Text style={styles.TextInput}>Passos</Text>
-                    <TextInput style={styles.allInput} placeholder='Primeiro passo'></TextInput>
-                </View>
+                {Array.from({ length: lengthStep }, (_, index) => (
+
+                    <View style={styles.defaultInput}>
+                        <Text style={styles.TextInput}>Passos</Text>
+                        <TextInput style={styles.allInput} placeholder='Primeiro passo'></TextInput>
+                    </View>
+                ))}
 
                 {/* Adicionar Passos */}
-                <View>
-                    <Text style={{ color: 'orange', fontFamily: 'Raleway_600SemiBold', fontSize: 14, marginTop: 15 }}>+ Adicionar passos</Text>
-                </View>
+                <TouchableOpacity onPress={addStep} style={styles.addButton}>
+                    <Text style={styles.addButtonText}>+ Adicionar passos</Text>
+                </TouchableOpacity>
 
                 {/* Botão */}
                 <View>

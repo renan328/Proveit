@@ -1,3 +1,4 @@
+import { width } from '@fortawesome/free-solid-svg-icons/faUser';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
         color: 'rgba(0, 0, 0, 0.7)',
         fontFamily: 'Raleway_700Bold',
         fontSize: 35,
+        top: -45,
     },
 
     IconCamera: {
@@ -36,18 +38,30 @@ const styles = StyleSheet.create({
 
     BorderIcon: {
         display: 'flex',
-        width: 140,
-        height: 140,
+        width: 240,
+        height: 240,
         marginTop: 10,
         borderWidth: 1.5,
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#FF7152',
         borderStyle: 'dashed',
-        borderBottomLeftRadius: 70,
-        borderBottomRightRadius: 70,
-        borderTopLeftRadius: 70,
-        borderTopRightRadius: 70
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50
+    },
+
+    imagemReceita:{
+        display: 'flex',
+        width: 240,
+        height: 240,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50
     },
 
     inputs: {
@@ -92,6 +106,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '80%'
+    },
+
+    addableComponent: {
+        marginTop: 25,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%'
     },
 
     categoriaInput: {
@@ -263,6 +285,20 @@ const styles = StyleSheet.create({
         marginLeft: '25px',
         overflowX: 'hidden',
         border: 'none'
+    },
+
+    addButton: {
+        backgroundColor: 'rgba(255,113,82,0.2)',
+        width: '50%',
+        textAlign: 'center',
+        paddingVertical: '12px',
+        borderRadius: 10,
+        marginTop: '10px'
+    },
+
+    addButtonText: { 
+        fontFamily: 'Raleway_700Bold',
+        color: '#FF7152'
     },
 
     button: {

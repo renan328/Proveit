@@ -41,6 +41,8 @@ export default function ReceitaSingle({ navigation }) {
         setSaved(!saved);
     };
 
+    
+
     return (
         <ScrollView style={styles.container}>
 
