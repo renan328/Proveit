@@ -300,6 +300,19 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
         color: '#FF7152'
     },
+    
+    removeButton: {
+        width: '50%',
+        textAlign: 'center',
+        paddingVertical: '12px',
+        borderRadius: 10,
+        marginTop: '10px'
+    },
+
+    removeButtonText: { 
+        fontFamily: 'Raleway_700Bold',
+        color: '#ff375b'
+    },
 
     button: {
         display: 'flex',

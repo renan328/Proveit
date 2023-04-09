@@ -12,6 +12,7 @@ import CadastroDeUsuario from '../Pages/CadastroDeUsuario';
 import CadastroDeReceita from '../Pages/CadastroDeReceita';
 import Pesquisa from '../Pages/Pesquisa';
 import Favoritos from '../Pages/Favoritos';
+import Configuracoes from '../Pages/Configuracoes';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -117,7 +118,8 @@ function FavoritosStack() {
 function PerfilStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen options={{ headerShown: false }} name="Settings" component={Perfil} />
+            <Stack.Screen options={{ headerShown: false }} name="Perfil" component={Perfil} />
+            <Stack.Screen options={{ headerShown: false }} name="Configuracoes" component={Configuracoes} />
         </Stack.Navigator>
     );
 }

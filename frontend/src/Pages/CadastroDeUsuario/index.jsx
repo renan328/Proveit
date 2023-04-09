@@ -30,8 +30,8 @@ const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, err
                     <TextInput
                         style={[
                             styles.defaultInput, {
-                                borderWidth: errors.email && 1,
-                                borderColor: errors.email && '#ff375b'
+                                borderWidth: errors[fieldName] && 1,
+                                borderColor: errors[fieldName] && '#ff375b'
                             }]}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -60,7 +60,7 @@ export default function CadastroDeUsuario({ navigation }) {
     const [image, setImage] = useState(null);
 
     const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
+
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,

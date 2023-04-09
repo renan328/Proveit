@@ -13,7 +13,7 @@ const screenHeight = Dimensions.get('window').height;
 
 const schema = yup.object().shape({
     email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
-    senha: yup.string().min(8, 'Mínimo de 6 caracteres').required('Campo obrigatório'),
+    senha: yup.string().min(8, 'Mínimo de 8 caracteres').required('Campo obrigatório'),
 });
 
 const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, errors }) => {
@@ -26,8 +26,8 @@ const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, err
                     <TextInput
                         style={[
                             styles.input, {
-                                borderWidth: errors.email && 1,
-                                borderColor: errors.email && '#ff375b'
+                                borderWidth: errors[fieldName] && 1,
+                                borderColor: errors[fieldName] && '#ff375b'
                             }]}
                         onChangeText={onChange}
                         onBlur={onBlur}

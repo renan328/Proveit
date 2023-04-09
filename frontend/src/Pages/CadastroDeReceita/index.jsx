@@ -30,9 +30,19 @@ export default function CadastroDeReceita({ navigation }) {
         setLengthIngredient(lengthIngredient + 1);
     };
 
+    // Remove ingrediente
+    const removeIngredient = () => {
+        setLengthIngredient(lengthIngredient - 1);
+    };
+
     // Novo passo
     const addStep = () => {
         setLengthStep(lengthStep + 1);
+    };
+
+    // Remove passo
+    const removeStep = () => {
+        setLengthStep(lengthStep - 1);
     };
 
     const cadastrarReceita = (e) => {
@@ -57,7 +67,6 @@ export default function CadastroDeReceita({ navigation }) {
     const [image, setImage] = useState(null);
 
     const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
@@ -240,6 +249,9 @@ export default function CadastroDeReceita({ navigation }) {
                     <Text style={styles.addButtonText}>+ Adicionar ingrediente</Text>
                 </TouchableOpacity>
 
+                {/* Remove ingredientes */}
+                {lengthIngredient > 1 && < TouchableOpacity onPress={removeIngredient} style={styles.removeButton}> <Text style={styles.removeButtonText}>- Apagar ingrediente</Text> </TouchableOpacity>}
+
                 {/* Input Passos */}
                 {Array.from({ length: lengthStep }, (_, index) => (
 
@@ -253,6 +265,10 @@ export default function CadastroDeReceita({ navigation }) {
                 <TouchableOpacity onPress={addStep} style={styles.addButton}>
                     <Text style={styles.addButtonText}>+ Adicionar passos</Text>
                 </TouchableOpacity>
+
+                {/* Remove Passos */}
+                {lengthStep > 1 && < TouchableOpacity onPress={removeStep} style={styles.removeButton}> <Text style={styles.removeButtonText}>- Apagar passo</Text> </TouchableOpacity>}
+
 
                 {/* Botão */}
                 <View>
