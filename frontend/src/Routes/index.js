@@ -12,6 +12,7 @@ import CadastroDeUsuario from '../Pages/CadastroDeUsuario';
 import CadastroDeReceita from '../Pages/CadastroDeReceita';
 import Pesquisa from '../Pages/Pesquisa';
 import Favoritos from '../Pages/Favoritos';
+import Configuracoes from '../Pages/Configuracoes';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
