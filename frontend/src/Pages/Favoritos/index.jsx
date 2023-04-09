@@ -56,8 +56,6 @@ export default function Favoritos() {
 
                 <Text>Favoritos</Text>
 
-
-
             </View>
 
 
@@ -73,9 +71,11 @@ export default function Favoritos() {
 
             <View style={styles.CardsList}>
 
-                <CartaoFavorito titulo={'Comida'} text={'comidinhas hmmmm'} Image={'/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg'} />
+                <CartaoFavorito titulo={'Coxinha impressionante sabor frango frango frango'} text={'comidinhas hmmmm fnjwifnnf fiownfiwf fniwmnfoiwf fijwidof dm nwodmwodm diownmdiowd iofnoiw'} Image={'/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg'} stars={3}/>
 
-                <CartaoFavorito titulo={'Comida'} text={'comidinhas hmmmm'} Image={'/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg'} />
+                <CartaoFavorito titulo={'Suco de fruta'} text={'Sucos diferenciados'} Image={'/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg'} stars={5}/>
+                
+                <CartaoFavorito titulo={'Comida'} text={'comidinhas hmmmm'} Image={'/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg'} stars={5}/>
 
             </View>
 

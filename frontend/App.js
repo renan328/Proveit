@@ -28,11 +28,7 @@ export default function App() {
   else {
     return (
       <MenuProvider>
-<<<<<<< HEAD
-        <CadastroDeUsuario/>
-=======
-        <Configuracoes/>
->>>>>>> b79faa52b471e2fdd51fc6cfcc7682c8a2d1c94b
+        <Favoritos/>
       </MenuProvider>
     )
   }
