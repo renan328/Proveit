@@ -1,7 +1,10 @@
-
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+
+    container: {
+        width: '100%'
+    },
 
     header: {
         width: '100%',
@@ -43,6 +46,25 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
+    },
+
+    cardList: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    
+    footer: {
+        display: 'flex',
+        alignItems: 'center',
+        marginVertical: '50px'
+    },
+
+    footerText: {
+        fontFamily: 'Raleway_600SemiBold',
+        color: 'rgba(0,0,0,0.4)',
+        fontSize: 15
     },
 
 });
