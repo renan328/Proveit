@@ -210,7 +210,7 @@ export default function CadastroDeReceita({ navigation }) {
                     <View style={styles.addableComponent}>
                         <View style={styles.defaultInput}>
                             <Text style={styles.TextInput}>Ingrediente</Text>
-                            <TextInput style={styles.allInput} placeholder=' Ingrediente'></TextInput>
+                            <TextInput style={styles.allInput} placeholder={`Ingrediente #${index + 1}`}></TextInput>
                         </View>
 
                         {/* Input Quantidade */}
@@ -244,8 +244,8 @@ export default function CadastroDeReceita({ navigation }) {
                 {Array.from({ length: lengthStep }, (_, index) => (
 
                     <View style={styles.defaultInput}>
-                        <Text style={styles.TextInput}>Passos</Text>
-                        <TextInput style={styles.allInput} placeholder='Primeiro passo'></TextInput>
+                        <Text style={styles.TextInput}>Passo</Text>
+                        <TextInput style={styles.allInput} placeholder={`Passo #${index + 1}`}></TextInput>
                     </View>
                 ))}
 
