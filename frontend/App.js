@@ -29,7 +29,7 @@ export default function App() {
   else {
     return (
       <MenuProvider>
-        <CadastroDeReceita />
+        <Routes />
       </MenuProvider>
     )
   }

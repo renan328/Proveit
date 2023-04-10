@@ -7,7 +7,8 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup'; import styles from './cadastrodeusuario.module';
+import * as yup from 'yup';
+import styles from './cadastrodeusuario.module';
 import * as ImagePicker from 'expo-image-picker';
 
 
