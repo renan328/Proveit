@@ -3,7 +3,7 @@ import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Image } 
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faPlus, faTrashAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import * as ImagePicker from 'expo-image-picker';
 import styles from './cadastrodereceita.module';
 
@@ -131,7 +131,7 @@ export default function CadastroDeReceita({ navigation }) {
 
             {/* Fotos */}
             <View style={{ display: 'flex', alignItems: "center" }}>
-                <Text style={{ fontFamily: 'Raleway_600SemiBold', fontSize: 15, marginTop: 26 }}> Foto </Text>
+                <Text style={{ fontFamily: 'Raleway_800ExtraBold', fontSize: 20, marginTop: 26, color: '#505050' }}> Foto </Text>
                 <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
                     <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />
                     {image && <Image source={{ uri: image }} style={styles.imagemReceita} />}
@@ -218,8 +218,11 @@ export default function CadastroDeReceita({ navigation }) {
                 {Array.from({ length: lengthIngredient }, (_, index) => (
                     <View style={styles.addableComponent}>
                         <View style={styles.defaultInput}>
-                            <Text style={styles.TextInput}>Ingrediente</Text>
-                            <TextInput style={styles.allInput} placeholder={`Ingrediente #${index + 1}`}></TextInput>
+                            <View style={styles.titleContainer}>
+                                <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
+                                <Text style={styles.TextInput2}>Ingrediente</Text>
+                            </View>
+                            <TextInput style={styles.allInput} placeholder='Ingrediente'></TextInput>
                         </View>
 
                         {/* Input Quantidade */}
@@ -244,31 +247,37 @@ export default function CadastroDeReceita({ navigation }) {
 
                 ))}
 
-                {/* Adicionar ingredientes */}
-                < TouchableOpacity onPress={addIngredient} style={styles.addButton}>
-                    <Text style={styles.addButtonText}>+ Adicionar ingrediente</Text>
-                </TouchableOpacity>
+                <View style={styles.btnContainer}>
+                    {/* Adicionar Ingrediente */}
+                    <TouchableOpacity onPress={addIngredient} style={styles.addButton}>
+                        <FontAwesomeIcon icon={faPlus} color='#FF7152'></FontAwesomeIcon><Text style={styles.addButtonText}> Adicionar passo</Text>
+                    </TouchableOpacity>
 
-                {/* Remove ingredientes */}
-                {lengthIngredient > 1 && < TouchableOpacity onPress={removeIngredient} style={styles.removeButton}> <Text style={styles.removeButtonText}>- Apagar ingrediente</Text> </TouchableOpacity>}
+                    {/* Remove Ingrediente */}
+                    {lengthIngredient > 1 && < TouchableOpacity onPress={removeIngredient} style={styles.removeButton}><FontAwesomeIcon icon={faTrashCan} color='#505050' /></TouchableOpacity>}
+                </View>
 
                 {/* Input Passos */}
                 {Array.from({ length: lengthStep }, (_, index) => (
 
                     <View style={styles.defaultInput}>
-                        <Text style={styles.TextInput}>Passo</Text>
-                        <TextInput style={styles.allInput} placeholder={`Passo #${index + 1}`}></TextInput>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
+                            <Text style={styles.TextInput2}>Passo</Text>
+                        </View>
+                        <TextInput style={styles.allInput} placeholder="Passo" ></TextInput>
                     </View>
                 ))}
 
-                {/* Adicionar Passos */}
-                <TouchableOpacity onPress={addStep} style={styles.addButton}>
-                    <Text style={styles.addButtonText}>+ Adicionar passos</Text>
-                </TouchableOpacity>
+                <View style={styles.btnContainer}>
+                    {/* Adicionar Passos */}
+                    <TouchableOpacity onPress={addStep} style={styles.addButton}>
+                        <FontAwesomeIcon icon={faPlus} color='#FF7152'></FontAwesomeIcon><Text style={styles.addButtonText}> Adicionar passo</Text>
+                    </TouchableOpacity>
 
-                {/* Remove Passos */}
-                {lengthStep > 1 && < TouchableOpacity onPress={removeStep} style={styles.removeButton}> <Text style={styles.removeButtonText}>- Apagar passo</Text> </TouchableOpacity>}
-
+                    {/* Remove Passos */}
+                    {lengthStep > 1 && < TouchableOpacity onPress={removeStep} style={styles.removeButton}><FontAwesomeIcon icon={faTrashAlt} color='#505050' /></TouchableOpacity>}
+                </View>
 
                 {/* Botão */}
                 <View>

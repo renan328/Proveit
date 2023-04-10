@@ -70,11 +70,36 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
+    titleContainer: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+    },
+
+    stepNumber: {
+        color: 'rgba(0,0,0,0.15)',
+        fontSize: "45px",
+        fontFamily: 'Raleway_900Black'
+    },
+
     TextInput: {
-        alignSelf: 'baseline',
-        justifyContent: 'flex-end',
+        color: '#505050',
+        alignSelf: 'flex-start',
+        justifyContent: 'flex-start',
         fontSize: "15px",
-        fontFamily: 'Raleway_600SemiBold'
+        fontFamily: 'Raleway_700Bold'
+    },
+
+    TextInput2: {
+        color: '#505050',
+        alignSelf: 'center',
+        justifyContent: 'flex-start',
+        fontSize: "18px",
+        fontFamily: 'Raleway_700Bold',
+        position: 'relative',
+        left: -12
     },
 
     allInput: {
@@ -287,13 +312,24 @@ const styles = StyleSheet.create({
         border: 'none'
     },
 
+    btnContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+    },
+
     addButton: {
         backgroundColor: 'rgba(255,113,82,0.2)',
-        width: '50%',
+        width: '60%',
         textAlign: 'center',
         paddingVertical: '12px',
         borderRadius: 10,
-        marginTop: '10px'
+        marginTop: '10px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
 
     addButtonText: { 
@@ -302,11 +338,12 @@ const styles = StyleSheet.create({
     },
     
     removeButton: {
-        width: '50%',
         textAlign: 'center',
-        paddingVertical: '12px',
+        padding: '12px',
         borderRadius: 10,
-        marginTop: '10px'
+        marginTop: '10px',
+        backgroundColor: 'rgba(0,0,0,0.15)',
+        marginLeft: '5px'
     },
 
     removeButtonText: { 

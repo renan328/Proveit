@@ -25,10 +25,11 @@ export default function App() {
   if (!fontsLoaded) {
     return <Loading />
   }
+
   else {
     return (
       <MenuProvider>
-        <Configuracoes/>
+        <CadastroDeReceita />
       </MenuProvider>
     )
   }
