@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 50
     },
 
-    imagemReceita:{
+    imagemReceita: {
         display: 'flex',
         width: 240,
         height: 240,
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         height: '50px',
-        width: '310px' ,
+        width: '310px',
         marginTop: 10,
         shadowOffset: {
             width: 0,
@@ -332,11 +332,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
-    addButtonText: { 
+    addButtonText: {
         fontFamily: 'Raleway_700Bold',
         color: '#FF7152'
     },
-    
+
     removeButton: {
         textAlign: 'center',
         padding: '12px',
@@ -346,20 +346,19 @@ const styles = StyleSheet.create({
         marginLeft: '5px'
     },
 
-    removeButtonText: { 
+    removeButtonText: {
         fontFamily: 'Raleway_700Bold',
         color: '#ff375b'
     },
 
     button: {
         display: 'flex',
-        marginBottom: 25,
-        marginTop: 20,
+        marginTop: 30,
         width: 200,
         backgroundColor: 'orange',
         color: '#FFF',
-        borderRadius: 5,
-        padding: 10,
+        borderRadius: 10,
+        padding: 15,
         alignSelf: 'center',
         shadowColor: "#000",
         shadowOffset: {
@@ -373,8 +372,37 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         color: '#FFF',
+        fontSize: '18px',
         fontFamily: 'Raleway_700Bold',
     },
+
+    successToast: {
+        backgroundColor: '#2dc254',
+        height: '55px',
+        width: '92%',
+        borderRadius: '15px',
+        paddingHorizontal: '10px',
+        position: 'absolute',
+        zIndex: '5',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+    },
+    
+
+    toastText: {
+        color: '#fff',
+        fontSize: 16,
+        fontFamily: 'Raleway_600SemiBold'
+    }
 });
 
 export default styles;

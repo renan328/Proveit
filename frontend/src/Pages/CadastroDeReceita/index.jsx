@@ -3,11 +3,13 @@ import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Image } 
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCamera, faPlus, faTrashAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faPlus, faTrashAlt, faTrashCan, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import * as ImagePicker from 'expo-image-picker';
 import styles from './cadastrodereceita.module';
+import Toast from 'react-native-toast-message';
+import { ref } from 'yup';
 
-export default function CadastroDeReceita({ navigation }) {
+export default function CadastroDeReceita({ navigation, props }) {
 
     {/* UseState errados nos MultipleSelectList */ }
     const [Nome, setNome] = useState();
@@ -119,10 +121,31 @@ export default function CadastroDeReceita({ navigation }) {
         { key: '6', value: 'Unidade(s)' }
     ]
 
+    const toastConfig = {
+        success: internalState => (
+            <View style={styles.successToast}>
+                <FontAwesomeIcon icon={faCircleCheck} size={28} style={{marginRight: 10}} color='#fff'/>
+                <Text style={styles.toastText}>{internalState.text1}</Text>
+            </View>
+        ),
+
+        error: () => { },
+        info: () => { },
+        any_custom_type: () => { },
+    };
+
+    const showSuccessToast = () => {
+        Toast.show({
+            type: 'success',
+            text1: 'Receita publicada',
+            position: 'bottom',
+            visibilityTime: 3000,
+            bottomOffset: 120
+        });
+    };
 
     return (
         <ScrollView style={styles.container} >
-
             {/* Header */}
             <View style={styles.header}>
                 <Text style={styles.textAdd}>Adicionar</Text>
@@ -281,7 +304,7 @@ export default function CadastroDeReceita({ navigation }) {
 
                 {/* Botão */}
                 <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Main')} >
+                    <TouchableOpacity onPress={showSuccessToast} >
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} style={styles.button} >
                             <Text style={styles.buttonText}>Publicar</Text>
@@ -289,6 +312,8 @@ export default function CadastroDeReceita({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
+            <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
+            <View style={{ paddingVertical: '50px' }} />
         </ScrollView >
     );
 }

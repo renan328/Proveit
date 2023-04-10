@@ -32,6 +32,7 @@ function MainTabNavigator() {
             inactiveTintColor: '#505050',
             tabBarShowLabel: false,
             tabBarStyle: {
+                marginTop: '100px',
                 position: 'absolute',
                 width: '90%',
                 bottom: 20,
@@ -41,14 +42,14 @@ function MainTabNavigator() {
                 borderRadius: 15,
                 height: 55,
                 backgroundColor: '#fff',
-                shadowColor:  '#000',
+                shadowColor: '#000',
                 shadowOffset: {
                     width: 0,
                     height: 3,
                 },
                 shadowOpacity: 0.20,
                 shadowRadius: 10,
-        
+
                 elevation: 15,
             }
         }}>

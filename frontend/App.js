@@ -19,8 +19,21 @@ import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
 import Loading from './src/Pages/Loading';
 
+
 export default function App() {
   const [fontsLoaded] = useFonts({ Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, });
+
+  const toastConfig ={
+    sucess: internalState => (
+      <View style={{backgroundColor: 'red'}}>
+        <Text>{internalState.text1}</Text>
+      </View>
+    ),
+
+    error: ()=> {},
+    info: () => {},
+    any_custom_type: () => {},
+  };
 
   if (!fontsLoaded) {
     return <Loading />
@@ -30,6 +43,7 @@ export default function App() {
     return (
       <MenuProvider>
         <Routes />
+        <Toast />
       </MenuProvider>
     )
   }

@@ -79,6 +79,8 @@ export default function Favoritos() {
 
             </View>
 
+            <View style={{paddingVertical: '50px'}}/>
+
         </View>
 
     );
