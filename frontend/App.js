@@ -42,7 +42,7 @@ export default function App() {
   else {
     return (
       <MenuProvider>
-        <Routes />
+        <Configuracoes />
         <Toast />
       </MenuProvider>
     )

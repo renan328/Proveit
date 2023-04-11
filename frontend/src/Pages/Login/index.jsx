@@ -45,7 +45,7 @@ const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, err
 export default function Login({ navigation }) {
 
     const { control, handleSubmit, formState: { errors } } = useForm({
-        //resolver: yupResolver(schema)
+        resolver: yupResolver(schema)
     })
 
     function handleSingIn(data) {
