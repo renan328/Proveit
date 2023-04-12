@@ -114,25 +114,29 @@ const styles = StyleSheet.create({
     },
 
 
+    Inputs_container:{
+        display:'flex',
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
 
-    inputSingle: {
+    Inputs: {
         width: '80%',
         display: 'flex',
         flexDirection:'row',
-        alignSelf:'center',
+        justifyContent:'space-around',
     },  
 
-    defaultInput: {
-        paddingHorizontal: '7px',
-        fontSize: '13px',
-        color: '#505050',
-        height: '50px',
-        width: '100%',
+    Input_Styles: {
+        /* borderWidth: 1,
+        borderColor: '#ccc', */
         backgroundColor: '#fff',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
+        borderRadius: 5,
+        fontSize: 20,
+        textAlign: 'center',
+        width: 52,
+        height: 67,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -140,51 +144,17 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
+        fontFamily: 'Raleway_700Bold',
+      },
+
+    code: {
+        textAlign: 'center',
+        color: '#FF785B',
+        textDecorationLine:'underline',
         fontFamily: 'Raleway_600SemiBold',
     },
-
-    button: {
-        display: 'flex',
-        marginTop:2,
-        width: '470%',
-        backgroundColor: 'orange',
-        color: '#FFF',
-        borderRadius: 5,
-        padding: 8,
-        alignSelf: 'center',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-    },
-
-    buttonText: {
-        textAlign: 'center',
-        color: '#FFF',
-        fontFamily: 'Raleway_700Bold',
-    },
-
-    testecontainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-      },
       
-      testeinput: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        fontSize: 20,
-        textAlign: 'center',
-        width: 50,
-        height: 50,
-      },
+    
 });
 
 export default styles;

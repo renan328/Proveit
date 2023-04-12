@@ -4,18 +4,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import validator from 'validator';
+import { QuizInput } from 'react-native-quiz-input';
 import styles from './cod_esqueciminhasenha.module';
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function Cod_EsqueciMinhaSenha() {
 
-    const [code, setCode] = useState('');
-
-    const handleCodeChange = (text) => {
-        // Remove qualquer caractere que não seja número
-        const cleanedText = text.replace(/[^0-9]/g, '');
-        setCode(cleanedText);
+    const onChange = ( data ) => {
+        console.log(data);
+        // your code goes here
     };
 
     return (
@@ -46,28 +44,18 @@ export default function Cod_EsqueciMinhaSenha() {
                         </View>
 
                         {/* Input */}
-                        <View style={styles.inputSingle}>
-                            <TextInput style={styles.defaultInput} placeholder='E-mail'></TextInput>
+                        <View style={styles.Inputs_container}>
+                            <View style={styles.Inputs}>
+                            <QuizInput
+                            wordStructure={[true, true, true, false, true, true, true]}
+                            onChange={onChange}
+                        />
+                            </View>
                         </View>
 
-                        <View style={styles.testecontainer}>
-                            <TextInput
-                                style={styles.testeinput}
-                                keyboardType="numeric"
-                                maxLength={1}
-                                value={code}
-                                onChangeText={handleCodeChange}
-                            />
-                        </View>
-
-                        {/* Botão */}
-                        <View style={styles.botoes}>
-                            <TouchableOpacity onPress={() => navigation.navigate('Main')} >
-                                <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
-                                    end={{ x: 2, y: 1 }} style={styles.button} >
-                                    <Text style={styles.buttonText}>Pronto</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
+                        {/* Reenviar código */}
+                        <View style={styles.resend_code}>
+                            <Text style={styles.code}>Reenviar código</Text>
                         </View>
                     </View>
                 </View>
