@@ -4,11 +4,19 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import validator from 'validator';
-import styles from './esqueciminhasenha.module';
+import styles from './cod_esqueciminhasenha.module';
 
 const screenHeight = Dimensions.get('window').height;
 
-export default function EsqueciMinhaSenha() {
+export default function Cod_EsqueciMinhaSenha() {
+
+    const [code, setCode] = useState('');
+
+    const handleCodeChange = (text) => {
+        // Remove qualquer caractere que não seja número
+        const cleanedText = text.replace(/[^0-9]/g, '');
+        setCode(cleanedText);
+    };
 
     return (
 
@@ -21,25 +29,35 @@ export default function EsqueciMinhaSenha() {
             <View style={styles.main}>
                 <View style={styles.main2}>
                     <View style={styles.circuloIcon}>
-                        <View style={styles.IconCad}>
+                        <View style={styles.IconDocu}>
                             <Image
-                                style={{ width: '89px', height: '86px' }}
-                                source={require('../../assets/IconCad.png')}
+                                style={{ width: '75px', height: '73px' }}
+                                source={require('../../assets/IconDocu.png')}
                             />
                         </View>
                     </View>
                     <View style={styles.main3}>
                         <View style={styles.Texts}>
-                            <View>
-                                <Text style={styles.Qualeoseu}>Qual é o seu</Text>
-                                <Text style={styles.Email}>email?</Text>
+                            <View style={styles.Texts1}>
+                                <Text style={styles.Digiteo}>Digite o</Text>
+                                <Text style={styles.codigo}>código</Text>
                             </View>
-                            <Text style={styles.Desc}>Digite o email cadastrado para que enviaremos um código de autenticação.</Text>
+                            <Text style={styles.Desc}>Digite o código enviado para o seu email.</Text>
                         </View>
 
                         {/* Input */}
                         <View style={styles.inputSingle}>
                             <TextInput style={styles.defaultInput} placeholder='E-mail'></TextInput>
+                        </View>
+
+                        <View style={styles.testecontainer}>
+                            <TextInput
+                                style={styles.testeinput}
+                                keyboardType="numeric"
+                                maxLength={1}
+                                value={code}
+                                onChangeText={handleCodeChange}
+                            />
                         </View>
 
                         {/* Botão */}

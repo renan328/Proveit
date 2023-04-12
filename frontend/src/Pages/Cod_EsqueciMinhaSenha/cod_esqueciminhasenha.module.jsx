@@ -61,12 +61,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF7152',
         shadowColor: "#000",
         shadowOffset: {
-            width: 4,
-            height: 4,
+            width: 1,
+            height: 5,
         },
         shadowOpacity: 0.5,
         shadowRadius: 4,
         elevation: 4,
+    },
+
+    IconDocu:{
+        marginLeft:10,
     },
     
     Texts:{
@@ -77,24 +81,26 @@ const styles = StyleSheet.create({
         height: '50%',
     },
 
-    Qualeoseu:{
+    Texts1:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'space-around',
+    },
+
+    Digiteo:{
         display:'flex',
         flexDirection:'row',
         justifyContent: 'flex-start',
         color: '#505050',
-        fontFamily: 'Raleway_800ExtraBold',
+        fontFamily: 'Raleway_700Bold',
         fontSize: 40,
     },
 
-    Email:{
+    codigo:{
         display:'flex',
-        flexDirection:'row',
-        justifyContent:'flex-start',
-        textDecorationLine:'underline',
-        marginTop:-9,
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
-        fontSize: 35,
+        fontSize: 40,
     },
 
     Desc:{
@@ -161,6 +167,24 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
     },
 
+    testecontainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+      },
+      
+      testeinput: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        fontSize: 20,
+        textAlign: 'center',
+        width: 50,
+        height: 50,
+      },
 });
 
 export default styles;
