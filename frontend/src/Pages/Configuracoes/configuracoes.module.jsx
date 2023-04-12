@@ -21,23 +21,26 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'Raleway_800ExtraBold',
         color: '#FF7152',
-        fontSize: '36px',
+        fontSize: '45px',
     },
     textOpcoes: {
         fontFamily: 'Raleway_500Medium',
-        fontSize: '15px'
+        fontSize: '18px'
     },
     textOpcoesSair: {
         fontFamily: 'Raleway_500Medium',
-        fontSize: '15px',
+        fontSize: '18px',
         color: '#FF7152'
     },
     botaoOpcoes: {
         alignSelf: 'flex-end'
     },
+    opcoes: {
+        marginTop: '15px'
+    },
     containerOpcoes: {
         marginTop: '30px',
-        marginVertical: '3%',
+        marginVertical: '2%',
         marginHorizontal: '5%',
         display: 'flex',
         flexDirection: 'row',

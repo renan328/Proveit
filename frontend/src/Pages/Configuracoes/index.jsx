@@ -16,8 +16,6 @@ export default function Configuracoes() {
                 <View style={styles.linha}/>
             </View>
 
-            {/* Linha Horizontal */}
-
             {/* Lista de opções */}
             <View style={styles.opcoes}>
                 <View style={styles.containerOpcoes}>
