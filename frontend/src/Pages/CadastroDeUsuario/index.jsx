@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Image} from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons'
+import { faCamera, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import Toast from 'react-native-toast-message';
 import styles from './cadastrodeusuario.module';
 import * as ImagePicker from 'expo-image-picker';
-
+import toastStyle from '../Toasts/toasts';
 
 const schema = yup.object().shape({
     nome: yup.string().required('Campo obrigatório'),
@@ -18,7 +19,6 @@ const schema = yup.object().shape({
     email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
     senha: yup.string().min(8, 'Mínimo de 8 caracteres').required('Campo obrigatório'),
     RedigiteSenha: yup.string().min(8, 'Mínimo de 8 caracteres').required('Campo obrigatório').oneOf([yup.ref('senha'), null], 'As senhas não são iguais')
-
 });
 
 const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, errors }) => {
@@ -49,14 +49,65 @@ const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, err
 
 export default function CadastroDeUsuario({ navigation }) {
 
+    const toastConfig = {
+        success: internalState => (
+            <View style={toastStyle.successToast}>
+                <FontAwesomeIcon icon={faCircleCheck} size={28} style={{ marginRight: 10 }} color='#fff' />
+                <Text style={toastStyle.toastText}>{internalState.text1}</Text>
+            </View>
+        ),
+
+        fail: internalState => (
+            <View style={toastStyle.failToast}>
+                <FontAwesomeIcon icon={faCircleXmark} size={28} style={{ marginRight: 10 }} color='#fff' />
+                <Text style={stytoastStyleles.toastText}>{internalState.text1}</Text>
+            </View>
+        ),
+
+        error: () => { },
+        info: () => { },
+        any_custom_type: () => { },
+    };
+
+    const showSuccessToast = () => {
+        Toast.show({
+            type: 'success',
+            text1: 'Bem vindo!',
+            position: 'bottom',
+            visibilityTime: 3000,
+            bottomOffset: 120
+        });
+    };
+
+    const showFailToast = () => {
+        Toast.show({
+            type: 'fail',
+            text1: 'Foi mal! Tente novamente mais tarde.',
+            position: 'bottom',
+            visibilityTime: 3000,
+            bottomOffset: 120
+        });
+    };
+
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     })
 
     function handleRegister(data) {
+
+        fetch("https://localhost:7219/api/Usuario", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+            .then((response) => { showSuccessToast; navigation.navigate('Main') })
+            .catch((error) => {
+                console.log(error);
+                showFailToast;
+            });
+
         console.log(data);
-        navigation.navigate('Main')
-    }
+    };
 
     const [image, setImage] = useState(null);
 
@@ -76,9 +127,12 @@ export default function CadastroDeUsuario({ navigation }) {
         }
     };
 
+    const [nome, setNome] = useState('');
+    const [nomeTag, setNomeTag] = useState('');
+
     const [selected, setSelected] = React.useState('');
 
-    const data = [
+    const dataCategoria = [
         { key: '1', value: 'Aves' },
         { key: '2', value: 'Bebidas' },
         { key: '3', value: 'Bolos' },
@@ -159,20 +213,6 @@ export default function CadastroDeUsuario({ navigation }) {
                     <CampoFormulario control={control} fieldName="RedigiteSenha" placeholder="Redigite sua senha" secureTextEntry errors={errors} />
                 </View>
 
-                <View style={styles.inputSingle}>
-                    <Text style={styles.inputTitle}>Suas categorias favoritas</Text>
-                    <MultipleSelectList style={styles.favcategoriaInput} data={data}
-                        setSelected={setSelected}
-                        placeholder='Alguma categoria'
-                        searchPlaceholder='Adicionar'
-                        notFoundText='Categoria não encontrada'
-                        fontFamily='Raleway_600SemiBold'
-                        boxStyles={styles.favcategoriaInput}
-                        inputStyles={styles.favcategoriafonteInput}
-                        dropdownStyles={styles.favcategorialistaInput}
-                        dropdownTextStyles={styles.favcategoriafonteInput}>
-                    </MultipleSelectList>
-                </View>
             </View>
 
             {/* Botão */}
@@ -184,6 +224,7 @@ export default function CadastroDeUsuario({ navigation }) {
                     </LinearGradient>
                 </TouchableOpacity>
             </View>
+            <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
         </View>
     )
 }

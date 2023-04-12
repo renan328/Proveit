@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 70
     },
 
-    imagemUsu:{
+    imagemUsu: {
         display: 'flex',
         width: 140,
         height: 140,
@@ -176,15 +176,16 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
     },
+    
     button: {
         display: 'flex',
-        marginBottom: 49,
-        marginTop: 49,
+        marginBottom: '50px',
+        marginTop: 30,
         width: 200,
         backgroundColor: 'orange',
         color: '#FFF',
-        borderRadius: 5,
-        padding: 10,
+        borderRadius: 10,
+        padding: 15,
         alignSelf: 'center',
         shadowColor: "#000",
         shadowOffset: {
@@ -200,7 +201,8 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontFamily: 'Raleway_700Bold',
     },
-    textError:{
+
+    textError: {
         alignSelf: 'center',
         color: '#ff375b',
         marginBottom: 8

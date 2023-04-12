@@ -3,23 +3,24 @@ import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Image } 
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCamera, faPlus, faTrashAlt, faTrashCan, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faPlus, faTrashAlt, faTrashCan, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import * as ImagePicker from 'expo-image-picker';
 import styles from './cadastrodereceita.module';
 import Toast from 'react-native-toast-message';
+import toastStyle from '../Toasts/toasts';
 import { ref } from 'yup';
 
 export default function CadastroDeReceita({ navigation, props }) {
 
     {/* UseState errados nos MultipleSelectList */ }
-    const [Nome, setNome] = useState();
+    const [Nome, setNome] = useState('');
     const [selected, setSelected] = React.useState(''); // Categoria
-    const [TempoPreparo, setTempoPreparo] = useState();
-    const [Tempo, setTempo] = useState();
-    const [Porcoes, setPorcoes] = useState();
+    const [TempoPreparo, setTempoPreparo] = useState('');
+    const [Tempo, setTempo] = useState('');
+    const [Porcoes, setPorcoes] = useState('');
     const [Aproveitamento, setAproveitamento] = useState(false);
-    const [ValCalorico, setValCalorico] = useState();
-    const [Descricao, setDescricao] = useState();
+    const [ValCalorico, setValCalorico] = useState('');
+    const [Descricao, setDescricao] = useState('');
     const [Ingredientes, setIngredientes] = useState([]);
     const [Passos, setPassos] = useState([]);
 
@@ -57,10 +58,10 @@ export default function CadastroDeReceita({ navigation, props }) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         })
-            .then((response) => { alert("Receita cadastrado com sucesso"); })
+            .then((response) => { showSuccessToast })
             .catch((error) => {
                 console.log(error);
-                alert("Erro ao buscar resultado");
+                showFailToast;
             });
     }
 
@@ -123,9 +124,16 @@ export default function CadastroDeReceita({ navigation, props }) {
 
     const toastConfig = {
         success: internalState => (
-            <View style={styles.successToast}>
-                <FontAwesomeIcon icon={faCircleCheck} size={28} style={{marginRight: 10}} color='#fff'/>
-                <Text style={styles.toastText}>{internalState.text1}</Text>
+            <View style={toastStyle.successToast}>
+                <FontAwesomeIcon icon={faCircleCheck} size={28} style={{ marginRight: 10 }} color='#fff' />
+                <Text style={toastStyle.toastText}>{internalState.text1}</Text>
+            </View>
+        ),
+
+        fail: internalState => (
+            <View style={toastStyle.failToast}>
+                <FontAwesomeIcon icon={faCircleXmark} size={28} style={{ marginRight: 10 }} color='#fff' />
+                <Text style={toastStyle.toastText}>{internalState.text1}</Text>
             </View>
         ),
 
@@ -138,6 +146,16 @@ export default function CadastroDeReceita({ navigation, props }) {
         Toast.show({
             type: 'success',
             text1: 'Receita publicada',
+            position: 'bottom',
+            visibilityTime: 3000,
+            bottomOffset: 120
+        });
+    };
+
+    const showFailToast = () => {
+        Toast.show({
+            type: 'fail',
+            text1: 'Receita não publicada, foi mal!',
             position: 'bottom',
             visibilityTime: 3000,
             bottomOffset: 120
@@ -304,7 +322,7 @@ export default function CadastroDeReceita({ navigation, props }) {
 
                 {/* Botão */}
                 <View>
-                    <TouchableOpacity onPress={showSuccessToast} >
+                    <TouchableOpacity onPress={showFailToast} >
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} style={styles.button} >
                             <Text style={styles.buttonText}>Publicar</Text>

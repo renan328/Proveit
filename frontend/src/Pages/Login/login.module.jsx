@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginTop: '135px',
-        borderTopLeftRadius: 90 ,
+        borderTopLeftRadius: 90,
         borderTopRightRadius: 90,
         shadowColor: "#000",
         shadowOffset: {
