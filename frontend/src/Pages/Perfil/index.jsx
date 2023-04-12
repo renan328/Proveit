@@ -11,7 +11,9 @@ export default function Perfil({ navigation }) {
         // Container Geral
         <View style={styles.container}>
             <View style={styles.header}>
-                <FontAwesomeIcon icon={faGear} size={32} color='rgba(50, 50, 50, 0.3)' style={{ marginTop: 15 }} />
+                <TouchableOpacity onPress={() => navigation.navigate('Configuracoes')}>
+                    <FontAwesomeIcon icon={faGear} size={32} color='rgba(50, 50, 50, 0.3)' style={{ marginTop: 15 }} />
+                </TouchableOpacity>
             </View>
             <View>
                 {/* Imagem do Usuário e Dados */}

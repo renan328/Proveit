@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginTop: '135px',
-        borderTopLeftRadius: 120,
-        borderTopRightRadius: 120,
+        borderTopLeftRadius: 90,
+        borderTopRightRadius: 90,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
         backgroundColor: '#FFF',
-        borderTopRightRadius: 120,
-        borderTopLeftRadius: 120,
+        borderTopRightRadius: 90,
+        borderTopLeftRadius: 90,
         marginBottom: 20
     },
 
@@ -138,6 +138,11 @@ const styles = StyleSheet.create({
         marginBottom: '15px',
         flexDirection: 'column',
         gap: 5
+    },
+    textError:{
+        alignSelf: 'center',
+        color: '#ff375b',
+        marginBottom: 8
     }
 
 });

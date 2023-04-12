@@ -4,11 +4,55 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import styles from './login.module';
 
 const screenHeight = Dimensions.get('window').height;
 
+const schema = yup.object().shape({
+    email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
+    senha: yup.string().min(8, 'Mínimo de 8 caracteres').required('Campo obrigatório'),
+});
+
+const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, errors }) => {
+    return (
+        <View>
+            <Controller
+                control={control}
+                name={fieldName}
+                render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                        style={[
+                            styles.input, {
+                                borderWidth: errors[fieldName] && 1,
+                                borderColor: errors[fieldName] && '#ff375b'
+                            }]}
+                        onChangeText={onChange}
+                        onBlur={onBlur}
+                        value={value}
+                        placeholder={placeholder}
+                        secureTextEntry={secureTextEntry}
+                    />
+                )}
+            />
+            {errors[fieldName] && <Text style={styles.textError}>{errors[fieldName].message}</Text>}
+        </View>
+    );
+};
+
 export default function Login({ navigation }) {
+
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    })
+
+    function handleSingIn(data) {
+        console.log(data);
+        navigation.navigate('Main')
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
@@ -32,12 +76,16 @@ export default function Login({ navigation }) {
                     </View>
 
                     <View style={styles.containerInput}>
-                        <TextInput style={styles.input} placeholder='Email ou nome de usuário'></TextInput>
-                        <TextInput style={styles.input} placeholder='Senha'></TextInput>
+
+                        <CampoFormulario control={control} fieldName="email" placeholder="E-mail" errors={errors} />
+                        <CampoFormulario control={control} fieldName="senha" placeholder="Senha" secureTextEntry errors={errors} />
+
+
                     </View>
 
                     {/* Botão */}
-                    <TouchableOpacity onPress={() => navigation.navigate('Main')} >
+                    {/* onPress={() => navigation.navigate('Main')} */}
+                    <TouchableOpacity onPress={handleSubmit(handleSingIn)}>
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} style={styles.button} >
                             <Text style={styles.buttonText}>Entrar</Text>

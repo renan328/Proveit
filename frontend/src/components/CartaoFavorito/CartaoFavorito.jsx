@@ -7,12 +7,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, useFonts } from '@expo-google-fonts/raleway';
 
 import { faBookmark, faStar } from '@fortawesome/free-solid-svg-icons';
+import { width } from "@fortawesome/free-solid-svg-icons/faUser";
 
 
 
 
-export default function CartaoFavorito({ titulo, text, buttonText }) {
+export default function CartaoFavorito({ titulo, text, stars }) {
 
+    const truncatedTitulo = titulo.length > 35 ? `${titulo.slice(0, 35)}...` : titulo;
+    const truncatedText = text.length > 55 ? `${text.slice(0, 55)}...` : text;
 
 
     const [saved, setSaved] = useState(false);
@@ -25,13 +28,6 @@ export default function CartaoFavorito({ titulo, text, buttonText }) {
         setSaved(!saved);
 
     };
-
-
-
-
-    const stars = 5;
-
-
 
 
     function StarCounter() {
@@ -78,31 +74,36 @@ export default function CartaoFavorito({ titulo, text, buttonText }) {
 
             <View style={styles.cardContent}>
 
-                <View style={styles.contentContainer}>
+                <View style={styles.header}>
 
-                    <View style={styles.header}>
+                    <View style={styles.titleContainer}>
 
-                        <Text style={styles.titulo}>{titulo}</Text>
-
-                        <TouchableOpacity onPress={() => addSave()}>
-
-                            <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={35} color={saved ? '#FF7152' : '#505050'} verticalAlign={'top'} />
-
-                        </TouchableOpacity>
+                        <Text style={styles.titulo}>{truncatedTitulo}</Text>
 
                     </View>
 
-                    <Text style={styles.text}>{text} uyguigiu</Text>
+                    <TouchableOpacity onPress={() => addSave()}>
 
+                        <FontAwesomeIcon icon={faBookmark} size={35} color={saved ? '#FF7152' : '#505050'} />
+
+                    </TouchableOpacity>
+
+                </View>
+
+                <View>
+                    <Text style={styles.text} verticalAlign={'top'}>{truncatedText}</Text>
+                </View>
+
+                <View style={styles.footer}>
                     <StarCounter style={styles.starsBox}></StarCounter>
-
                 </View>
 
-                <View style={styles.imageContainer}>
 
-                    <Image source={require('/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg')} style={styles.image} />
+            </View>
 
-                </View>
+            <View style={styles.imageContainer}>
+
+                <Image source={require('../../assets/cat_salgados.jpg')} style={styles.image} />
 
             </View>
 
@@ -133,41 +134,47 @@ const styles = StyleSheet.create({
 
         width: '92%',
 
-        height: '125px',
+        minHeight: '125px',
+
+        maxHeight: '200px',
 
         marginTop: '29px',
-
-        overflow: '',
-
-    },
-
-    cardContent: {
 
         flexDirection: 'row',
 
         display: 'flex',
 
+        flexGrow: 1,
+
+        flexShrink: 1,
     },
 
-    contentContainer: {
-
-        height: '100%',
-
-        flex: 50,
-
-    },
-
-    header: {
+    cardContent: {
 
         display: 'flex',
+
+        marginHorizontal: '10px',
+
+        flexDirection: 'column',
+
+        justifyContent: 'space-between',
+
+        width: '50%',
+
+        flexGrow: 1,
+
+        paddingBottom: '10px',
+
+    },
+
+
+    header: {
 
         flexDirection: 'row',
 
         justifyContent: 'space-between',
 
-        margin: '5px',
-
-        height: '100%',
+        marginBottom: '12px',
 
     },
 
@@ -179,29 +186,29 @@ const styles = StyleSheet.create({
 
     },
 
-    titulo: {
+    titleContainer: {
 
-        fontSize: 20,
+        flex: 80,
+
+    },
+
+    titulo: {
 
         fontFamily: 'Raleway_700Bold',
 
         color: '#505050',
 
+        marginTop: '10px',
 
+        fontSize: 17,
 
     },
 
     text: {
 
-        flexWrap: 'wrap',
-
-        flexGrow: 1,
-
-        alignItems: 'start',
+        width: '100%',
 
         fontsize: '8px',
-
-        lineheight: '9px',
 
         color: '#505050',
 
@@ -226,13 +233,19 @@ const styles = StyleSheet.create({
 
     },
 
-    starsBox: {
+    footer: {
 
         display: 'flex',
 
-        flexDirection: 'row',
+        height: '20%',
 
-        alignContent: 'flex-start'
+        alignItems: 'flex-start',
+
+    },
+
+    starsBox: {
+
+        flexDirection: "row",
 
     }
 

@@ -1,3 +1,4 @@
+import { width } from '@fortawesome/free-solid-svg-icons/faUser';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
         color: 'rgba(0, 0, 0, 0.7)',
         fontFamily: 'Raleway_700Bold',
         fontSize: 35,
+        top: -45,
     },
 
     IconCamera: {
@@ -36,18 +38,30 @@ const styles = StyleSheet.create({
 
     BorderIcon: {
         display: 'flex',
-        width: 140,
-        height: 140,
+        width: 240,
+        height: 240,
         marginTop: 10,
         borderWidth: 1.5,
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#FF7152',
         borderStyle: 'dashed',
-        borderBottomLeftRadius: 70,
-        borderBottomRightRadius: 70,
-        borderTopLeftRadius: 70,
-        borderTopRightRadius: 70
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50
+    },
+
+    imagemReceita: {
+        display: 'flex',
+        width: 240,
+        height: 240,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50
     },
 
     inputs: {
@@ -56,11 +70,36 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
+    titleContainer: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+    },
+
+    stepNumber: {
+        color: 'rgba(0,0,0,0.15)',
+        fontSize: "45px",
+        fontFamily: 'Raleway_900Black'
+    },
+
     TextInput: {
-        alignSelf: 'baseline',
-        justifyContent: 'flex-end',
+        color: '#505050',
+        alignSelf: 'flex-start',
+        justifyContent: 'flex-start',
         fontSize: "15px",
-        fontFamily: 'Raleway_600SemiBold'
+        fontFamily: 'Raleway_700Bold'
+    },
+
+    TextInput2: {
+        color: '#505050',
+        alignSelf: 'center',
+        justifyContent: 'flex-start',
+        fontSize: "18px",
+        fontFamily: 'Raleway_700Bold',
+        position: 'relative',
+        left: -12
     },
 
     allInput: {
@@ -94,11 +133,19 @@ const styles = StyleSheet.create({
         width: '80%'
     },
 
+    addableComponent: {
+        marginTop: 25,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%'
+    },
+
     categoriaInput: {
         display: 'flex',
         alignItems: 'center',
         height: '50px',
-        width: 300 ,
+        width: '310px',
         marginTop: 10,
         shadowOffset: {
             width: 0,
@@ -265,15 +312,53 @@ const styles = StyleSheet.create({
         border: 'none'
     },
 
+    btnContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+    },
+
+    addButton: {
+        backgroundColor: 'rgba(255,113,82,0.2)',
+        width: '60%',
+        textAlign: 'center',
+        paddingVertical: '12px',
+        borderRadius: 10,
+        marginTop: '10px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+
+    addButtonText: {
+        fontFamily: 'Raleway_700Bold',
+        color: '#FF7152'
+    },
+
+    removeButton: {
+        textAlign: 'center',
+        padding: '12px',
+        borderRadius: 10,
+        marginTop: '10px',
+        backgroundColor: 'rgba(0,0,0,0.15)',
+        marginLeft: '5px'
+    },
+
+    removeButtonText: {
+        fontFamily: 'Raleway_700Bold',
+        color: '#ff375b'
+    },
+
     button: {
         display: 'flex',
-        marginBottom: 25,
-        marginTop: 20,
+        marginTop: 30,
         width: 200,
         backgroundColor: 'orange',
         color: '#FFF',
-        borderRadius: 5,
-        padding: 10,
+        borderRadius: 10,
+        padding: 15,
         alignSelf: 'center',
         shadowColor: "#000",
         shadowOffset: {
@@ -287,6 +372,7 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         color: '#FFF',
+        fontSize: '18px',
         fontFamily: 'Raleway_700Bold',
     },
 });

@@ -7,9 +7,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         height: '16%',
         
-    },  
-
-
+    },
+    
     main: {
         display: 'flex',
         backgroundColor: '#fff',
