@@ -2,23 +2,26 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
 
+    
     imageContainer: {
         display: 'flex',
-        height: '10%',
-    },
+        height: '16%',
+        
+    },  
+
 
     main: {
         display: 'flex',
         backgroundColor: '#fff',
         width: '100%',
-        height: '63%',
+        height: '83%',
         display: 'flex',
-       /*  textAlign: 'center',
-        alignItems: 'flex-center',
-        justifyContent: 'flex-start', */
-        justifyContent:'space-between',
         marginTop: '100',
-        borderTopRightRadius: 120,
+        flexDirection: 'column',
+        /* justifyContent: 'center',
+        alignItems:'center', */
+        textAlign: 'justify-content',
+        borderTopRightRadius: 90,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -27,6 +30,23 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 7,
         /* top: "-70" */
+    },
+
+    main2:{
+        display:'flex',
+        height: '75%',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignContent:'center',
+        alignItems:'center',
+    },
+
+    main3:{
+        width: '100%',
+        height: '45%',
+        justifyContent: 'space-around',
+        flexDirection: 'column',
+        alignItems:'center'
     },
 
     circuloIcon: {
@@ -42,31 +62,51 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF7152',
     },
     
+    Texts:{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent:'space-between',
+        width: '82%',
+        height: '50%',
+    },
 
     Qualeoseu:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent: 'flex-start',
         color: '#505050',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 40,
     },
 
     Email:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'flex-start',
+        textDecorationLine:'underline',
+        marginTop:-9,
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 35,
     },
 
     Desc:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'flex-start',
         color: '#505050',
         fontFamily: 'Raleway_600SemiBold',
         fontSize: 14,
         opacity: '80%',
     },
 
+
+
     inputSingle: {
         width: '80%',
         display: 'flex',
-        /* justifyContent: 'space-around', */
-        /* marginTop: '20px', */
+        flexDirection:'row',
+        alignSelf:'center',
     },  
 
     defaultInput: {
@@ -75,7 +115,6 @@ const styles = StyleSheet.create({
         color: '#505050',
         height: '50px',
         width: '100%',
-        alignSelf: 'center',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -88,15 +127,13 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        /* marginTop: 10, */
         fontFamily: 'Raleway_600SemiBold',
     },
 
     button: {
         display: 'flex',
-        /* marginBottom: 49,
-        marginTop: 49, */
-        width: 275,
+        marginTop:2,
+        width: 305,
         backgroundColor: 'orange',
         color: '#FFF',
         borderRadius: 5,
@@ -117,9 +154,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
     },
 
-    WaveImage:{
-
-    },
 });
 
 export default styles;
