@@ -24,8 +24,13 @@ const styles = StyleSheet.create({
         fontSize: '36px',
     },
     textOpcoes: {
-        fontFamily: 'Raleway_800ExtraBold',
+        fontFamily: 'Raleway_500Medium',
         fontSize: '15px'
+    },
+    textOpcoesSair: {
+        fontFamily: 'Raleway_500Medium',
+        fontSize: '15px',
+        color: '#FF7152'
     },
     botaoOpcoes: {
         alignSelf: 'flex-end'
@@ -33,14 +38,32 @@ const styles = StyleSheet.create({
     containerOpcoes: {
         marginTop: '30px',
         marginVertical: '3%',
-        marginHorizontal: '5%'
+        marginHorizontal: '5%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     linha: {
         display: 'flex',
         alignSelf: 'center',
-        borderBottomColor: '#cecece',
+        backgroundColor: '#cecece',
+        opacity: '0.4',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        width: '330px', height: '30px'
+        width: '60%', 
+        height: '3px', 
+        border: 'none',
+        marginTop: '15px'
+    },
+    linhaOpcoes: {
+        display: 'flex',
+        alignSelf: 'center',
+        backgroundColor: '#cecece',
+        opacity: '0.4',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        width: '90%',
+        height: '3px', 
+        border: 'none',
     }
 
 });
