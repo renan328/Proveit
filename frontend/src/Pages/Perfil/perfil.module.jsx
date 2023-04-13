@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         textAlign: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#ffffff'
     },
 
     header: {

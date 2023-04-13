@@ -4,7 +4,8 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        display: 'flex'
+        display: 'flex',
+        backgroundColor: '#ffffff'
     },
     header: {
         width: '100%',
