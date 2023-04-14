@@ -4,16 +4,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import validator from 'validator';
-import { QuizInput } from 'react-native-quiz-input';
 import styles from './cod_esqueciminhasenha.module';
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function Cod_EsqueciMinhaSenha() {
 
-    const onChange = ( data ) => {
-        console.log(data);
-        // your code goes here
+    const [code, setCode] = useState('');
+
+    const handleCodeChange = (text) => {
+        // Remove qualquer caractere que não seja número
+        const cleanedText = text.replace(/[^0-9]/g, '');
+        setCode(cleanedText);
     };
 
     return (
@@ -46,10 +48,34 @@ export default function Cod_EsqueciMinhaSenha() {
                         {/* Input */}
                         <View style={styles.Inputs_container}>
                             <View style={styles.Inputs}>
-                            <QuizInput
-                            wordStructure={[true, true, true, false, true, true, true]}
-                            onChange={onChange}
-                        />
+                                <TextInput
+                                    style={styles.Input_Styles}
+                                    keyboardType="numeric"
+                                    maxLength={1}
+                                    value={code}
+                                    onChangeText={handleCodeChange}
+                                />
+                                <TextInput
+                                    style={styles.Input_Styles}
+                                    keyboardType="numeric"
+                                    maxLength={1}
+                                    value={code}
+                                    onChangeText={handleCodeChange}
+                                />
+                                <TextInput
+                                    style={styles.Input_Styles}
+                                    keyboardType="numeric"
+                                    maxLength={1}
+                                    value={code}
+                                    onChangeText={handleCodeChange}
+                                />
+                                <TextInput
+                                    style={styles.Input_Styles}
+                                    keyboardType="numeric"
+                                    maxLength={1}
+                                    value={code}
+                                    onChangeText={handleCodeChange}
+                                />
                             </View>
                         </View>
 
