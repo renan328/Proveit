@@ -12,6 +12,5 @@ namespace proveit.DTO
         public int Quantidade { get; set; }
         public string Medida { get; set; }
         public int Receita_id { get; set; }
-        public int Ingredientes_id { get; set; }
     }
 }

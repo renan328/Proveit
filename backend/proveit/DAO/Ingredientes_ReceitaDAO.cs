@@ -11,7 +11,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT idIngredientesReceita, Ingredientes.Nome, Quantidade, Medida, Receita_id, Ingredientes_id FROM Ingredientes_Receita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id WHERE Receita_id = @id;";
+            var query = "SELECT idIngredientesReceita, Ingredientes.Nome, Quantidade, Medida, Receita_id FROM Ingredientes_Receita INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id WHERE Receita_id = @id;";
 
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@id", id);
@@ -26,7 +26,6 @@ namespace proveit.DAO
                 ingrediente_Receita.Quantidade = int.Parse(dataReader["Quantidade"].ToString());
                 ingrediente_Receita.Medida = dataReader["Medida"].ToString();
                 ingrediente_Receita.Receita_id = int.Parse(dataReader["Receita_id"].ToString());
-                ingrediente_Receita.Ingredientes_id = int.Parse(dataReader["Ingredientes_id"].ToString());
 
                 ingredientes_Receita.Add(ingrediente_Receita);
             }
@@ -54,7 +53,6 @@ namespace proveit.DAO
             comando.Parameters.AddWithValue("@Quantidade", Ingredientes_Receita.Quantidade);
             comando.Parameters.AddWithValue("@Medida", Ingredientes_Receita.Medida);
             comando.Parameters.AddWithValue("@Receita_id", Ingredientes_Receita.Receita_id);
-            comando.Parameters.AddWithValue("@Ingredientes_id", Ingredientes_Receita.Ingredientes_id);
             comando.Parameters.AddWithValue("@idIngredientesReceita", Ingredientes_Receita.idIngredientesReceita);
 
             comando.ExecuteNonQuery();

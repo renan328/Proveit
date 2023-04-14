@@ -9,8 +9,6 @@ namespace proveit.DTO
         public string NomeTag { get; set; }
         public string Email { get; set;}
         public string Senha { get; set; }
-        public Blob Foto { get; set; }
-        public int Categorias_id { get; set; }
-
+        public string Foto { get; set; }
     }
 }
