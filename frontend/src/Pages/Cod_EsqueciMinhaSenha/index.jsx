@@ -10,12 +10,26 @@ const screenHeight = Dimensions.get('window').height;
 
 export default function Cod_EsqueciMinhaSenha() {
 
-    const [code, setCode] = useState('');
 
-    const handleCodeChange = (text) => {
+    const [code1, setCode1] = useState('');
+    const [code2, setCode2] = useState('');
+    const [code3, setCode3] = useState('');
+    const [code4, setCode4] = useState('');
+    
+    const [firstTextInput, setFirstTextInput] = useState(null);
+    const [secondTextInput, setSecondTextInput] = useState(null);
+    const [thirdTextInput, setThirdTextInput] = useState(null);
+    const [fourthTextInput, setFourthTextInput] = useState(null);
+
+    const handleCodeChange = (text, setState, nextInput) => {
         // Remove qualquer caractere que não seja número
         const cleanedText = text.replace(/[^0-9]/g, '');
-        setCode(cleanedText);
+        setState(cleanedText);
+
+        // Se o texto não estiver vazio, move o foco para o próximo TextInput
+        if (text !== '') {
+            nextInput.focus();
+        }
     };
 
     return (
@@ -52,29 +66,33 @@ export default function Cod_EsqueciMinhaSenha() {
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
                                     maxLength={1}
-                                    value={code}
-                                    onChangeText={handleCodeChange}
+                                    value={code1}
+                                    onChangeText={(text) => handleCodeChange(text, setCode1, firstTextInput)}
+                                    ref={(input) => { setSecondTextInput = input; }}
                                 />
                                 <TextInput
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
                                     maxLength={1}
-                                    value={code}
-                                    onChangeText={handleCodeChange}
+                                    value={code2}
+                                    onChangeText={(text) => handleCodeChange(text, setCode2, secondTextInput)}
+                                    ref={(input) => { setThirdTextInput = input; }}
                                 />
                                 <TextInput
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
                                     maxLength={1}
-                                    value={code}
-                                    onChangeText={handleCodeChange}
+                                    value={code3}
+                                    onChangeText={(text) => handleCodeChange(text, setCode3, thirdTextInput)}
+                                    ref={(input) => { setFourthTextInput = input; }}
                                 />
                                 <TextInput
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
                                     maxLength={1}
-                                    value={code}
-                                    onChangeText={handleCodeChange}
+                                    value={code4}
+                                    onChangeText={(text) => handleCodeChange(text, setCode4, null)}
+                                    ref={(input) => { setFourthTextInput = input; }}
                                 />
                             </View>
                         </View>

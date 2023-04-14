@@ -2,7 +2,10 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
 
-    
+    container:{
+        height: '100%',
+    },
+
     imageContainer: {
         display: 'flex',
         height: '16%',
@@ -13,7 +16,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         backgroundColor: '#fff',
         width: '100%',
-        height: '83%',
+        height: '85%',
         display: 'flex',
         marginTop: '100',
         flexDirection: 'column',
