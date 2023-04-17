@@ -1,36 +1,62 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useRef } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import validator from 'validator';
 import styles from './cod_esqueciminhasenha.module';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function Cod_EsqueciMinhaSenha() {
 
+    const [code, setCode] = useState(['', '', '', '']);
+    const input1 = useRef(null);
+    const input2 = useRef(null);
+    const input3 = useRef(null);
+    const input4 = useRef(null);
 
-    const [code1, setCode1] = useState('');
-    const [code2, setCode2] = useState('');
-    const [code3, setCode3] = useState('');
-    const [code4, setCode4] = useState('');
-    
-    const [firstTextInput, setFirstTextInput] = useState(null);
-    const [secondTextInput, setSecondTextInput] = useState(null);
-    const [thirdTextInput, setThirdTextInput] = useState(null);
-    const [fourthTextInput, setFourthTextInput] = useState(null);
-
-    const handleCodeChange = (text, setState, nextInput) => {
+    const handleCodeChange = (index, text, value) => {
         // Remove qualquer caractere que não seja número
         const cleanedText = text.replace(/[^0-9]/g, '');
-        setState(cleanedText);
+        const newCode = [...code];
+        newCode[index] = cleanedText;
+        setCode(newCode);
 
         // Se o texto não estiver vazio, move o foco para o próximo TextInput
-        if (text !== '') {
-            nextInput.focus();
+
+        if (cleanedText !== '' && index < 3) {
+            switch (index) {
+                case 0:
+                    input2.current.focus();
+                    break;
+                case 1:
+                    input3.current.focus();
+                    break;
+                case 2:
+                    input4.current.focus();
+                    break;
+                default:
+                    break;
+            }
+        } else if (index > 0 && cleanedText === '') {
+            // Se o texto estiver vazio e não for o primeiro campo, move o foco para o campo anterior
+            switch (index) {
+                case 1:
+                    input1.current.focus();
+                    break;
+                case 2:
+                    input2.current.focus();
+                    break;
+                case 3:
+                    input3.current.focus();
+                    break;
+                default:
+                    break;
+            }
         }
-    };
+    };  
 
     return (
 
@@ -66,33 +92,33 @@ export default function Cod_EsqueciMinhaSenha() {
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
                                     maxLength={1}
-                                    value={code1}
-                                    onChangeText={(text) => handleCodeChange(text, setCode1, firstTextInput)}
-                                    ref={(input) => { setSecondTextInput = input; }}
+                                    value={code[0]}
+                                    onChangeText={(value) => handleCodeChange(0, value, setCode)}
+                                    ref={input1}
                                 />
                                 <TextInput
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
                                     maxLength={1}
-                                    value={code2}
-                                    onChangeText={(text) => handleCodeChange(text, setCode2, secondTextInput)}
-                                    ref={(input) => { setThirdTextInput = input; }}
+                                    value={code[1]}
+                                    onChangeText={(value) => handleCodeChange(1, value, setCode)}
+                                    ref={input2}
                                 />
                                 <TextInput
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
                                     maxLength={1}
-                                    value={code3}
-                                    onChangeText={(text) => handleCodeChange(text, setCode3, thirdTextInput)}
-                                    ref={(input) => { setFourthTextInput = input; }}
+                                    value={code[2]}
+                                    onChangeText={(value) => handleCodeChange(2, value, setCode)}
+                                    ref={input3}
                                 />
                                 <TextInput
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
                                     maxLength={1}
-                                    value={code4}
-                                    onChangeText={(text) => handleCodeChange(text, setCode4, null)}
-                                    ref={(input) => { setFourthTextInput = input; }}
+                                    value={code[3]}
+                                    onChangeText={(value) => handleCodeChange(3, value, setCode)}
+                                    ref={input4}
                                 />
                             </View>
                         </View>

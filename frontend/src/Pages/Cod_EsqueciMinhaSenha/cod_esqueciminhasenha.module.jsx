@@ -20,8 +20,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         marginTop: '100',
         flexDirection: 'column',
-        /* justifyContent: 'center',
-        alignItems:'center', */
         textAlign: 'justify-content',
         borderTopRightRadius: 90,
         shadowColor: "#000",
@@ -31,7 +29,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 7,
-        /* top: "-70" */
     },
 
     main2:{
@@ -45,7 +42,7 @@ const styles = StyleSheet.create({
 
     main3:{
         width: '100%',
-        height: '45%',
+        height: '55%',
         justifyContent: 'space-around',
         flexDirection: 'column',
         alignItems:'center'
@@ -109,7 +106,7 @@ const styles = StyleSheet.create({
     Desc:{
         display:'flex',
         flexDirection:'row',
-        justifyContent:'flex-start',
+        justifyContent:'center',
         color: '#505050',
         fontFamily: 'Raleway_600SemiBold',
         fontSize: 14,
