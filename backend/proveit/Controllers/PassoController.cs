@@ -9,23 +9,6 @@ namespace proveit.Controllers
     [ApiController]
     public class PassoController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult ListarPassos(int id)
-        {
-            var dao = new PassoDAO();
-            var passos = dao.ListarPassos(id);
-            return Ok(passos);
-        }
-
-        [HttpPut]
-        public IActionResult AlterarPasso(PassoDTO passo)
-        {
-            var dao = new PassoDAO();
-            dao.AlterarPassos(passo);
-
-            return Ok();
-        }
-
         [HttpDelete]
         public IActionResult DeletarPassos(int id)
         {

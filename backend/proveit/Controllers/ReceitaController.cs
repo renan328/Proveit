@@ -38,17 +38,18 @@ namespace proveit.Controllers
         }
 
         [HttpPut]
-        public IActionResult AlterarReceita(ReceitaDTO receita)
+        public IActionResult AlterarReceita([FromBody] ReceitaGeralDTO receita)
         {
-            var dao = new ReceitaDAO();
+            var dao = new ReceitaGeralDAO();
             dao.AlterarReceita(receita);
 
             return Ok();
         }
+
         [HttpDelete]
-        public IActionResult RemoverReceita(int id)
+        public IActionResult RemoverReceita([FromRoute] int id)
         {
-            var dao = new ReceitaDAO();
+            var dao = new ReceitaGeralDAO();
             dao.RemoverReceita(id);
 
             return Ok();

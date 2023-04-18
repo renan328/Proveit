@@ -49,6 +49,9 @@ const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, err
 
 export default function CadastroDeUsuario({ navigation }) {
 
+    const [nome, setNome] = useState('');
+    const [nomeTag, setNomeTag] = useState('');
+
     const toastConfig = {
         success: internalState => (
             <View style={toastStyle.successToast}>
@@ -126,35 +129,6 @@ export default function CadastroDeUsuario({ navigation }) {
             setImage(result.assets[0].uri);
         }
     };
-
-    const [nome, setNome] = useState('');
-    const [nomeTag, setNomeTag] = useState('');
-
-    const [selected, setSelected] = React.useState('');
-
-    const dataCategoria = [
-        { key: '1', value: 'Aves' },
-        { key: '2', value: 'Bebidas' },
-        { key: '3', value: 'Bolos' },
-        { key: '4', value: 'Carnes' },
-        { key: '5', value: 'Doces' },
-        { key: '6', value: 'Frutos do Mar' },
-        { key: '7', value: 'Japones' },
-        { key: '8', value: 'Lanches' },
-        { key: '9', value: 'LowCarb' },
-        { key: '10', value: 'Massa' },
-        { key: '11', value: 'Molhos' },
-        { key: '12', value: 'Rapidas' },
-        { key: '13', value: 'Saladas' },
-        { key: '14', value: 'Salgados' },
-        { key: '15', value: 'Sanduiches' },
-        { key: '16', value: 'Snacks' },
-        { key: '17', value: 'Sobremesas' },
-        { key: '18', value: 'Sopas' },
-        { key: '19', value: 'Torta' },
-        { key: '20', value: 'Vegano' },
-        { key: '21', value: 'Vegetariano' },
-    ];
 
     return (
         <View style={styles.container}>

@@ -129,23 +129,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_600SemiBold',
     },
 
-    validator: {
-        display: 'flex',
-        alignItems: 'center',
-        marginLeft: 50,
-        fontFamily: 'Raleway_800ExtraBold',
-        color: 'rgba(61, 7, 7, 0.78)',
-        backgroundColor: 'rgba(255, 0, 0, 0.24)',
-        width: '20%',
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-    },
-
-    InputCategoria: {
-        marginTop: 10
-    },
 
     favcategoriaInput: {
         overflowX: 'hidden',
@@ -200,6 +183,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#FFF',
         fontFamily: 'Raleway_700Bold',
+    },
+
+    inputError:{
+        borderWidth: 1,
+        borderColor: '#ff375b'
     },
 
     textError: {

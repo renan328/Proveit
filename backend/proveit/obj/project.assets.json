@@ -2223,27 +2223,24 @@
     ]
   },
   "packageFolders": {
-    "D:\\home\\aluno\\.nuget\\packages\\": {},
-    "C:\\ProgramData\\Xamarin\\NuGet\\": {},
+    "C:\\Users\\Renan\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\ThinkCentre32\\ProveIt\\backend\\proveit\\proveit.csproj",
+      "projectUniqueName": "C:\\TCC\\ProveIt\\backend\\proveit\\proveit.csproj",
       "projectName": "proveit",
-      "projectPath": "C:\\ThinkCentre32\\ProveIt\\backend\\proveit\\proveit.csproj",
-      "packagesPath": "D:\\home\\aluno\\.nuget\\packages\\",
-      "outputPath": "C:\\ThinkCentre32\\ProveIt\\backend\\proveit\\obj\\",
+      "projectPath": "C:\\TCC\\ProveIt\\backend\\proveit\\proveit.csproj",
+      "packagesPath": "C:\\Users\\Renan\\.nuget\\packages\\",
+      "outputPath": "C:\\TCC\\ProveIt\\backend\\proveit\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\ProgramData\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "D:\\home\\aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Renan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -2300,7 +2297,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
