@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     main3:{
         width: '100%',
         height: '55%',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         flexDirection: 'column',
         alignItems:'center'
     },
@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
     Texts:{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent:'space-between',
+        justifyContent:'space-around',
         width: '82%',
-        height: '50%',
+        height: '40%',
     },
 
     Texts1:{
@@ -129,11 +129,9 @@ const styles = StyleSheet.create({
     },  
 
     Input_Styles: {
-        /* borderWidth: 1,
-        borderColor: '#ccc', */
         backgroundColor: '#fff',
         borderRadius: 5,
-        fontSize: 20,
+        fontSize: 28,
         textAlign: 'center',
         width: 52,
         height: 67,
@@ -142,9 +140,10 @@ const styles = StyleSheet.create({
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.50,
         shadowRadius: 4,
         fontFamily: 'Raleway_700Bold',
+        color: '#505050',
       },
 
     code: {
