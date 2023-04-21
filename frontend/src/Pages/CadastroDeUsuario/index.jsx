@@ -3,54 +3,21 @@ import { View, Text, StyleSheet, TextInput, ScrollView, Image } from 'react-nati
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCamera, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { faCamera, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import Toast from 'react-native-toast-message';
 import styles from './cadastrodeusuario.module';
 import * as ImagePicker from 'expo-image-picker';
 import toastStyle from '../Toasts/toasts';
 
-const schema = yup.object().shape({
-    nome: yup.string().required('Campo obrigatório'),
-    nomeTag: yup.string().required('Campo obrigatório'),
-    email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
-    senha: yup.string().min(8, 'Mínimo de 8 caracteres').required('Campo obrigatório'),
-    RedigiteSenha: yup.string().min(8, 'Mínimo de 8 caracteres').required('Campo obrigatório').oneOf([yup.ref('senha'), null], 'As senhas não são iguais')
-});
-
-const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, errors }) => {
-    return (
-        <View>
-            <Controller
-                control={control}
-                name={fieldName}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        style={[
-                            styles.defaultInput, {
-                                borderWidth: errors[fieldName] && 1,
-                                borderColor: errors[fieldName] && '#ff375b'
-                            }]}
-                        onChangeText={onChange}
-                        onBlur={onBlur}
-                        value={value}
-                        placeholder={placeholder}
-                        secureTextEntry={secureTextEntry}
-                    />
-                )}
-            />
-            {errors[fieldName] && <Text style={styles.textError}>{errors[fieldName].message}</Text>}
-        </View>
-    );
-};
-
 export default function CadastroDeUsuario({ navigation }) {
 
     const [nome, setNome] = useState('');
     const [nomeTag, setNomeTag] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [confirmSenha, setConfirmSenha] = useState('');
+    const [foto, setFoto] = useState(null);
+    const [errors, setErrors] = useState({});
 
     const toastConfig = {
         success: internalState => (
@@ -92,41 +59,62 @@ export default function CadastroDeUsuario({ navigation }) {
         });
     };
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema)
-    })
-
-    function handleRegister(data) {
-
-        fetch("https://localhost:7219/api/Usuario", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        })
-            .then((response) => { showSuccessToast; navigation.navigate('Main') })
-            .catch((error) => {
-                console.log(error);
-                showFailToast;
-            });
-
-        console.log(data);
-    };
-
-    const [image, setImage] = useState(null);
-
     const pickImage = async () => {
 
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 4],
             quality: 0.7,
         });
 
-        console.log(result);
-
         if (!result.canceled) {
-            setImage(result.assets[0].uri);
+            setFoto(result.assets[0].uri);
+        }
+    };
+
+    function handleRegister() {
+        const errors = {};
+
+        if (!nome.trim()) {
+            errors.nome = "Nome é obrigatório";
+        }
+        if (!nomeTag.trim()) {
+            errors.nomeTag = "Nome de usuário é obrigatório";
+        }
+        if (!email.trim()) {
+            errors.email = "Email é obrigatório";
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            errors.email = "Email inválido";
+        }
+        if (!senha) {
+            errors.senha = "Senha é obrigatória";
+        } else if (senha.length < 6) {
+            errors.senha = "Senha deve ter pelo menos 6 caracteres";
+        }
+        if (!confirmSenha) {
+            errors.confirmSenha = "Confirmação de senha é obrigatória";
+        } else if (confirmSenha !== senha) {
+            errors.confirmSenha = "As senhas não coincidem";
+        }
+        setErrors(errors);
+
+        const body = { nome, foto, nomeTag, email, senha };
+
+        if (Object.keys(errors).length === 0) {
+            // código de registro aqui
+            fetch("https://localhost:7219/api/Usuario", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            })
+                .then((response) => { showSuccessToast; navigation.navigate('Main') })
+                .catch((error) => {
+                    console.log(error);
+                    showFailToast;
+                });
+
+            console.log(body);
         }
     };
 
@@ -154,7 +142,7 @@ export default function CadastroDeUsuario({ navigation }) {
 
                 <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
                     <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />
-                    {image && <Image source={{ uri: image }} style={styles.imagemUsu} />}
+                    {foto && <Image source={{ uri: foto }} style={styles.imagemUsu} />}
                 </TouchableOpacity>
             </View>
 
@@ -162,36 +150,70 @@ export default function CadastroDeUsuario({ navigation }) {
             <View style={styles.inputs}>
                 <View style={styles.inputSingle}>
                     <Text style={styles.inputTitle}>Nome</Text>
-                    <CampoFormulario control={control} fieldName="nome" placeholder="Seu nome" errors={errors} />
+                    <TextInput
+                        style={[styles.defaultInput, errors.nome && styles.inputError]}
+                        placeholder="Nome"
+                        value={nome}
+                        onChangeText={(text) => setNome(text)}
+                    />
+                    {errors.nome && <Text style={styles.textError}>{errors.nome}</Text>}
                 </View>
 
                 <View style={styles.inputSingle}>
                     <Text style={styles.inputTitle}>Nome de usuário</Text>
-                    <CampoFormulario control={control} fieldName="nomeTag" placeholder="Nome de usuário" errors={errors} />
+                    <TextInput
+                        style={[styles.defaultInput, errors.nomeTag && styles.inputError]}
+                        placeholder="Nome de usuário"
+                        value={nomeTag}
+                        onChangeText={(text) => setNomeTag(text)}
+                    />
+                    {errors.nomeTag && <Text style={styles.textError}>{errors.nomeTag}</Text>}
                 </View>
 
                 <View style={styles.inputSingle}>
                     <Text style={styles.inputTitle}>E-mail</Text>
-                    <CampoFormulario control={control} fieldName="email" placeholder="E-mail" errors={errors} />
+                    <TextInput
+                        style={[styles.defaultInput, errors.email && styles.inputError]}
+                        placeholder="E-mail"
+                        value={email}
+                        onChangeText={(text) => setEmail(text)}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                    />
+                    {errors.email && <Text style={styles.textError}>{errors.email}</Text>}
                 </View>
 
 
                 <View style={styles.inputSingle}>
                     <Text style={styles.inputTitle}>Senha</Text>
-                    <CampoFormulario control={control} fieldName="senha" placeholder="Senha" secureTextEntry errors={errors} />
-
+                    <TextInput
+                        style={[styles.defaultInput, errors.senha && styles.inputError]}
+                        placeholder="Senha"
+                        value={senha}
+                        onChangeText={(text) => setSenha(text)}
+                        secureTextEntry={true}
+                    />
+                    {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
                 </View>
 
                 <View style={styles.inputSingle}>
-                    <Text style={styles.inputTitle}>Redigite sua senha</Text>
-                    <CampoFormulario control={control} fieldName="RedigiteSenha" placeholder="Redigite sua senha" secureTextEntry errors={errors} />
+                    <Text style={styles.inputTitle}>Confirme sua senha</Text>
+                    <TextInput
+                        style={[styles.defaultInput, errors.confirmSenha && styles.inputError]}
+                        placeholder="Confirmar Senha"
+                        value={confirmSenha}
+                        onChangeText={(text) => setConfirmSenha(text)}
+                        secureTextEntry={true}
+                    />
+                    {errors.confirmSenha && <Text style={styles.textError}>{errors.confirmSenha}</Text>}
                 </View>
 
             </View>
 
             {/* Botão */}
             <View style={styles.botoes}>
-                <TouchableOpacity onPress={handleSubmit(handleRegister)} >
+                <TouchableOpacity onPress={handleRegister} >
                     <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                         end={{ x: 2, y: 1 }} style={styles.button} >
                         <Text style={styles.buttonText}>Pronto</Text>

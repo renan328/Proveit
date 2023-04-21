@@ -40,15 +40,15 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = @"INSERT INTO Usuarios (Nome, Foto NomeTag, Email, Senha) VALUES
-						(@nome, @foto, @nometag,@email,@senha)";
+            var query = @"INSERT INTO Usuarios (Nome, Foto, NomeTag, Email, Senha) VALUES
+						(@nome, @foto, @nometag, @email, @senha)";
 
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@nome", usuario.Nome);
+            comando.Parameters.AddWithValue("@foto", usuario.Foto);
             comando.Parameters.AddWithValue("@nometag", usuario.NomeTag);
             comando.Parameters.AddWithValue("@email", usuario.Email);
             comando.Parameters.AddWithValue("@senha", usuario.Senha);
-            comando.Parameters.AddWithValue("@foto", usuario.Foto);
 
             comando.ExecuteNonQuery();
             conexao.Close();

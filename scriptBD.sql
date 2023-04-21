@@ -11,10 +11,10 @@ CREATE TABLE Categorias (
 CREATE TABLE Usuarios (
     idUsuario INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     Nome VARCHAR(255) NOT NULL,
-    Foto BLOB,
     NomeTag VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL,
     Senha VARCHAR(255) NOT NULL,
+	Foto LONGBLOB,
     PRIMARY KEY (idUsuario)
 );
 
@@ -148,8 +148,7 @@ SELECT * FROM Receitas INNER JOIN Ingredientes_Receita ON Receitas.idReceita = I
 SELECT * FROM FotosReceita inner join Receitas on FotosReceita.Receita_id = Receitas.idReceita where idReceita = 1;
 
 -- Select tabela unica (testes)
-SELECT * FROM FotosReceita;
+SELECT * FROM Usuarios;
 
 -- Select receita single
-SELECT idReceita, Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categorias.Nome, FotosReceita.idFoto, FotosReceita.Foto FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id INNER JOIN FotosReceita ON FotosReceita.Receita_id = Receitas.idReceita;
-            
+SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento,  Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categorias.Nome, FotosReceita.idFoto, FotosReceita.Foto FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id INNER JOIN FotosReceita ON FotosReceita.Receita_id = Receitas.idReceita where idReceita = 1;
