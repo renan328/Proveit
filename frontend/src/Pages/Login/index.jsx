@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -11,46 +11,35 @@ import styles from './login.module';
 
 const screenHeight = Dimensions.get('window').height;
 
-const schema = yup.object().shape({
-    email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
-    senha: yup.string().min(8, 'Mínimo de 8 caracteres').required('Campo obrigatório'),
-});
-
-const CampoFormulario = ({ control, fieldName, placeholder, secureTextEntry, errors }) => {
-    return (
-        <View>
-            <Controller
-                control={control}
-                name={fieldName}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        style={[
-                            styles.input, {
-                                borderWidth: errors[fieldName] && 1,
-                                borderColor: errors[fieldName] && '#ff375b'
-                            }]}
-                        onChangeText={onChange}
-                        onBlur={onBlur}
-                        value={value}
-                        placeholder={placeholder}
-                        secureTextEntry={secureTextEntry}
-                    />
-                )}
-            />
-            {errors[fieldName] && <Text style={styles.textError}>{errors[fieldName].message}</Text>}
-        </View>
-    );
-};
-
 export default function Login({ navigation }) {
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema)
-    })
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [errors, setErrors] = useState({});
 
-    function handleSingIn(data) {
-        console.log(data);
-        navigation.navigate('Main')
+    function handleSingIn() {
+        const errors = {};
+
+        if (!email.trim()) {
+            errors.email = "Email é obrigatório";
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            errors.email = "Email inválido";
+        }
+        if (!senha) {
+            errors.senha = "Senha é obrigatória";
+        } else if (senha.length < 6) {
+            errors.senha = "Senha deve ter pelo menos 6 caracteres";
+        }
+        setErrors(errors);
+
+        const body = { email, senha };
+
+        if (Object.keys(errors).length === 0) {
+
+            console.log(body)
+            navigation.navigate('Main')
+
+        }
     }
 
     return (
@@ -77,15 +66,36 @@ export default function Login({ navigation }) {
 
                     <View style={styles.containerInput}>
 
-                        <CampoFormulario control={control} fieldName="email" placeholder="E-mail" errors={errors} />
-                        <CampoFormulario control={control} fieldName="senha" placeholder="Senha" secureTextEntry errors={errors} />
+                        <View style={styles.inputSingle}>
+                            <TextInput
+                                style={[styles.input, errors.email && styles.inputError]}
+                                placeholder="E-mail"
+                                value={email}
+                                onChangeText={(text) => setEmail(text)}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                            />
+                            {errors.email && <Text style={styles.textError}>{errors.email}</Text>}
+                        </View>
 
+
+                        <View style={styles.inputSingle}>
+                            <TextInput
+                                style={[styles.input, errors.senha && styles.inputError]}
+                                placeholder="Senha"
+                                value={senha}
+                                onChangeText={(text) => setSenha(text)}
+                                secureTextEntry={true}
+                            />
+                            {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
+                        </View>
 
                     </View>
 
                     {/* Botão */}
                     {/* onPress={() => navigation.navigate('Main')} */}
-                    <TouchableOpacity onPress={handleSubmit(handleSingIn)}>
+                    <TouchableOpacity onPress={handleSingIn}>
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} style={styles.button} >
                             <Text style={styles.buttonText}>Entrar</Text>

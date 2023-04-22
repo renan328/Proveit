@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Image } from "react-native";
+import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Image, Picker } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -8,119 +8,56 @@ import * as ImagePicker from 'expo-image-picker';
 import styles from './cadastrodereceita.module';
 import Toast from 'react-native-toast-message';
 import toastStyle from '../Toasts/toasts';
-import { ref } from 'yup';
 
 export default function CadastroDeReceita({ navigation, props }) {
 
     {/* UseState errados nos MultipleSelectList */ }
-    const [Nome, setNome] = useState('');
-    const [selected, setSelected] = React.useState(''); // Categoria
-    const [TempoPreparo, setTempoPreparo] = useState('');
-    const [Tempo, setTempo] = useState('');
-    const [Porcoes, setPorcoes] = useState('');
-    const [Aproveitamento, setAproveitamento] = useState(false);
-    const [ValCalorico, setValCalorico] = useState('');
-    const [Descricao, setDescricao] = useState('');
-    const [Ingredientes, setIngredientes] = useState([]);
-    const [Passos, setPassos] = useState([]);
-
-    const [lengthIngredient, setLengthIngredient] = useState(1);
-    const [lengthStep, setLengthStep] = useState(1);
-
+    const [nome, setNome] = useState('');
+    const [tempoPreparo, setTempoPreparo] = useState('');
+    const [tempo, setTempo] = useState('Minutos(s)');
+    const [porcoes, setPorcoes] = useState('');
+    const [valCalorico, setValCalorico] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [usuarioID, setUsuariosID] = React.useState('');
+    const [categoria, setCategoria] = React.useState('');
+    const [aproveitamento, setAproveitamento] = useState(false);
+    const [foto, setFoto] = useState(null);
+    const [ingredientes, setIngredientes] = useState([{ nome: '', quantidade: '', medida: '' }]);
+    const [passos, setPassos] = useState([{ NumPasso: 1, PassoTexto: '' }]);
 
     // Novo ingrediente
-    const addIngredient = () => {
-        setLengthIngredient(lengthIngredient + 1);
+    function adicionarIngrediente() {
+        setIngredientes([...ingredientes, { nome: '', quantidade: '', medida: '' }]);
     };
 
-    // Remove ingrediente
-    const removeIngredient = () => {
-        setLengthIngredient(lengthIngredient - 1);
+    function removerIngrediente(index) {
+        const novosIngredientes = [...ingredientes];
+        novosIngredientes.splice(index, 1);
+        setIngredientes(novosIngredientes);
     };
 
-    // Novo passo
+    function atualizarIngrediente(index, propriedade, valor) {
+        const novosIngredientes = [...ingredientes];
+        novosIngredientes[index][propriedade] = valor;
+        setIngredientes(novosIngredientes);
+    };
+
     const addStep = () => {
-        setLengthStep(lengthStep + 1);
+        const newStepNum = passos[passos.length - 1].NumPasso + 1;
+        setPassos([...passos, { NumPasso: newStepNum, PassoTexto: '' }]);
     };
 
-    // Remove passo
-    const removeStep = () => {
-        setLengthStep(lengthStep - 1);
+    const removeStep = (index) => {
+        const updatedSteps = [...passos];
+        updatedSteps.splice(index, 1);
+        setPassos(updatedSteps);
     };
 
-    const cadastrarReceita = (e) => {
-        e.preventDefault();
-
-        const body = { Nome, selected, TempoPreparo, Tempo, Porcoes, Aproveitamento, ValCalorico, Descricao, Ingredientes, Passos };
-
-        fetch("https://localhost:7219/api/Receita", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
-        })
-            .then((response) => { showSuccessToast })
-            .catch((error) => {
-                console.log(error);
-                showFailToast;
-            });
-    }
-
-
-    //Configurações das imagens
-    const [image, setImage] = useState(null);
-
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 4],
-            quality: 0.7,
-        });
-
-        console.log(result);
-
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
-        }
+    const handleStepTextChange = (index, text) => {
+        const updatedSteps = [...passos];
+        updatedSteps[index].PassoTexto = text;
+        setPassos(updatedSteps);
     };
-
-    const data = [
-        { key: '1', value: 'Aves' },
-        { key: '2', value: 'Bebidas' },
-        { key: '3', value: 'Bolos' },
-        { key: '4', value: 'Carnes' },
-        { key: '5', value: 'Doces' },
-        { key: '6', value: 'Frutos do Mar' },
-        { key: '7', value: 'Japones' },
-        { key: '8', value: 'Lanches' },
-        { key: '9', value: 'LowCarb' },
-        { key: '10', value: 'Massa' },
-        { key: '11', value: 'Molhos' },
-        { key: '12', value: 'Rapidas' },
-        { key: '13', value: 'Saladas' },
-        { key: '14', value: 'Salgados' },
-        { key: '15', value: 'Sanduiches' },
-        { key: '16', value: 'Snacks' },
-        { key: '17', value: 'Sobremesas' },
-        { key: '18', value: 'Sopas' },
-        { key: '19', value: 'Torta' },
-        { key: '20', value: 'Vegano' },
-        { key: '21', value: 'Vegetariano' }
-    ];
-
-    const hora = [
-        { key: '1', value: 'minuto(s)' },
-        { key: '2', value: 'hora(s)' },
-    ];
-
-    const medida = [
-        { key: '1', value: '1 xícara (chá)' },
-        { key: '2', value: '1/2 xícara (chá)' },
-        { key: '3', value: '1/4 xícara (chá)' },
-        { key: '4', value: '1 colher (sopa)' },
-        { key: '5', value: '1 colher (chá)' },
-        { key: '6', value: 'Unidade(s)' }
-    ]
 
     const toastConfig = {
         success: internalState => (
@@ -162,6 +99,67 @@ export default function CadastroDeReceita({ navigation, props }) {
         });
     };
 
+
+    //Configurações das imagens
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 0.7,
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setFoto(result.assets[0].uri);
+        }
+    };
+
+    function cadastrarReceita() {
+
+        const body = { nome, tempoPreparo, tempo, porcoes, valCalorico, descricao, usuarioID, categoria, foto, ingredientes, passos };
+
+
+        fetch("https://localhost:7219/api/Receita", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            })
+                .then((response) => { showSuccessToast; navigation.navigate('Main') })
+                .catch((error) => {
+                    console.log(error);
+                    showFailToast;
+                });
+
+            console.log(body);
+    };
+
+    const categorias = [
+        'Aves',
+        'Bebidas',
+        'Bolos',
+        'Carnes',
+        'Doces',
+        'Frutos do Mar',
+        'Japones',
+        'Lanches',
+        'LowCarb',
+        'Massa',
+        'Molhos',
+        'Rapidas',
+        'Saladas',
+        'Salgados',
+        'Sanduiches',
+        'Snacks',
+        'Sobremesas',
+        'Sopas',
+        'Torta',
+        'Vegano',
+        'Vegetariano'
+    ];
+
+
     return (
         <ScrollView style={styles.container} >
             {/* Header */}
@@ -175,7 +173,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                 <Text style={{ fontFamily: 'Raleway_800ExtraBold', fontSize: 20, marginTop: 26, color: '#505050' }}> Foto </Text>
                 <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
                     <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />
-                    {image && <Image source={{ uri: image }} style={styles.imagemReceita} />}
+                    {foto && <Image source={{ uri: foto }} style={styles.imagemReceita} />}
                 </TouchableOpacity>
             </View>
 
@@ -185,24 +183,27 @@ export default function CadastroDeReceita({ navigation, props }) {
                 {/* Input Nome */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Nome</Text>
-                    <TextInput style={styles.allInput} placeholder='Digite o nome da receita' value={Nome} onChange={(e) => setNome(e.target.value)} />
+                    <TextInput
+                        style={styles.allInput}
+                        placeholder='Digite o nome da receita'
+                        value={nome}
+                        onChangeText={(texto) => setNome(texto)}
+                    />
                 </View>
 
                 {/* Input Categorias */}
                 <View style={styles.defaultInput}>
-                    <Text style={styles.TextInput}>Categorias</Text>
+                    <Text style={styles.TextInput}>Categoria</Text>
                     {/* UseState errados nos MultipleSelectList */}
-                    <MultipleSelectList data={data}
-                        setSelected={setSelected}
-                        placeholder='Alguma categoria'
-                        searchPlaceholder='Adicionar'
-                        notFoundText='Categoria não encontrada'
-                        fontFamily='Raleway_600SemiBold'
-                        boxStyles={styles.categoriaInput}
-                        inputStyles={{ fontSize: '11px', color: '#505050', padding: 5 }}
-                        dropdownStyles={styles.categoriaListaInput}
-                        dropdownTextStyles={{ fontSize: '11px', color: '#505050' }}>
-                    </MultipleSelectList>
+                    <Picker
+                        style={styles.allInput}
+                        selectedValue={categoria}
+                        onValueChange={(itemValue) => setCategoria(itemValue)}
+                    >
+                        {categorias.map((categoria, index) => (
+                            <Picker.Item key={index} label={categoria} value={categoria} />
+                        ))}
+                    </Picker>
                 </View>
 
                 {/* Input Tempo de Preparo */}
@@ -210,33 +211,39 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <Text style={styles.TextInput}>Tempo de preparo</Text>
                 </View>
                 <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
-                    <TextInput style={styles.inputTempo} placeholder='Tempo' value={TempoPreparo} onChange={(e) => setTempoPreparo(e.target.value)} />
+                    <TextInput
+                        style={styles.inputTempo}
+                        placeholder='Tempo'
+                        value={tempoPreparo}
+                        onChangeText={(texto) => setTempoPreparo(texto)}
+                    />
 
-                    {/* UseState errados nos MultipleSelectList */}
-                    <MultipleSelectList data={hora}
-                        setSelected={setSelected}
-                        placeholder='Horas'
-                        searchPlaceholder='Adicionar'
-                        notFoundText='Horas não encontrada'
-                        fontFamily='Raleway_600SemiBold'
-                        boxStyles={styles.horaInput}
-                        inputStyles={{ fontSize: '11px', color: '#505050', marginTop: 5, }}
-                        dropdownStyles={styles.horaListaInput}
-                        dropdownTextStyles={{ fontSize: '11px', color: '#505050', marginTop: 5 }}>
-                    </MultipleSelectList>
+                    <Picker
+                        style={styles.ListaInput}
+                        selectedValue={tempo}
+                        onValueChange={(itemValue) => setTempo(itemValue)}
+                    >
+                        <Picker.Item label="Minutos(s)" value="Minutos(s)" />
+                        <Picker.Item label="Hora(s)" value="Hora(s)" />
+                    </Picker>
                 </View>
 
                 {/* Input Porções */}
                 <View style={styles.defaultInput} >
 
                     <Text style={styles.TextInput}>Porções</Text>
-                    <TextInput style={styles.allInput} placeholder="Quantidade" value={Porcoes} onChange={(e) => setPorcoes(e.target.value)} />
+                    <TextInput
+                        style={styles.allInput}
+                        placeholder="Quantidade"
+                        value={porcoes}
+                        onChangeText={(texto) => setPorcoes(texto)}
+                    />
                 </View>
 
                 {/* CheckBox de Aproveitamento */}
                 <View style={styles.defaultInput}>
                     <View style={styles.checkboxContainer}>
-                        <CheckBox value={Aproveitamento} onValueChange={setAproveitamento} style={styles.checkbox} />
+                        <CheckBox value={aproveitamento} onValueChange={setAproveitamento} style={styles.checkbox} />
                         <Text style={{ margin: 5, fontSize: "15px", fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
                         <TouchableOpacity title="?" />
                     </View>
@@ -245,84 +252,114 @@ export default function CadastroDeReceita({ navigation, props }) {
                 {/* Input Valor cal */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Valor Calórico</Text>
-                    <TextInput style={styles.allInput} placeholder='Ex: Gramas/quilocalorias' value={ValCalorico} onChange={(e) => setValCalorico(e.target.value)} />
+                    <TextInput
+                        style={styles.allInput}
+                        placeholder='Ex: Gramas/quilocalorias'
+                        value={valCalorico}
+                        onChangeText={(texto) => setValCalorico(texto)}
+                    />
                 </View>
 
                 {/* Input Pequena descrição */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Pequena descrição</Text>
-                    <TextInput style={styles.allInput} placeholder='Ex: Coxinha de frango com catupiry' value={Descricao} onChange={(e) => setDescricao(e.target.value)} />
+                    <TextInput
+                        style={styles.allInput}
+                        placeholder='Ex: Coxinha de frango com catupiry'
+                        value={descricao}
+                        onChangeText={(texto) => setDescricao(texto)}
+                    />
                 </View>
 
-                {/* Colocar em componente ingredientes e passos */}
-                {/* Input Ingredientes */}
-                {Array.from({ length: lengthIngredient }, (_, index) => (
-                    <View style={styles.addableComponent}>
-                        <View style={styles.defaultInput}>
-                            <View style={styles.titleContainer}>
-                                <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
-                                <Text style={styles.TextInput2}>Ingrediente</Text>
+                {/* Ingredientes */}
+                <View style={styles.addableComponent}>
+                    {ingredientes.map((ingrediente, index) => (
+                        <View key={index} style={styles.addableComponent}>
+
+                            <View style={styles.defaultInput}>
+                                <View style={styles.titleContainer}>
+                                    <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
+                                    <Text style={styles.TextInput2}>Ingrediente</Text>
+                                </View>
+
+                                <TextInput
+                                    style={styles.allInput}
+                                    placeholder="Ingrediente"
+                                    value={ingrediente.nome}
+                                    onChangeText={texto => atualizarIngrediente(index, 'nome', texto)}
+                                />
                             </View>
-                            <TextInput style={styles.allInput} placeholder='Ingrediente'></TextInput>
-                        </View>
 
-                        {/* Input Quantidade */}
-                        <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
-                            <Text style={styles.TextInput}>Quantidade e Medidas</Text>
+                            <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
+                                <Text style={styles.TextInput}>Quantidade e Medidas</Text>
+                            </View>
+                            <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
+                                <TextInput
+                                    style={styles.inputQuantidade}
+                                    placeholder="Quantidade"
+                                    value={ingrediente.quantidade}
+                                    onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
+                                />
+                                <Picker
+                                    style={styles.ListaInput}
+                                    selectedValue={ingrediente.medida}
+                                    onValueChange={valor => atualizarIngrediente(index, 'medida', valor)}
+                                >
+                                    <Picker.Item label="1 xícara (chá)" value="1 xícara (chá)" />
+                                    <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
+                                    <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />
+                                    <Picker.Item label="1 colher (sopa)" value="1 colher (sopa)" />
+                                    <Picker.Item label="1 colher (chá)" value="1 colher (chá)" />
+                                    <Picker.Item label="Unidade(s)" value="Unidade(s)" />
+                                </Picker>
+                            </View>
                         </View>
-                        <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
-                            <TextInput style={styles.inputQuantidade} placeholder='Quantidade'></TextInput>
-                            <MultipleSelectList data={medida}
-                                setSelected={setSelected}
-                                placeholder='Medidas'
-                                searchPlaceholder='Adicionar'
-                                notFoundText='Medida não encontrada'
-                                fontFamily='Raleway_600SemiBold'
-                                boxStyles={styles.medidaInput}
-                                inputStyles={{ fontSize: '11px', color: '#505050', marginTop: 5, }}
-                                dropdownStyles={styles.medidaListaInput}
-                                dropdownTextStyles={{ fontSize: '11px', color: '#505050', marginTop: 5 }}>
-                            </MultipleSelectList>
-                        </View>
+                    ))}
+                    <View style={styles.addRemoveButtonsContainer}>
+                        <TouchableOpacity style={styles.addButton} onPress={() => adicionarIngrediente()}>
+                            <Text style={styles.addButtonText}>Adicionar ingrediente</Text>
+                        </TouchableOpacity>
+
+                        {ingredientes.length > 1 && (
+                            <TouchableOpacity style={styles.removeButton} onPress={() => removerIngrediente(ingredientes.length - 1)}>
+                                <FontAwesomeIcon icon={faTrashCan} color='#505050' />
+                            </TouchableOpacity>
+                        )}
                     </View>
-
-                ))}
-
-                <View style={styles.btnContainer}>
-                    {/* Adicionar Ingrediente */}
-                    <TouchableOpacity onPress={addIngredient} style={styles.addButton}>
-                        <FontAwesomeIcon icon={faPlus} color='#FF7152'></FontAwesomeIcon><Text style={styles.addButtonText}> Adicionar passo</Text>
-                    </TouchableOpacity>
-
-                    {/* Remove Ingrediente */}
-                    {lengthIngredient > 1 && < TouchableOpacity onPress={removeIngredient} style={styles.removeButton}><FontAwesomeIcon icon={faTrashCan} color='#505050' /></TouchableOpacity>}
                 </View>
 
-                {/* Input Passos */}
-                {Array.from({ length: lengthStep }, (_, index) => (
-
-                    <View style={styles.defaultInput}>
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
-                            <Text style={styles.TextInput2}>Passo</Text>
+                {/* "Passos" Input */}
+                <View style={styles.defaultInput}>
+                    {passos.map((step, index) => (
+                        <View key={index} style={styles.addableComponent}>
+                            <View style={styles.titleContainer}>
+                                <Text style={styles.stepNumber}>{`#${step.NumPasso}`}</Text>
+                                <Text style={styles.TextInput2}>Passo</Text>
+                            </View>
+                            <TextInput
+                                style={styles.allInput}
+                                value={step.PassoTexto}
+                                placeholder="Digite o passo"
+                                onChangeText={(text) => handleStepTextChange(index, text)}
+                            />
                         </View>
-                        <TextInput style={styles.allInput} placeholder="Passo" ></TextInput>
+                    ))}
+
+                    <View style={styles.addRemoveButtonsContainer}>
+                        <TouchableOpacity onPress={addStep} style={styles.addButton}>
+                            <FontAwesomeIcon icon={faPlus} color='#FF7152' /><Text style={styles.addButtonText}> Adicionar passo</Text>
+                        </TouchableOpacity>
+
+                        {passos.length > 1 && (
+                            <TouchableOpacity onPress={() => removeStep(passos.length - 1)} style={styles.removeButton}>
+                                <FontAwesomeIcon icon={faTrashCan} color="#505050" />
+                            </TouchableOpacity>
+                        )}
                     </View>
-                ))}
-
-                <View style={styles.btnContainer}>
-                    {/* Adicionar Passos */}
-                    <TouchableOpacity onPress={addStep} style={styles.addButton}>
-                        <FontAwesomeIcon icon={faPlus} color='#FF7152'></FontAwesomeIcon><Text style={styles.addButtonText}> Adicionar passo</Text>
-                    </TouchableOpacity>
-
-                    {/* Remove Passos */}
-                    {lengthStep > 1 && < TouchableOpacity onPress={removeStep} style={styles.removeButton}><FontAwesomeIcon icon={faTrashAlt} color='#505050' /></TouchableOpacity>}
                 </View>
 
-                {/* Botão */}
                 <View>
-                    <TouchableOpacity onPress={showFailToast} >
+                    <TouchableOpacity onPress={cadastrarReceita} >
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} style={styles.button} >
                             <Text style={styles.buttonText}>Publicar</Text>
@@ -332,6 +369,6 @@ export default function CadastroDeReceita({ navigation, props }) {
             </View>
             <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
             <View style={{ paddingVertical: '50px' }} />
-        </ScrollView >
+        </ScrollView>
     );
 }

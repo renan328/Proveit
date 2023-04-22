@@ -143,6 +143,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#ff375b',
         marginBottom: 8
+    },
+    inputError:{
+        borderWidth: 1,
+        borderColor: '#ff375b'
     }
 
 });

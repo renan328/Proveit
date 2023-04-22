@@ -27,23 +27,13 @@ CREATE TABLE Receitas (
     ValCalorico VARCHAR(255) NULL,
     Descricao VARCHAR(255) NOT NULL,
     Usuario_id INTEGER UNSIGNED NOT NULL,
-    Categorias_id INTEGER UNSIGNED NULL,
+    Categoria VARCHAR(255) NOT NULL,
     Aproveitamento BOOL NULL,
+	Foto LONGBLOB NOT NULL,
     PRIMARY KEY (idReceita),
     FOREIGN KEY (Usuario_id)
-        REFERENCES Usuarios (idUsuario),
-    FOREIGN KEY (Categorias_id)
-        REFERENCES Categorias (idCategoria)
-);
-
-CREATE TABLE FotosReceita (
-    idFoto INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    Receita_id INTEGER UNSIGNED NULL,
-    Foto LONGBLOB,
-    FOREIGN KEY (Receita_id)
-        REFERENCES Receitas (idReceita),
-    PRIMARY KEY (idFoto)
-);
+        REFERENCES Usuarios (idUsuario)
+);	
 
 CREATE TABLE Passos (
     idPasso INTEGER UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,

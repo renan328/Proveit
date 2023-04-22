@@ -204,17 +204,31 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_600SemiBold'
     },
 
-    horaListaInput: {
+    addRemoveButtonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    
+    ListaInput: {
         width: 180,
+        height: '50px',
+        fontSize: '13px',
+        color: '#505050',
         shadowOffset: {
             width: 0,
             height: 2,
         },
+        marginTop: '10px',
         shadowOpacity: 0.25,
         shadowRadius: 4,
         marginLeft: '25px',
         overflowX: 'hidden',
-        border: 'none'
+        border: 'none',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
     },
 
     inputQntd: {
@@ -312,24 +326,16 @@ const styles = StyleSheet.create({
         border: 'none'
     },
 
-    btnContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-    },
-
     addButton: {
         backgroundColor: 'rgba(255,113,82,0.2)',
-        width: '60%',
         textAlign: 'center',
         paddingVertical: '12px',
         borderRadius: 10,
         marginTop: '10px',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingHorizontal: '10px'
     },
 
     addButtonText: {
@@ -374,6 +380,29 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: '18px',
         fontFamily: 'Raleway_700Bold',
+    },
+
+    inputPasso: {
+
+        paddingHorizontal: '7px',
+        fontSize: '13px',
+        color: '#505050',
+        height: '50px',
+        width: '100%',
+        backgroundColor: '#fff',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        marginTop: 10,
+        fontFamily: 'Raleway_600SemiBold'
     },
 });
 
