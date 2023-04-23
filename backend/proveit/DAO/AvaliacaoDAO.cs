@@ -25,7 +25,7 @@ namespace proveit.DAO
                 avaliacao.Estrelas = int.Parse(dataReader["Estrelas"].ToString());
                 avaliacao.Comentario = dataReader["Comentario"].ToString();
                 avaliacao.Receita_id = int.Parse(dataReader["Receita_id"].ToString());
-                avaliacao.Usuario_id = int.Parse(dataReader["Usuarios_id"].ToString());
+                avaliacao.Usuario_id = int.Parse(dataReader["Usuario_id"].ToString());
 
                 avaliacoes.Add(avaliacao);
             }
@@ -33,6 +33,17 @@ namespace proveit.DAO
             conexao.Close();
             return avaliacoes;
         }
+
+        public double CalcularMediaEstrelas(int id)
+        {
+            var avaliacoes = ListarAvaliacaoDeReceita(id);
+            if (avaliacoes.Count > 0)
+            {
+                return avaliacoes.Average(a => a.Estrelas);
+            }
+            return 0;
+        }
+
         public List<AvaliacaoDTO> ListarAvaliacoes() 
         {
             var conexao = ConnectionFactory.Build();

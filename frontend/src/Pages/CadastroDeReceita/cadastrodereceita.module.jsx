@@ -29,11 +29,14 @@ const styles = StyleSheet.create({
         color: 'rgba(0, 0, 0, 0.7)',
         fontFamily: 'Raleway_700Bold',
         fontSize: 35,
-        top: -45,
     },
 
     IconCamera: {
         color: 'rgba(255, 113, 82, 0.75)'
+    },
+
+    IconCameraError: {
+        color: '#ff375b'
     },
 
     BorderIcon: {
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
         width: 240,
         height: 240,
         marginTop: 10,
-        borderWidth: 1.5,
+        borderWidth: 2.5,
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#FF7152',
@@ -50,6 +53,11 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 50,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50
+    },
+
+    BorderIconError: {
+        borderWidth: 3.5,
+        borderColor: '#ff375b',
     },
 
     imagemReceita: {
@@ -100,6 +108,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
         position: 'relative',
         left: -12
+    },
+    TextInput2Error: {
+        color: 'rgba(255, 55, 92, 0.6)',
     },
 
     allInput: {
@@ -209,7 +220,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    
+
     ListaInput: {
         width: 180,
         height: '50px',
@@ -383,7 +394,6 @@ const styles = StyleSheet.create({
     },
 
     inputPasso: {
-
         paddingHorizontal: '7px',
         fontSize: '13px',
         color: '#505050',
@@ -404,6 +414,23 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontFamily: 'Raleway_600SemiBold'
     },
+
+    inputError: {
+        borderWidth: 1,
+        borderColor: '#ff375b'
+    },
+
+    textError: {
+        alignSelf: 'center',
+        color: '#ff375b',
+        marginTop: 5
+    },
+
+    StepTextError: {
+        alignSelf: 'center',
+        color: 'rgba(255, 55, 92, 0.6)',
+        marginTop: 5
+    }
 });
 
 export default styles;

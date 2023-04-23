@@ -16,7 +16,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categorias.Nome, FotosReceita.idFoto, FotosReceita.Foto FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id INNER JOIN FotosReceita on FotosReceita.Receita_id = Receitas.idReceita WHERE idReceita = @id";
+            var query = "SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario WHERE idReceita = @id;";
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@id", id);
             var dataReader = comando.ExecuteReader();
@@ -40,13 +40,13 @@ namespace proveit.DAO
                     newReceita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
                     newReceita.ValCalorico = int.Parse(dataReader["ValCalorico"].ToString());
                     newReceita.Descricao = dataReader["Descricao"].ToString();
+                    newReceita.Categoria = dataReader["Categoria"].ToString();
                     newReceita.NomeTag = dataReader["NomeTag"].ToString();
                     newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
                     newReceita.Foto = (dataReader["Foto"].ToString());
 
                     newReceita.Ingredientes = new List<Ingredientes_ReceitaDTO>();
                     newReceita.Passos = new List<PassoDTO>();
-                    newReceita.Avaliacoes = new List<AvaliacaoDTO>();
 
                     receitas.Add(newReceita);
                 }
@@ -83,44 +83,11 @@ namespace proveit.DAO
                     receita.Passos.Add(passo);
                 }
 
-                /*
-                var listaAvaliacoes = receita.Avaliacoes;
-                var idAvaliacao = int.Parse(dataReader["idAvaliacao"].ToString());
-
-                if (listaAvaliacoes.Any(x => x.idAvaliacao == idAvaliacao) == false)
-                {
-                    // Não existe avaliacao na lista
-
-                    var avaliacao = new AvaliacaoDTO();
-                    avaliacao.idAvaliacao = idAvaliacao;
-                    avaliacao.Estrelas = int.Parse(dataReader["Estrelas"].ToString());
-                    avaliacao.Comentario = dataReader["Comentario"].ToString();
-                    avaliacao.Receita_id = int.Parse(dataReader["Receita_id"].ToString());
-                    avaliacao.Usuario_id = int.Parse(dataReader["Usuario_id"].ToString());
-                    receita.Avaliacoes.Add(avaliacao);
-                }
-
-                int somaEstrelas = 0;
-
-                foreach (var avaliacao in listaAvaliacoes)
-                {
-                    somaEstrelas += avaliacao.Estrelas;
-                }
-
-                int mediaEstrelas = 0;
-                if (listaAvaliacoes.Count > 0)
-                {
-                    mediaEstrelas = (int)somaEstrelas / listaAvaliacoes.Count;
-                }
-                receita.mediaEstrelas = mediaEstrelas;
-
-                */
-
             }
 
             conexao.Close();
             return receitas;
-        }
+        } 
 
         // ListarReceitas
         public List<ReceitaGeralDTO> ListarReceitas()
@@ -129,7 +96,7 @@ namespace proveit.DAO
             conexao.Open();
 
 
-            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, TempoPreparo,Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categorias.Nome, FotosReceita.idFoto, FotosReceita.Foto FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id INNER JOIN FotosReceita ON FotosReceita.Receita_id = Receitas.idReceita";
+            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, TempoPreparo,Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
 
@@ -152,6 +119,7 @@ namespace proveit.DAO
                     newReceita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
                     newReceita.ValCalorico = int.Parse(dataReader["ValCalorico"].ToString());
                     newReceita.Descricao = dataReader["Descricao"].ToString();
+                    newReceita.Categoria = dataReader["Categoria"].ToString();
                     newReceita.NomeTag = dataReader["NomeTag"].ToString();
                     newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
                     newReceita.Foto = (dataReader["Foto"].ToString());
@@ -205,8 +173,8 @@ namespace proveit.DAO
             conexao.Open();
 
             // Inserindo receita
-            var queryReceita = @"INSERT INTO Receitas (Nome, TempoPreparo, Tempo, Porcoes, ValCalorico, Descricao, Usuario_id, Categorias_id, Aproveitamento, Foto) VALUES
-						(@nome,@tempoPreparo, @tempo, @porcoes,@valCalorico, @descricao, @usuario_id, @categorias_id, @aproveitamento, @foto);   SELECT LAST_INSERT_ID();";
+            var queryReceita = @"INSERT INTO Receitas (Nome, TempoPreparo, Tempo, Porcoes, ValCalorico, Descricao, Usuario_id, Categoria, Aproveitamento, Foto) VALUES
+						(@nome,@tempoPreparo, @tempo, @porcoes,@valCalorico, @descricao, @usuario_id, @categoria, @aproveitamento, @foto);   SELECT LAST_INSERT_ID();";
 
             var comando = new MySqlCommand(queryReceita, conexao);
 
@@ -217,7 +185,7 @@ namespace proveit.DAO
             comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
             comando.Parameters.AddWithValue("@descricao", receita.Descricao);
             comando.Parameters.AddWithValue("@usuario_id", receita.Usuario_id);
-            comando.Parameters.AddWithValue("@categorias_id", receita.Categoria_id);
+            comando.Parameters.AddWithValue("@categoria", receita.Categoria);
             comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
             comando.Parameters.AddWithValue("@foto", receita.Foto);
             int idReceita = Convert.ToInt32(comando.ExecuteScalar());
@@ -235,7 +203,7 @@ namespace proveit.DAO
                 comandoIngrediente.Parameters.AddWithValue("@receita_id", idReceita);
 
                 comandoIngrediente.ExecuteNonQuery();
-            }
+            } 
 
             // Inserindo passos
             foreach (var passo in receita.Passos)
@@ -277,7 +245,7 @@ namespace proveit.DAO
             comando.Parameters.AddWithValue("@tempo", receita.Tempo);
             comando.Parameters.AddWithValue("@porcoes", receita.Porcoes);
             comando.Parameters.AddWithValue("@valCalorico", receita.ValCalorico);
-            comando.Parameters.AddWithValue("@categorias_id", receita.Categoria_id);
+            comando.Parameters.AddWithValue("@categoria", receita.Categoria);
             comando.Parameters.AddWithValue("@aproveitamento", receita.Aproveitamento);
             comando.ExecuteNonQuery();
 

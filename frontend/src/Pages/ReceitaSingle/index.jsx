@@ -9,13 +9,19 @@ import IngredienteReceita from '../../components/IngredienteReceita/IngredienteR
 import ComentarioSingle from '../../components/ComentarioSingle/ComentarioSingle';
 import { AirbnbRating } from 'react-native-ratings';
 import styles from './receitasingle.module';
+import { counter } from '@fortawesome/fontawesome-svg-core';
 
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function ReceitaSingle({ navigation }) {
 
-    const stars = 8;
+    const [estrelas, setEstrelas] = useState(5);
+    const [comentario, setComentario] = useState('');
+    const [usuario_id, setUsuario_id] = useState(1);
+    const [receita_id, setReceita_id] = useState(1);
+
+    const stars = 5;
 
     function StarCounter() {
 
@@ -24,7 +30,7 @@ export default function ReceitaSingle({ navigation }) {
         for (let index = 0; index < stars; index++) {
             starsBox.push(
                 <View key={index}>
-                    <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} ></FontAwesomeIcon>
+                    <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} />
                 </View>
             );
         }
@@ -41,7 +47,29 @@ export default function ReceitaSingle({ navigation }) {
         setSaved(!saved);
     };
 
-    
+    function handleRatingChange(ratingValue) {
+        setEstrelas(ratingValue); // Atualiza o estado com o valor do rating selecionado pelo usuário
+    };
+
+    function handleAssessment() {
+
+        const body = { estrelas, comentario, usuario_id, receita_id };
+
+        // código de registro aqui
+        fetch("https://localhost:7219/api/Avaliacao", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        })
+            .then((response) => { showSuccessToast })
+            .catch((error) => {
+                console.log(error);
+                showFailToast;
+            });
+
+        console.log(body);
+
+    }
 
     return (
         <ScrollView style={styles.container}>
@@ -214,12 +242,18 @@ export default function ReceitaSingle({ navigation }) {
                             selectedColor='#fff'
                             unSelectedColor='rgb(255,255,255,0.5)'
                             reviewColor='#fff'
+                            onFinishRating={handleRatingChange}
                         />
 
-                        <TextInput placeholder={'O que você tem a dizer?'} style={styles.commentInput} textAlignVertical="top"
-                            multiline={true} ></TextInput>
+                        <TextInput
+                            placeholder={'O que você tem a dizer?'}
+                            style={styles.commentInput}
+                            textAlignVertical="top"
+                            multiline={true}
+                            value={comentario}
+                            onChangeText={(texto) => setComentario(texto)} />
 
-                        <TouchableOpacity style={styles.rateButton} onPress={() => alert(`Avaliado`)}>
+                        <TouchableOpacity style={styles.rateButton} onPress={handleAssessment}>
                             <Text style={styles.rateButtonText}>Avaliar</Text>
                         </TouchableOpacity>
                     </LinearGradient>

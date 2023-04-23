@@ -17,12 +17,10 @@ namespace proveit.DTO
         public string Descricao { get; set; }
         public string NomeTag { get; set; }
         public int Usuario_id { get; set; }
-        public int Categoria_id { get; set; }
+        public string Categoria { get; set; }
         public bool Aproveitamento { get; set; }
         public string Foto { get; set; }
-        public int mediaEstrelas { get; set; }
         public List<PassoDTO> Passos { get; set; }
         public List<Ingredientes_ReceitaDTO> Ingredientes { get; set; }
-        public List<AvaliacaoDTO> Avaliacoes { get; set; }
     }
 }

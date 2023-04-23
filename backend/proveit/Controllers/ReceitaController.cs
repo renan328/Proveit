@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using proveit.DAO;
 using proveit.DTO;
 
@@ -9,14 +8,33 @@ namespace proveit.Controllers
     [ApiController]
     public class ReceitaController : ControllerBase
     {
+
+        public class DetalhesReceita
+        {
+            public List<ReceitaGeralDTO> Receitas { get; set; }
+            public List<AvaliacaoDTO> Avaliacoes { get; set; }
+            public double MediaEstrelas { get; set; }
+        }
+
+
         [HttpGet]
         [Route("unica")]
         public IActionResult ListarReceitaUnica(int id)
         {
-            var dao = new ReceitaGeralDAO();
-            var receitas = dao.ListarReceitaUnica(id);
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receita = ReceitaDAO.ListarReceitaUnica(id);
+            var avaliacoes = AvaliacaoDAO.ListarAvaliacaoDeReceita(id);
+            var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(id);
 
-            return Ok(receitas);
+            var detalhesReceita = new DetalhesReceita
+            {
+                Receitas = receita,
+                Avaliacoes = avaliacoes,
+                MediaEstrelas = mediaEstrelas
+            };
+
+            return Ok(detalhesReceita);
         }
 
         [HttpGet]
