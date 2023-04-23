@@ -19,7 +19,8 @@ namespace proveit.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListarCategoriaUnica(int id)
+        [Route("{id}")]
+        public IActionResult ListarCategoriaUnica([FromRoute] int id)
         {
             var dao = new CategoriaDAO();
             var categorias = dao.ListarCategoriasUnica(id);

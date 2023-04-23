@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimension } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -7,6 +7,7 @@ import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Re
 import styles from './perfil.module';
 
 export default function Perfil({ navigation }) {
+
     return (
         // Container Geral
         <View style={styles.container}>

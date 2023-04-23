@@ -1,22 +1,40 @@
+import { useEffect, useState } from 'react';
 import React from "react";
-import { FlatList, View, Text, StyleSheet, Image, SectionList, TouchableOpacity } from 'react-native';
+import { FlatList, View, SectionList } from 'react-native';
 import CartaoReceita from "./CartaoReceita";
 
-const ListItem = ({ item }) => {
-    return (
-        <CartaoReceita uri={item.uri} title={item.titulo} description={item.descricao} portions={item.porcoes} time={item.preparacao} route={item.navegacao} />
-    );
-}
-
-
 function CarrosselReceitas({ }) {
+
+    const [receitas, setReceitas] = useState([]);
+
+    useEffect(() => {
+        fetch("https://localhost:7219/api/Re", {
+            method: "GET",
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setReceitas(json);
+            })
+            .catch((error) => {
+                alert("Erro ao buscar receitas");
+            });
+    }, []);
+
+    const ListItem = ({ receitas }) => {
+        return (
+            receitas.map((receita, index) => (
+                <CartaoReceita receita={receita} key={index}/>
+            ))
+        );
+    };
+
     return (
         // Funções do carrossel, container principal
         <View style={{ marginLeft: 10 }}>
 
             {/* Container SectionList, quebra as informações para retornar de maneira organizada. */}
             <SectionList
-                contentContainerStyle={{ paddingHorizontal: 0 }} stickySectionHeadersEnabled={false} sections={SECTIONS} renderSectionHeader={({ section }) => (
+                contentContainerStyle={{ paddingHorizontal: 0 }} stickySectionHeadersEnabled={false} sections={receitas} renderSectionHeader={({ section }) => (
                     <>
                         {section.horizontal ? (
 

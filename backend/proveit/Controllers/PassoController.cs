@@ -10,7 +10,8 @@ namespace proveit.Controllers
     public class PassoController : ControllerBase
     {
         [HttpDelete]
-        public IActionResult DeletarPassos(int id)
+        [Route("{id}")]
+        public IActionResult DeletarPassos([FromRoute] int id)
         {
             var dao = new PassoDAO();
             dao.DeletarPassos(id);

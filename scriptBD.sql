@@ -129,6 +129,8 @@ INSERT INTO Ingredientes_Receita (Nome, Quantidade , Medida, Receita_id) VALUES 
 INSERT INTO Ingredientes_Receita (Nome, Quantidade , Medida, Receita_id) VALUES ("queijo", 1, 'unidade', 1);
 
 INSERT INTO Avaliacao (Estrelas, Comentario, Receita_id, Usuario_id) VALUES (5 ,"muito bom",1 ,1);
+
+INSERT INTO ReceitasFavoritas (Receita_id, Usuario_id) VALUES (1, 1);
 -- Select receitas por ingredientes
 SELECT * FROM Receitas INNER JOIN Ingredientes_Receita ON Receitas.idReceita = Ingredientes_Receita.Receita_id  WHERE Ingredientes_Receita.Nome  = "Nome" OR Ingredientes_Receita.Nome = "Nome"  OR Ingredientes_Receita.Nome = "Nome" ;
 
@@ -139,3 +141,6 @@ SELECT * FROM Avaliacao;
 SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario WHERE idReceita = 1;
 -- Select all receitas
 SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario;
+
+-- Select Receitas favoritas por usuário
+SELECT Receita_id FROM ReceitasFavoritas WHERE Usuario_id = 1;

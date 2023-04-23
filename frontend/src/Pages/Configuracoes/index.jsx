@@ -10,10 +10,12 @@ export default function Configuracoes() {
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
-                <TouchableOpacity style={styles.botao}><FontAwesomeIcon icon={faArrowLeft} color="#FF7152" size={'30px'} /></TouchableOpacity>
+                <TouchableOpacity style={styles.botao} onPress={() => navigation.goBack()}>
+                    <FontAwesomeIcon icon={faArrowLeft} color="#FF7152" size={'30px'} />
+                </TouchableOpacity>
 
                 <Text style={styles.title}>Configurações</Text>
-                <View style={styles.linha}/>
+                <View style={styles.linha} />
             </View>
 
             {/* Lista de opções */}
@@ -23,49 +25,49 @@ export default function Configuracoes() {
                     <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
                 </View>
 
-                <View style={styles.linhaOpcoes}/>
+                <View style={styles.linhaOpcoes} />
 
                 <View style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Editar Receita</Text>
                     <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
                 </View>
 
-                <View style={styles.linhaOpcoes}/>
+                <View style={styles.linhaOpcoes} />
 
                 <View style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Temas</Text>
                     <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
                 </View>
 
-                <View style={styles.linhaOpcoes}/>
+                <View style={styles.linhaOpcoes} />
 
                 <View style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Central de Ajuda</Text>
                     <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
                 </View>
 
-                <View style={styles.linhaOpcoes}/>
+                <View style={styles.linhaOpcoes} />
 
                 <View style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Termos e Condições</Text>
                     <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
                 </View>
 
-                <View style={styles.linhaOpcoes}/>
+                <View style={styles.linhaOpcoes} />
 
                 <View style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Políticas de Privacidade</Text>
                     <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
                 </View>
 
-                <View style={styles.linhaOpcoes}/>
+                <View style={styles.linhaOpcoes} />
 
                 <View style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoesSair}>Sair da Conta</Text>
                     <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} color="#FF7152" size={'25px'} /></TouchableOpacity>
                 </View>
 
-                <View style={styles.linhaOpcoes}/>
+                <View style={styles.linhaOpcoes} />
             </View>
         </View>
     );

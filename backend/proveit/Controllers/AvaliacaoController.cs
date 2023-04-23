@@ -11,8 +11,8 @@ namespace proveit.Controllers
     {
 
         [HttpGet]
-        [Route("unica")]
-        public IActionResult ListarAvaliacaoDeReceita(int id)
+        [Route("{id}")]
+        public IActionResult ListarAvaliacaoDeReceita([FromRoute] int id)
         {
             var dao = new AvaliacaoDAO();
             var avaliacoes = dao.ListarAvaliacaoDeReceita(id);
@@ -49,7 +49,8 @@ namespace proveit.Controllers
         }
 
         [HttpDelete]
-        public IActionResult RemoverAvaliacao(int id)
+        [Route("{id}")]
+        public IActionResult RemoverAvaliacao([FromRoute] int id)
         {
             var dao = new AvaliacaoDAO();
             dao.DeletarAvaliacao(id);

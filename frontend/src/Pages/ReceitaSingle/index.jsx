@@ -45,6 +45,25 @@ export default function ReceitaSingle({ navigation }) {
 
     const addSave = () => {
         setSaved(!saved);
+
+        if (saved !== true) {
+
+            const body = { usuario_id, receita_id };
+
+            // código de registro aqui
+            fetch("https://localhost:7219/api/ReceitaFavorita", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            })
+                .then((response) => { showSuccessToast })
+                .catch((error) => {
+                    console.log(error);
+                    showFailToast;
+                });
+
+            console.log(body);
+        }
     };
 
     function handleRatingChange(ratingValue) {

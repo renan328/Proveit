@@ -8,18 +8,9 @@ namespace proveit.Controllers
     [ApiController]
     public class ReceitaController : ControllerBase
     {
-
-        public class DetalhesReceita
-        {
-            public List<ReceitaGeralDTO> Receitas { get; set; }
-            public List<AvaliacaoDTO> Avaliacoes { get; set; }
-            public double MediaEstrelas { get; set; }
-        }
-
-
         [HttpGet]
-        [Route("unica")]
-        public IActionResult ListarReceitaUnica(int id)
+        [Route("{id}")]
+        public IActionResult ListarReceitaUnica([FromRoute] int id)
         {
             var ReceitaDAO = new ReceitaGeralDAO();
             var AvaliacaoDAO = new AvaliacaoDAO();
@@ -27,9 +18,9 @@ namespace proveit.Controllers
             var avaliacoes = AvaliacaoDAO.ListarAvaliacaoDeReceita(id);
             var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(id);
 
-            var detalhesReceita = new DetalhesReceita
+            var detalhesReceita = new DetalhesReceitaDTO
             {
-                Receitas = receita,
+                Receita= receita,
                 Avaliacoes = avaliacoes,
                 MediaEstrelas = mediaEstrelas
             };
@@ -65,6 +56,7 @@ namespace proveit.Controllers
         }
 
         [HttpDelete]
+        [Route("{id}")]
         public IActionResult RemoverReceita([FromRoute] int id)
         {
             var dao = new ReceitaGeralDAO();

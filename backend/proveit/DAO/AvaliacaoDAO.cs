@@ -75,7 +75,7 @@ namespace proveit.DAO
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
-            // Inserindo os passos
+
             var query = @"INSERT INTO Avaliacao (Estrelas, Comentario, Receita_id, Usuario_id) VALUES
 						(@estrelas,@comentario,@receita_id,@usuario_id)";
 

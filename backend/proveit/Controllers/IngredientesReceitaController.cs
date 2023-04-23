@@ -9,14 +9,6 @@ namespace proveit.Controllers
     [ApiController]
     public class IngredientesReceitaController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Listar(int id)
-        {
-            var dao = new Ingredientes_ReceitaDAO();
-            var ingredientesReceita = dao.ListarIngredientesReceitas(id);
-            return Ok(ingredientesReceita);
-        }
-
         [HttpPut]
         public IActionResult AlterarIngredientes(Ingredientes_ReceitaDTO ingredientes)
         {

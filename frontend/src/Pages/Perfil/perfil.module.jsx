@@ -54,6 +54,17 @@ const styles = StyleSheet.create({
         marginTop: '15px',
         color: '#505050',
         textAlign: 'center'
+    },
+    imagemUsu: {
+        display: 'flex',
+        width: 140,
+        height: 140,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomLeftRadius: 70,
+        borderBottomRightRadius: 70,
+        borderTopLeftRadius: 70,
+        borderTopRightRadius: 70
     }
 
 

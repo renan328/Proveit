@@ -4,19 +4,19 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUtensils, faClock } from '@fortawesome/free-solid-svg-icons';
 
-const ListItem = ({ uri, title, description, portions, time }) => {
+const ListItem = ({ receita }) => {
 
-const truncatedTitle = title.length > 20 ? `${title.slice(0, 20)}...` : title;
+const truncatedTitle = nome.length > 20 ? `${nome.slice(0, 20)}...` : nome;
 
     return (
 
         <View style={styles.caixaPrincipal}>
 
             {/* Container de imagem e texto */}
-            <Image style={styles.imgReceita} source={uri} />
+            <Image style={styles.imgReceita} source={receita.foto} />
             <View style={styles.containerTexto}>
                 <Text style={styles.titulo}>{truncatedTitle}</Text>
-                <Text style={styles.descricao} numberOfLines={1}>{description}</Text>
+                <Text style={styles.descricao} numberOfLines={1}>{receita.descricao}</Text>
             </View>
 
             {/* Informações da footer */}
@@ -24,11 +24,11 @@ const truncatedTitle = title.length > 20 ? `${title.slice(0, 20)}...` : title;
                 end={{ x: 2, y: 1 }} colors={['#FF7152', '#FF7152']} style={styles.footer}>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <FontAwesomeIcon style={styles.legenda} icon={faUtensils} />
-                    <Text style={styles.legenda}>{portions}</Text>
+                    <Text style={styles.legenda}>{receita.porcoes}</Text>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <FontAwesomeIcon style={styles.legenda} icon={faClock} />
-                    <Text style={styles.legenda} >{time}</Text>
+                    <Text style={styles.legenda} >{receita.tempoPreparo} <Text style={styles.legenda} >{receita.tempo}</Text> </Text>
                 </View>
             </LinearGradient>
 

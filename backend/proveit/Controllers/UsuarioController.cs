@@ -17,6 +17,15 @@ namespace proveit.Controllers
 
             return Ok(usuarios);
         }
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult ListarPorID([FromRoute] int id)
+        {
+            var dao = new UsuarioDAO();
+            var usuario = dao.ListarUsuarioPorId(id);
+
+            return Ok(usuario);
+        }
 
         [HttpPost]
         public IActionResult CadastrarUsuario(UsuarioDTO usuario)
