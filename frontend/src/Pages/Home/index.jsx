@@ -4,8 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceita';
-import CartaoReceita from '../../components/CartaoReceita/CartaoReceita';
+import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas';
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 import Toast from 'react-native-toast-message';
 import styles from './home.module';

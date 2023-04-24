@@ -4,18 +4,15 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUtensils, faClock } from '@fortawesome/free-solid-svg-icons';
 
-const ListItem = ({ receita }) => {
-
-const truncatedTitle = nome.length > 20 ? `${nome.slice(0, 20)}...` : nome;
-
+export default function CartaoReceita({ receita }) {
     return (
-
         <View style={styles.caixaPrincipal}>
 
             {/* Container de imagem e texto */}
-            <Image style={styles.imgReceita} source={receita.foto} />
+            <Image style={styles.imgReceita} source={{uri: receita.foto}} />
+
             <View style={styles.containerTexto}>
-                <Text style={styles.titulo}>{truncatedTitle}</Text>
+                <Text style={styles.titulo}>{receita.nomeReceita}</Text>
                 <Text style={styles.descricao} numberOfLines={1}>{receita.descricao}</Text>
             </View>
 
@@ -33,10 +30,9 @@ const truncatedTitle = nome.length > 20 ? `${nome.slice(0, 20)}...` : nome;
             </LinearGradient>
 
         </View>
-    );
-};
 
-export default ListItem;
+    )
+}
 
 const styles = StyleSheet.create({
 

@@ -14,7 +14,7 @@ CREATE TABLE Usuarios (
     NomeTag VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL,
     Senha VARCHAR(255) NOT NULL,
-	Foto LONGBLOB,
+	Foto LONGTEXT,
     PRIMARY KEY (idUsuario)
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE Receitas (
     Usuario_id INTEGER UNSIGNED NOT NULL,
     Categoria VARCHAR(255) NOT NULL,
     Aproveitamento BOOL NULL,
-	Foto LONGBLOB NOT NULL,
+	Foto LONGTEXT NOT NULL,
     PRIMARY KEY (idReceita),
     FOREIGN KEY (Usuario_id)
         REFERENCES Usuarios (idUsuario)
