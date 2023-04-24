@@ -13,6 +13,9 @@ import CadastroDeReceita from '../Pages/CadastroDeReceita';
 import Pesquisa from '../Pages/Pesquisa';
 import Favoritos from '../Pages/Favoritos';
 import Configuracoes from '../Pages/Configuracoes';
+import EsqueciMinhaSenha from '../Pages/EsqueciMinhaSenha';
+import Cod_EsqueciMinhaSenha from '../Pages/Cod_EsqueciMinhaSenha';
+
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -97,6 +100,7 @@ function LoginStackScreen() {
         <Stack.Navigator>
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
             <Stack.Screen name="CadastroDeUsuario" component={CadastroDeUsuario} options={{ headerShown: false }} />
+
         </Stack.Navigator>
     );
 }
@@ -145,6 +149,15 @@ function PerfilStack() {
     );
 }
 
+function EsqueciMinhaSenhaStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} />
+            <Stack.Screen options={{ headerShown: false }} name="Cod_EsqueciMinhaSenha" component={Cod_EsqueciMinhaSenha} />
+        </Stack.Navigator>
+    );
+}
+
 export default function Routes() {
 
     return (
@@ -164,6 +177,7 @@ export default function Routes() {
                 }}
             >
                 <Stack.Screen name="Login" component={LoginStackScreen} />
+                <Stack.Screen name="EsqueciMinhaSenhaStack" component={EsqueciMinhaSenhaStack} />
                 <Stack.Screen name="Main" component={MainTabNavigator} />
             </Stack.Navigator>
         </NavigationContainer>

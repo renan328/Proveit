@@ -44,7 +44,7 @@ export default function EsqueciMinhaSenha() {
 
                         {/* Botão */}
                         <View style={styles.botoes}>
-                            <TouchableOpacity onPress={() => navigation.navigate('Main')} >
+                            <TouchableOpacity onPress={() => navigation.navigate("Cod_EsqueciMinhaSenha")} >
                                 <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                                     end={{ x: 2, y: 1 }} style={styles.button} >
                                     <Text style={styles.buttonText}>Pronto</Text>

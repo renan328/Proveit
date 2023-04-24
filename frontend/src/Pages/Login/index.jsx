@@ -105,7 +105,7 @@ export default function Login({ navigation }) {
                 </View>
 
                 <View style={styles.texts}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigation.navigate("EsqueciMinhaSenhaStack")}>
                         <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Esqueci minha senha</Text>
                     </TouchableOpacity>
                     <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Ainda não tem uma conta?</Text>
