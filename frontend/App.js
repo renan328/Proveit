@@ -14,6 +14,7 @@ import CadastroDeReceita from './src/Pages/CadastroDeReceita';
 import CadastroDeUsuario from './src/Pages/CadastroDeUsuario';
 import EsqueciMinhaSenha from './src/Pages/EsqueciMinhaSenha';
 import Cod_EsqueciMinhaSenha from './src/Pages/Cod_EsqueciMinhaSenha';
+import Red_EsqueciMinhaSenha from './src/Pages/Red_EsqueciMinhaSenha';
 import Favoritos from './src/Pages/Favoritos';
 import { Route } from 'expo-router/src/Route';
 import { NavigationContainer } from '@react-navigation/native';
@@ -25,7 +26,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <Routes />
+      <Red_EsqueciMinhaSenha />
     </MenuProvider>
   )
 }

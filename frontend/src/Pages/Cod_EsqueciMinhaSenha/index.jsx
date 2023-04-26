@@ -2,7 +2,6 @@ import React, { Component, useState, useRef } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
-import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import validator from 'validator';
 import styles from './cod_esqueciminhasenha.module';
 import { text } from '@fortawesome/fontawesome-svg-core';
@@ -60,7 +59,7 @@ export default function Cod_EsqueciMinhaSenha() {
 
     return (
 
-        <View style={styles.container}>
+        <View style={{maxHeight: screenHeight}}>
             {/* Imagem fundo */}
             <View style={styles.imageContainer}>
                 <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}> </ImageBackground>

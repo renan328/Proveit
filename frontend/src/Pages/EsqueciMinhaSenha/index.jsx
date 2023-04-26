@@ -2,17 +2,16 @@ import React, { Component, useState } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
-import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import validator from 'validator';
 import styles from './esqueciminhasenha.module';
 
 const screenHeight = Dimensions.get('window').height;
 
-export default function EsqueciMinhaSenha() {
+export default function EsqueciMinhaSenha({ navigation }) {
 
     return (
 
-        <View style={styles.container}>
+        <View style={{maxHeight: screenHeight}}>
             {/* Imagem fundo */}
             <View style={styles.imageContainer}>
                 <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}> </ImageBackground>
@@ -44,7 +43,7 @@ export default function EsqueciMinhaSenha() {
 
                         {/* Botão */}
                         <View style={styles.botoes}>
-                            <TouchableOpacity onPress={() => navigation.navigate("Cod_EsqueciMinhaSenha")} >
+                            <TouchableOpacity onPress={() => navigation.navigate('Cod_EsqueciMinhaSenha')} >
                                 <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                                     end={{ x: 2, y: 1 }} style={styles.button} >
                                     <Text style={styles.buttonText}>Pronto</Text>

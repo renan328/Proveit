@@ -15,7 +15,7 @@ import Favoritos from '../Pages/Favoritos';
 import Configuracoes from '../Pages/Configuracoes';
 import EsqueciMinhaSenha from '../Pages/EsqueciMinhaSenha';
 import Cod_EsqueciMinhaSenha from '../Pages/Cod_EsqueciMinhaSenha';
-
+import Red_EsqueciMinhaSenha from '../Pages/Red_EsqueciMinhaSenha';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -90,6 +90,12 @@ function MainTabNavigator() {
                 ), headerShown: false
             }} />
 
+            <Tab.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenhaStack} options={{
+                tabBarIcon: ({ focused }) => (
+                    <FontAwesomeIcon icon={faUser} size={22} color={focused ? '#FF7152' : '#505050'} />
+                ), headerShown: false
+            }} />
+
         </Tab.Navigator>
     );
 }
@@ -153,7 +159,8 @@ function EsqueciMinhaSenhaStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} />
-            <Stack.Screen options={{ headerShown: false }} name="Cod_EsqueciMinhaSenha" component={Cod_EsqueciMinhaSenha} />
+            <Stack.Screen options={{ headerShown: false }} name="Cod_EsqueciMinhaSenha" component={Cod_EsqueciMinhaSenha}/>
+            <Stack.Screen options={{ headerShown: false }} name="Red_EsqueciMinhaSenha" component={Red_EsqueciMinhaSenha}/>
         </Stack.Navigator>
     );
 }
