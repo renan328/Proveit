@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
     main2:{
         display:'flex',
-        height: '75%',
+        height: '93%',
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignContent:'center',
@@ -71,14 +71,13 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent:'space-between',
         width: '82%',
-        height: '25%',
+        height: '20%',
     },
 
     Texts2:{
         display: 'flex',
         flexDirection: 'row',
-        justifyContent:'space-between',
-     
+        justifyContent:'flex-start',
     },
 
     Redefinasua:{
@@ -95,6 +94,7 @@ const styles = StyleSheet.create({
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 33,
+        
     },
 
     Desc:{
@@ -108,6 +108,13 @@ const styles = StyleSheet.create({
     },
 
 
+    InputsButton:{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent:'space-between',
+        width: '82%',
+        height: '70%',
+    },
 
     inputSingle: {
         width: '80%',
