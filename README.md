@@ -23,7 +23,7 @@ Entre outras!
 ## 👨‍💻 O desenvolvimento
 🤔 _Onde estamos?_
 
-O nosso projeto tem bases iniciais bem definidas. Estamos em estágios pós-iniciais de desenvolvimento, com algumas telas prontas, um banco de dados completo e um backend em desenvolvimento ativo.
+O nosso projeto tem bases iniciais bem definidas. Estamos em estágios avançados de desenvolvimento, com a maioria das telas prontas, um banco de dados completo e um backend em desenvolvimento ativo.
 
 
 ## Tecnologias usadas
