@@ -6,7 +6,7 @@ namespace proveit.DAO
     {
         public static MySqlConnection Build()
         {
-            return new MySqlConnection("Server=localhost;Database=Proveit;Uid=root;Pwd=root;");
+            return new MySqlConnection("Server=proveit.mysql.database.azure.com;Database=Proveit;Uid=proveitadm;Pwd=@letscock5565;");
         }
     }
 }

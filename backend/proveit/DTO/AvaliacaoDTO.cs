@@ -7,5 +7,7 @@
         public string Comentario { get; set; }
         public int Receita_id { get; set; }
         public int Usuario_id { get; set; }
+        public string UsuarioNome { get; set; }
+        public string UsuarioFoto { get; set; }
     }
 }

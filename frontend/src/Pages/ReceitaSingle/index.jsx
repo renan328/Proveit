@@ -8,6 +8,7 @@ import PassoReceita from '../../components/PassoReceita/PassoReceita';
 import IngredienteReceita from '../../components/IngredienteReceita/IngredienteReceita';
 import ComentarioSingle from '../../components/ComentarioSingle/ComentarioSingle';
 import { AirbnbRating } from 'react-native-ratings';
+import { useRoute } from '@react-navigation/native';
 import styles from './receitasingle.module';
 import { counter } from '@fortawesome/fontawesome-svg-core';
 
@@ -16,12 +17,29 @@ const screenHeight = Dimensions.get('window').height;
 
 export default function ReceitaSingle({ navigation }) {
 
+    const route = useRoute();
+    const { id } = route.params;
     const [estrelas, setEstrelas] = useState(5);
     const [comentario, setComentario] = useState('');
-    const [usuario_id, setUsuario_id] = useState(1);
-    const [receita_id, setReceita_id] = useState(1);
+    const [usuario_id, setUsuario_id] = useState(2);
+    const [receita_id, setReceita_id] = useState(id);
+    const [dadosReceita, setDadosReceita] = useState([]);
 
-    const stars = 5;
+
+    useEffect(() => {
+        fetch("https://cloudproveit.azurewebsites.net/api/receita/" + id, {
+            method: "GET",
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setDadosReceita(json);
+            })
+            .catch((error) => {
+                alert("Erro ao buscar receita");
+            });
+    }, []);
+
+    const stars = dadosReceita.mediaEstrelas;
 
     function StarCounter() {
 
@@ -51,7 +69,7 @@ export default function ReceitaSingle({ navigation }) {
             const body = { usuario_id, receita_id };
 
             // código de registro aqui
-            fetch("https://localhost:7219/api/ReceitaFavorita", {
+            fetch("https://cloudproveit.azurewebsites.net/api/ReceitaFavorita", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
@@ -75,7 +93,7 @@ export default function ReceitaSingle({ navigation }) {
         const body = { estrelas, comentario, usuario_id, receita_id };
 
         // código de registro aqui
-        fetch("https://localhost:7219/api/Avaliacao", {
+        fetch("https://cloudproveit.azurewebsites.net/api/Avaliacao", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -88,12 +106,12 @@ export default function ReceitaSingle({ navigation }) {
 
         console.log(body);
 
-    }
+    };
 
     return (
         <ScrollView style={styles.container}>
 
-            <ImageBackground source={require('../../assets/cat_bolos.jpg')} style={{ height: screenHeight * 0.5 }}>
+            <ImageBackground source={{ uri: dadosReceita.receita?.foto }} style={{ height: screenHeight * 0.5 }}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => navigation.goBack()}><FontAwesomeIcon style={styles.headerIcon} icon={faAngleLeft} size={28} /></TouchableOpacity>
                     <Menu>
@@ -119,15 +137,15 @@ export default function ReceitaSingle({ navigation }) {
 
 
                     <View style={styles.mainTexts}>
-                        <Text style={styles.mainTitle}>Bolo de chocolate</Text>
-                        <Text style={styles.description}>Bolo de chocolate com cobertura cobertura coberturacoberturacoberturacoberturacoberturacoberturacoberturacobertura cobertura cobertura coberturacobertura cobertura cobertura de chocolate branco</Text>
+                        <Text style={styles.mainTitle}>{dadosReceita.receita?.nomeReceita}</Text>
+                        <Text style={styles.description}>{dadosReceita.receita?.descricao}</Text>
                     </View>
 
 
                     <View style={styles.caloryContainer}>
                         <LinearGradient start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.caloryCounter}>
-                            <Text style={styles.caloryText}>Valor calórico: <Text style={{ fontFamily: 'Raleway_700Bold' }}>100 g / 274 kcal</Text></Text>
+                            <Text style={styles.caloryText}>Valor calórico: <Text style={{ fontFamily: 'Raleway_700Bold' }}>{dadosReceita.receita?.valCalorico}</Text></Text>
                         </LinearGradient>
                     </View>
 
@@ -135,12 +153,12 @@ export default function ReceitaSingle({ navigation }) {
                         end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.detailsContainer}>
                         <View style={styles.subDetail}>
                             <FontAwesomeIcon icon={faUtensils} size={70} style={styles.detailIcon} />
-                            <Text style={styles.detailText}>12 porções</Text>
+                            <Text style={styles.detailText}>{dadosReceita.receita?.porcoes}porções</Text>
                         </View>
                         <View style={styles.divBar}></View>
                         <View style={styles.subDetail}>
                             <FontAwesomeIcon icon={faClock} size={70} style={styles.detailIcon} />
-                            <Text style={styles.detailText}>15 horas</Text>
+                            <Text style={styles.detailText}>{dadosReceita.receita?.tempoPreparo} {dadosReceita.receita?.tempo}</Text>
                         </View>
                     </LinearGradient>
 
@@ -167,7 +185,7 @@ export default function ReceitaSingle({ navigation }) {
                         </View>
                         <View style={{ marginHorizontal: '8px' }}>
                             <Text style={styles.mainUserText}>User Name</Text>
-                            <Text style={styles.linkUserText}>@username</Text>
+                            <Text style={styles.linkUserText}>@{dadosReceita.receita?.nomeTag}</Text>
                         </View>
                     </TouchableOpacity>
                     <View
@@ -187,11 +205,10 @@ export default function ReceitaSingle({ navigation }) {
                     </View>
 
                     <View style={styles.ingredientsList}>
-                        <IngredienteReceita id={1} measure={'500g'} text={'Chocolate'} />
-                        <IngredienteReceita id={2} measure={'1kg'} text={'Farinha'} />
-                        <IngredienteReceita id={3} measure={'2kg'} text={'Açúcar'} />
-                        <IngredienteReceita id={4} measure={'6'} text={'Ovos'} />
-                        <IngredienteReceita id={5} measure={'50g'} text={'Fermento'} />
+
+                        {dadosReceita.receita?.ingredientes.map((ingrediente) => (
+                            <IngredienteReceita id={ingrediente.idIngredientesReceita} quantidade={ingrediente.quantidade} medida={ingrediente.medida} nome={ingrediente.nomeIngrediente} />
+                        ))}
 
                     </View>
                 </View>
@@ -213,11 +230,10 @@ export default function ReceitaSingle({ navigation }) {
                     </View>
 
                     <View style={styles.stepList}>
-                        <PassoReceita step={1} text={'Leve ao fogo o leite a margarina e o chocolate.'} />
-                        <PassoReceita step={2} text={'Leve ao fogo o leite a margarina e o chocolate. Leve ao fogo o leite a margarina e o chocolate. Leve ao fogo o leite a margarina e o chocolate.'} />
-                        <PassoReceita step={3} text={'Leve ao fogo o leite a margarina e o chocolate.'} />
-                        <PassoReceita step={4} text={'Leve ao fogo o leite a margarina e o chocolate.'} />
-                        <PassoReceita step={5} text={'Leve ao fogo o leite a margarina e o chocolate.'} />
+
+                        {dadosReceita.receita?.passos.map((passo) => (
+                            <PassoReceita numPasso={passo.numPasso} passoTexto={passo.passoTexto} />
+                        ))}
 
                     </View>
                 </View>
@@ -283,9 +299,11 @@ export default function ReceitaSingle({ navigation }) {
                         <Text style={styles.commentsTitle}>Comentários</Text>
                     </View>
                     <View style={styles.commentsContainer}>
-                        <ComentarioSingle userPicture={'imagem'} userName={'Pedro Silva'} stars={5} comment={'Achei uma ótima receita pra ser bem sincero.'} />
 
-                        <ComentarioSingle userPicture={'imagem'} userName={'Especialista em catapultas'} stars={3} comment={'Catapultas são mecanismos de cerco que utilizam uma espécie de colher para lançar um objeto a uma grande distância, evitando assim possíveis obstáculos como muralhas e fossos. Foram criados possivelmente pelos gregos, durante o reinado de Dionísio I, como arma de guerra.'} />
+                        {dadosReceita.avaliacoes?.map((avaliacoes) => (
+                            <ComentarioSingle userPicture={{uri: avaliacoes.usuarioFoto}} userName={avaliacoes.usuarioNome} stars={avaliacoes.estrelas} comment={avaliacoes.comentario} />
+                        ))}
+
                     </View>
                 </View>
 

@@ -6,7 +6,7 @@ export default function CarrosselHome() {
     const [receitas, setReceitas] = useState([]);
 
     useEffect(() => {
-        fetch("https://localhost:7219/api/Receita", {
+        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
             method: "GET",
         })
             .then((response) => response.json())
@@ -22,10 +22,10 @@ export default function CarrosselHome() {
 
     return (
         <View>
-            <ScrollView horizontal={true} style={{marginLeft: 10, }}>
+            <ScrollView horizontal={true} style={{ marginLeft: 10, }}>
                 {
                     receitas.map((receita, index) => (
-                        <CartaoReceita receita={receita} key={index} />
+                            <CartaoReceita receita={receita} key={index} />
                     ))
                 }
             </ScrollView>

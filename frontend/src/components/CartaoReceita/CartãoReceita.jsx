@@ -3,33 +3,42 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUtensils, faClock } from '@fortawesome/free-solid-svg-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function CartaoReceita({ receita }) {
+    const navigation = useNavigation();
+
+    const handleCardPress = ( id ) => {
+        navigation.navigate('ReceitaSingle', { id: receita.idReceita });
+    };
+    
     return (
-        <View style={styles.caixaPrincipal}>
+        <TouchableOpacity key={receita.id} onPress={() => handleCardPress(receita.id)}>
+            <View style={styles.caixaPrincipal}>
 
-            {/* Container de imagem e texto */}
-            <Image style={styles.imgReceita} source={{uri: receita.foto}} />
+                {/* Container de imagem e texto */}
+                <Image style={styles.imgReceita} source={{ uri: receita.foto }} />
 
-            <View style={styles.containerTexto}>
-                <Text style={styles.titulo}>{receita.nomeReceita}</Text>
-                <Text style={styles.descricao} numberOfLines={1}>{receita.descricao}</Text>
+                <View style={styles.containerTexto}>
+                    <Text style={styles.titulo}>{receita.nomeReceita}</Text>
+                    <Text style={styles.descricao} numberOfLines={1}>{receita.descricao}</Text>
+                </View>
+
+                {/* Informações da footer */}
+                <LinearGradient start={{ x: -1, y: 1 }}
+                    end={{ x: 2, y: 1 }} colors={['#FF7152', '#FF7152']} style={styles.footer}>
+                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                        <FontAwesomeIcon style={styles.legenda} icon={faUtensils} />
+                        <Text style={styles.legenda}>{receita.porcoes}</Text>
+                    </View>
+                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                        <FontAwesomeIcon style={styles.legenda} icon={faClock} />
+                        <Text style={styles.legenda} >{receita.tempoPreparo} <Text style={styles.legenda} >{receita.tempo}</Text> </Text>
+                    </View>
+                </LinearGradient>
+
             </View>
-
-            {/* Informações da footer */}
-            <LinearGradient start={{ x: -1, y: 1 }}
-                end={{ x: 2, y: 1 }} colors={['#FF7152', '#FF7152']} style={styles.footer}>
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                    <FontAwesomeIcon style={styles.legenda} icon={faUtensils} />
-                    <Text style={styles.legenda}>{receita.porcoes}</Text>
-                </View>
-                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                    <FontAwesomeIcon style={styles.legenda} icon={faClock} />
-                    <Text style={styles.legenda} >{receita.tempoPreparo} <Text style={styles.legenda} >{receita.tempo}</Text> </Text>
-                </View>
-            </LinearGradient>
-
-        </View>
+        </TouchableOpacity>
 
     )
 }

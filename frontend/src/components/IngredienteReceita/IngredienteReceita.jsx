@@ -1,14 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet } from 'react-native'
 
-export default function IngredienteReceita( { ID, text, measure } ) {
-   
-    const id = {ID};
+export default function IngredienteReceita({ ID, nome, quantidade, medida }) {
 
-    return(
+    const id = { ID };
+
+    return (
         <View style={styles.container}>
-            <Text style={styles.text}>• {measure}</Text>
-            <Text style={styles.text}> {text}</Text>
+            <Text style={styles.text}>• {quantidade}</Text>
+            <Text style={styles.text}> {medida} de </Text>
+            <Text style={styles.text}>{nome}</Text>
         </View>
     );
 }
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_600SemiBold',
         color: '#505050',
         fontSize: '15px'
-    }    
+    }
 
 
 });

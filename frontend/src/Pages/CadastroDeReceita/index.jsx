@@ -175,12 +175,12 @@ export default function CadastroDeReceita({ navigation, props }) {
 
         if (Object.keys(errors).length === 0) {
 
-            fetch("https://localhost:7219/api/Receita", {
+            fetch("https://cloudproveit.azurewebsites.net/api/receita", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             })
-                .then((response) => { showSuccessToast; navigation.navigate('Main') })
+                .then((response) => { alert('foi') })
                 .catch((error) => {
                     console.log(error);
                     showFailToast;
@@ -281,7 +281,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                         selectedValue={tempo}
                         onValueChange={(itemValue) => setTempo(itemValue)}
                     >
-                        <Picker.Item label="Minutos(s)" value="Min(s)" />
+                        <Picker.Item label="Minutos(s)" value="Minutos(s)" />
                         <Picker.Item label="Hora(s)" value="Hora(s)" />
                     </Picker>
                 </View>
@@ -369,12 +369,13 @@ export default function CadastroDeReceita({ navigation, props }) {
                                     selectedValue={ingrediente.medida}
                                     onValueChange={valor => atualizarIngrediente(index, 'medida', valor)}
                                 >
-                                    <Picker.Item label="1 xícara (chá)" value="1 xícara (chá)" />
+                                    <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
                                     <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
                                     <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />
-                                    <Picker.Item label="1 colher (sopa)" value="1 colher (sopa)" />
-                                    <Picker.Item label="1 colher (chá)" value="1 colher (chá)" />
+                                    <Picker.Item label="Colher (sopa)" value="Colher (sopa)" />
+                                    <Picker.Item label="Colher (chá)" value="Colher (chá)" />
                                     <Picker.Item label="Unidade(s)" value="Unidade(s)" />
+                                    <Picker.Item label="Litro(s)" value="Litro(s)" />
                                 </Picker>
                             </View>
                         </View>
@@ -384,7 +385,7 @@ export default function CadastroDeReceita({ navigation, props }) {
 
                     <View style={styles.addRemoveButtonsContainer}>
                         <TouchableOpacity style={styles.addButton} onPress={() => adicionarIngrediente()}>
-                        <FontAwesomeIcon icon={faPlus} color='#FF7152' /><Text style={styles.addButtonText}>Adicionar ingrediente</Text>
+                            <FontAwesomeIcon icon={faPlus} color='#FF7152' /><Text style={styles.addButtonText}>Adicionar ingrediente</Text>
                         </TouchableOpacity>
 
                         {ingredientes.length > 1 && (

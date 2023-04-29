@@ -103,7 +103,7 @@ export default function CadastroDeUsuario({ navigation }) {
 
         if (Object.keys(errors).length === 0) {
             // código de registro aqui
-            fetch("https://localhost:7219/api/Usuario", {
+            fetch("https://cloudproveit.azurewebsites.net/api/Usuario", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)

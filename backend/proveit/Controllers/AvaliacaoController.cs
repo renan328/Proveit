@@ -30,7 +30,7 @@ namespace proveit.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarAvaliacao([FromBody] AvaliacaoDTO avaliacao)
+        public IActionResult CadastrarAvaliacao([FromBody] CadAvaliacaoDTO avaliacao)
         {
             var dao = new AvaliacaoDAO();
             dao.CadastrarAvaliacao(avaliacao);

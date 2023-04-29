@@ -4,9 +4,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faFlag, faQuoteLeft, faQuoteRight, faStar } from '@fortawesome/free-solid-svg-icons';
 
-export default function ComentarioSingle({ userId, userPicture, userName, stars, comment }) {
-
-    userId = 1;
+export default function ComentarioSingle({ usuario_id, userPicture, userName, stars, comment }) {
 
     function StarCounter() {
 
@@ -30,7 +28,7 @@ export default function ComentarioSingle({ userId, userPicture, userName, stars,
         <View style={styles.container}>
 
             <View style={styles.imgContainer}>
-                <Image source={require('../../assets/user.jpg')} style={styles.userPic}></Image>
+                <Image source={userPicture} style={styles.userPic}></Image>
             </View>
 
             <View style={styles.textContainer}>
@@ -57,7 +55,7 @@ const styles = StyleSheet.create({
 
     container: {
         display: 'flex',
-        width: '80%',
+        minWidth: '80%',
         color: '#505050',
         backgroundColor: '#fff',
         flexDirection: 'row',
@@ -69,7 +67,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.45,
         shadowRadius: 3.84,
-
         elevation: 5,
         borderBottomStartRadius: 10,
         borderTopStartRadius: 10,

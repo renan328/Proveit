@@ -11,7 +11,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT * FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Receita_id = @id";
+            var query = "SELECT idAvaliacao, Estrelas, Comentario, Receita_id, Avaliacao.Usuario_id, Usuarios.Nome AS UsuarioNome, Usuarios.Foto AS UsuarioFoto FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Receita_id = @id";
 
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@id", id);
@@ -26,6 +26,8 @@ namespace proveit.DAO
                 avaliacao.Comentario = dataReader["Comentario"].ToString();
                 avaliacao.Receita_id = int.Parse(dataReader["Receita_id"].ToString());
                 avaliacao.Usuario_id = int.Parse(dataReader["Usuario_id"].ToString());
+                avaliacao.UsuarioNome = dataReader["UsuarioNome"].ToString();
+                avaliacao.UsuarioFoto = dataReader["UsuarioFoto"].ToString();
 
                 avaliacoes.Add(avaliacao);
             }
@@ -71,7 +73,7 @@ namespace proveit.DAO
             return avaliacoes;
         }
 
-        public void CadastrarAvaliacao(AvaliacaoDTO avaliacao)
+        public void CadastrarAvaliacao(CadAvaliacaoDTO avaliacao)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();

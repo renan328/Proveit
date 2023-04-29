@@ -38,7 +38,7 @@ export default function Home({ navigation }) {
                         <Text style={styles.subTexto}>O que você deseja hoje?</Text>
 
                         {/*Scroll categorias*/}
-                        <CarrosselCategorias></CarrosselCategorias>
+                        <CarrosselCategorias/>
                     </View>
 
                     {/*Input ingredientes*/}

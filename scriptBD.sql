@@ -25,7 +25,7 @@ CREATE TABLE Receitas (
     Tempo VARCHAR(255) NOT NULL,
     Porcoes INTEGER UNSIGNED NOT NULL,
     ValCalorico VARCHAR(255) NULL,
-    Descricao VARCHAR(255) NOT NULL,
+    Descricao LONGTEXT NOT NULL,
     Usuario_id INTEGER UNSIGNED NOT NULL,
     Categoria VARCHAR(255) NOT NULL,
     Aproveitamento BOOL NULL,
@@ -57,7 +57,7 @@ CREATE TABLE Ingredientes_Receita (
 CREATE TABLE Avaliacao (
     idAvaliacao INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     Estrelas INTEGER UNSIGNED NOT NULL,
-    Comentario VARCHAR(255) NULL,
+    Comentario LONGTEXT NULL,
     Receita_id INTEGER UNSIGNED NULL,
     Usuario_id INTEGER UNSIGNED NULL,
     FOREIGN KEY (Usuario_id)
@@ -131,16 +131,18 @@ INSERT INTO Ingredientes_Receita (Nome, Quantidade , Medida, Receita_id) VALUES 
 INSERT INTO Avaliacao (Estrelas, Comentario, Receita_id, Usuario_id) VALUES (5 ,"muito bom",1 ,1);
 
 INSERT INTO ReceitasFavoritas (Receita_id, Usuario_id) VALUES (1, 1);
+
 -- Select receitas por ingredientes
 SELECT * FROM Receitas INNER JOIN Ingredientes_Receita ON Receitas.idReceita = Ingredientes_Receita.Receita_id  WHERE Ingredientes_Receita.Nome  = "Nome" OR Ingredientes_Receita.Nome = "Nome"  OR Ingredientes_Receita.Nome = "Nome" ;
 
 -- Select tabela unica (testes)
-SELECT * FROM Avaliacao;
+SELECT * FROM Usuarios where idUsuario = 2;
 
 -- Select receita single
 SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario WHERE idReceita = 1;
 -- Select all receitas
 SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario;
 
+SELECT idAvaliacao, Estrelas, Comentario, Receita_id, Avaliacao.Usuario_id, Usuarios.Nome AS UsuarioNome, Usuarios.Foto AS UsuarioFoto FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Receita_id = 1;
 -- Select Receitas favoritas por usuário
 SELECT Receita_id FROM ReceitasFavoritas WHERE Usuario_id = 1;

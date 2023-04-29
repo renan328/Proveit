@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from 'react-native'
 
-export default function PassoReceita( {step, text} ) {
-   
-    return(
+export default function PassoReceita({ passoTexto, numPasso }) {
+
+    return (
         <View style={styles.container}>
-            <Text style={styles.step}>{step}</Text>
-            <Text style={styles.text}>{text}</Text>
+            <Text style={styles.step}>{numPasso}</Text>
+            <Text style={styles.text}>{passoTexto}</Text>
         </View>
     );
 }
@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
         fontSize: '40px',
         marginRight: '15px'
     },
-    
+
     text: {
         textAlign: 'justify',
         fontFamily: 'Raleway_600SemiBold',
         color: '#505050',
         fontSize: '15px'
-    }    
+    }
 
 
 });
