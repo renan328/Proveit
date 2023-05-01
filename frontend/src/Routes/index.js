@@ -42,7 +42,7 @@ function MainTabNavigator() {
                 left: 20,
                 right: 20,
                 elevation: 0,
-                borderRadius: 15,
+                borderRadius: 20,
                 height: 55,
                 backgroundColor: '#fff',
                 shadowColor: '#000',
@@ -90,11 +90,11 @@ function MainTabNavigator() {
                 ), headerShown: false
             }} />
 
-            <Tab.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenhaStack} options={{
+            {/* <Tab.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenhaStack} options={{
                 tabBarIcon: ({ focused }) => (
                     <FontAwesomeIcon icon={faUser} size={22} color={focused ? '#FF7152' : '#505050'} />
                 ), headerShown: false
-            }} />
+            }} /> */}
 
         </Tab.Navigator>
     );

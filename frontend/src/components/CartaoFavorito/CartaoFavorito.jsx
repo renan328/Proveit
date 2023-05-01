@@ -134,11 +134,11 @@ const styles = StyleSheet.create({
 
         width: '92%',
 
-        minHeight: '125px',
+        minHeight: 125,
 
-        maxHeight: '200px',
+        maxHeight: 200,
 
-        marginTop: '29px',
+        marginTop: 29,
 
         flexDirection: 'row',
 
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 
         display: 'flex',
 
-        marginHorizontal: '10px',
+        marginHorizontal: 10,
 
         flexDirection: 'column',
 
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
 
         flexGrow: 1,
 
-        paddingBottom: '10px',
+        paddingBottom: 10,
 
     },
 
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
 
         justifyContent: 'space-between',
 
-        marginBottom: '12px',
+        marginBottom: 12,
 
     },
 
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
 
         color: '#505050',
 
-        marginTop: '10px',
+        marginTop: 10,
 
         fontSize: 17,
 
@@ -208,11 +208,11 @@ const styles = StyleSheet.create({
 
         width: '100%',
 
-        fontsize: '8px',
+        fontsize: 8,
 
         color: '#505050',
 
-        fontWeight: '300',
+        fontWeight: 300,
 
         display: 'flex',
 

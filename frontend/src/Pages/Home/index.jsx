@@ -8,7 +8,7 @@ import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas'
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 import Toast from 'react-native-toast-message';
 import styles from './home.module';
-
+import CartaoExplorar from '../../components/CarrosselExplorar/CartãoExplorar';
 
 
 export default function Home({ navigation }) {
@@ -19,37 +19,38 @@ export default function Home({ navigation }) {
         <ScrollView style={styles.main}>
             {/*Header principal*/}
             <View style={styles.header}>
-                <LinearGradient colors={['#FF7152', '#FFB649']} style={[styles.header]}>
-                    {/*Header secundária (logo e eventual botão)*/}
-                    <View style={styles.subHeader}>
-                        <Image
-                            style={{ width: 78, height: 70 }}
-                            source={require('../../assets/proveitLogo.png')}
-                        />
-                    </View>
+                {/*Header secundária (logo e eventual botão)*/}
+                <View style={styles.subHeader}>
+                    <Image
+                        style={{ width: 52, height: 46, top: 15 }}
+                        source={require('../../assets/proveitLogoColored.png')}
+                    />
+                    <Image
+                        style={{ minWidth: '200px', maxWidth: '300px', height: '200px' }}
+                        source={require('../../assets/homeBalls.png')}
+                        resizeMode='stretch'
+                    />
+                </View>
 
-                    {/*Apresentação*/}
-                    <View>
-                        <Text style={styles.TextoSecundario}>Bem-vindo(a),</Text>
-                        <Text style={styles.Text}>{username}</Text>
-                    </View>
+                {/*Apresentação*/}
+                <View style={styles.textContainer}>
+                    <Text style={styles.welcome}>Bem-vindo(a),</Text>
+                    <Text style={styles.username}>{username}</Text>
+                </View>
 
-                    <View style={{ textAlign: 'center', display: 'flex', justifyContent: 'space-around' }}>
-                        <Text style={styles.subTexto}>O que você deseja hoje?</Text>
+                <View style={{ textAlign: 'center', display: 'flex', justifyContent: 'space-around' }}>
+                    <Text style={styles.subTexto}>O que <Text style={{ fontFamily: 'Raleway_900Black' }}>você</Text> deseja hoje?</Text>
 
-                        {/*Scroll categorias*/}
-                        <CarrosselCategorias/>
-                    </View>
+                    {/*Scroll categorias*/}
+                    <CarrosselCategorias></CarrosselCategorias>
+                </View>
 
-                    {/*Input ingredientes*/}
-                    <View style={styles.containerCentralizado}>
-                        <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput> <FontAwesomeIcon icon={faMagnifyingGlass} style={{
-                            color: '#fff', position: 'relative',
-                            top: -50
-                        }} />
-                    </View>
-
-                </LinearGradient>
+                {/*Input ingredientes*/}
+                <View style={styles.inputContainer}>
+                    <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput> <FontAwesomeIcon icon={faMagnifyingGlass} style={{
+                        color: '#505050'
+                    }} size={20} />
+                </View>
             </View>
 
             <View style={styles.listamento}>
@@ -61,6 +62,16 @@ export default function Home({ navigation }) {
                     <CarrosselReceitas></CarrosselReceitas>
                 </TouchableOpacity>
             </View>
+
+            <View style={styles.listamento}>
+                <Text style={styles.categoriaBig}>Explore<Text style={{ color: '#FF7152' }}>!</Text></Text>
+            </View>
+
+            <ScrollView horizontal={true}>
+                <CartaoExplorar title={'Melhor avaliadas'} image={require('../../assets/explore1.png')} />
+                <CartaoExplorar title={'Mais favoritadas'} image={require('../../assets/explore2.png')} />
+                <CartaoExplorar title={'Mais comentadas'} image={require('../../assets/explore3.png')} />
+            </ScrollView>
 
             <ReceitaEspecial></ReceitaEspecial>
 
@@ -99,4 +110,3 @@ export default function Home({ navigation }) {
 
     )
 }
-

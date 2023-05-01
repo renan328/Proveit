@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
     stepNumber: {
         color: 'rgba(0,0,0,0.15)',
-        fontSize: "45px",
+        fontSize: 45,
         fontFamily: 'Raleway_900Black'
     },
 
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         color: '#505050',
         alignSelf: 'flex-start',
         justifyContent: 'flex-start',
-        fontSize: "15px",
+        fontSize: 15,
         fontFamily: 'Raleway_700Bold'
     },
 
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         color: '#505050',
         alignSelf: 'center',
         justifyContent: 'flex-start',
-        fontSize: "18px",
+        fontSize: 18,
         fontFamily: 'Raleway_700Bold',
         position: 'relative',
         left: -12
@@ -114,11 +114,11 @@ const styles = StyleSheet.create({
     },
 
     allInput: {
-        marginHorizontal: '47px',
-        paddingHorizontal: '7px',
-        fontSize: '13px',
+        marginHorizontal: 47,
+        paddingHorizontal: 7,
+        fontSize: 13,
         color: '#505050',
-        height: '50px',
+        height: 50,
         width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
     categoriaInput: {
         display: 'flex',
         alignItems: 'center',
-        height: '50px',
-        width: '310px',
+        height: 50,
+        width: 310,
         marginTop: 10,
         shadowOffset: {
             width: 0,
@@ -179,9 +179,9 @@ const styles = StyleSheet.create({
 
     inputTempo: {
         padding: 5,
-        fontSize: '13px',
+        fontSize: 13,
         color: '#505050',
-        height: '50px',
+        height: 50,
         width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     horaInput: {
         overflowX: 'hidden',
         display: 'flex',
-        height: '50px',
+        height: 50,
         width: 180,
         marginLeft: 25,
         marginTop: 10,
@@ -223,17 +223,17 @@ const styles = StyleSheet.create({
 
     ListaInput: {
         width: 180,
-        height: '50px',
-        fontSize: '13px',
+        height: 50,
+        fontSize: 13,
         color: '#505050',
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        marginTop: '10px',
+        marginTop: 10,
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        marginLeft: '25px',
+        marginLeft: 25,
         overflowX: 'hidden',
         border: 'none',
         borderBottomLeftRadius: 10,
@@ -243,10 +243,10 @@ const styles = StyleSheet.create({
     },
 
     inputQntd: {
-        paddingHorizontal: '8px',
-        fontSize: '13px',
+        paddingHorizontal: 8,
+        fontSize: 13,
         color: '#505050',
-        height: '50px',
+        height: 50,
         width: '24%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
@@ -265,8 +265,8 @@ const styles = StyleSheet.create({
     },
 
     textPorcoes: {
-        marginLeft: '72px',
-        fontSize: "15px",
+        marginLeft: 72,
+        fontSize: 15,
         fontFamily: 'Raleway_600SemiBold'
     },
 
@@ -282,15 +282,15 @@ const styles = StyleSheet.create({
 
     textMedida: {
         marginLeft: '20%',
-        fontSize: "15px",
+        fontSize: 15,
         fontFamily: 'Raleway_600SemiBold'
     },
 
     inputQuantidade: {
         padding: 5,
-        fontSize: '13px',
+        fontSize: 13,
         color: '#505050',
-        height: '50px',
+        height: 50,
         width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
@@ -311,9 +311,9 @@ const styles = StyleSheet.create({
     medidaInput: {
         overflowX: 'hidden',
         display: 'flex',
-        height: '50px',
+        height: 50,
         width: 180,
-        marginLeft: '25px',
+        marginLeft: 25,
         marginTop: 10,
         shadowOffset: {
             width: 0,
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        marginLeft: '25px',
+        marginLeft:25,
         overflowX: 'hidden',
         border: 'none'
     },
@@ -340,13 +340,13 @@ const styles = StyleSheet.create({
     addButton: {
         backgroundColor: 'rgba(255,113,82,0.2)',
         textAlign: 'center',
-        paddingVertical: '12px',
+        paddingVertical: 12,
         borderRadius: 10,
-        marginTop: '10px',
+        marginTop: 10,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        paddingHorizontal: '10px'
+        paddingHorizontal: 10
     },
 
     addButtonText: {
@@ -356,11 +356,11 @@ const styles = StyleSheet.create({
 
     removeButton: {
         textAlign: 'center',
-        padding: '12px',
+        padding: 12,
         borderRadius: 10,
-        marginTop: '10px',
+        marginTop: 10,
         backgroundColor: 'rgba(0,0,0,0.15)',
-        marginLeft: '5px'
+        marginLeft: 5
     },
 
     removeButtonText: {
@@ -389,15 +389,15 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         color: '#FFF',
-        fontSize: '18px',
+        fontSize: 18,
         fontFamily: 'Raleway_700Bold',
     },
 
     inputPasso: {
-        paddingHorizontal: '7px',
-        fontSize: '13px',
+        paddingHorizontal: 7,
+        fontSize: 13,
         color: '#505050',
-        height: '50px',
+        height: 50,
         width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,

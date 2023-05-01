@@ -1,13 +1,19 @@
 import React from 'react';
-import { FlatList, View, Text, StyleSheet, Image, SectionList } from 'react-native';
+import { FlatList, View, Text, StyleSheet, ImageBackground, SectionList, TouchableOpacity } from 'react-native';
+import { BlurView } from 'expo-blur';
 
 //Componente único de categoria
 const ListItem = ({ item }) => {
     return (
         <View style={styles.caixaPrincipal}>
-            <Image source={item.uri} style={styles.imgCategoria} resizeMode="cover" />
-            <Text style={styles.titulo}>{item.text}</Text>
+            <ImageBackground source={item.uri} style={styles.imgCategoria} resizeMode="cover" imageStyle={{ borderRadius: 24 }}
+            >
+                <BlurView intensity={20}  tint="light" style={styles.textContainer}>
+                    <Text style={styles.titulo}>{item.text}</Text>
+                </BlurView>
+            </ImageBackground>
         </View>
+
     );
 };
 
@@ -16,7 +22,7 @@ function CarrosselCategorias() {
     return (
         <View style={styles.container}>
             <SectionList
-                contentContainerStyle={{ paddingHorizontal: 5 }} stickySectionHeadersEnabled={false} sections={SECTIONS} renderSectionHeader={({ section }) => (
+                stickySectionHeadersEnabled={true} sections={SECTIONS} renderSectionHeader={({ section }) => (
                     <>
                         {section.horizontal ? (
                             <FlatList
@@ -179,55 +185,65 @@ export default CarrosselCategorias;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginVertical: '8px',
-        paddingVertical: '2px'
-      },
+        marginVertical: 8,
+        paddingVertical: 2
+    },
+
+    imgCategoria: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
 
     caixaPrincipal: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingVertical: '0',
-        paddingBottom: '10px',
-        height: '100px',
-        minWidth: '70px',
-        maxWidth: '150px',
+        height: 88,
+        width: '134px',
         textAlign: 'center',
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
+        borderRadius: 24,
         backgroundColor: 'rgba(255, 255, 255, 0.2)',
-        marginHorizontal: '5px',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
             height: 3,
         },
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.3,
         shadowRadius: 4.65,
+        margin: 5
+    },
+
+    textContainer: {
+        backgroundColor: 'rgba(255,255,255)',
+        height: 25,
+        display: 'flex',
+        justifyContent: 'center',
+        borderTopRightRadius: 4,
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius:24
     },
 
     titulo: {
-        fontSize: '12px',
-        color: '#fff',
-        fontWeight: '500'
+        fontFamily: 'Raleway_600SemiBold',
+        textTransform: 'uppercase',
+        fontSize: 12,
+        color: '#000',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(255,255,255, 0.65)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderTopRightRadius: 4,
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius:24,
     },
 
     CarrosselContainer: {
-        marginVertical: '20px',
+        marginVertical: 20,
         display: 'flex',
         flexDirection: 'row'
-    },
-
-    imgCategoria: {
-
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-        width: '100%',
-        height: '80%',
-        marginBottom: '2px'
     },
 
 });

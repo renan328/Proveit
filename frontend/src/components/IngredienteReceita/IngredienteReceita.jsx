@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         width: '85%',
         display: 'flex',
         flexDirection: 'row',
-        marginVertical: '10px',
+        marginVertical: 10,
         alignItems: 'center',
         justifyContent: 'flex-start'
     },
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         fontFamily: 'Raleway_600SemiBold',
         color: '#505050',
-        fontSize: '15px'
+        fontSize: 15
     }
 
 

@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         color: '#505050',
         backgroundColor: '#fff',
         flexDirection: 'row',
-        marginTop: '30px',
+        marginTop: 30,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
     },
 
     userPic: {
-        width: '65px',
-        height: '65px',
+        width: 65,
+        height: 65,
         top: -15,
         left: 10,
         shadowOffset: {
@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
     textContainer: {
         flex: 75,
         display: 'flex',
-        paddingHorizontal: '20px',
-        paddingVertical: '10px',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
         borderBottomEndRadius: 20,
         borderTopEndRadius: 20,
         zIndex: 0,
@@ -115,24 +115,24 @@ const styles = StyleSheet.create({
     userName: {
         fontFamily: 'Raleway_700Bold',
         color: '#505050',
-        fontSize: '16px'
+        fontSize: 16
     },
 
     quoteContainer: {
-        marginVertical: '5px'
+        marginVertical: 5
     },
 
     comment: {
         fontFamily: 'Raleway_600SemiBold',
         color: '#505050',
-        fontSize: '14px'
+        fontSize: 14
     },
 
     footer: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        marginVertical: '5px'
+        marginVertical: 5
     }
 
 });

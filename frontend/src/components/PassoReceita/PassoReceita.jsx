@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         width: '85%',
         display: 'flex',
         flexDirection: 'row',
-        marginVertical: '10px',
+        marginVertical: 10,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
     step: {
         fontFamily: 'Raleway_900Black',
         color: '#505050',
-        fontSize: '40px',
-        marginRight: '15px'
+        fontSize: 40,
+        marginRight: 15
     },
 
     text: {
         textAlign: 'justify',
         fontFamily: 'Raleway_600SemiBold',
         color: '#505050',
-        fontSize: '15px'
+        fontSize: 15
     }
 
 

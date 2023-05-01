@@ -1,4 +1,3 @@
-
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -9,39 +8,32 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch'
     },
 
-    containerCentralizado: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-
     //header
     logoMini: {
-        height: '70px',
+        height: 70,
         backgroundColor: 'red'
     },
 
     header: {
         display: 'flex',
-        justifyContent: 'space-between',
         width: '100%',
-        height: 500,
+        height: 400,
         left: 0,
         top: 0,
         borderBottomLeftRadius: 65,
-        borderBottomRightRadius: 65,
+        borderBottomRightRadius:65,
 
         overflow: 'hidden',
-        shadowColor: "#000",
+        shadowColor: "rgba(0,0,0,0.5)",
         shadowOffset: {
             width: 0,
-            height: 3,
+            height: 4,
         },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-
-        elevation: 7,
+        shadowOpacity: 0.35,
+        shadowRadius: 6,
+        elevation: 4,
+        paddingLeft: 20,
+        paddingBottom: 20
     },
 
     subHeader: {
@@ -49,35 +41,34 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItens: 'center',
-        justifyContent: 'center'
+        justifyContent: 'space-between',
+        height: 60,
+        overflow: 'visible',
+        zIndex: 200
     },
 
-    shadowProp: {
-        paddingTop: '20px',
-        paddingBottom: '30px',
-        shadowOffset: { largura: 100, altura: 100 },
-        shadowColor: 'rgba(0, 0, 0, 0.25)',
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
+    textContainer: {
+        marginTop: 20,
+        marginBottom: 5
     },
 
-    Text: {
+    welcome: {
         fontFamily: 'Raleway_700Bold',
-        textAlign: 'center',
-        fontSize: 40,
+        textAlign: 'left',
+        fontSize: 22,
         fontWeight: 700,
-        color: '#fff',
+        color: '#FF7152',
         textShadowColor: 'rgba(0, 0, 0, 0.1)',
         textShadowOffset: { width: -1, height: 3 },
         textShadowRadius: 3
     },
 
-    TextoSecundario: {
-        fontFamily: 'Raleway_700Bold',
-        textAlign: 'center',
-        fontSize: 36,
+    username: {
+        fontFamily: 'Raleway_800ExtraBold',
+        textAlign: 'left',
+        fontSize: 37,
         fontWeight: 700,
-        color: 'rgba(255, 255, 255, 0.8)',
+        color: '#505050',
         textShadowColor: 'rgba(0, 0, 0, 0.1)',
         textShadowOffset: { width: -1, height: 3 },
         textShadowRadius: 3
@@ -85,18 +76,27 @@ const styles = StyleSheet.create({
 
     subTexto: {
         fontFamily: 'Raleway_600SemiBold',
-        color: '#fff',
-        fontWeight: '400'
+        color: 'rgba(0,0,0, 0.5)',
+        textAlign: 'left',
+        marginVertical: 8
+    },
+
+    inputContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     ingredienteInput: {
-        marginHorizontal: '5px',
-        paddingHorizontal: '7px',
-        fontSize: '11px',
+        marginHorizontal: 5,
+        paddingHorizontal: 7,
+        fontSize: 11,
         fontFamily: 'Raleway_600SemiBold',
         color: '#505050',
-        height: '35px',
-        width: '296px',
+        height: 40,
+        width: '84%',
+        left: -10,
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -110,25 +110,25 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         position: 'relative',
-        top: -50
+        alignSelf: 'center',
     },
 
     //listas
     listamento: {
         textAlign: 'center',
-        margin: '40px',
+        margin: 40,
     },
 
     categoria: {
         fontFamily: 'Raleway_800ExtraBold',
-        fontSize: '20px',
+        fontSize: 20,
         color: '#505050',
     },
 
     categoriaBig: {
-        marginTop: '30px',
-        fontFamily: 'Raleway_800ExtraBold',
-        fontSize: '30px',
+        marginTop: 10,
+        fontFamily: 'Raleway_900Black',
+        fontSize: 35,
         color: '#505050',
     }
 

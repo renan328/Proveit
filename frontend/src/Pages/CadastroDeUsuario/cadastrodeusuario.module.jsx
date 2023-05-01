@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 
 
     inputs: {
-        marginTop: '40px',
+        marginTop: 40,
         width: '100%',
         display: 'flex',
         alignItems: 'center',
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         width: '80%',
         display: 'flex',
         justifyContent: 'space-around',
-        marginTop: '20px',
+        marginTop: 20,
     },
 
     inputTitle: {
@@ -108,10 +108,10 @@ const styles = StyleSheet.create({
     },
 
     defaultInput: {
-        paddingHorizontal: '7px',
-        fontSize: '13px',
+        paddingHorizontal: 7,
+        fontSize: 13,
         color: '#505050',
-        height: '50px',
+        height: 50,
         width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 
     favcategoriaInput: {
         overflowX: 'hidden',
-        width: '296px',
+        width: 296,
         marginTop: 10,
         shadowOffset: {
             width: 0,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     },
 
     favcategoriafonteInput: {
-        fontSize: '11px',
+        fontSize: 11,
         color: '#505050',
         marginTop: 5,
     },
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     
     button: {
         display: 'flex',
-        marginBottom: '50px',
+        marginBottom: 50,
         marginTop: 30,
         width: 200,
         backgroundColor: 'orange',

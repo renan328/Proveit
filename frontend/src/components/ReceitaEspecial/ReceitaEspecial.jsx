@@ -1,25 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, Image, Touchable } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { TouchableOpacity } from 'react-native-web';
 
 function ReceitaEspecial() {
 
     return (
 
-        <LinearGradient start={{ x: -1, y: 1 }}
-            end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.containerEspecial}>
+        <View style={styles.containerEspecial}>
             <View style={styles.containerTexto}>
                 <Text style={styles.tituloEspecial}>Nossa </Text>
                 <Text style={styles.tituloEspecial2}>seleção</Text>
-                <FontAwesomeIcon icon={'pot-food'} />
             </View>
-            <View style={styles.containerReceita}>
+            <TouchableOpacity style={styles.containerReceita}>
                 <Image style={styles.imagemReceita}
                     source={require('../../assets/cat_molhos.jpg')}></Image>
                 <Text style={styles.tituloReceita}>Hambúrguer</Text>
-            </View>
-        </LinearGradient>
+            </TouchableOpacity>
+        </View>
     )
 
 }
@@ -29,46 +27,30 @@ export default ReceitaEspecial;
 const styles = StyleSheet.create({
 
     containerEspecial: {
-        paddingHorizontal: '20px',
-        marginVertical: '30px',
+        paddingHorizontal: 20,
         width: '100%',
-        height: '220px',
+        height: 200,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         overflow: 'hidden',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-
-        elevation: 7,
+        top: 10
     },
 
-    containerTexto: {
-
-    },
 
     tituloEspecial: {
-        fontSize: '30px',
-        color: '#fff',
-        fontWeight: '600',
-        textShadowColor: 'rgba(0, 0, 0, 0.1)',
-        textShadowOffset: { width: -1, height: 3 },
-        textShadowRadius: 3
+        fontSize: 45,
+        color: '#FF7152',
+        fontFamily: 'Raleway_900Black',
+        textTransform: 'uppercase'
     },
 
     tituloEspecial2: {
-        fontSize: '30px',
-        color: 'rgba(255, 255, 255, 0.8)',
-        fontWeight: '700',
-        textShadowColor: 'rgba(0, 0, 0, 0.1)',
-        textShadowOffset: { width: -1, height: 3 },
-        textShadowRadius: 3
+        fontSize: 35,
+        color: '#505050',
+        fontFamily: 'Raleway_800ExtraBold',
+        letterSpacing: 3.5,
     }
 
 });

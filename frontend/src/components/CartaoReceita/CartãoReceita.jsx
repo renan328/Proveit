@@ -1,44 +1,53 @@
 import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUtensils, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
+import { BlurView } from "expo-blur";
 
 export default function CartaoReceita({ receita }) {
     const navigation = useNavigation();
 
-    const handleCardPress = ( id ) => {
+    const handleCardPress = (id) => {
         navigation.navigate('ReceitaSingle', { id: receita.idReceita });
     };
-    
+
+    const stars = receita.mediaEstrelas;
+
+    function StarCounter() {
+
+        const starsBox = [];
+
+        for (let index = 0; index < stars; index++) {
+            starsBox.push(
+                <View key={index}>
+                    <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} />
+                </View>
+            );
+        }
+    }
+
     return (
         <TouchableOpacity key={receita.id} onPress={() => handleCardPress(receita.id)}>
-            <View style={styles.caixaPrincipal}>
+            <ImageBackground source={{ uri: receita.foto }} imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20, borderTopRightRadius: 20, }} style={styles.caixaPrincipal}>
 
-                {/* Container de imagem e texto */}
-                <Image style={styles.imgReceita} source={{ uri: receita.foto }} />
-
-                <View style={styles.containerTexto}>
-                    <Text style={styles.titulo}>{receita.nomeReceita}</Text>
-                    <Text style={styles.descricao} numberOfLines={1}>{receita.descricao}</Text>
+                <View style={styles.header}>
+                    <TouchableOpacity>
+                        <FontAwesomeIcon icon={faBookmark} size={20} color="#505050" style={styles.bookmarkIcon} />
+                    </TouchableOpacity>
                 </View>
 
-                {/* Informações da footer */}
-                <LinearGradient start={{ x: -1, y: 1 }}
-                    end={{ x: 2, y: 1 }} colors={['#FF7152', '#FF7152']} style={styles.footer}>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <FontAwesomeIcon style={styles.legenda} icon={faUtensils} />
-                        <Text style={styles.legenda}>{receita.porcoes}</Text>
+                {/* Container de imagem e texto */}
+                <BlurView style={styles.containerTexto} intensity={14}>
+                    <View style={styles.containerTextoWhite}>
+                        {StarCounter()}
+                        <Text style={styles.titulo}>{receita.nomeReceita}</Text>
                     </View>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <FontAwesomeIcon style={styles.legenda} icon={faClock} />
-                        <Text style={styles.legenda} >{receita.tempoPreparo} <Text style={styles.legenda} >{receita.tempo}</Text> </Text>
-                    </View>
-                </LinearGradient>
+                </BlurView>
 
-            </View>
-        </TouchableOpacity>
+            </ImageBackground>
+        </TouchableOpacity >
 
     )
 }
@@ -48,79 +57,76 @@ const styles = StyleSheet.create({
     caixaPrincipal: {
         display: 'flex',
         alignItems: 'center',
-        marginHorizontal: '6px',
+        margin: 6,
         justifyContent: 'space-between',
-        width: '131.15px',
-        height: '230px',
+        width: 175,
+        height: 240,
         backgroundColor: '#fff',
-        borderBottomLeftRadius: 14,
-        borderBottomRightRadius: 14,
-        borderTopLeftRadius: 14,
-        borderTopRightRadius: 14,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.29,
-        shadowRadius: 2,
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
     },
 
-    imgReceita: {
-        borderTopLeftRadius: 14,
-        borderTopRightRadius: 14,
-        height: '62%',
+    header: {
+        padding: 7,
         width: '100%',
-        marginBottom: '2px'
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+
+    bookmarkIcon: {
+        padding: 8,
+        backgroundColor: 'rgba(255,255,255,0.7)',
+        borderRadius: 10,
     },
 
     containerTexto: {
+        width: '100%',
+        height: 50,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+    },
+
+    containerTextoWhite: {
         flexWrap: 'wrap',
-        textAlign: 'center',
+        textAlign: 'left',
         display: 'flex',
-        justifyContent: 'space-between',
+        flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: '7px',
-        top: -4,
-        flexShrink: 1
+        justifyContent: 'flex-start',
+        width: '100%',
+        height: '100%',
+        paddingHorizontal: 8,
+        backgroundColor: 'rgba(255,255,255,0.75)',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
     },
 
     titulo: {
         display: 'flex',
         flexGrow: 1,
         flexWrap: 'wrap',
-        fontSize: '11px',
-        fontWeight: '700',
-        marginBottom: '3px',
-        fontFamily: 'Raleway_700Bold'
+        fontSize: 13,
+        marginBottom: 3,
+        fontFamily: 'Raleway_700Bold',
+        textAlign: 'left',
+        color: '#505050',
+        textTransform: 'capitalize'
     },
-
-    descricao: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        color: '#9e9e9e',
-        fontSize: '9px',
-        flexShrink: 1
-    },
-
-    footer: {
-        paddingVertical: '7px',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'flex-start',
-        flexDirection: 'row',
-        borderBottomLeftRadius: 14,
-        borderBottomRightRadius: 14,
-
-    },
-
-    legenda: {
-        marginHorizontal: '3px',
-        fontSize: '12px',
-        fontFamily: 'Raleway_500Medium',
-        color: '#fff'
-    }
 
 
 });

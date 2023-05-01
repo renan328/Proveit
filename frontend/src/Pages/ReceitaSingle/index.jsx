@@ -10,6 +10,7 @@ import ComentarioSingle from '../../components/ComentarioSingle/ComentarioSingle
 import { AirbnbRating } from 'react-native-ratings';
 import { useRoute } from '@react-navigation/native';
 import styles from './receitasingle.module';
+import { BlurView } from 'expo-blur';
 import { counter } from '@fortawesome/fontawesome-svg-core';
 
 
@@ -111,12 +112,12 @@ export default function ReceitaSingle({ navigation }) {
     return (
         <ScrollView style={styles.container}>
 
-            <ImageBackground source={{ uri: dadosReceita.receita?.foto }} style={{ height: screenHeight * 0.5 }}>
+            <ImageBackground source={{ uri: dadosReceita.receita?.foto }} style={styles.mainImage} imageStyle={{ borderBottomLeftRadius: 50, borderBottomRightRadius: 50 }}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => navigation.goBack()}><FontAwesomeIcon style={styles.headerIcon} icon={faAngleLeft} size={28} /></TouchableOpacity>
                     <Menu>
                         <MenuTrigger>
-                            <FontAwesomeIcon icon={faEllipsisVertical} style={styles.headerIcon} size={28} color={'#fff'} />
+                            <FontAwesomeIcon icon={faEllipsisVertical} style={styles.headerIcon} size={28} color={'#505050'} />
                         </MenuTrigger>
                         <MenuOptions>
                             <MenuOption style={{ marginVertical: '10px', marginHorizontal: '5px' }} onSelect={() => alert(`Compartilhar`)} text='Compartilhar' />
@@ -124,46 +125,45 @@ export default function ReceitaSingle({ navigation }) {
                         </MenuOptions>
                     </Menu>
                 </View>
+
+                <BlurView style={styles.mainHeader}>
+                    <View style={styles.mainHeaderWhite}>
+                        <View style={styles.mainTexts}>
+                            <View style={styles.starsContainer}>
+                                {StarCounter()}
+                            </View>
+                            <Text style={styles.mainTitle}>{dadosReceita.receita?.nomeReceita}</Text>
+                        </View>
+                    </View>
+                </BlurView>
             </ImageBackground>
 
             <View style={styles.mainContainer}>
 
-                <View style={styles.mainHeader}>
-                    <View style={styles.starsContainer}>
-
-                        {StarCounter()}
-
-                    </View>
-
-
-                    <View style={styles.mainTexts}>
-                        <Text style={styles.mainTitle}>{dadosReceita.receita?.nomeReceita}</Text>
-                        <Text style={styles.description}>{dadosReceita.receita?.descricao}</Text>
-                    </View>
-
-
-                    <View style={styles.caloryContainer}>
-                        <LinearGradient start={{ x: -1, y: 1 }}
-                            end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.caloryCounter}>
-                            <Text style={styles.caloryText}>Valor calórico: <Text style={{ fontFamily: 'Raleway_700Bold' }}>{dadosReceita.receita?.valCalorico}</Text></Text>
-                        </LinearGradient>
-                    </View>
-
+                <Text style={styles.description}>{dadosReceita.receita?.descricao}</Text>
+                <View style={styles.caloryContainer}>
                     <LinearGradient start={{ x: -1, y: 1 }}
-                        end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.detailsContainer}>
-                        <View style={styles.subDetail}>
-                            <FontAwesomeIcon icon={faUtensils} size={70} style={styles.detailIcon} />
-                            <Text style={styles.detailText}>{dadosReceita.receita?.porcoes}porções</Text>
-                        </View>
-                        <View style={styles.divBar}></View>
-                        <View style={styles.subDetail}>
-                            <FontAwesomeIcon icon={faClock} size={70} style={styles.detailIcon} />
-                            <Text style={styles.detailText}>{dadosReceita.receita?.tempoPreparo} {dadosReceita.receita?.tempo}</Text>
-                        </View>
+                        end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.caloryCounter}>
+                        <Text style={styles.caloryText}>Valor calórico: <Text style={{ fontFamily: 'Raleway_700Bold' }}>{dadosReceita.receita?.valCalorico}</Text></Text>
                     </LinearGradient>
+                </View>
 
+                <LinearGradient start={{ x: -1, y: 1 }}
+                    end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.detailsContainer}>
+                    <View style={styles.subDetail}>
+                        <FontAwesomeIcon icon={faUtensils} size={70} style={styles.detailIcon} />
+                        <Text style={styles.subDetailText}>Rendimento</Text>
+                        <Text style={styles.detailText}>{dadosReceita.receita?.porcoes}porções</Text>
+                    </View>
+                    <View style={styles.divBar}></View>
+                    <View style={styles.subDetail}>
+                        <FontAwesomeIcon icon={faClock} size={70} style={styles.detailIcon} />
+                        <Text style={styles.subDetailText}>Preparo</Text>
+                        <Text style={styles.detailText}>{dadosReceita.receita?.tempoPreparo} {dadosReceita.receita?.tempo}</Text>
+                    </View>
+                </LinearGradient>
 
-                    <TouchableOpacity onPress={() => addSave()} style={{
+                {/* <TouchableOpacity onPress={() => addSave()} style={{
                         marginTop: '10px',
                         display: 'flex',
                         flexDirection: 'row',
@@ -177,136 +177,138 @@ export default function ReceitaSingle({ navigation }) {
                         backgroundColor: saved ? '#ffc9bd' : '#fff',
                     }}>
                         <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={25} color={saved ? '#FF7152' : '#505050'} />
+                    </TouchableOpacity> */}
+
+                <TouchableOpacity style={styles.detailsContainer} onPress={() => navigation.navigate('Perfil')}>
+                    <View>
+                        <Image source={require('../../assets/user.jpg')} style={styles.userPic}></Image>
+                    </View>
+                    <View style={{ marginHorizontal: '8px' }}>
+                        <Text style={styles.mainUserText}>User Name</Text>
+                        <Text style={styles.linkUserText}>@{dadosReceita.receita?.nomeTag}</Text>
+                    </View>
+                </TouchableOpacity>
+                <View
+                    style={{
+                        borderBottomColor: '#505050',
+                        opacity: 0.4,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        width: '330px', height: '5px',
+                        marginTop: '15px',
+                        alignSelf: 'center'
+                    }} />
+            </View>
+            <View style={styles.ingredients}>
+
+                <View style={styles.ingredientsHeader}>
+                    <FontAwesomeIcon icon={faCarrot} size={50} color='#FF7152' />
+                    <Text style={styles.ingredientsTitle}>Ingredientes</Text>
+                </View>
+
+                <View style={styles.ingredientsList}>
+
+                    {dadosReceita.receita?.ingredientes.map((ingrediente) => (
+                        <IngredienteReceita id={ingrediente.idIngredientesReceita} quantidade={ingrediente.quantidade} medida={ingrediente.medida} nome={ingrediente.nomeIngrediente} />
+                    ))}
+
+                </View>
+            </View>
+
+            <View
+                style={{
+                    borderBottomColor: '#505050',
+                    opacity: 0.4,
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    width: '330px', height: '5px',
+                    marginTop: '15px',
+                    alignSelf: 'center'
+                }} />
+
+            <View style={styles.steps}>
+
+                <View style={styles.stepsHeader}>
+                    <FontAwesomeIcon icon={faKitchenSet} size={50} color='#FF7152' />
+                    <Text style={styles.stepsTitle}>Passos</Text>
+                </View>
+
+                <View style={styles.stepList}>
+
+                    {dadosReceita.receita?.passos.map((passo) => (
+                        <PassoReceita numPasso={passo.numPasso} passoTexto={passo.passoTexto} />
+                    ))}
+
+                </View>
+            </View>
+            <View
+                style={{
+                    borderBottomColor: '#505050',
+                    opacity: 0.4,
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    width: '330px', height: '5px',
+                    marginTop: '15px',
+                    alignSelf: 'center'
+                }} />
+            <View style={styles.ready}>
+                <Text style={styles.readySubText}>E já está</Text>
+                <Text style={styles.readyMainText}>PRONTO!</Text>
+            </View>
+            <View
+                style={{
+                    borderBottomColor: '#505050',
+                    opacity: 0.4,
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    width: '330px', height: '5px',
+                    marginTop: '15px',
+                    alignSelf: 'center'
+                }} />
+
+            <View style={styles.rating}>
+                <Text style={styles.ratePresentation}>O que <Text style={{ color: '#FF7152' }}>você</Text> achou?</Text>
+                <LinearGradient start={{ x: -1, y: 1 }}
+                    end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.ratingContainer}>
+                    <AirbnbRating
+                        ratingColor='#fff'
+                        count={5}
+                        reviews={[
+                            'Terrível',
+                            'Ruim',
+                            'Okay',
+                            'Ótimo',
+                            'Sensacional!',
+                        ]}
+                        defaultRating={5}
+                        size={35}
+                        selectedColor='#fff'
+                        unSelectedColor='rgb(255,255,255,0.5)'
+                        reviewColor='#fff'
+                        onFinishRating={handleRatingChange}
+                    />
+
+                    <TextInput
+                        placeholder={'O que você tem a dizer?'}
+                        style={styles.commentInput}
+                        textAlignVertical="top"
+                        multiline={true}
+                        value={comentario}
+                        onChangeText={(texto) => setComentario(texto)} />
+
+                    <TouchableOpacity style={styles.rateButton} onPress={handleAssessment}>
+                        <Text style={styles.rateButtonText}>Avaliar</Text>
                     </TouchableOpacity>
+                </LinearGradient>
+            </View>
 
-                    <TouchableOpacity style={styles.detailsContainer} onPress={() => navigation.navigate('Perfil')}>
-                        <View>
-                            <Image source={require('../../assets/user.jpg')} style={styles.userPic}></Image>
-                        </View>
-                        <View style={{ marginHorizontal: '8px' }}>
-                            <Text style={styles.mainUserText}>User Name</Text>
-                            <Text style={styles.linkUserText}>@{dadosReceita.receita?.nomeTag}</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <View
-                        style={{
-                            borderBottomColor: '#505050',
-                            opacity: 0.4,
-                            borderBottomWidth: StyleSheet.hairlineWidth,
-                            width: '330px', height: '5px',
-                            marginTop: '15px'
-                        }} />
+            <View style={styles.comments}>
+                <View style={styles.commentsHeader}>
+                    <Text style={styles.commentsTitle}>Comentários</Text>
                 </View>
-                <View style={styles.ingredients}>
+                <View style={styles.commentsContainer}>
 
-                    <View style={styles.ingredientsHeader}>
-                        <FontAwesomeIcon icon={faCarrot} size={50} color='#FF7152' />
-                        <Text style={styles.ingredientsTitle}>Ingredientes</Text>
-                    </View>
+                    {dadosReceita.avaliacoes?.map((avaliacoes) => (
+                        <ComentarioSingle userPicture={{ uri: avaliacoes.usuarioFoto }} userName={avaliacoes.usuarioNome} stars={avaliacoes.estrelas} comment={avaliacoes.comentario} />
+                    ))}
 
-                    <View style={styles.ingredientsList}>
-
-                        {dadosReceita.receita?.ingredientes.map((ingrediente) => (
-                            <IngredienteReceita id={ingrediente.idIngredientesReceita} quantidade={ingrediente.quantidade} medida={ingrediente.medida} nome={ingrediente.nomeIngrediente} />
-                        ))}
-
-                    </View>
                 </View>
-
-                <View
-                    style={{
-                        borderBottomColor: '#505050',
-                        opacity: 0.4,
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                        width: '330px', height: '5px',
-                        marginTop: '15px'
-                    }} />
-
-                <View style={styles.steps}>
-
-                    <View style={styles.stepsHeader}>
-                        <FontAwesomeIcon icon={faKitchenSet} size={50} color='#FF7152' />
-                        <Text style={styles.stepsTitle}>Passos</Text>
-                    </View>
-
-                    <View style={styles.stepList}>
-
-                        {dadosReceita.receita?.passos.map((passo) => (
-                            <PassoReceita numPasso={passo.numPasso} passoTexto={passo.passoTexto} />
-                        ))}
-
-                    </View>
-                </View>
-                <View
-                    style={{
-                        borderBottomColor: '#505050',
-                        opacity: 0.4,
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                        width: '330px', height: '5px',
-                        marginTop: '15px'
-                    }} />
-                <View style={styles.ready}>
-                    <Text style={styles.readySubText}>E já está</Text>
-                    <Text style={styles.readyMainText}>PRONTO!</Text>
-                </View>
-                <View
-                    style={{
-                        borderBottomColor: '#505050',
-                        opacity: 0.4,
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                        width: '330px', height: '5px',
-                        marginTop: '15px'
-                    }} />
-
-                <View style={styles.rating}>
-                    <Text style={styles.ratePresentation}>O que <Text style={{ color: '#FF7152' }}>você</Text> achou?</Text>
-                    <LinearGradient start={{ x: -1, y: 1 }}
-                        end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.ratingContainer}>
-                        <AirbnbRating
-                            ratingColor='#fff'
-                            count={5}
-                            reviews={[
-                                'Terrível',
-                                'Ruim',
-                                'Okay',
-                                'Ótimo',
-                                'Sensacional!',
-                            ]}
-                            defaultRating={5}
-                            size={35}
-                            selectedColor='#fff'
-                            unSelectedColor='rgb(255,255,255,0.5)'
-                            reviewColor='#fff'
-                            onFinishRating={handleRatingChange}
-                        />
-
-                        <TextInput
-                            placeholder={'O que você tem a dizer?'}
-                            style={styles.commentInput}
-                            textAlignVertical="top"
-                            multiline={true}
-                            value={comentario}
-                            onChangeText={(texto) => setComentario(texto)} />
-
-                        <TouchableOpacity style={styles.rateButton} onPress={handleAssessment}>
-                            <Text style={styles.rateButtonText}>Avaliar</Text>
-                        </TouchableOpacity>
-                    </LinearGradient>
-                </View>
-
-                <View style={styles.comments}>
-                    <View style={styles.commentsHeader}>
-                        <Text style={styles.commentsTitle}>Comentários</Text>
-                    </View>
-                    <View style={styles.commentsContainer}>
-
-                        {dadosReceita.avaliacoes?.map((avaliacoes) => (
-                            <ComentarioSingle userPicture={{uri: avaliacoes.usuarioFoto}} userName={avaliacoes.usuarioNome} stars={avaliacoes.estrelas} comment={avaliacoes.comentario} />
-                        ))}
-
-                    </View>
-                </View>
-
             </View>
         </ScrollView >
     );

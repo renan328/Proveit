@@ -1,5 +1,6 @@
+import { StyleSheet, Dimensions } from 'react-native';
 
-import { StyleSheet } from 'react-native';
+const screenHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
 
@@ -9,25 +10,34 @@ const styles = StyleSheet.create({
     },
 
     header: {
+        width: '100%',
         flexDirection: 'row',
         flex: 1,
         justifyContent: 'space-between'
     },
 
     headerIcon: {
-        color: '#fff',
-        marginVertical: '20px',
-        marginHorizontal: '12px',
+        color: '#505050',
+        marginVertical: 20,
+        marginHorizontal: 12,
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
         textShadowOffset: { width: -1, height: 1 },
         textShadowRadius: 10,
-        paddingVertical: '10px',
-        paddingHorizontal: '5px',
-        backgroundColor: 'rgba(80, 80, 80, 0.46)',
+        paddingVertical: 10,
+        paddingHorizontal: 5,
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
+    },
+
+    mainImage:{
+        height: screenHeight * 0.55, 
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 20
     },
 
     mainContainer: {
@@ -35,32 +45,42 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#fff',
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        top: -60,
-        borderTopLeftRadius: 70,
-        borderTopRightRadius: 70,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -5,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 5,
     },
 
     mainHeader: {
+        height: 120,
         display: 'flex',
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        maxWidth: '90%'
+        width: '100%',
+        borderBottomLeftRadius: 50, borderBottomRightRadius: 50,
+        borderTopLeftRadius: 50, borderTopRightRadius: 50,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.40,
+        shadowRadius: 7,
+        elevation: 7
+    },
+
+    mainHeaderWhite: {
+        paddingTop: 20,
+        paddingBottom: 20,
+        display: 'flex',
+        flex: 1,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        width: '100%',
+        backgroundColor: 'rgba(255,255,255,0.7)',
+        borderBottomLeftRadius: 50, borderBottomRightRadius: 50,
+        borderTopLeftRadius: 50, borderTopRightRadius: 50,
+        paddingLeft: 20
     },
 
     starsContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        marginTop: '15px'
+        marginTop: 15
     },
 
     star: {
@@ -69,17 +89,17 @@ const styles = StyleSheet.create({
 
     mainTexts: {
         display: 'flex',
-        alignItems: 'center',
+        textAlign: 'left',
         top: -18,
-        maxWidth: '100%'
+        width: '100%'
     },
 
     mainTitle: {
         color: '#505050',
         fontFamily: 'Raleway_800ExtraBold',
-        fontSize: '25px',
-        textAlign: 'center',
-        width: '85%',
+        fontSize: 20,
+        textAlign: 'left',
+        width: '100%',
         flexGrow: 1
     },
 
@@ -87,13 +107,13 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: 'rgba(0, 0, 0, 0.55)',
         fontFamily: 'Raleway_500Medium',
-        width: '85%',
-        textAlign: 'center',
+        width: '80%',
+        textAlign: 'justify',
     },
 
     caloryCounter: {
-        paddingHorizontal: '12px',
-        paddingVertical: '2px',
+        paddingHorizontal: 12,
+        paddingVertical: 5,
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
         borderTopLeftRadius: 10,
@@ -101,7 +121,8 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOpacity: 0.1,
         shadowRadius: 3,
-        flex: 1
+        flex: 1,
+        marginVertical: 10
     },
 
     caloryText: {
@@ -111,22 +132,22 @@ const styles = StyleSheet.create({
     },
 
     detailsContainer: {
-        marginVertical: '10px',
+        marginVertical: 10,
         flex: 1,
         flexDirection: 'row',
-        width: '100%',
-        paddingVertical: '20px',
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
+        width: '90%',
+        paddingVertical: 20,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.35,
-        shadowRadius: 4,
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
     },
 
     subDetail: {
@@ -137,15 +158,23 @@ const styles = StyleSheet.create({
 
     divBar: {
         height: '90%',
-        width: '2px',
+        width: 2,
         backgroundColor: '#fff'
+    },
+
+    subDetailText: {
+        fontFamily: 'Raleway_500Medium',
+        color: 'rgba(255,255,255,0.7)',
+        marginTop: 5,
+        fontSize: 12,
     },
 
     detailText: {
         fontFamily: 'Raleway_700Bold',
         color: '#fff',
-        marginTop: '5px',
-        fontSize: '15px'
+        marginTop: 5,
+        fontSize: 17,
+        textTransform: 'uppercase'
     },
 
     detailIcon: {
@@ -153,7 +182,7 @@ const styles = StyleSheet.create({
     },
 
     markButton: {
-        marginTop: '20px',
+        marginTop: 20,
         display: 'flex',
         flexDirection: 'row',
         width: '50%',
@@ -162,8 +191,8 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         justifyContent: 'space-between',
-        paddingVertical: '20px',
-        paddingHorizontal: '30px',
+        paddingVertical: 20,
+        paddingHorizontal: 30,
     },
 
     userPic: {
@@ -172,13 +201,13 @@ const styles = StyleSheet.create({
     },
 
     mainUserText: {
-        fontSize: '25px',
+        fontSize: 25,
         fontFamily: 'Raleway_800ExtraBold',
         color: '#FF7152'
     },
 
     linkUserText: {
-        fontSize: '15px',
+        fontSize: 15,
         fontFamily: 'Raleway_700Bold',
         color: '#505050'
     },
@@ -191,22 +220,22 @@ const styles = StyleSheet.create({
     },
 
     stepsHeader: {
-        marginTop: '17px',
+        marginTop: 17,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
     },
 
     stepsTitle: {
-        marginLeft: '15px',
+        marginLeft: 15,
         fontFamily: 'Raleway_800ExtraBold',
         color: '#505050',
         fontSize: 25,
-        marginTop: '7px',
+        marginTop: 7,
     },
 
     stepList: {
-        marginTop: '20px',
+        marginTop: 20,
         display: 'flex',
         alignItems: 'center',
         width: '100%'
@@ -220,29 +249,29 @@ const styles = StyleSheet.create({
     },
 
     ingredientsHeader: {
-        marginTop: '17px',
+        marginTop: 17,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
     },
 
     ingredientsTitle: {
-        marginLeft: '15px',
+        marginLeft: 15,
         fontFamily: 'Raleway_800ExtraBold',
         color: '#505050',
         fontSize: 25,
-        marginTop: '7px',
+        marginTop: 7,
     },
 
     ingredientsList: {
-        marginTop: '20px',
+        marginTop: 20,
         display: 'flex',
         alignItems: 'center',
         width: '100%'
     },
 
     ready: {
-        marginTop: '15px',
+        marginTop: 15,
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column'
@@ -251,14 +280,14 @@ const styles = StyleSheet.create({
     readySubText: {
         fontFamily: 'Raleway_700Bold',
         color: '#999999',
-        fontSize: '15px'
+        fontSize: 15
     },
 
     readyMainText: {
         fontFamily: 'Raleway_900Black',
-        fontSize: '42px',
+        fontSize: 42,
         color: '#505050',
-        letterSpacing: '10px'
+        letterSpacing: 10
     },
 
     rating: {
@@ -270,13 +299,13 @@ const styles = StyleSheet.create({
 
     ratePresentation: {
         fontFamily: 'Raleway_800ExtraBold',
-        fontSize: '20px',
-        marginTop: '20px',
+        fontSize: 20,
+        marginTop: 20,
         color: '#505050'
     },
 
     ratingContainer: {
-        marginTop: '20px',
+        marginTop: 20,
         width: '90%',
         display: 'flex',
         flexDirection: 'column',
@@ -311,15 +340,15 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 5,
-        padding: '10px',
-        marginTop: '10px',
+        padding: 10,
+        marginTop: 10,
         flexGrow: true,
-        height: '100px'
+        height: 100
     },
 
     rateButton: {
-        marginTop: '25px',
-        paddingVertical: '8px',
+        marginTop: 25,
+        paddingVertical: 8,
         textAlign: 'center',
         width: '70%',
         backgroundColor: '#fff',
@@ -342,29 +371,29 @@ const styles = StyleSheet.create({
     },
 
     comments: {
-        marginTop: '40px',
+        marginTop: 40,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
     },
 
     commentsHeader: {
-        paddingVertical: '30px'
+        paddingVertical: 30
     },
 
     commentsTitle: {
-        fontSize: '25px',
+        fontSize: 25,
         fontFamily: 'Raleway_800ExtraBold',
         color: '#505050',
     },
 
     commentSingle: {
-        paddingVertical: '7px',
-        paddingHorizontal: '7px',
+        paddingVertical: 7,
+        paddingHorizontal: 7,
         textAlign: 'left',
-        fontSize: '13px',
+        fontSize: 13,
         color: '#505050',
-        height: '50px',
+        height: 50,
         width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
