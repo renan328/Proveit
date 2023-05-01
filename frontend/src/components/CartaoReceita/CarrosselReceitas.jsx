@@ -7,20 +7,20 @@ export default function CarrosselHome() {
 
     const [receitas, setReceitas] = useState([]);
 
-    // useEffect(() => {
-    //     fetch("https://cloudproveit.azurewebsites.net/api/receita", {
-    //         method: "GET",
-    //     })
-    //         .then((response) => response.json())
-    //         .then((json) => {
-    //             setReceitas(json);
-    //         })
-    //         .catch((error) => {
-    //             alert("Erro ao buscar receitas");
-    //         });
-    // }, []);
+    useEffect(() => {
+        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
+            method: "GET",
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setReceitas(json);
+            })
+            .catch((error) => {
+                alert("Erro ao buscar receitas");
+            });
+    }, []);
 
-    // console.log(receitas)
+    console.log(receitas)
 
     if (receitas == '') {
         return (
