@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         backgroundColor: '#fff',
         width: '100%',
-        height: '85%',
+        height: '91.2%',
         display: 'flex',
         marginTop: '100',
         flexDirection: 'column',
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent:'space-around',
-        width: '82%',
+        width: '73%',
         height: '40%',
     },
 
