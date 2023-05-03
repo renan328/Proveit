@@ -99,7 +99,7 @@ export default function ReceitaSingle({ navigation }) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         })
-            .then((response) => { showSuccessToast })
+            .then((response) => { alert("Avaliação cadastrada com sucesso!"); })
             .catch((error) => {
                 console.log(error);
                 showFailToast;
@@ -153,7 +153,7 @@ export default function ReceitaSingle({ navigation }) {
                     <View style={styles.subDetail}>
                         <FontAwesomeIcon icon={faUtensils} size={70} style={styles.detailIcon} />
                         <Text style={styles.subDetailText}>Rendimento</Text>
-                        <Text style={styles.detailText}>{dadosReceita.receita?.porcoes}porções</Text>
+                        <Text style={styles.detailText}>{dadosReceita.receita?.porcoes} porções</Text>
                     </View>
                     <View style={styles.divBar}></View>
                     <View style={styles.subDetail}>

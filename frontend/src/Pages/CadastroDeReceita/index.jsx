@@ -28,39 +28,38 @@ export default function CadastroDeReceita({ navigation, props }) {
     const [passos, setPassos] = useState([{ idPasso: 0, NumPasso: 1, PassoTexto: '' }]);
     const [errors, setErrors] = useState({});
 
-    // Novo ingrediente
     function adicionarIngrediente() {
         setIngredientes([...ingredientes, { nome: '', quantidade: '', medida: '' }]);
-    };
+    }
 
     function removerIngrediente(index) {
         const novosIngredientes = [...ingredientes];
         novosIngredientes.splice(index, 1);
         setIngredientes(novosIngredientes);
-    };
+    }
 
     function atualizarIngrediente(index, propriedade, valor) {
         const novosIngredientes = [...ingredientes];
         novosIngredientes[index][propriedade] = valor;
         setIngredientes(novosIngredientes);
-    };
+    }
 
     const addStep = () => {
         const newStepNum = passos[passos.length - 1].NumPasso + 1;
         setPassos([...passos, { NumPasso: newStepNum, PassoTexto: '' }]);
-    };
+    }
 
     const removeStep = (index) => {
         const updatedSteps = [...passos];
         updatedSteps.splice(index, 1);
         setPassos(updatedSteps);
-    };
+    }
 
     const handleStepTextChange = (index, text) => {
         const updatedSteps = [...passos];
         updatedSteps[index].PassoTexto = text;
         setPassos(updatedSteps);
-    };
+    }
 
     const toastConfig = {
         success: internalState => (
@@ -80,7 +79,7 @@ export default function CadastroDeReceita({ navigation, props }) {
         error: () => { },
         info: () => { },
         any_custom_type: () => { },
-    };
+    }
 
     const showSuccessToast = () => {
         Toast.show({
@@ -90,7 +89,7 @@ export default function CadastroDeReceita({ navigation, props }) {
             visibilityTime: 3000,
             bottomOffset: 120
         });
-    };
+    }
 
     const showFailToast = () => {
         Toast.show({
@@ -100,7 +99,7 @@ export default function CadastroDeReceita({ navigation, props }) {
             visibilityTime: 3000,
             bottomOffset: 120
         });
-    };
+    }
 
 
     //Configurações das imagens
@@ -118,7 +117,7 @@ export default function CadastroDeReceita({ navigation, props }) {
             return;
         }
         setFoto(result.assets[0].uri);
-    };
+    }
 
     function cadastrarReceita() {
         const errors = {};
@@ -166,9 +165,6 @@ export default function CadastroDeReceita({ navigation, props }) {
         if (!foto) {
             errors.foto = "Imagem é obrigatória";
         }
-
-        // tempo, foto
-
         setErrors(errors);
 
         const body = { idReceita, nomeReceita, tempoPreparo, tempo, porcoes, valCalorico, descricao, nomeTag, usuario_id, categoria, aproveitamento, foto, ingredientes, passos };
@@ -180,14 +176,14 @@ export default function CadastroDeReceita({ navigation, props }) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             })
-                .then((response) => { alert('foi') })
+                .then((response) => { alert('Receita cadastrada com sucesso!') })
                 .catch((error) => {
                     console.log(error);
                     showFailToast;
                 });
 
             console.log(body);
-        };
+        }
     }
 
     const categorias = [
@@ -212,8 +208,7 @@ export default function CadastroDeReceita({ navigation, props }) {
         'Torta',
         'Vegano',
         'Vegetariano'
-    ];
-
+    ]
 
     return (
         <ScrollView style={styles.container} >
@@ -271,7 +266,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                 <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
                     <TextInput
                         style={[styles.inputTempo, errors.tempoPreparo && styles.inputError]}
-                        placeholder='Tempo'
+                        placeholder='Ex: 10'
                         value={tempoPreparo}
                         onChangeText={(texto) => setTempoPreparo(texto)}
                     />
@@ -295,7 +290,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <Text style={styles.TextInput}>Porções</Text>
                     <TextInput
                         style={[styles.allInput, errors.porcoes && styles.inputError]}
-                        placeholder="Quantidade"
+                        placeholder="Ex: 10"
                         value={porcoes}
                         onChangeText={(texto) => setPorcoes(texto)}
                     />
@@ -316,7 +311,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <Text style={styles.TextInput}>Valor Calórico</Text>
                     <TextInput
                         style={styles.allInput}
-                        placeholder='Ex: Gramas/quilocalorias'
+                        placeholder='Ex: 150'
                         value={valCalorico}
                         onChangeText={(texto) => setValCalorico(texto)}
                     />
@@ -346,7 +341,7 @@ export default function CadastroDeReceita({ navigation, props }) {
 
                                 <TextInput
                                     style={[styles.allInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
-                                    placeholder="Ingrediente"
+                                    placeholder="Ex: farinha de trigo"
                                     value={ingrediente.nomeIngrediente}
                                     onChangeText={texto => atualizarIngrediente(index, 'nomeIngrediente', texto)}
                                 />
@@ -359,7 +354,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                             <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
                                 <TextInput
                                     style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
-                                    placeholder="Quantidade"
+                                    placeholder="Ex: 10"
                                     value={ingrediente.quantidade}
                                     onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
                                 />
@@ -369,6 +364,10 @@ export default function CadastroDeReceita({ navigation, props }) {
                                     selectedValue={ingrediente.medida}
                                     onValueChange={valor => atualizarIngrediente(index, 'medida', valor)}
                                 >
+                                    <Picker.Item label="A gosto" value="a gosto" />
+                                    <Picker.Item label="Gramas (g)" value="g" />
+                                    <Picker.Item label="Quilograma (kg)" value="kg" />
+                                    <Picker.Item label="ML" value="ml" />
                                     <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
                                     <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
                                     <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />
