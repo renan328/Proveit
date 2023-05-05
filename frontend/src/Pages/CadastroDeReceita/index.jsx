@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Image, Picker } from "react-native";
+import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Image, Picker, Appearance, useColorScheme } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCamera, faPlus, faTrashAlt, faTrashCan, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import * as ImagePicker from 'expo-image-picker';
-import styles from './cadastrodereceita.module';
+import stylesLight from './cadastrodereceita.module';
+import stylesDark from './cadastrodereceita.moduleDark';
 import Toast from 'react-native-toast-message';
 import toastStyle from '../Toasts/toasts';
 
@@ -214,18 +215,21 @@ export default function CadastroDeReceita({ navigation, props }) {
         'Vegetariano'
     ];
 
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
+
 
     return (
         <ScrollView style={styles.container} >
             {/* Header */}
             <View style={styles.header}>
                 <Text style={styles.textAdd}>Adicionar</Text>
-                <Text style={styles.textReceitas} >Receitas</Text>
+                <Text style={styles.textReceitas} >Receita</Text>
             </View>
 
             {/* Fotos */}
             <View style={{ display: 'flex', alignItems: "center" }}>
-                <Text style={{ fontFamily: 'Raleway_800ExtraBold', fontSize: 20, marginTop: 26, color: '#505050' }}> Foto </Text>
+                <Text style={styles.headerPic}> Foto </Text>
                 <TouchableOpacity style={[styles.BorderIcon, errors.foto && styles.BorderIconError]} onPress={pickImage}>
                     <FontAwesomeIcon style={[styles.IconCamera, errors.foto && styles.IconCameraError]} icon={faCamera} size={58} />
                     {foto && <Image source={{ uri: foto }} style={styles.imagemReceita} />}

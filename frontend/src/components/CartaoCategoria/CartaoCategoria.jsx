@@ -1,16 +1,20 @@
 import React from 'react';
-import { FlatList, View, Text, StyleSheet, ImageBackground, SectionList, TouchableOpacity } from 'react-native';
+import { FlatList, View, Text, StyleSheet, ImageBackground, SectionList, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import { BlurView } from 'expo-blur';
 
 //Componente único de categoria
 const ListItem = ({ item }) => {
+
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
+
     return (
         <View style={styles.caixaPrincipal}>
             <ImageBackground source={item.uri} style={styles.imgCategoria} resizeMode="cover" imageStyle={{ borderRadius: 24 }}
             >
-                <BlurView intensity={20}  tint="light" style={styles.textContainer}>
+                <View style={styles.textContainer}>
                     <Text style={styles.titulo}>{item.text}</Text>
-                </BlurView>
+                </View>
             </ImageBackground>
         </View>
 
@@ -19,6 +23,10 @@ const ListItem = ({ item }) => {
 
 //Função para o slider
 function CarrosselCategorias() {
+
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
+
     return (
         <View style={styles.container}>
             <SectionList
@@ -182,7 +190,7 @@ const SECTIONS = [
 
 export default CarrosselCategorias;
 
-const styles = StyleSheet.create({
+const stylesLight = StyleSheet.create({
     container: {
         flex: 1,
         marginVertical: 8,
@@ -220,7 +228,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 4,
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 24,
-        borderBottomRightRadius:24
+        borderBottomRightRadius: 24
     },
 
     titulo: {
@@ -237,7 +245,72 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 4,
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 24,
-        borderBottomRightRadius:24,
+        borderBottomRightRadius: 24,
+    },
+
+    CarrosselContainer: {
+        marginVertical: 20,
+        display: 'flex',
+        flexDirection: 'row'
+    },
+
+});
+
+const stylesDark = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginVertical: 8,
+        paddingVertical: 2
+    },
+
+    imgCategoria: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+
+    caixaPrincipal: {
+        height: 88,
+        width: '134px',
+        textAlign: 'center',
+        borderRadius: 24,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 4.65,
+        margin: 5
+    },
+
+    textContainer: {
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        height: 25,
+        display: 'flex',
+        justifyContent: 'center',
+        borderTopRightRadius: 4,
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24
+    },
+
+    titulo: {
+        fontFamily: 'Raleway_600SemiBold',
+        textTransform: 'uppercase',
+        fontSize: 12,
+        color: '#fff',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0, 0.65)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderTopRightRadius: 4,
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
     },
 
     CarrosselContainer: {

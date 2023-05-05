@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#202020'
     },
 
     header: {
@@ -18,41 +18,46 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
 
+    configIcon: {
+        marginTop: 10,
+        color: '#909090',
+    },
+
     userImage: {
         borderBottomLeftRadius: 50,
         borderBottomRightRadius: 50,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
-        marginTop: '15px',
+        marginTop: 10,
         width: 100,
         height: 100,
-        maxWidth: '500px',
-        backgroundColor: 'rgba(50, 50, 50, 0.2)',
+        maxWidth: 500,
+        backgroundColor: '#303030',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
     },
     name: {
         fontFamily: 'Raleway_800ExtraBold',
-        marginTop: '10px',
+        marginTop: 10,
         color: '#FF7152',
         fontSize: 28,
     },
     userName: {
         fontFamily: 'Raleway_700Bold',
-        color: '#858585',
+        color: '#909090',
         fontSize: 12,
     },
     text: {
         fontFamily: 'Raleway_700Bold',
-        marginTop: '50px',
+        marginTop: 50,
         color: '#FF7152',
     },
     textUnder: {
-        width: '350px',
+        width: 350,
         fontFamily: 'Raleway_700Bold',
-        marginTop: '15px',
-        color: '#505050',
+        marginTop: 15,
+        color: '#fff',
         textAlign: 'center'
     },
     imagemUsu: {

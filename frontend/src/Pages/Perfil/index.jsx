@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimension } from 'react-native';
+import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimension, Appearance, useColorScheme } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRightFromBracket, faUser, faGear } from '@fortawesome/free-solid-svg-icons';
 import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, useFonts } from '@expo-google-fonts/raleway';
-import styles from './perfil.module';
+import stylesLight from './perfil.module';
+import stylesDark from './perfil.moduleDark';
+
 
 export default function Perfil({ navigation }) {
+
+    const scheme = useColorScheme();
+    const styles = scheme ==='dark' ? stylesDark : stylesLight;
 
     return (
         // Container Geral
         <View style={styles.container}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.navigate('Configuracoes')}>
-                    <FontAwesomeIcon icon={faGear} size={32} color='rgba(50, 50, 50, 0.3)' style={{ marginTop: 15 }} />
+                    <FontAwesomeIcon icon={faGear} size={32} style={styles.configIcon} />
                 </TouchableOpacity>
             </View>
             <View>
                 {/* Imagem do Usuário e Dados */}
                 <View style={styles.userImage}>
-                    <FontAwesomeIcon icon={faUser} size={50} style={styles.userIcon} color='#505050' />
+                    <FontAwesomeIcon icon={faUser} size={50} style={styles.userIcon} color='#606060' />
                 </View>
                 <Text style={styles.name}>User</Text>
                 <Text style={styles.userName}>@userName</Text>

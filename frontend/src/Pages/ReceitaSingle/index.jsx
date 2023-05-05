@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, Appearance, useColorScheme, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
@@ -9,7 +9,8 @@ import IngredienteReceita from '../../components/IngredienteReceita/IngredienteR
 import ComentarioSingle from '../../components/ComentarioSingle/ComentarioSingle';
 import { AirbnbRating } from 'react-native-ratings';
 import { useRoute } from '@react-navigation/native';
-import styles from './receitasingle.module';
+import stylesDark from './receitasingle.moduleDark';
+import stylesLight from './receitasingle.module';
 import { BlurView } from 'expo-blur';
 import { counter } from '@fortawesome/fontawesome-svg-core';
 
@@ -17,6 +18,9 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
 const screenHeight = Dimensions.get('window').height;
 
 export default function ReceitaSingle({ navigation }) {
+
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     const route = useRoute();
     const { id } = route.params;

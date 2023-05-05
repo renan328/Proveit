@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         display: 'flex',
-        backgroundColor: '#ffffff'
+        backgroundColor: '#202020'
     },
     header: {
         width: '100%',
@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
     },
     textOpcoes: {
         fontFamily: 'Raleway_600SemiBold',
-        fontSize: 18,
-        color: '#505050',
+        fontSize: 15,
+        color: '#fff',
     },
     textOpcoesSair: {
         fontFamily: 'Raleway_700Bold',
-        fontSize: 15,
+        fontSize: 18,
         color: '#FF7152'
     },
     botaoOpcoes: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#eeeeee',
+        backgroundColor: '#303030',
         marginTop: 20,
     },
     linha: {
@@ -76,11 +76,17 @@ const styles = StyleSheet.create({
         border: 'none',
     },
 
+    bottomTextContainer: {
+        top: 50,
+        display: 'flex',
+        width: '100%',
+        alignItems: 'center'
+    },
+
     bottomText: {
-        alignSelf: 'center',
         fontSize: 12,
         fontFamily: 'Raleway_500Medium',
-        color: '#505050',
+        color: '#606060',
         width: '100%'
     }
 

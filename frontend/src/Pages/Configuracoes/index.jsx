@@ -1,73 +1,74 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Appearance, useColorScheme } from "react-native";
 import { Raleway_800ExtraBold, Raleway_500Medium } from "@expo-google-fonts/raleway";
-import styles from './configuracoes.module';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faArrowLeft, faChevronCircleRight, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import stylesDark from './configuracoes.moduleDark';
+import stylesLight from './configuracoes.module';
 
-export default function Configuracoes() {
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronLeft, faUser, faRightFromBracket, faQuestionCircle, faPencil, faBrush, faScroll } from '@fortawesome/free-solid-svg-icons';
+
+export default function Configuracoes( {navigation} ) {
+
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
+
     return (
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity style={styles.botao} onPress={() => navigation.goBack()}>
-                    <FontAwesomeIcon icon={faArrowLeft} color="#FF7152" size={'30px'} />
+                    <FontAwesomeIcon icon={faChevronLeft} color="#FF7152" size={'30px'} />
                 </TouchableOpacity>
 
                 <Text style={styles.title}>Configurações</Text>
-                <View style={styles.linha} />
             </View>
+            <View style={styles.linha} />
 
             {/* Lista de opções */}
             <View style={styles.opcoes}>
-                <View style={styles.containerOpcoes}>
+                <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Editar Perfil</Text>
-                    <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
-                </View>
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faUser} size={'25px'} color="#606060" />
+                </TouchableOpacity>
 
-                <View style={styles.linhaOpcoes} />
 
-                <View style={styles.containerOpcoes}>
-                    <Text style={styles.textOpcoes}>Editar Receita</Text>
-                    <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
-                </View>
+                <TouchableOpacity style={styles.containerOpcoes}>
+                    <Text style={styles.textOpcoes}>Editar receita</Text>
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={'25px'} color="#606060" />
+                </TouchableOpacity>
 
-                <View style={styles.linhaOpcoes} />
 
-                <View style={styles.containerOpcoes}>
+                <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Temas</Text>
-                    <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
-                </View>
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faBrush} size={'25px'} color="#606060" />
+                </TouchableOpacity>
 
-                <View style={styles.linhaOpcoes} />
-
-                <View style={styles.containerOpcoes}>
+                <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Central de Ajuda</Text>
-                    <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
-                </View>
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faQuestionCircle} size={'25px'} color="#606060" />
+                </TouchableOpacity>
 
-                <View style={styles.linhaOpcoes} />
 
-                <View style={styles.containerOpcoes}>
-                    <Text style={styles.textOpcoes}>Termos e Condições</Text>
-                    <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
-                </View>
+                <TouchableOpacity style={styles.containerOpcoes}>
+                    <Text style={styles.textOpcoes}>Termos e condições</Text>
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faScroll} size={'25px'} color="#606060" />
+                </TouchableOpacity>
 
-                <View style={styles.linhaOpcoes} />
 
-                <View style={styles.containerOpcoes}>
-                    <Text style={styles.textOpcoes}>Políticas de Privacidade</Text>
-                    <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} size={'25px'} /></TouchableOpacity>
-                </View>
+                <TouchableOpacity style={styles.containerOpcoes}>
+                    <Text style={styles.textOpcoes}>Política de privacidade</Text>
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faScroll} size={'25px'} color="#606060" />
+                </TouchableOpacity>
 
-                <View style={styles.linhaOpcoes} />
 
-                <View style={styles.containerOpcoes}>
-                    <Text style={styles.textOpcoesSair}>Sair da Conta</Text>
-                    <TouchableOpacity style={styles.botaoOpcoes}><FontAwesomeIcon icon={faChevronRight} color="#FF7152" size={'25px'} /></TouchableOpacity>
-                </View>
+                <TouchableOpacity style={styles.containerOpcoes}>
+                    <Text style={styles.textOpcoesSair}>Sair da conta</Text>
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faRightFromBracket} size={'25px'} color="#ff7152" />
+                </TouchableOpacity>
 
-                <View style={styles.linhaOpcoes} />
+            </View>
+            <View style={styles.bottomTextContainer}>
+                <Text style={styles.bottomText}>© 2023-2023 Proveit.inc</Text>
             </View>
         </View>
     );

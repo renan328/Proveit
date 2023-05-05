@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -7,12 +7,17 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas';
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 import Toast from 'react-native-toast-message';
-import styles from './home.module';
+import stylesDark from './home.moduleDark';
+import stylesLight from './home.moduleLight';
+
 import CartaoExplorar from '../../components/CarrosselExplorar/CartãoExplorar';
 
 
 export default function Home({ navigation }) {
+
     const username = "Convidado";
+    const scheme = useColorScheme();
+    const styles = scheme ==='dark' ? stylesDark : stylesLight;
 
     return (
 
@@ -23,7 +28,7 @@ export default function Home({ navigation }) {
                 <View style={styles.subHeader}>
                     <Image
                         style={{ width: 52, height: 46, top: 15 }}
-                        source={require('../../assets/proveitLogoColored.png')}
+                        source={ scheme ==='dark' ? require('../../assets/proveitLogoColored.png') : require('../../assets/proveitLogoColoredDark.png')}
                     />
                     <Image
                         style={{ minWidth: '200px', maxWidth: '300px', height: '200px' }}

@@ -16,6 +16,7 @@ import EsqueciMinhaSenha from './src/Pages/EsqueciMinhaSenha';
 import Cod_EsqueciMinhaSenha from './src/Pages/Cod_EsqueciMinhaSenha';
 import Red_EsqueciMinhaSenha from './src/Pages/Red_EsqueciMinhaSenha';
 import Favoritos from './src/Pages/Favoritos';
+import Configuracoes from './src/Pages/Configuracoes';
 import { Route } from 'expo-router/src/Route';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';

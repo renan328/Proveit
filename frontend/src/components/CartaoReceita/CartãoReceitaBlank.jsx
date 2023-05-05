@@ -1,11 +1,14 @@
 import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Appearance, useColorScheme } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { BlurView } from "expo-blur";
 
 export default function CartaoReceitaBlank() {
+
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     return (
         <View>
@@ -27,7 +30,7 @@ export default function CartaoReceitaBlank() {
     )
 }
 
-const styles = StyleSheet.create({
+const stylesLight = StyleSheet.create({
 
     caixaPrincipal: {
         display: 'flex',
@@ -80,6 +83,66 @@ const styles = StyleSheet.create({
         height: '100%',
         paddingHorizontal: 8,
         backgroundColor: 'rgba(255,255,255,0.75)',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+    },
+
+});
+
+const stylesDark = StyleSheet.create({
+
+    caixaPrincipal: {
+        display: 'flex',
+        alignItems: 'center',
+        margin: 6,
+        justifyContent: 'space-between',
+        width: 175,
+        height: 240,
+        backgroundColor: '#fff',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        backgroundColor: 'rgba(0,0,0,0.15)'
+    },
+
+    header: {
+        padding: 7,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+
+    bookmarkIcon: {
+        padding: 8,
+        backgroundColor: 'rgba(0,0,0,0.15)',
+        borderRadius: 10,
+    },
+
+    containerTexto: {
+        width: '100%',
+        height: 50,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+    },
+
+    containerTextoWhite: {
+        flexWrap: 'wrap',
+        textAlign: 'left',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%',
+        height: '100%',
+        paddingHorizontal: 8,
+        backgroundColor: 'rgba(0,0,0,0.3)',
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 5,

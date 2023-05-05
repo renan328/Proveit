@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Appearance, useColorScheme } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
 import { TransitionSpecs } from '@react-navigation/stack';
@@ -29,6 +29,9 @@ const Stack = createNativeStackNavigator();
 
 // Tab navigator principal, a com todas as stacks screens
 function MainTabNavigator() {
+
+    const scheme = useColorScheme();
+
     return (
         <Tab.Navigator screenOptions={{
             activeTintColor: '#FF7152',
@@ -44,7 +47,8 @@ function MainTabNavigator() {
                 elevation: 0,
                 borderRadius: 20,
                 height: 55,
-                backgroundColor: '#fff',
+                border: 0,
+                backgroundColor: scheme === 'dark' ? '#202020' : '#fff',
                 shadowColor: '#000',
                 shadowOffset: {
                     width: 0,
@@ -59,13 +63,13 @@ function MainTabNavigator() {
 
             <Tab.Screen name="Home" component={HomeStack} options={{
                 tabBarIcon: ({ focused }) => (
-                    <FontAwesomeIcon style={styles.button} icon={faHome} size={22} color={focused ? '#FF7152' : '#505050'} />
+                    <FontAwesomeIcon style={styles.button} icon={faHome} size={22} color={focused ? '#FF7152' : '#808080'} />
                 ), headerShown: false,
             }} />
 
             <Tab.Screen name="Adicionar" component={CadastroDeReceitaStack} options={{
                 tabBarIcon: ({ focused }) => (
-                    <FontAwesomeIcon icon={faPlus} size={22} color={focused ? '#FF7152' : '#505050'} />
+                    <FontAwesomeIcon icon={faPlus} size={22} color={focused ? '#FF7152' : '#808080'} />
                 ), headerShown: false
             }} />
 
@@ -80,13 +84,13 @@ function MainTabNavigator() {
 
             <Tab.Screen name="Favoritos" component={FavoritosStack} options={{
                 tabBarIcon: ({ focused }) => (
-                    <FontAwesomeIcon icon={faBookmark} size={22} color={focused ? '#FF7152' : '#505050'} />
+                    <FontAwesomeIcon icon={faBookmark} size={22} color={focused ? '#FF7152' : '#808080'} />
                 ), headerShown: false
             }} />
 
             <Tab.Screen name="Perfil" component={PerfilStack} options={{
                 tabBarIcon: ({ focused }) => (
-                    <FontAwesomeIcon icon={faUser} size={22} color={focused ? '#FF7152' : '#505050'} />
+                    <FontAwesomeIcon icon={faUser} size={22} color={focused ? '#FF7152' : '#808080'} />
                 ), headerShown: false
             }} />
 
