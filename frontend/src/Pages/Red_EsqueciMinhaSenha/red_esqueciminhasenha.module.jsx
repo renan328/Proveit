@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         flexDirection:"column",
         justifyContent: 'center',
         alignSelf: 'center',
+        marginTop:25,
         width: 150,
         height: 150,
         borderRadius: '70%',
