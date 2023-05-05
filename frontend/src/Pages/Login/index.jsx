@@ -54,7 +54,7 @@ export default function Login({ navigation }) {
                 {/* Logo */}
                 <View style={styles.logo}>
                     <Image
-                        style={{ width: '130px', height: '118px' }}
+                        style={{ width: 130, height: 118 }}
                         source={require('../../assets/proveitLogoColored.png')}
                     />
                 </View>

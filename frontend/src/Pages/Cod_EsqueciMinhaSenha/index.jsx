@@ -55,7 +55,7 @@ export default function Cod_EsqueciMinhaSenha() {
                     break;
             }
         }
-    };  
+    }  
 
     return (
 
@@ -70,7 +70,7 @@ export default function Cod_EsqueciMinhaSenha() {
                     <View style={styles.circuloIcon}>
                         <View style={styles.IconDocu}>
                             <Image
-                                style={{ width: '75px', height: '73px' }}
+                                style={{ width: 75, height: 73 }}
                                 source={require('../../assets/IconDocu.png')}
                             />
                         </View>

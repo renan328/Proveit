@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -108,7 +108,7 @@ export default function CadastroDeUsuario({ navigation }) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             })
-                .then((response) => { showSuccessToast; navigation.navigate('Main') })
+                .then((response) => { alert("Usuário cadastrado com sucesso!"); navigation.navigate('Main') })
                 .catch((error) => {
                     console.log(error);
                     showFailToast;

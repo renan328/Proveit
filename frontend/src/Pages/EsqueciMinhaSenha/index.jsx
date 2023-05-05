@@ -22,7 +22,7 @@ export default function EsqueciMinhaSenha({ navigation }) {
                     <View style={styles.circuloIcon}>
                         <View style={styles.IconCad}>
                             <Image
-                                style={{ width: '89px', height: '86px' }}
+                                style={{ width: 89, height: 86 }}
                                 source={require('../../assets/IconCad.png')}
                             />
                         </View>

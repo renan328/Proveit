@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         backgroundColor: '#fff',
         width: '100%',
-        height: '83%',
+        height: '85%',
         display: 'flex',
         marginTop: '100',
         flexDirection: 'column',
@@ -117,10 +117,10 @@ const styles = StyleSheet.create({
     },  
 
     defaultInput: {
-        paddingHorizontal: '7px',
-        fontSize: '13px',
+        paddingHorizontal: 7,
+        fontSize: 13,
         color: '#505050',
-        height: '50px',
+        height: 50,
         width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
@@ -137,10 +137,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_600SemiBold',
     },
 
+    botoes:{
+        width: '100%',
+    },
+
     button: {
         display: 'flex',
         marginTop:2,
-        width: '470%',
+        width: "78%",
         backgroundColor: 'orange',
         color: '#FFF',
         borderRadius: 5,

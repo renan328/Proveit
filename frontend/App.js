@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <Routes />
+      <Red_EsqueciMinhaSenha />
     </MenuProvider>
   )
 }

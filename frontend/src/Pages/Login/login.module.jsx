@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginTop: '135px',
+        marginTop: 135,
         borderTopLeftRadius: 90,
         borderTopRightRadius: 90,
         shadowColor: "#000",
@@ -36,14 +36,14 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 7,
-        top: "-70"
+        top: -70
     },
 
 
     logo: {
         flex: 1,
         width: '100%',
-        marginTop: '20px',
+        marginTop: 20,
         flexDirection: 'row',
         textAlign: 'center',
         alignItens: 'center',
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
     containerLogin: {
         width: '85%',
-        height: '300px',
+        height: 300,
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'space-around',
@@ -83,19 +83,19 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: '20px'
+        marginBottom: 20
     },
 
     input: {
         width: 300,
-        marginVertical: '5px',
-        marginHorizontal: '5px',
-        paddingHorizontal: '7px',
-        fontSize: '13px',
+        marginVertical: 5,
+        marginHorizontal: 5,
+        paddingHorizontal: 7,
+        fontSize: 13,
         fontFamily: 'Raleway_600SemiBold',
         color: '#505050',
-        height: '45px',
-        minWidth: '265px',
+        height: 45,
+        minWidth: 265,
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -126,16 +126,18 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
+        textAlign: 'center'
     },
 
     buttonText: {
         color: '#FFF',
         fontFamily: 'Raleway_700Bold',
+        textAlign: 'center'
     },
 
     texts: {
         color: '#505050',
-        marginBottom: '15px',
+        marginBottom: 15,
         flexDirection: 'column',
         gap: 5
     },

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '84%',
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start',
         marginTop: '100',
         flexDirection: 'column',
         borderTopRightRadius: 90,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
     main2:{
         display:'flex',
-        height: '93%',
+        height: '87%',
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignContent:'center',
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 
     main3:{
         width: '100%',
-        height: '65%',
+        height: '60%',
         justifyContent: 'space-around',
         flexDirection: 'column',
         alignItems:'center'
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         flexDirection:"column",
         justifyContent: 'center',
         alignSelf: 'center',
+        marginTop:25,
         width: 150,
         height: 150,
         borderRadius: '70%',
@@ -101,10 +102,10 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         justifyContent:'flex-start',
-        color: '#505050',
+        color: '#000',
         fontFamily: 'Raleway_600SemiBold',
         fontSize: 14,
-        opacity: '80%',
+        
     },
 
 
@@ -112,8 +113,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent:'space-between',
-        width: '82%',
-        height: '70%',
+        width: '100%',
+        height: '60%',
     },
 
     inputSingle: {
@@ -143,11 +144,15 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         fontFamily: 'Raleway_600SemiBold',
     },
+    
+    botoes:{
+        width: '100%',
+    },
 
     button: {
         display: 'flex',
         marginTop:2,
-        width: '470%',
+        width: '78%',
         backgroundColor: 'orange',
         color: '#FFF',
         borderRadius: 5,
