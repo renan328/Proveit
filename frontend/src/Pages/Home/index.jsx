@@ -38,6 +38,7 @@ export default function Home({ navigation }) {
                 </View>
                 <View style={{ textAlign: 'center', display: 'flex', justifyContent: 'space-around' }}>
                     <Text style={styles.subTexto}>O que <Text style={{ fontFamily: 'Raleway_900Black' }}>você</Text> deseja hoje?</Text>
+                    <CarrosselCategorias />
                 </View>
                 <View style={styles.inputContainer}>
                     <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput> <FontAwesomeIcon icon={faMagnifyingGlass} style={{

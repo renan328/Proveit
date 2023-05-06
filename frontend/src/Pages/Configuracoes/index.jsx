@@ -61,7 +61,7 @@ export default function Configuracoes( {navigation} ) {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style={styles.containerOpcoes}>
+                <TouchableOpacity style={styles.containerOpcoes}  onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.textOpcoesSair}>Sair da conta</Text>
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faRightFromBracket} size={'25px'} color="#ff7152" />
                 </TouchableOpacity>

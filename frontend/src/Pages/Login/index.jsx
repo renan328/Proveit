@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
+import { faUser, width } from '@fortawesome/free-solid-svg-icons/faUser';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import styles from './login.module';
+import { BlurView } from 'expo-blur';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -44,26 +45,14 @@ export default function Login({ navigation }) {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.imageContainer}>
-                <ImageBackground source={require('../../assets/headerBG.jpg')} style={{ height: screenHeight * 0.5 }} />
-            </View>
+        <ImageBackground source={require('../../assets/headerBG.jpg')} style={styles.container} resizeMode='cover' >
 
-            <View style={styles.main}>
+            <BlurView style={styles.main} intensity={80}>
+                <View style={styles.tint}>
 
-                {/* Logo */}
-                <View style={styles.logo}>
-                    <Image
-                        style={{ width: 130, height: 118 }}
-                        source={require('../../assets/proveitLogoColored.png')}
-                    />
-                </View>
+                    <Image source={require('../../assets/proveitLogo.png')} style={styles.logo} />
 
-                {/* View Login e inputs */}
-                <View style={styles.containerLogin}>
-                    <View style={styles.loginHeader}>
-                        <Text style={styles.loginText}>Login</Text>
-                    </View>
+                    <Image source={require('../../assets/Sabores.png')} style={styles.saboresImg} />
 
                     <View style={styles.containerInput}>
 
@@ -91,31 +80,35 @@ export default function Login({ navigation }) {
                             />
                             {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
                         </View>
+                        <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
+                            <Text style={{ fontFamily: 'Raleway_500Medium', color: 'rgba(255,255,255,0.35)', textDecorationLine: 'underline', marginLeft: 6 }}>Esqueci minha senha</Text>
+                        </TouchableOpacity>
 
                     </View>
+                    <ImageBackground source={require('../../assets/bemVindo.png')} style={styles.buttons}>
+                        {/* Botão */}
+                        <TouchableOpacity onPress={() => navigation.navigate('Main')
+                        }>
+                            <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
+                                end={{ x: 2, y: 1 }} style={styles.button} >
+                                <Text style={styles.buttonText}>Entrar</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
 
-                    {/* Botão */}
-                    {/* onPress={() => navigation.navigate('Main')} */}
-                    <TouchableOpacity onPress={() => navigation.navigate('Main')
-                    }>
-                        <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
-                            end={{ x: 2, y: 1 }} style={styles.button} >
-                            <Text style={styles.buttonText}>Entrar</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
+                        <Text style={styles.ou}>OU</Text>
 
+                        <TouchableOpacity onPress={() => navigation.navigate('Main')} style={styles.googleButton}>
+                            <Image source={require('../../assets/googleIcon.png')} style={{width: 27, height: 27}} /><Text style={styles.googleButtonText}>Entrar com Google</Text>
+                        </TouchableOpacity>
+
+                        <Text style={styles.headerSignText}>Ainda não tem uma conta?</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")} style={styles.signUpButton}>
+                            <Text style={{ fontFamily: 'Raleway_700Bold', color: '#FF7152' }}>Cadastrar</Text>
+                        </TouchableOpacity>
+                    </ImageBackground>
                 </View>
-
-                <View style={styles.texts}>
-                    <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
-                        <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Esqueci minha senha</Text>
-                    </TouchableOpacity>
-                    <Text style={{ fontFamily: 'Raleway_600SemiBold' }}>Ainda não tem uma conta?</Text>
-                    <Text style={{ fontFamily: 'Raleway_700Bold', textDecorationLine: 'underline', color: '#FF7152' }} onPress={() => navigation.navigate('CadastroDeUsuario')}>Cadastrar</Text>
-                </View>
-
-            </View>
-        </View>
+            </BlurView >
+        </ImageBackground >
 
     )
 }

@@ -20,6 +20,7 @@ import Configuracoes from './src/Pages/Configuracoes';
 import { Route } from 'expo-router/src/Route';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
+import Login from './src/Pages/Login';
 
 
 export default function App() {
@@ -27,7 +28,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <Red_EsqueciMinhaSenha />
+      <Login />
     </MenuProvider>
   )
 }
