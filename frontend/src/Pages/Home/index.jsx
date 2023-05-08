@@ -1,15 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
+import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas';
+import CartaoExplorar from '../../components/CarrosselExplorar/CartaoExplorar';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas';
-import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
-import Toast from 'react-native-toast-message';
 import StylesDark from './home.moduleDark';
 import StylesLight from './home.moduleLight';
-import CartaoExplorar from '../../components/CarrosselExplorar/CartãoExplorar';
 
 export default function Home({ navigation }) {
     const username = "Convidado";
@@ -35,10 +32,10 @@ export default function Home({ navigation }) {
                 </View>
                 <View style={{ textAlign: 'center', display: 'flex', justifyContent: 'space-around' }}>
                     <Text style={styles.subTexto}>O que <Text style={{ fontFamily: 'Raleway_900Black' }}>você</Text> deseja hoje?</Text>
-                    <CarrosselCategorias />
+                    <CarrosselCategorias/>
                 </View>
                 <View style={styles.inputContainer}>
-                    <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput> <FontAwesomeIcon icon={faMagnifyingGlass} style={{
+                    <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput><FontAwesomeIcon icon={faMagnifyingGlass} style={{
                         color: '#505050'
                     }} size={20} />
                 </View>
@@ -47,19 +44,16 @@ export default function Home({ navigation }) {
                 <Text style={styles.categoria}>O que há de <Text style={{ color: '#FF7152' }}>novo?</Text></Text>
             </View>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('ReceitaSingle')}>
-                    <CarrosselReceitas></CarrosselReceitas>
-                </TouchableOpacity>
+                <CarrosselReceitas></CarrosselReceitas>
             </View>
             <View style={styles.listamento}>
                 <Text style={styles.categoriaBig}>Explore<Text style={{ color: '#FF7152' }}>!</Text></Text>
+                <ScrollView horizontal={true}>
+                    <CartaoExplorar title={'Melhor avaliadas'} image={require('../../assets/explore2.png')} />
+                    <CartaoExplorar title={'Mais favoritadas'} image={require('../../assets/explore2.png')} />
+                    <CartaoExplorar title={'Mais comentadas'} image={require('../../assets/explore3.png')} />
+                </ScrollView>
             </View>
-            <ScrollView horizontal={true}>
-                <CartaoExplorar title={'Melhor avaliadas'} image={require('../../assets/explore1.png')} />
-                <CartaoExplorar title={'Mais favoritadas'} image={require('../../assets/explore2.png')} />
-                <CartaoExplorar title={'Mais comentadas'} image={require('../../assets/explore3.png')} />
-            </ScrollView>
-            <ReceitaEspecial></ReceitaEspecial>
             <View style={styles.listamento}>
                 <Text style={styles.categoriaBig}>Popular <Text style={{ color: '#FF7152' }}>hoje</Text></Text>
             </View>

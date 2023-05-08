@@ -20,8 +20,6 @@ export default function CarrosselHome() {
             });
     }, []);
 
-    console.log(receitas)
-
     if (receitas == '') {
         return (
             <View>

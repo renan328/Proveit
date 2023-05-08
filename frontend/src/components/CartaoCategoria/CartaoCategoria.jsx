@@ -22,11 +22,9 @@ const CartaoCategoria = ({ item }) => {
 };
 
 //Função para o slider
-function CarrosselCategorias() {
-
+export default function CarrosselCategorias() {
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
-
     return (
         <View style={styles.container}>
             <ScrollView horizontal={true} style={{ marginLeft: 10, }}>
@@ -39,32 +37,30 @@ function CarrosselCategorias() {
         </View>
     )
 }
-
 //Imagens usadas
 const slides = {
-    // aves: require('../../assets/cat_aves.jpg'),
-    // bebidas: require('../../assets/cat_bebidas.jpg'),
-    // bolos: require('../../assets/cat_bolos.jpg'),
-    // carnes: require('../../assets/cat_carnes.jpg'),
-    // doces: require('../../assets/cat_doces.jpg'),
-    // frutosDoMar: require('../../assets/cat_frutosDoMar.jpg'),
-    // japones: require('../../assets/cat_japones.jpg'),
+    aves: require('../../assets/cat_aves.jpg'),
+    bebidas: require('../../assets/cat_bebidas.jpg'),
+    bolos: require('../../assets/cat_bolos.jpg'),
+    carnes: require('../../assets/cat_carnes.jpg'),
+    doces: require('../../assets/cat_doces.jpg'),
+    frutosDoMar: require('../../assets/cat_frutosDoMar.jpg'),
+    japones: require('../../assets/cat_japones.jpg'),
     // lanches: require('../../assets/cat_lanches.jpg'),
-    // lowCarb: require('../../assets/cat_lowCarb.jpg'),
-    // massa: require('../../assets/cat_massa.jpg'),
-    // molhos: require('../../assets/cat_molhos.jpg'),
-    // rapidas: require('../../assets/cat_rapidas.jpg'),
-    // saladas: require('../../assets/cat_saladas.jpg'),
-    // salgados: require('../../assets/cat_salgados.jpg'),
-    // sanduiches: require('../../assets/cat_sanduiches.jpg'),
-    // snacks: require('../../assets/cat_snacks.jpg'),
-    // sobremesas: require('../../assets/cat_sobremesas.jpg'),
+    lowCarb: require('../../assets/cat_lowCarb.jpg'),
+    massa: require('../../assets/cat_massa.jpg'),
+    molhos: require('../../assets/cat_molhos.jpg'),
+    rapidas: require('../../assets/cat_rapidas.jpg'),
+    saladas: require('../../assets/cat_saladas.jpg'),
+    salgados: require('../../assets/cat_salgados.jpg'),
+    sanduiches: require('../../assets/cat_sanduiches.jpg'),
+    snacks: require('../../assets/cat_snacks.jpg'),
+    sobremesas: require('../../assets/cat_sobremesas.jpg'),
     // sopas: require('../../assets/cat_sopas.jpg'),
-    // torta: require('../../assets/cat_torta.jpg'),
-    // vegano: require('../../assets/cat_vegano.jpg'),
-    // vegetariano: require('../../assets/cat_vegetariano.jpg'),
+    torta: require('../../assets/cat_torta.jpg'),
+    vegano: require('../../assets/cat_vegano.jpg'),
+    vegetariano: require('../../assets/cat_vegetariano.jpg'),
 }
-
 //Lista dos cartões
 const categorias = [
     {
@@ -168,8 +164,6 @@ const categorias = [
         uri: slides.vegetariano,
     },
 ];
-
-export default CarrosselCategorias;
 
 const stylesLight = StyleSheet.create({
     container: {
