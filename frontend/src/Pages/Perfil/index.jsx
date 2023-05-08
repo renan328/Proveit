@@ -37,8 +37,8 @@ export default function Perfil({ navigation }) {
                     borderBottomColor: '#505050',
                     opacity: 0.4,
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: '330px', height: '5px',
-                    marginTop: '15px'
+                    width: 330, height: 5,
+                    marginTop: 15
                 }}
             />
 
@@ -50,8 +50,8 @@ export default function Perfil({ navigation }) {
                     borderBottomColor: '#505050',
                     opacity: 0.4,
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: '330px', height: '5px',
-                    marginTop: '15px'
+                    width: 330, height: 5,
+                    marginTop: 15
                 }}
             />
         </View>

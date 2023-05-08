@@ -306,7 +306,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                 <View style={styles.defaultInput}>
                     <View style={styles.checkboxContainer}>
                         <CheckBox value={aproveitamento} onValueChange={setAproveitamento} style={styles.checkbox} />
-                        <Text style={{ margin: 5, fontSize: "15px", fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
+                        <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
                         <TouchableOpacity title="?" />
                     </View>
                 </View>
@@ -442,7 +442,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                 </View>
             </View>
             <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
-            <View style={{ paddingVertical: '50px' }} />
+            <View style={{ paddingVertical: 50 }} />
         </ScrollView>
     );
 }

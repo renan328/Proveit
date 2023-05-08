@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
 
     textContainer: {
-        marginTop: '20px',
+        marginTop: 20,
         textAlign: 'center',
     },  
 
@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
     },
 
     input: {
-        marginVertical: '5px',
-        marginHorizontal: '5px',
-        paddingHorizontal: '7px',
-        fontSize: '13px',
+        marginVertical: 5,
+        marginHorizontal: 5,
+        paddingHorizontal: 7,
+        fontSize: 13,
         fontFamily: 'Raleway_700Bold',
         color: '#505050',
-        height: '45px',
-        minWidth: '265px',
+        height: 45,
+        minWidth: 265,
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -47,26 +47,22 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
     },
-
     cardList: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    
     footer: {
         display: 'flex',
         alignItems: 'center',
-        marginVertical: '50px'
+        marginVertical: 50
     },
-
     footerText: {
         fontFamily: 'Raleway_600SemiBold',
         color: 'rgba(0,0,0,0.4)',
         fontSize: 15
-    },
-
+    }
 });
 
 export default styles;

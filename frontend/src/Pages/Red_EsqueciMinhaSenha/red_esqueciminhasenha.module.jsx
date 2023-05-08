@@ -125,10 +125,10 @@ const styles = StyleSheet.create({
     },  
 
     defaultInput: {
-        paddingHorizontal: '7px',
-        fontSize: '13px',
+        paddingHorizontal: 7,
+        fontSize: 13,
         color: '#505050',
-        height: '50px',
+        height: 50,
         width: '100%',
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,

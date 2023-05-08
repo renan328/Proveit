@@ -36,9 +36,7 @@ export default function Login({ navigation }) {
         const body = { email, senha };
 
         if (Object.keys(errors).length === 0) {
-
-
-
+            
         }
         console.log(body)
         navigation.navigate('Main')
@@ -52,7 +50,7 @@ export default function Login({ navigation }) {
 
                     <Image source={require('../../assets/proveitLogo.png')} style={styles.logo} />
 
-                    <Image source={require('../../assets/Sabores.png')} style={styles.saboresImg} />
+                    <Image source={require('../../assets/sabores.png')} style={styles.saboresImg} />
 
                     <View style={styles.containerInput}>
 

@@ -5,10 +5,10 @@ const toastStyle = StyleSheet.create({
 
     successToast: {
         backgroundColor: '#2dc254',
-        height: '55px',
+        height: 55,
         width: '92%',
-        borderRadius: '15px',
-        paddingHorizontal: '10px',
+        borderRadius: 15,
+        paddingHorizontal: 10,
         position: 'absolute',
         zIndex: '5',
         display: 'flex',
@@ -26,10 +26,10 @@ const toastStyle = StyleSheet.create({
 
     failToast: {
         backgroundColor: '#c22d2d',
-        height: '55px',
+        height: 55,
         width: '92%',
-        borderRadius: '15px',
-        paddingHorizontal: '10px',
+        borderRadius: 15,
+        paddingHorizontal: 10,
         position: 'absolute',
         zIndex: '5',
         display: 'flex',

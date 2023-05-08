@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <Login />
+      <Routes />
     </MenuProvider>
   )
 }

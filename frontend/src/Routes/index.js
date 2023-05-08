@@ -38,7 +38,7 @@ function MainTabNavigator() {
             inactiveTintColor: '#505050',
             tabBarShowLabel: false,
             tabBarStyle: {
-                marginTop: '100px',
+                marginTop: 100,
                 position: 'absolute',
                 width: '90%',
                 bottom: 20,
@@ -200,8 +200,8 @@ const styles = StyleSheet.create({
 
     searchButton: {
         color: '#fff',
-        paddingHorizontal: '12px',
-        paddingVertical: '10px',
+        paddingHorizontal: 12,
+        paddingVertical: 10,
         borderRadius: 10,
         shadowRadius: 0,
         shadowColor: "#000",

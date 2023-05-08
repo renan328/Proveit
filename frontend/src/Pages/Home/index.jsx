@@ -7,24 +7,21 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas';
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 import Toast from 'react-native-toast-message';
-import stylesDark from './home.moduleDark';
-import stylesLight from './home.moduleLight';
-
+import StylesDark from './home.moduleDark';
+import StylesLight from './home.moduleLight';
 import CartaoExplorar from '../../components/CarrosselExplorar/CartãoExplorar';
 
 export default function Home({ navigation }) {
-
     const username = "Convidado";
     const scheme = useColorScheme();
-    const styles = scheme ==='dark' ? stylesDark : stylesLight;
-
+    const styles = scheme === 'dark' ? StylesDark : StylesLight;
     return (
         <ScrollView style={styles.main}>
             <View style={styles.header}>
                 <View style={styles.subHeader}>
                     <Image
                         style={{ width: 52, height: 46, top: 15 }}
-                        source={ scheme ==='dark' ? require('../../assets/proveitLogoColored.png') : require('../../assets/proveitLogoColoredDark.png')}
+                        source={scheme === 'dark' ? require('../../assets/proveitLogoColored.png') : require('../../assets/proveitLogoColoredDark.png')}
                     />
                     <Image
                         style={{ minWidth: 200, maxWidth: 300, height: 200 }}
@@ -84,6 +81,5 @@ export default function Home({ navigation }) {
             <View>
             </View>
         </ScrollView>
-
     )
 }

@@ -11,7 +11,7 @@ export default function Pesquisar() {
 
             <View style={styles.logo}>
                 <Image
-                    style={{ width: '240px', height: '215px' }}
+                    style={{ width: 240, height: 215 }}
                     source={require('../../assets/proveitLogo.png')}
                 />
             </View>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     logo: {
-        margin: '100px'
+        margin: 100
     },
     circle:{
         display: 'flex',

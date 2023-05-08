@@ -60,10 +60,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#cecece',
         opacity: '0.4',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        width: '60%', 
-        height: '3px', 
+        width: '60%',
+        height: 3,
         border: 'none',
-        marginTop: '15px'
+        marginTop: 15
     },
     linhaOpcoes: {
         display: 'flex',
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         opacity: '0.4',
         borderBottomWidth: StyleSheet.hairlineWidth,
         width: '90%',
-        height: '3px', 
+        height: 3,
         border: 'none',
     },
 

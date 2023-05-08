@@ -17,7 +17,7 @@ export default function Configuracoes( {navigation} ) {
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity style={styles.botao} onPress={() => navigation.goBack()}>
-                    <FontAwesomeIcon icon={faChevronLeft} color="#FF7152" size={'30px'} />
+                    <FontAwesomeIcon icon={faChevronLeft} color="#FF7152" size={30} />
                 </TouchableOpacity>
 
                 <Text style={styles.title}>Configurações</Text>
@@ -28,42 +28,42 @@ export default function Configuracoes( {navigation} ) {
             <View style={styles.opcoes}>
                 <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Editar Perfil</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faUser} size={'25px'} color="#606060" />
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faUser} size={25} color="#606060" />
                 </TouchableOpacity>
 
 
                 <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Editar receita</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={'25px'} color="#606060" />
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={25} color="#606060" />
                 </TouchableOpacity>
 
 
                 <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Temas</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faBrush} size={'25px'} color="#606060" />
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faBrush} size={25} color="#606060" />
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Central de Ajuda</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faQuestionCircle} size={'25px'} color="#606060" />
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faQuestionCircle} size={25} color="#606060" />
                 </TouchableOpacity>
 
 
                 <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Termos e condições</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faScroll} size={'25px'} color="#606060" />
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faScroll} size={25} color="#606060" />
                 </TouchableOpacity>
 
 
                 <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Política de privacidade</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faScroll} size={'25px'} color="#606060" />
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faScroll} size={25} color="#606060" />
                 </TouchableOpacity>
 
 
                 <TouchableOpacity style={styles.containerOpcoes}  onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.textOpcoesSair}>Sair da conta</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faRightFromBracket} size={'25px'} color="#ff7152" />
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faRightFromBracket} size={25} color="#ff7152" />
                 </TouchableOpacity>
 
             </View>

@@ -23,8 +23,8 @@ export default function Pesquisar() {
                             borderBottomColor: '#505050',
                             opacity: 0.4,
                             borderBottomWidth: StyleSheet.hairlineWidth,
-                            width: '330px', height: '5px',
-                            marginTop: '15px'
+                            width: 330, height: 5,
+                            marginTop: 15
                         }}
                     />
                 </View>
@@ -44,8 +44,8 @@ export default function Pesquisar() {
                         borderBottomColor: 'rgba(0,0,0,0.3)',
                         opacity: 0.4,
                         borderBottomWidth: StyleSheet.hairlineWidth,
-                        width: '330px', height: '5px',
-                        marginTop: '15px'
+                        width: 330, height: 5,
+                        marginTop: 15
                     }}
                 />
             </View>

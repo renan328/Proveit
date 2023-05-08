@@ -59,7 +59,7 @@ export default function ReceitaSingle({ navigation }) {
         }
 
         return (
-            <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '5px', }}>{starsBox}</View>
+            <View style={{ display: 'flex', flexDirection: 'row', marginLeft: 5, }}>{starsBox}</View>
         );
     };
 
@@ -124,8 +124,8 @@ export default function ReceitaSingle({ navigation }) {
                             <FontAwesomeIcon icon={faEllipsisVertical} style={styles.headerIcon} size={28} color={'#505050'} />
                         </MenuTrigger>
                         <MenuOptions>
-                            <MenuOption style={{ marginVertical: '10px', marginHorizontal: '5px' }} onSelect={() => alert(`Compartilhar`)} text='Compartilhar' />
-                            <MenuOption style={{ marginVertical: '10px', marginHorizontal: '5px' }} onSelect={() => alert(`Denunciar`)} text='Denunciar' />
+                            <MenuOption style={{ marginVertical: 10, marginHorizontal: 5 }} onSelect={() => alert(`Compartilhar`)} text='Compartilhar' />
+                            <MenuOption style={{ marginVertical: 10, marginHorizontal: 5 }} onSelect={() => alert(`Denunciar`)} text='Denunciar' />
                         </MenuOptions>
                     </Menu>
                 </View>
@@ -187,7 +187,7 @@ export default function ReceitaSingle({ navigation }) {
                     <View>
                         <Image source={require('../../assets/user.jpg')} style={styles.userPic}></Image>
                     </View>
-                    <View style={{ marginHorizontal: '8px' }}>
+                    <View style={{ marginHorizontal: 8 }}>
                         <Text style={styles.mainUserText}>User Name</Text>
                         <Text style={styles.linkUserText}>@{dadosReceita.receita?.nomeTag}</Text>
                     </View>
@@ -197,8 +197,8 @@ export default function ReceitaSingle({ navigation }) {
                         borderBottomColor: '#505050',
                         opacity: 0.4,
                         borderBottomWidth: StyleSheet.hairlineWidth,
-                        width: '330px', height: '5px',
-                        marginTop: '15px',
+                        width: 330, height: 5,
+                        marginTop: 15,
                         alignSelf: 'center'
                     }} />
             </View>
@@ -223,8 +223,8 @@ export default function ReceitaSingle({ navigation }) {
                     borderBottomColor: '#505050',
                     opacity: 0.4,
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: '330px', height: '5px',
-                    marginTop: '15px',
+                    width: 330, height: 5,
+                    marginTop: 15,
                     alignSelf: 'center'
                 }} />
 
@@ -248,8 +248,8 @@ export default function ReceitaSingle({ navigation }) {
                     borderBottomColor: '#505050',
                     opacity: 0.4,
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: '330px', height: '5px',
-                    marginTop: '15px',
+                    width: 330, height: 5,
+                    marginTop: 15,
                     alignSelf: 'center'
                 }} />
             <View style={styles.ready}>
@@ -261,8 +261,8 @@ export default function ReceitaSingle({ navigation }) {
                     borderBottomColor: '#505050',
                     opacity: 0.4,
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: '330px', height: '5px',
-                    marginTop: '15px',
+                    width: 330, height: 5,
+                    marginTop: 15,
                     alignSelf: 'center'
                 }} />
 

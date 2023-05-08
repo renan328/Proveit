@@ -23,10 +23,10 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 50,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
-        marginTop: '15px',
+        marginTop: 15,
         width: 100,
         height: 100,
-        maxWidth: '500px',
+        maxWidth: 500,
         backgroundColor: 'rgba(50, 50, 50, 0.2)',
         display: 'flex',
         alignItems: 'center',
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontFamily: 'Raleway_800ExtraBold',
-        marginTop: '10px',
+        marginTop: 10,
         color: '#FF7152',
         fontSize: 28,
     },
@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
     },
     text: {
         fontFamily: 'Raleway_700Bold',
-        marginTop: '50px',
+        marginTop: 50,
         color: '#FF7152',
     },
     textUnder: {
-        width: '350px',
+        width: 350,
         fontFamily: 'Raleway_700Bold',
-        marginTop: '15px',
+        marginTop: 15,
         color: '#505050',
         textAlign: 'center'
     },

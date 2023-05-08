@@ -19,7 +19,7 @@ export default function ComentarioSingle({ usuario_id, userPicture, userName, st
         }
 
         return (
-            <View style={{ display: 'flex', flexDirection: 'row', marginLeft: '5px', }}>{starsBox}</View>
+            <View style={{ display: 'flex', flexDirection: 'row', marginLeft: 5, }}>{starsBox}</View>
         );
     };
 

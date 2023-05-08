@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 7,
         fontSize: 15,
         fontFamily: 'Raleway_700Bold',
-        color: '#CCC',
+        color: '#FFF',
         height: 45,
         minWidth: 265,
         backgroundColor: '#303030',

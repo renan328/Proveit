@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
     },
-    
+
     button: {
         display: 'flex',
         marginBottom: 50,
@@ -167,7 +167,10 @@ const styles = StyleSheet.create({
         width: 200,
         backgroundColor: 'orange',
         color: '#FFF',
-        borderRadius: 10,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
         padding: 15,
         alignSelf: 'center',
         shadowColor: "#000",
@@ -185,7 +188,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
     },
 
-    inputError:{
+    inputError: {
         borderWidth: 1,
         borderColor: '#ff375b'
     },
