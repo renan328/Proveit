@@ -128,6 +128,10 @@ export default function Cod_EsqueciMinhaSenha() {
                         </View>
                     </View>
                 </View>
+                <Image
+                    style={styles.balls}
+                    source={require('../../assets/homeBalls.png')}
+                />
             </View>
         </View>
     );

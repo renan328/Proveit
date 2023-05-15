@@ -11,10 +11,15 @@ export default function EsqueciMinhaSenha({ navigation }) {
 
     return (
 
-        <View style={{maxHeight: screenHeight}}>
+        <View style={{ maxHeight: screenHeight }}>
             {/* Imagem fundo */}
             <View style={styles.imageContainer}>
-                <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}> </ImageBackground>
+                <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}>
+                    <Image
+                    source={require('../../assets/backbutton.png')} 
+                    style={styles.backbutton}/> 
+                    
+                </ImageBackground>
             </View>
             {/* Container de componentes */}
             <View style={styles.main}>
@@ -52,6 +57,10 @@ export default function EsqueciMinhaSenha({ navigation }) {
                         </View>
                     </View>
                 </View>
+                <Image
+                    style={styles.balls}
+                    source={require('../../assets/homeBalls.png')}
+                />
             </View>
         </View>
     );

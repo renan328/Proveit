@@ -8,6 +8,18 @@ const styles = StyleSheet.create({
         height: '16%',
         
     },
+
+    backbutton:{
+        display:'flex',
+        flexDirection: 'column',
+        alignContent: 'flex-start',
+        marginTop:9,
+        marginLeft: 9,
+        width: 40, 
+        height: 50,
+        /* Opacity: '40%'!!!!!!!!!!! */
+    },
+    
     
     main: {
         display: 'flex',
@@ -164,6 +176,15 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontFamily: 'Raleway_700Bold',
     },
+
+    balls:{
+        marginTop: -44,
+        width: 235, 
+        height: 200,
+        transform: [{ rotate: '180deg' }]
+    },
+
+   
 
 });
 

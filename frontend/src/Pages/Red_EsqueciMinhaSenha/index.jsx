@@ -58,6 +58,10 @@ export default function Red_EsqueciMinhaSenha({ navigation }) {
                         </View>
                     </View>
                 </View>
+                <Image
+                    style={styles.balls}
+                    source={require('../../assets/homeBalls.png')}
+                />
             </View>
         </View>
     );

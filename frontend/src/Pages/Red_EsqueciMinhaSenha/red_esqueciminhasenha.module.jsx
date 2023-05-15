@@ -173,6 +173,13 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
     },
 
+    balls:{
+        marginTop: -44,
+        width: 235, 
+        height: 200,
+        transform: [{ rotate: '180deg' }]
+    },
+
 });
 
 export default styles;

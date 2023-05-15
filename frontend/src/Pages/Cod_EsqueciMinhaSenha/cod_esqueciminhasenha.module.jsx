@@ -152,6 +152,13 @@ const styles = StyleSheet.create({
         textDecorationLine:'underline',
         fontFamily: 'Raleway_600SemiBold',
     },
+
+    balls:{
+        marginTop: -44,
+        width: 235, 
+        height: 200,
+        transform: [{ rotate: '180deg' }]
+    },
       
     
 });
