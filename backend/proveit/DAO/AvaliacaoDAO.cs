@@ -84,7 +84,7 @@ namespace proveit.DAO
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@estrelas", avaliacao.Estrelas);
             comando.Parameters.AddWithValue("@comentario", avaliacao.Comentario);
-            comando.Parameters.AddWithValue("@Receita_id", avaliacao.Receita_id);
+            comando.Parameters.AddWithValue("@receita_id", avaliacao.Receita_id);
             comando.Parameters.AddWithValue("@usuario_id", avaliacao.Usuario_id);
 
             comando.ExecuteNonQuery();
@@ -100,14 +100,14 @@ namespace proveit.DAO
                         Estrelas = @estrelas,
                         Comentario = @comentario,
                         Usuario_id = @usuario_id,
-                        Receita_id = @Receita_id
+                        Receita_id = @receita_id
                         WHERE idAvaliacao = @id";
 
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@id", avaliacao.idAvaliacao);
             comando.Parameters.AddWithValue("@estrelas", avaliacao.Estrelas);
             comando.Parameters.AddWithValue("@comentario", avaliacao.Comentario);
-            comando.Parameters.AddWithValue("@Receita_id", avaliacao.Receita_id);
+            comando.Parameters.AddWithValue("@receita_id", avaliacao.Receita_id);
             comando.Parameters.AddWithValue("@usuario_id", avaliacao.Usuario_id);
 
             comando.ExecuteNonQuery();

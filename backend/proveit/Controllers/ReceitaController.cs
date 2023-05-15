@@ -31,10 +31,23 @@ namespace proveit.Controllers
         [HttpGet]
         public IActionResult ListarReceitas()
         {
-            var dao = new ReceitaGeralDAO();
-            var receitas = dao.ListarReceitas();
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarReceitas();
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
 
-            return Ok(receitas);
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
         }
 
         [HttpPost]

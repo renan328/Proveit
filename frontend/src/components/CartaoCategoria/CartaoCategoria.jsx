@@ -2,169 +2,19 @@ import React from 'react';
 import { ScrollView, View, Text, StyleSheet, ImageBackground, SectionList, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import { BlurView } from 'expo-blur';
 
-//Componente único de categoria
-const CartaoCategoria = ({ item }) => {
-
-    const scheme = useColorScheme();
-    const styles = scheme === 'dark' ? stylesDark : stylesLight;
-
+export default function CartaoCategoria({ categoria }) {
+    const scheme = useColorScheme()
+    const styles = scheme === 'dark' ? stylesDark : stylesLight
     return (
         <View style={styles.caixaPrincipal}>
-            <ImageBackground source={item.uri} style={styles.imgCategoria} resizeMode="cover" imageStyle={{ borderRadius: 24 }}
-            >
+            <ImageBackground source={{ uri: categoria?.foto }} style={styles.imgCategoria} resizeMode="cover">
                 <View style={styles.textContainer}>
-                    <Text style={styles.titulo}>{item.text}</Text>
+                    <Text style={styles.titulo}>{categoria?.nome}</Text>
                 </View>
             </ImageBackground>
         </View>
-
-    );
-};
-
-//Função para o slider
-export default function CarrosselCategorias() {
-    const scheme = useColorScheme();
-    const styles = scheme === 'dark' ? stylesDark : stylesLight;
-    return (
-        <View style={styles.container}>
-            <ScrollView horizontal={true} style={{ marginLeft: 10, }}>
-                {
-                    categorias.map((categoria, index) => (
-                        <CartaoCategoria item={categoria} key={index} />
-                    ))
-                }
-            </ScrollView>
-        </View>
     )
 }
-//Imagens usadas
-const slides = {
-    aves: require('../../assets/cat_aves.jpg'),
-    bebidas: require('../../assets/cat_bebidas.jpg'),
-    bolos: require('../../assets/cat_bolos.jpg'),
-    carnes: require('../../assets/cat_carnes.jpg'),
-    doces: require('../../assets/cat_doces.jpg'),
-    frutosDoMar: require('../../assets/cat_frutosDoMar.jpg'),
-    japones: require('../../assets/cat_japones.jpg'),
-    // lanches: require('../../assets/cat_lanches.jpg'),
-    lowCarb: require('../../assets/cat_lowCarb.jpg'),
-    massa: require('../../assets/cat_massa.jpg'),
-    molhos: require('../../assets/cat_molhos.jpg'),
-    rapidas: require('../../assets/cat_rapidas.jpg'),
-    saladas: require('../../assets/cat_saladas.jpg'),
-    salgados: require('../../assets/cat_salgados.jpg'),
-    sanduiches: require('../../assets/cat_sanduiches.jpg'),
-    snacks: require('../../assets/cat_snacks.jpg'),
-    sobremesas: require('../../assets/cat_sobremesas.jpg'),
-    // sopas: require('../../assets/cat_sopas.jpg'),
-    torta: require('../../assets/cat_torta.jpg'),
-    vegano: require('../../assets/cat_vegano.jpg'),
-    vegetariano: require('../../assets/cat_vegetariano.jpg'),
-}
-//Lista dos cartões
-const categorias = [
-    {
-        key: '5',
-        text: 'Doces',
-        uri: slides.doces,
-    },
-    {
-        key: '13',
-        text: 'Salgados',
-        uri: slides.salgados,
-    },
-    {
-        key: '12',
-        text: 'Saladas',
-        uri: slides.saladas,
-    },
-    {
-        key: '6',
-        text: 'Frutos do Mar',
-        uri: slides.frutosDoMar,
-    },
-    {
-        key: '11',
-        text: 'Rapidas',
-        uri: slides.rapidas,
-    },
-    {
-        key: '7',
-        text: 'Japonês',
-        uri: slides.japones,
-    },
-    {
-        key: '8',
-        text: 'Lanches',
-        uri: slides.lanches,
-    },
-    {
-        key: '1',
-        text: 'Aves',
-        uri: slides.aves,
-    },
-    {
-        key: '2',
-        text: 'Bebidas',
-        uri: slides.bebidas,
-    },
-    {
-        key: '3',
-        text: 'Bolos',
-        uri: slides.bolos,
-    },
-    {
-        key: '4',
-        text: 'Carnes',
-        uri: slides.carnes,
-    },
-    {
-        key: '9',
-        text: 'Massas',
-        uri: slides.massa,
-    },
-    {
-        key: '10',
-        text: 'Molhos',
-        uri: slides.molhos,
-    },
-    {
-        key: '14',
-        text: 'Sanduíches',
-        uri: slides.sanduiches,
-    },
-    {
-        key: '15',
-        text: 'Snacks',
-        uri: slides.snacks,
-    },
-    {
-        key: '16',
-        text: 'Sobremesas',
-        uri: slides.sobremesas,
-    },
-    {
-        key: '17',
-        text: 'Sopas',
-        uri: slides.sopas,
-    },
-    {
-        key: '18',
-        text: 'Tortas',
-        uri: slides.torta,
-    },
-    {
-        key: '19',
-        text: 'Vegano',
-        uri: slides.vegano,
-    },
-    {
-        key: '20',
-        text: 'Vegetariano',
-        uri: slides.vegetariano,
-    },
-];
-
 const stylesLight = StyleSheet.create({
     container: {
         flex: 1,
@@ -177,6 +27,10 @@ const stylesLight = StyleSheet.create({
         height: '100%',
         display: 'flex',
         justifyContent: 'flex-end',
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24
     },
 
     caixaPrincipal: {
@@ -229,8 +83,7 @@ const stylesLight = StyleSheet.create({
         flexDirection: 'row'
     },
 
-});
-
+})
 const stylesDark = StyleSheet.create({
     container: {
         flex: 1,
@@ -243,6 +96,10 @@ const stylesDark = StyleSheet.create({
         height: '100%',
         display: 'flex',
         justifyContent: 'flex-end',
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24
     },
 
     caixaPrincipal: {
@@ -292,6 +149,5 @@ const stylesDark = StyleSheet.create({
         marginVertical: 20,
         display: 'flex',
         flexDirection: 'row'
-    },
-
-});
+    }
+})

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using proveit.DAO;
+using proveit.DTO;
 
 namespace proveit.Controllers
 {
@@ -26,6 +27,15 @@ namespace proveit.Controllers
             var categorias = dao.ListarCategoriasUnica(id);
 
             return Ok(categorias);
+        }
+
+        [HttpPost]
+        public IActionResult CadastarCategoria([FromBody] CategoriaDTO categoria)
+        {
+            var dao = new CategoriaDAO();
+            dao.CadastrarCategoria(categoria);
+
+            return Ok();
         }
     }
 }

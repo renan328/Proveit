@@ -36,7 +36,7 @@ export default function Login({ navigation }) {
         const body = { email, senha };
 
         if (Object.keys(errors).length === 0) {
-            
+
         }
         console.log(body)
         navigation.navigate('Main')
@@ -79,7 +79,7 @@ export default function Login({ navigation }) {
                             {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
                         </View>
                         <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
-                            <Text style={{ fontFamily: 'Raleway_500Medium', color: 'rgba(255,255,255,0.35)', textDecorationLine: 'underline', marginLeft: 6 }}>Esqueci minha senha</Text>
+                            <Text style={{ fontFamily: 'Raleway_500Medium', color: 'rgba(255,255,255,0.55)', textDecorationLine: 'underline', marginLeft: 6 }}>Esqueci minha senha</Text>
                         </TouchableOpacity>
 
                     </View>
@@ -96,11 +96,11 @@ export default function Login({ navigation }) {
                         <Text style={styles.ou}>OU</Text>
 
                         <TouchableOpacity onPress={() => navigation.navigate('Main')} style={styles.googleButton}>
-                            <Image source={require('../../assets/googleIcon.png')} style={{width: 27, height: 27}} /><Text style={styles.googleButtonText}>Entrar com Google</Text>
+                            <Image source={require('../../assets/googleIcon.png')} style={{ width: 27, height: 27 }} /><Text style={styles.googleButtonText}>Entrar com Google</Text>
                         </TouchableOpacity>
 
                         <Text style={styles.headerSignText}>Ainda não tem uma conta?</Text>
-                        <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")} style={styles.signUpButton}>
+                        <TouchableOpacity onPress={() => navigation.navigate("CadastroDeUsuario")} style={styles.signUpButton}>
                             <Text style={{ fontFamily: 'Raleway_700Bold', color: '#FF7152' }}>Cadastrar</Text>
                         </TouchableOpacity>
                     </ImageBackground>

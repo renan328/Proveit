@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 
     saboresImg: {
         height: 200,
-        width: '90%',
+        width: 300,
     },
     
     containerInput: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 7,
         fontSize: 15,
         fontFamily: 'Raleway_700Bold',
-        color: '#FFF',
+        color: 'rgb(255, 255, 255)',
         height: 45,
         minWidth: 265,
         backgroundColor: '#303030',

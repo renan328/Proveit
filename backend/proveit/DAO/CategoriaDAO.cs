@@ -22,6 +22,7 @@ namespace proveit.DAO
                 var categoria = new CategoriaDTO();
                 categoria.Categoria_id = int.Parse(dataReader["idCategoria"].ToString());
                 categoria.Nome = dataReader["Nome"].ToString();
+                categoria.Foto = dataReader["Foto"].ToString();
 
                 categorias.Add(categoria);
             }
@@ -29,7 +30,7 @@ namespace proveit.DAO
             conexao.Close();
             return categorias;
 
-            }
+        }
 
         public List<CategoriaDTO> ListarCategoriasUnica(int id)
         {
@@ -49,12 +50,29 @@ namespace proveit.DAO
                 var categoria = new CategoriaDTO();
                 categoria.Categoria_id = int.Parse(dataReader["idCategoria"].ToString());
                 categoria.Nome = dataReader["Nome"].ToString();
+                categoria.Foto = dataReader["Foto"].ToString();
 
                 categorias.Add(categoria);
             }
 
             conexao.Close();
             return categorias;
+        }
+
+        public void CadastrarCategoria(CategoriaDTO categoria)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = @"INSERT INTO Categorias (Nome, Foto) VALUES
+						(@nome, @foto)";
+
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@nome", categoria.Nome);
+            comando.Parameters.AddWithValue("@foto", categoria.Foto);
+
+            comando.ExecuteNonQuery();
+            conexao.Close();
         }
     }
 }

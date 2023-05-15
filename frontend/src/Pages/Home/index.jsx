@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TextInput, StatusBar, ScrollView, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
-import CarrosselCategorias from '../../components/CartaoCategoria/CartaoCategoria';
 import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas';
+import CarrosselCategorias from '../../components/CartaoCategoria/CarrosselCategoria';
 import CartaoExplorar from '../../components/CarrosselExplorar/CartaoExplorar';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
@@ -32,7 +32,9 @@ export default function Home({ navigation }) {
                 </View>
                 <View style={{ textAlign: 'center', display: 'flex', justifyContent: 'space-around' }}>
                     <Text style={styles.subTexto}>O que <Text style={{ fontFamily: 'Raleway_900Black' }}>você</Text> deseja hoje?</Text>
-                    <CarrosselCategorias/>
+                    <View>
+                        <CarrosselCategorias/>
+                    </View>
                 </View>
                 <View style={styles.inputContainer}>
                     <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput><FontAwesomeIcon icon={faMagnifyingGlass} style={{
@@ -44,12 +46,12 @@ export default function Home({ navigation }) {
                 <Text style={styles.categoria}>O que há de <Text style={{ color: '#FF7152' }}>novo?</Text></Text>
             </View>
             <View>
-                <CarrosselReceitas></CarrosselReceitas>
+                <CarrosselReceitas />
             </View>
             <View style={styles.listamento}>
                 <Text style={styles.categoriaBig}>Explore<Text style={{ color: '#FF7152' }}>!</Text></Text>
                 <ScrollView horizontal={true}>
-                    <CartaoExplorar title={'Melhor avaliadas'} image={require('../../assets/explore2.png')} />
+                    <CartaoExplorar title={'Melhor avaliadas'} image={require('../../assets/explore1.png')} />
                     <CartaoExplorar title={'Mais favoritadas'} image={require('../../assets/explore2.png')} />
                     <CartaoExplorar title={'Mais comentadas'} image={require('../../assets/explore3.png')} />
                 </ScrollView>

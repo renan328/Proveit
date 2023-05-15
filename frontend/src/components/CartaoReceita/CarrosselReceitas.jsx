@@ -5,7 +5,7 @@ import CartaoReceitaBlank from './CartãoReceitaBlank';
 
 export default function CarrosselHome() {
 
-    const [receitas, setReceitas] = useState([]);
+    const [dadosReceita, setDadosReceita] = useState([]);
 
     useEffect(() => {
         fetch("https://cloudproveit.azurewebsites.net/api/receita", {
@@ -13,14 +13,14 @@ export default function CarrosselHome() {
         })
             .then((response) => response.json())
             .then((json) => {
-                setReceitas(json);
+                setDadosReceita(json);
             })
             .catch((error) => {
                 alert("Erro ao buscar receitas");
             });
     }, []);
 
-    if (receitas == '') {
+    if (dadosReceita == '') {
         return (
             <View>
                 <ScrollView horizontal={true} style={{ marginLeft: 10, }}>
@@ -35,7 +35,7 @@ export default function CarrosselHome() {
             <View>
                 <ScrollView horizontal={true} style={{ marginLeft: 10, }}>
                     {
-                        receitas.map((receita, index) => (
+                        dadosReceita.map((receita, index) => (
                             <CartaoReceita receita={receita} key={index} />
                         ))
                     }

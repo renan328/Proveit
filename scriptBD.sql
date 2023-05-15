@@ -4,7 +4,7 @@ USE Proveit;
 CREATE TABLE Categorias (
     idCategoria INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     Nome VARCHAR(255) NULL,
-    Foto VARCHAR(255),
+    Foto LONGTEXT,
     PRIMARY KEY (idCategoria)
 );
 
@@ -107,11 +107,6 @@ CREATE TABLE ReceitasFavoritas (
     PRIMARY KEY (idReceitasFavoritas)
 );
 
--- insert de categorias (Possível mudança)
-INSERT INTO Categorias (Nome, Foto) VALUES ( 'Salgados', '../../assets/cat_salgados.jpg'), ('Doces', '../../assets/cat_doces.jpg'), ('Japonês', '../../assets/cat_japones.jpg'), ('Carnes', '../../assets/cat_carnes.jpg'), ('Saladas', '../../assets/cat_saladas.jpg'), ('Vegano', '../../assets/cat_vegano.jpg'), ('Vegetariano', '../../assets/cat_vegetariano.jpg'), 
-('Sanduíches', '../../assets/cat_sanduiches.jpg'), ('Low Carb', '../../assets/cat_lowCarb.jpg'), ('Lanches e Snacks', '../../assets/cat_snacks.jpg'), ('Sopas', '../../assets/cat_sopas.jpg'), ('Aves', '../../assets/cat_aves.jpg'), ('Frutos do mar. peixes e crustáceos', '../../assets/cat_frutosDoMar.jpg'), 
-('Acompanhamentos e molhos', '../../assets/cat_molhos.jpg'), ('Massas', '../../assets/cat_massas.jpg'), ('Tortas e quiches', '../../assets/cat_torta.jpg'), ('Bebidas', '../../assets/cat_bebidas.jpg'), ('Rápidas', '../../assets/cat_rapidas.jpg'), ('Sobremesas', '../../assets/cat_sobremesa.jpg'), ('Lanches', '../../assets/cat_lanches.jpg'), ('Bolos', '../../assets/cat_bolos.jpg');
-
 -- SELECTS UNICOS
 
 -- SELECT Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento FROM Receitas INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id;
@@ -120,6 +115,7 @@ INSERT INTO Categorias (Nome, Foto) VALUES ( 'Salgados', '../../assets/cat_salga
 -- SELECT * FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Receita_id = 1;
 
 -- insert padrão de receita
+/*
 INSERT INTO Usuarios (Nome, NomeTag, Email, Senha) VALUES ('renan', 'renan123', 're@gamil', '123');
 INSERT INTO Receitas (Nome, TempoPreparo, Tempo, Porcoes, ValCalorico, Descricao, Usuario_id, Categoria, Aproveitamento, Foto) VALUES ('pao e queijo', 2, "minutos", 1, 255, 'pao', 1, "Lanches", FALSE, "base46");
 INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (1, 1, 'coma o pao');
@@ -127,10 +123,9 @@ INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (1, 2, 'coma o quei
 INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (1, 3, 'coma tudo');
 INSERT INTO Ingredientes_Receita (Nome, Quantidade , Medida, Receita_id) VALUES ("Pão", 1, 'unidade', 1);
 INSERT INTO Ingredientes_Receita (Nome, Quantidade , Medida, Receita_id) VALUES ("queijo", 1, 'unidade', 1);
-
 INSERT INTO Avaliacao (Estrelas, Comentario, Receita_id, Usuario_id) VALUES (5 ,"muito bom",1 ,1);
-
 INSERT INTO ReceitasFavoritas (Receita_id, Usuario_id) VALUES (1, 1);
+*/
 
 -- Select receitas por ingredientes
 SELECT * FROM Receitas INNER JOIN Ingredientes_Receita ON Receitas.idReceita = Ingredientes_Receita.Receita_id  WHERE Ingredientes_Receita.Nome  = "Nome" OR Ingredientes_Receita.Nome = "Nome"  OR Ingredientes_Receita.Nome = "Nome" ;

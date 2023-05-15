@@ -10,22 +10,22 @@ export default function CartaoReceita({ receita }) {
     const navigation = useNavigation();
 
     const handleCardPress = (id) => {
-        navigation.navigate('ReceitaSingle', { id: receita.idReceita });
+        navigation.navigate('ReceitaSingle', { id: receita.receita?.idReceita });
     };
 
     const stars = receita.mediaEstrelas;
-
     function StarCounter() {
-
         const starsBox = [];
-
         for (let index = 0; index < stars; index++) {
             starsBox.push(
                 <View key={index}>
-                    <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} />
+                    <FontAwesomeIcon style={styles.star} icon={faStar} size={15} color={'#FF7152'} />
                 </View>
             );
         }
+        return (
+            <View style={{ display: 'flex', flexDirection: 'row', marginStart: 5, marginTop: 5, }}>{starsBox}</View>
+        )
     }
 
     const scheme = useColorScheme();
@@ -33,7 +33,7 @@ export default function CartaoReceita({ receita }) {
 
     return (
         <TouchableOpacity key={receita.id} onPress={() => handleCardPress(receita.id)}>
-            <ImageBackground source={{ uri: !receita.foto ?  '../../assets/proveitLogo.png' : receita.foto}} imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20, borderTopRightRadius: 20, }} style={styles.caixaPrincipal}>
+            <ImageBackground source={{ uri: !receita.receita?.foto ?  '../../assets/proveitLogo.png' : receita.receita?.foto}} imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20, borderTopRightRadius: 20, }} style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
                     <TouchableOpacity>
@@ -45,7 +45,7 @@ export default function CartaoReceita({ receita }) {
                 <View style={styles.containerTexto} >
                     <View style={styles.containerTextoWhite}>
                         {StarCounter()}
-                        <Text style={styles.titulo}>{receita.nomeReceita}</Text>
+                        <Text style={styles.titulo}>{receita.receita?.nomeReceita}</Text>
                     </View>
                 </View>
 
