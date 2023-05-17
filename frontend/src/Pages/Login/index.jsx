@@ -100,7 +100,7 @@ export default function Login({ navigation }) {
                         </TouchableOpacity>
 
                         <Text style={styles.headerSignText}>Ainda não tem uma conta?</Text>
-                        <TouchableOpacity onPress={() => navigation.navigate("CadastroDeUsuario")} style={styles.signUpButton}>
+                        <TouchableOpacity onPress={() => navigation.navigate("CadastroDeCategoria")} style={styles.signUpButton}>
                             <Text style={{ fontFamily: 'Raleway_700Bold', color: '#FF7152' }}>Cadastrar</Text>
                         </TouchableOpacity>
                     </ImageBackground>

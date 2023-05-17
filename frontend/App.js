@@ -28,7 +28,11 @@ export default function App() {
 
   return (
     <MenuProvider>
+<<<<<<< HEAD
       <Favoritos />
+=======
+      <Routes />
+>>>>>>> refs/remotes/origin/main
     </MenuProvider>
   )
 }
