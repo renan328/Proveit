@@ -33,7 +33,7 @@ export default function CartaoReceita({ receita }) {
 
     return (
         <TouchableOpacity key={receita.id} onPress={() => handleCardPress(receita.id)}>
-            <ImageBackground source={{ uri: !receita.receita?.foto ?  '../../assets/proveitLogo.png' : receita.receita?.foto}} imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20, borderTopRightRadius: 20, }} style={styles.caixaPrincipal}>
+            <ImageBackground source={{ uri: !receita.receita?.foto ?  '../../assets/proveitLogo.png' : receita.receita?.foto}} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
                     <TouchableOpacity>
@@ -60,15 +60,15 @@ const stylesLight = StyleSheet.create({
     caixaPrincipal: {
         display: 'flex',
         alignItems: 'center',
-        margin: 6,
         justifyContent: 'space-between',
-        width: 175,
-        height: 240,
+        margin: 6,
+        width: 230,
+        height: 350,
         backgroundColor: '#fff',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -94,14 +94,19 @@ const stylesLight = StyleSheet.create({
         color: '#505050',
     },
 
+    timeBadge: {
+
+    },
+
     containerTexto: {
         width: '100%',
-        height: 50,
+        height: 111,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
         border: 0,
+        alignSelf: 'baseline',
     },
 
     containerTextoWhite: {
@@ -111,7 +116,7 @@ const stylesLight = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         width: '100%',
         height: '100%',
         paddingHorizontal: 8,
@@ -120,16 +125,18 @@ const stylesLight = StyleSheet.create({
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
+        alignSelf: 'baseline',
+
     },
 
     titulo: {
         display: 'flex',
         flexGrow: 1,
         flexWrap: 'wrap',
-        fontSize: 13,
-        marginBottom: 3,
+        fontSize: 16,
+        marginVertical: 10,
         fontFamily: 'Raleway_700Bold',
-        textAlign: 'left',
+        textAlign: 'center',
         color: '#505050',
         textTransform: 'capitalize'
     },
@@ -144,13 +151,13 @@ const stylesDark = StyleSheet.create({
         alignItems: 'center',
         margin: 6,
         justifyContent: 'space-between',
-        width: 175,
-        height: 240,
+        width: 230,
+        height: 350,
         backgroundColor: '#303030',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -161,7 +168,7 @@ const stylesDark = StyleSheet.create({
     },
 
     header: {
-        padding: 7,
+        padding: 10,
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
@@ -172,16 +179,16 @@ const stylesDark = StyleSheet.create({
     bookmarkIcon: {
         padding: 8,
         backgroundColor: 'rgba(0,0,0,0.7)',
-        borderRadius: 10,
+        borderRadius: 13,
         color: '#fff',
 
     },
-
+    
     containerTexto: {
         width: '100%',
-        height: 50,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        height: 111,
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
 
@@ -191,25 +198,26 @@ const stylesDark = StyleSheet.create({
         flexWrap: 'wrap',
         textAlign: 'left',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '100%',
         height: '100%',
         paddingHorizontal: 8,
-        backgroundColor: 'rgba(20,20,20,0.9)',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
+        paddingVertical: 4,
+        backgroundColor: 'rgba(20,20,20,0.8)',
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
 
     titulo: {
         display: 'flex',
         flexGrow: 1,
         flexWrap: 'wrap',
-        fontSize: 13,
-        marginBottom: 3,
+        fontSize: 17,
+        marginVertical: 7,
         fontFamily: 'Raleway_700Bold',
         textAlign: 'left',
         color: '#fff',
@@ -218,4 +226,3 @@ const stylesDark = StyleSheet.create({
 
 
 });
-

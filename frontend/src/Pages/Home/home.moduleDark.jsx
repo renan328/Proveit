@@ -111,19 +111,31 @@ const styles = StyleSheet.create({
     listamento: {
         textAlign: 'center',
         marginTop: 35,
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent:'center'
+    },
+
+    listamentoIcon: {
+        color: '#505050',
+        marginRight: 10
     },
 
     categoria: {
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 20,
-        color: '#FFF',
+        color: '#dcdcdc',
+        marginBottom: 10
     },
 
     categoriaBig: {
         marginTop: 10,
         fontFamily: 'Raleway_900Black',
         fontSize: 35,
-        color: '#FFF',
+        color: '#dcdcdc',
+        marginBottom: 10
+
     }
 
 });

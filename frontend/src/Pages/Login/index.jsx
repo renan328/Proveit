@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimensions, useColorScheme, Appearance } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser, width } from '@fortawesome/free-solid-svg-icons/faUser';
@@ -7,12 +7,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import styles from './login.module';
+import stylesLight from './login.module';
+import stylesDark from './login.moduleDark';
 import { BlurView } from 'expo-blur';
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function Login({ navigation }) {
+
+    const scheme = useColorScheme()
+    const styles = scheme === 'dark' ? stylesDark : stylesLight
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -43,14 +47,14 @@ export default function Login({ navigation }) {
     }
 
     return (
-        <ImageBackground source={require('../../assets/headerBG.jpg')} style={styles.container} resizeMode='cover' >
+        <ImageBackground source={scheme == 'dark' ? require('../../assets/headerBG.jpg') : require('../../assets/headerBgLight.jpg')} style={styles.container} resizeMode='cover' >
 
             <BlurView style={styles.main} intensity={80}>
                 <View style={styles.tint}>
 
-                    <Image source={require('../../assets/proveitLogo.png')} style={styles.logo} />
+                    <Image source={scheme == 'dark' ? require('../../assets/proveitWhiteFade.png') : require('../../assets/proveitGrey.png')} style={styles.logo} />
 
-                    <Image source={require('../../assets/sabores.png')} style={styles.saboresImg} />
+                    <Image source={scheme == 'dark' ? require('../../assets/sabores.png') : require('../../assets/saboresLight.png')} style={styles.saboresImg} />
 
                     <View style={styles.containerInput}>
 

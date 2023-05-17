@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
 
     tint: {
-        backgroundColor: 'rgba(255,255,255,0.65)',
+        backgroundColor: 'rgba(12,12,12,0.85)',
         width: '100%',
         height: '100%',
         borderTopLeftRadius: 60,
@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 7,
         fontSize: 15,
         fontFamily: 'Raleway_700Bold',
-        color: '#505050',
+        color: 'rgb(255, 255, 255)',
         height: 45,
         minWidth: 265,
-        backgroundColor: '#fff',
+        backgroundColor: '#303030',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
         borderTopLeftRadius: 10,
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
 
     signUpButton: {
         marginTop: 5,
-        backgroundColor: '#fff',
+        backgroundColor: 'rgba(20,20,20,0.8)',
         paddingVertical: 10,
         paddingHorizontal: 30,
         borderRadius: 15

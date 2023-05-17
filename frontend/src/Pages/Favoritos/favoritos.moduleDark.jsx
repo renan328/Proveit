@@ -27,7 +27,10 @@ const styles = StyleSheet.create({
     },
     CardsList: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        flexDirection: 'row'
     },
     SubHeader: {
         position: 'relative',
@@ -35,7 +38,11 @@ const styles = StyleSheet.create({
         marginLeft: 33
     },
     ScreenSelect: {
-        width: 170,
+        backgroundColor: '#131313',
+        padding: 10,
+        borderRadius: 10,
+        paddingHorizontal: 35,
+        width: 250,
         display: 'flex',
         justifyContent: 'space-between',
         marginTop: 19,

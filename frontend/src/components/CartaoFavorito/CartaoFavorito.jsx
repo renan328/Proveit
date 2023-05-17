@@ -2,7 +2,7 @@ import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faStar, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faBookmark, faClock } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { BlurView } from "expo-blur";
 
@@ -14,7 +14,7 @@ export default function CartaoReceita({ }) {
         for (let index = 0; index < stars; index++) {
             starsBox.push(
                 <View key={index}>
-                    <FontAwesomeIcon style={styles.star} icon={faStar} size={15} color={'#FF7152'} />
+                    <FontAwesomeIcon style={styles.star} icon={faStar} size={10} color={'#FF7152'} />
                 </View>
             );
         }
@@ -28,7 +28,7 @@ export default function CartaoReceita({ }) {
 
     return (
         <TouchableOpacity key={1}>
-            <ImageBackground source={{ uri: '../../assets/cat_frutosDoMar.jpg'}} imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20, borderTopRightRadius: 20, }} style={styles.caixaPrincipal}>
+            <ImageBackground source={require('../../assets/cat_frutosDoMar.jpg')} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
                     <TouchableOpacity>
@@ -37,9 +37,10 @@ export default function CartaoReceita({ }) {
                 </View>
 
                 {/* Container de imagem e texto */}
+
                 <View style={styles.containerTexto} >
                     <View style={styles.containerTextoWhite}>
-                        {StarCounter()}
+                            {StarCounter()}
                         <Text style={styles.titulo}>Fruto do mar</Text>
                     </View>
                 </View>
@@ -55,15 +56,15 @@ const stylesLight = StyleSheet.create({
     caixaPrincipal: {
         display: 'flex',
         alignItems: 'center',
-        margin: 6,
         justifyContent: 'space-between',
-        width: 175,
-        height: 240,
+        margin: 6,
+        width: 170,
+        height: 220,
         backgroundColor: '#fff',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -91,7 +92,7 @@ const stylesLight = StyleSheet.create({
 
     containerTexto: {
         width: '100%',
-        height: 50,
+        height: 78,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 5,
@@ -104,9 +105,9 @@ const stylesLight = StyleSheet.create({
         flexWrap: 'wrap',
         textAlign: 'left',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         width: '100%',
         height: '100%',
         paddingHorizontal: 8,
@@ -115,6 +116,8 @@ const stylesLight = StyleSheet.create({
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
+        alignSelf: 'baseline',
+
     },
 
     titulo: {
@@ -122,9 +125,9 @@ const stylesLight = StyleSheet.create({
         flexGrow: 1,
         flexWrap: 'wrap',
         fontSize: 13,
-        marginBottom: 3,
+        marginVertical: 10,
         fontFamily: 'Raleway_700Bold',
-        textAlign: 'left',
+        textAlign: 'center',
         color: '#505050',
         textTransform: 'capitalize'
     },
@@ -139,13 +142,13 @@ const stylesDark = StyleSheet.create({
         alignItems: 'center',
         margin: 6,
         justifyContent: 'space-between',
-        width: 175,
-        height: 240,
+        width: 170,
+        height: 220,
         backgroundColor: '#303030',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -156,7 +159,7 @@ const stylesDark = StyleSheet.create({
     },
 
     header: {
-        padding: 7,
+        padding: 10,
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
@@ -167,16 +170,16 @@ const stylesDark = StyleSheet.create({
     bookmarkIcon: {
         padding: 8,
         backgroundColor: 'rgba(0,0,0,0.7)',
-        borderRadius: 10,
+        borderRadius: 13,
         color: '#fff',
 
     },
-
+    
     containerTexto: {
         width: '100%',
-        height: 50,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        height: 78,
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
 
@@ -186,17 +189,18 @@ const stylesDark = StyleSheet.create({
         flexWrap: 'wrap',
         textAlign: 'left',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '100%',
         height: '100%',
         paddingHorizontal: 8,
-        backgroundColor: 'rgba(20,20,20,0.9)',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
+        paddingVertical: 4,
+        backgroundColor: 'rgba(20,20,20,0.8)',
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
 
     titulo: {
@@ -204,9 +208,9 @@ const stylesDark = StyleSheet.create({
         flexGrow: 1,
         flexWrap: 'wrap',
         fontSize: 13,
-        marginBottom: 3,
+        marginVertical: 7,
         fontFamily: 'Raleway_700Bold',
-        textAlign: 'left',
+        textAlign: 'center',
         color: '#fff',
         textTransform: 'capitalize'
     },

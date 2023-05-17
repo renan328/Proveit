@@ -37,14 +37,13 @@ const stylesLight = StyleSheet.create({
         alignItems: 'center',
         margin: 6,
         justifyContent: 'space-between',
-        width: 175,
-        height: 240,
+        width: 230,
+        height: 350,
         backgroundColor: '#fff',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
         backgroundColor: 'rgba(0,0,0,0.1)'
     },
 
@@ -65,7 +64,7 @@ const stylesLight = StyleSheet.create({
 
     containerTexto: {
         width: '100%',
-        height: 50,
+        height: 111,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 5,
@@ -98,8 +97,8 @@ const stylesDark = StyleSheet.create({
         alignItems: 'center',
         margin: 6,
         justifyContent: 'space-between',
-        width: 175,
-        height: 240,
+        width: 230,
+        height: 350,
         backgroundColor: '#fff',
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
@@ -125,7 +124,7 @@ const stylesDark = StyleSheet.create({
 
     containerTexto: {
         width: '100%',
-        height: 50,
+        height: 111,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 5,

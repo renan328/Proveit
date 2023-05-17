@@ -7,11 +7,7 @@ export default function CartaoCategoria({ categoria }) {
     const styles = scheme === 'dark' ? stylesDark : stylesLight
     return (
         <View style={styles.caixaPrincipal}>
-<<<<<<< HEAD
-            <ImageBackground source={{ uri: categoria?.foto }} style={styles.imgCategoria} imageStyle={{ borderRadius: 24}}resizeMode="cover">
-=======
             <ImageBackground source={{ uri: categoria?.foto }} style={styles.imgCategoria} resizeMode="cover" imageStyle={{ borderRadius: 24 }}>
->>>>>>> refs/remotes/origin/main
                 <View style={styles.textContainer}>
                     <Text style={styles.titulo}>{categoria?.nome}</Text>
                 </View>
