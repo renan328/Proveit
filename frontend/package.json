@@ -21,7 +21,7 @@
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@react-navigation/stack": "^6.3.16",
-    "expo": "^48.0.16",
+    "expo": "^48.0.17",
     "expo-app-loading": "^2.1.1",
     "expo-blur": "~12.2.2",
     "expo-constants": "~14.2.1",

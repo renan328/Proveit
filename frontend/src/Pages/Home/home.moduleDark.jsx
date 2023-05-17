@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     //listas
     listamento: {
         textAlign: 'center',
-        margin: 40,
+        marginTop: 35,
     },
 
     categoria: {

@@ -1,252 +1,216 @@
-import React, { useState } from "react";
-
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-
+import React from "react";
+import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faStar, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { useNavigation } from '@react-navigation/native';
+import { BlurView } from "expo-blur";
 
-import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, useFonts } from '@expo-google-fonts/raleway';
+export default function CartaoReceita({ }) {
 
-import { faBookmark, faStar } from '@fortawesome/free-solid-svg-icons';
-import { width } from "@fortawesome/free-solid-svg-icons/faUser";
-
-
-
-
-export default function CartaoFavorito({ titulo, text, stars }) {
-
-    const truncatedTitulo = titulo.length > 35 ? `${titulo.slice(0, 35)}...` : titulo;
-    const truncatedText = text.length > 55 ? `${text.slice(0, 55)}...` : text;
-
-
-    const [saved, setSaved] = useState(false);
-
-
-
-
-    const addSave = () => {
-
-        setSaved(!saved);
-
-    };
-
-
+    const stars = 5;
     function StarCounter() {
-
-
-
-
         const starsBox = [];
-
-
-
-
         for (let index = 0; index < stars; index++) {
-
             starsBox.push(
-
                 <View key={index}>
-
-                    <FontAwesomeIcon style={styles.star} icon={faStar} size={20} color={'#FF7152'} ></FontAwesomeIcon>
-
+                    <FontAwesomeIcon style={styles.star} icon={faStar} size={15} color={'#FF7152'} />
                 </View>
-
             );
-
         }
-
-
-
-
         return (
+            <View style={{ display: 'flex', flexDirection: 'row', marginStart: 5, marginTop: 5, }}>{starsBox}</View>
+        )
+    }
 
-            <View style={styles.starsBox}>{starsBox}</View>
-
-        );
-
-    };
-
-
-
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     return (
-
-        <View style={styles.card}>
-
-            <View style={styles.cardContent}>
+        <TouchableOpacity key={1}>
+            <ImageBackground source={{ uri: '../../assets/cat_frutosDoMar.jpg'}} imageStyle={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderTopLeftRadius: 20, borderTopRightRadius: 20, }} style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
-
-                    <View style={styles.titleContainer}>
-
-                        <Text style={styles.titulo}>{truncatedTitulo}</Text>
-
-                    </View>
-
-                    <TouchableOpacity onPress={() => addSave()}>
-
-                        <FontAwesomeIcon icon={faBookmark} size={35} color={saved ? '#FF7152' : '#505050'} />
-
+                    <TouchableOpacity>
+                        <FontAwesomeIcon icon={faBookmark} size={20} style={styles.bookmarkIcon} />
                     </TouchableOpacity>
-
                 </View>
 
-                <View>
-                    <Text style={styles.text} verticalAlign={'top'}>{truncatedText}</Text>
+                {/* Container de imagem e texto */}
+                <View style={styles.containerTexto} >
+                    <View style={styles.containerTextoWhite}>
+                        {StarCounter()}
+                        <Text style={styles.titulo}>Fruto do mar</Text>
+                    </View>
                 </View>
 
-                <View style={styles.footer}>
-                    <StarCounter style={styles.starsBox}></StarCounter>
-                </View>
+            </ImageBackground>
+        </TouchableOpacity >
 
+    )
+}
 
-            </View>
+const stylesLight = StyleSheet.create({
 
-            <View style={styles.imageContainer}>
-
-                <Image source={require('../../assets/cat_salgados.jpg')} style={styles.image} />
-
-            </View>
-
-        </View>
-
-    );
-
-};
-
-
-
-
-const styles = StyleSheet.create({
-
-    card: {
-
-        backgroundColor: '#fff',
-
-        borderRadius: 8,
-
-        shadowColor: '#000',
-
-        shadowOffset: { width: 2, height: 2 },
-
-        shadowOpacity: 0.3,
-
-        shadowRadius: 4,
-
-        width: '92%',
-
-        minHeight: 125,
-
-        maxHeight: 200,
-
-        marginTop: 29,
-
-        flexDirection: 'row',
-
+    caixaPrincipal: {
         display: 'flex',
-
-        flexGrow: 1,
-
-        flexShrink: 1,
-    },
-
-    cardContent: {
-
-        display: 'flex',
-
-        marginHorizontal: 10,
-
-        flexDirection: 'column',
-
+        alignItems: 'center',
+        margin: 6,
         justifyContent: 'space-between',
-
-        width: '50%',
-
-        flexGrow: 1,
-
-        paddingBottom: 10,
-
+        width: 175,
+        height: 240,
+        backgroundColor: '#fff',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
     },
-
 
     header: {
-
+        padding: 7,
+        width: '100%',
+        display: 'flex',
         flexDirection: 'row',
-
-        justifyContent: 'space-between',
-
-        marginBottom: 12,
-
+        alignItems: 'center',
+        justifyContent: 'flex-end'
     },
 
-    imageContainer: {
+    bookmarkIcon: {
+        padding: 8,
+        backgroundColor: 'rgba(255,255,255,0.7)',
+        borderRadius: 10,
+        color: '#505050',
+    },
 
-        flex: 50,
+    containerTexto: {
+        width: '100%',
+        height: 50,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+        border: 0,
+    },
 
+    containerTextoWhite: {
+        border: 0,
+        flexWrap: 'wrap',
+        textAlign: 'left',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%',
         height: '100%',
-
-    },
-
-    titleContainer: {
-
-        flex: 80,
-
+        paddingHorizontal: 8,
+        backgroundColor: 'rgba(255,255,255,0.90)',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
     },
 
     titulo: {
-
+        display: 'flex',
+        flexGrow: 1,
+        flexWrap: 'wrap',
+        fontSize: 13,
+        marginBottom: 3,
         fontFamily: 'Raleway_700Bold',
-
+        textAlign: 'left',
         color: '#505050',
-
-        marginTop: 10,
-
-        fontSize: 17,
-
+        textTransform: 'capitalize'
     },
 
-    text: {
 
-        width: '100%',
+});
 
-        fontsize: 8,
+const stylesDark = StyleSheet.create({
 
-        color: '#505050',
-
-        fontWeight: 300,
-
+    caixaPrincipal: {
         display: 'flex',
+        alignItems: 'center',
+        margin: 6,
+        justifyContent: 'space-between',
+        width: 175,
+        height: 240,
+        backgroundColor: '#303030',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
+    },
+
+    header: {
+        padding: 7,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+
+    bookmarkIcon: {
+        padding: 8,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        borderRadius: 10,
+        color: '#fff',
 
     },
 
-    image: {
-
+    containerTexto: {
         width: '100%',
+        height: 50,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
 
+    },
+
+    containerTextoWhite: {
+        flexWrap: 'wrap',
+        textAlign: 'left',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%',
         height: '100%',
-
-        display: 'flex',
-
-        borderTopRightRadius: 8,
-
-        borderBottomEndRadius: 8,
-
-
+        paddingHorizontal: 8,
+        backgroundColor: 'rgba(20,20,20,0.9)',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
     },
 
-    footer: {
-
+    titulo: {
         display: 'flex',
-
-        height: '20%',
-
-        alignItems: 'flex-start',
-
+        flexGrow: 1,
+        flexWrap: 'wrap',
+        fontSize: 13,
+        marginBottom: 3,
+        fontFamily: 'Raleway_700Bold',
+        textAlign: 'left',
+        color: '#fff',
+        textTransform: 'capitalize'
     },
 
-    starsBox: {
 
-        flexDirection: "row",
+});
 
-    }
-
-})

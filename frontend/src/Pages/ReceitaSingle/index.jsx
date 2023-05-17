@@ -110,6 +110,9 @@ export default function ReceitaSingle({ navigation }) {
                 </View>
                 <BlurView style={styles.mainHeader}>
                     <View style={styles.mainHeaderWhite}>
+                        <TouchableOpacity onPress={() => addSave()} style={styles.favButton} >
+                                <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={25} color={saved ? '#FF7152' : '#505050'} />
+                        </TouchableOpacity>
                         <View style={styles.mainTexts}>
                             <View style={styles.starsContainer}>
                                 {StarCounter()}
@@ -143,21 +146,6 @@ export default function ReceitaSingle({ navigation }) {
                     </View>
                 </LinearGradient>
 
-                <TouchableOpacity onPress={() => addSave()} style={{
-                        marginTop: '10px',
-                        display: 'flex',
-                        flexDirection: 'row',
-                        borderBottomLeftRadius: 10,
-                        borderBottomRightRadius: 10,
-                        borderTopLeftRadius: 10,
-                        borderTopRightRadius: 10,
-                        justifyContent: 'space-between',
-                        paddingVertical: '10px',
-                        paddingHorizontal: '20px',
-                        backgroundColor: saved ? '#ffc9bd' : '#fff',
-                    }}>
-                        <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={25} color={saved ? '#FF7152' : '#505050'} />
-                    </TouchableOpacity>
                 <TouchableOpacity style={styles.detailsContainer} onPress={() => navigation.navigate('Perfil')}>
                     <View>
                         <Image source={require('../../assets/user.jpg')} style={styles.userPic}></Image>
@@ -273,6 +261,16 @@ export default function ReceitaSingle({ navigation }) {
                         <ComentarioSingle userPicture={{ uri: avaliacoes.usuarioFoto }} userName={avaliacoes.usuarioNome} stars={avaliacoes.estrelas} comment={avaliacoes.comentario} />
                     ))}
                 </View>
+                <View
+                    style={{
+                        borderBottomColor: '#505050',
+                        opacity: 0.4,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        width: '90%',
+                        height: 5,
+                        marginTop: 100,
+                        alignSelf: 'center'
+                    }} />
             </View>
         </ScrollView >
     )

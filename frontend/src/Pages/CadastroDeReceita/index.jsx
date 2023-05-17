@@ -281,7 +281,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                         selectedValue={tempo}
                         onValueChange={(itemValue) => setTempo(itemValue)}
                     >
-                        <Picker.Item label="Minutos(s)" value="Minutos(s)" />
+                        <Picker.Item label="Minuto(s)" value="Minuto(s)" />
                         <Picker.Item label="Hora(s)" value="Hora(s)" />
                     </Picker>
                 </View>

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         marginLeft: 9,
         width: 40, 
         height: 50,
-        /* Opacity: '40%'!!!!!!!!!!! */
+        backgroundColor: 'rgba(255,255,255,0.4)'
     },
     
     

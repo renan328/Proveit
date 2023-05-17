@@ -1,9 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet, button } from "react-native";
-import styles from "./favoritos.module";
+import { View, Text, StyleSheet, button, useColorScheme, Appearance } from "react-native";
+import stylesLight from "./favoritos.module";
+import stylesDark from "./favoritos.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
+import CartaoReceita from "../../components/CartaoReceita/CartãoReceita";
 
 export default function Favoritos() {
+
+    const scheme = useColorScheme()
+    const styles = scheme === 'dark' ? stylesDark : stylesLight
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -29,9 +34,7 @@ export default function Favoritos() {
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#505050' }}>Favoritos</Text>
             </View>
             <View style={styles.CardsList}>
-                <CartaoFavorito titulo={'Coxinha impressionante sabor frango frango frango'} text={'comidinhas hmmmm fnjwifnnf fiownfiwf fniwmnfoiwf fijwidof dm nwodmwodm diownmdiowd iofnoiw'} Image={'/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg'} stars={3} />
-                <CartaoFavorito titulo={'Suco de fruta'} text={'Sucos diferenciados'} Image={'/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg'} stars={5} />
-                <CartaoFavorito titulo={'Comida'} text={'comidinhas hmmmm'} Image={'/workspaces/ProveIt/frontend/src/assets/cat_salgados.jpg'} stars={5} />
+                <CartaoFavorito />
             </View>
             <View style={{ paddingVertical: 50 }} />
         </View>

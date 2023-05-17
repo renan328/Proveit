@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <EsqueciMinhaSenha />
+      <Favoritos />
     </MenuProvider>
   )
 }

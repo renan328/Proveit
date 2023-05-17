@@ -116,13 +116,15 @@ const styles = StyleSheet.create({
     //listas
     listamento: {
         textAlign: 'center',
-        margin: 40,
+        marginVertical: 35,
+        marginHorizontal: 5
     },
 
     categoria: {
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 20,
         color: '#505050',
+        marginVertical: 12,
     },
 
     categoriaBig: {
@@ -130,6 +132,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_900Black',
         fontSize: 35,
         color: '#505050',
+        marginVertical: 12,
+
     }
 
 });

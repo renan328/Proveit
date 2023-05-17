@@ -10,9 +10,8 @@ export default function IngredienteReceita({ ID, nome, quantidade, medida }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>• {quantidade}</Text>
-            <Text style={styles.text}> {medida} de </Text>
-            <Text style={styles.text}>{nome}</Text>
+            <Text style={styles.text}>• {quantidade} {medida} de {nome}</Text>
+
         </View>
     );
 }
