@@ -1,9 +1,12 @@
-import React, { Component, useState } from 'react';
+import React, {  useState } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import validator from 'validator';
 import styles from './red_esqueciminhasenha.module';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -14,7 +17,15 @@ export default function Red_EsqueciMinhaSenha({ navigation }) {
         <View style={{ maxHeight: screenHeight }}>
             {/* Imagem fundo */}
             <View style={styles.imageContainer}>
-                <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}> </ImageBackground>
+                <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}>
+                    <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
+                        <FontAwesomeIcon
+                            style={styles.arrowleft}
+                            color={'#fff'}
+                            size={30}
+                            icon={faChevronLeft} />
+                    </TouchableOpacity>
+                </ImageBackground>
             </View>
             {/* Container de componentes */}
             <View style={styles.main}>
@@ -30,8 +41,8 @@ export default function Red_EsqueciMinhaSenha({ navigation }) {
                     <View style={styles.main3}>
                         <View style={styles.Texts}>
                             <View style={styles.Texts2}>
-                                <Text style={styles.Redefinasua}>Redefina sua</Text>
-                                <Text style={styles.Senha}> senha</Text>
+                                <Text style={styles.Redefinasua}>Redefina sua<Text style={{color:'#ff7152'}}> senha</Text></Text>
+                                
                             </View>
                             <Text style={styles.Desc}>Escreva sua nova senha, não se esqueça de usar letras, numeros e caracteres.</Text>
                         </View>

@@ -15,10 +15,24 @@ const styles = StyleSheet.create({
         alignContent: 'flex-start',
         marginTop:9,
         marginLeft: 9,
+        borderRadius:10,
         width: 40, 
         height: 50,
-        backgroundColor: 'rgba(255,255,255,0.4)'
+        backgroundColor: 'rgba(255,255,255,0.6)',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 2,
     },
+
+    arrowleft:{
+        marginTop:4,
+        padding:6,
+    },
+
     
     
     main: {

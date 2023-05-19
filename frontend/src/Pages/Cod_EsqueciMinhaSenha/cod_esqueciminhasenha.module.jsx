@@ -2,23 +2,44 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
 
-    container:{
-        height: '100%',
-    },
+
 
     imageContainer: {
         display: 'flex',
         height: '16%',
         
     },
+
+    backbutton:{
+        display:'flex',
+        flexDirection: 'column',
+        alignContent: 'flex-start',
+        marginTop:9,
+        marginLeft: 9,
+        borderRadius:10,
+        width: 40, 
+        height: 50,
+        backgroundColor: 'rgba(255,255,255,0.6)',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 2,
+    },
+
+    arrowleft:{
+        marginTop:4,
+        padding:6,
+    },
+
     
     main: {
         display: 'flex',
         backgroundColor: '#fff',
         width: '100%',
-        height: '91.2%',
-        display: 'flex',
-        marginTop: '100',
+        height: '84%',
         flexDirection: 'column',
         textAlign: 'justify-content',
         borderTopRightRadius: 90,
@@ -34,6 +55,7 @@ const styles = StyleSheet.create({
     main2:{
         display:'flex',
         height: '75%',
+        marginTop:15,
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignContent:'center',
@@ -77,14 +99,15 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent:'space-around',
-        width: '73%',
+        width: '81%',
         height: '40%',
     },
 
     Texts1:{
         display: 'flex',
         flexDirection: 'row',
-        justifyContent:'space-around',
+        justifyContent:'space-between',
+       
     },
 
     Digiteo:{
@@ -154,7 +177,7 @@ const styles = StyleSheet.create({
     },
 
     balls:{
-        marginTop: -44,
+        marginTop:-53,
         width: 235, 
         height: 200,
         transform: [{ rotate: '180deg' }]

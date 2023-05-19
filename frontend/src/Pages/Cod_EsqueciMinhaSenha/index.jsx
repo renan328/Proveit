@@ -4,11 +4,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import validator from 'validator';
 import styles from './cod_esqueciminhasenha.module';
-import { text } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const screenHeight = Dimensions.get('window').height;
 
-export default function Cod_EsqueciMinhaSenha() {
+export default function Cod_EsqueciMinhaSenha({ navigation }) {
 
     const [code, setCode] = useState(['', '', '', '']);
     const input1 = useRef(null);
@@ -55,14 +56,22 @@ export default function Cod_EsqueciMinhaSenha() {
                     break;
             }
         }
-    }  
+    }
 
     return (
 
-        <View style={{maxHeight: screenHeight}}>
+        <View style={{ maxHeight: screenHeight }}>
             {/* Imagem fundo */}
             <View style={styles.imageContainer}>
-                <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}> </ImageBackground>
+                <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}>
+                    <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
+                        <FontAwesomeIcon
+                            style={styles.arrowleft}
+                            color={'#fff'}
+                            size={30}
+                            icon={faChevronLeft}/>
+                    </TouchableOpacity>
+                </ImageBackground>
             </View>
             {/* Container de componentes */}
             <View style={styles.main}>

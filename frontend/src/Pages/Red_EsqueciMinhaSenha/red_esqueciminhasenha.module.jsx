@@ -8,14 +8,36 @@ const styles = StyleSheet.create({
         
     },
     
+    backbutton:{
+        display:'flex',
+        flexDirection: 'column',
+        alignContent: 'flex-start',
+        marginTop:9,
+        marginLeft: 9,
+        borderRadius:10,
+        width: 40, 
+        height: 50,
+        backgroundColor: 'rgba(255,255,255,0.6)',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 2,
+    },
+
+    arrowleft:{
+        marginTop:4,
+        padding:6,
+    },
+
     main: {
         display: 'flex',
         backgroundColor: '#fff',
         width: '100%',
         height: '84%',
-        display: 'flex',
         justifyContent: 'flex-start',
-        marginTop: '100',
         flexDirection: 'column',
         borderTopRightRadius: 90,
         shadowColor: "#000",
@@ -69,16 +91,14 @@ const styles = StyleSheet.create({
     
     Texts:{
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent:'space-between',
-        width: '82%',
+        width: '90%',
         height: '20%',
     },
 
     Texts2:{
         display: 'flex',
         flexDirection: 'row',
-        justifyContent:'flex-start',
+        alignContent:'space-around'
     },
 
     Redefinasua:{
@@ -90,8 +110,6 @@ const styles = StyleSheet.create({
 
     Senha:{
         display:'flex',
-        flexDirection: 'column',
-        justifyContent:'center',
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 33,
@@ -174,7 +192,7 @@ const styles = StyleSheet.create({
     },
 
     balls:{
-        marginTop: -44,
+        marginTop: -110,
         width: 235, 
         height: 200,
         transform: [{ rotate: '180deg' }]

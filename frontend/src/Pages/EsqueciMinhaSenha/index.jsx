@@ -1,9 +1,12 @@
-import React, { Component, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-web';
 import validator from 'validator';
 import styles from './esqueciminhasenha.module';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -15,10 +18,13 @@ export default function EsqueciMinhaSenha({ navigation }) {
             {/* Imagem fundo */}
             <View style={styles.imageContainer}>
                 <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}>
-                    <Image
-                    source={require('../../assets/backbutton.png')} 
-                    style={styles.backbutton}/> 
-                    
+                    <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
+                        <FontAwesomeIcon
+                            style={styles.arrowleft}
+                            color={'#fff'}
+                            size={30}
+                            icon={faChevronLeft}></FontAwesomeIcon>
+                    </TouchableOpacity>
                 </ImageBackground>
             </View>
             {/* Container de componentes */}
