@@ -10,15 +10,17 @@ export default function CarrosselCategorias() {
         })
             .then((response) => response.json())
             .then((json) => {
+                console.log(json);
                 setCategorias(json);
             })
             .catch((error) => {
                 alert("Erro ao buscar categoirias");
             });
-    }, []);
+    }, [])
+
     return (
         <View style={styles.container}>
-            <ScrollView horizontal={true} style={{ marginLeft: 10, }}>
+            <ScrollView horizontal={true} style={{ marginLeft: 10 }}>
                 {
                     categorias.map((categoria, index) => (
                         <CartaoCategoria categoria={categoria} key={index} />

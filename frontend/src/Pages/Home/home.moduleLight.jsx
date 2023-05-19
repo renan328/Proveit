@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         height: 60,
         overflow: 'visible',
-        zIndex: 200
     },
 
     textContainer: {

@@ -78,7 +78,41 @@ namespace proveit.DAO
 
             conexao.Close();
             return receita;
-        } 
+        }
+        
+        public List<ReceitaGeralDTO> ListarReceitasHome()
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+
+            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, Foto";
+            var comando = new MySqlCommand(query, conexao);
+            var dataReader = comando.ExecuteReader();
+
+            var receitas = new List<ReceitaGeralDTO>();
+
+            while (dataReader.Read())
+            {
+                var idReceita = int.Parse(dataReader["idReceita"].ToString()); ;
+
+                if (receitas.Any(x => x.idReceita == idReceita) == false)
+                {
+                    //Não existe receita na lista
+
+                    var newReceita = new ReceitaGeralDTO();
+
+                    newReceita.idReceita = idReceita;
+                    newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
+                    newReceita.Foto = (dataReader["Foto"].ToString());
+
+                    receitas.Add(newReceita);
+                }
+            }
+
+            conexao.Close();
+            return receitas;
+        }
 
         // Listar receitas
         public List<ReceitaGeralDTO> ListarReceitas()

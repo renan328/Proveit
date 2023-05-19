@@ -107,7 +107,6 @@ const stylesLight = StyleSheet.create({
         paddingVertical: 10,
         borderBottomEndRadius: 20,
         borderTopEndRadius: 20,
-        zIndex: 0,
     },
 
     commentHeader: {
@@ -194,7 +193,6 @@ const stylesDark = StyleSheet.create({
         paddingVertical: 10,
         borderBottomEndRadius: 20,
         borderTopEndRadius: 20,
-        zIndex: 0,
     },
 
     commentHeader: {

@@ -32,8 +32,8 @@ export default function Login({ navigation }) {
         }
         if (!senha) {
             errors.senha = "Senha é obrigatória";
-        } else if (senha.length < 6) {
-            errors.senha = "Senha deve ter pelo menos 6 caracteres";
+        } else if (senha.length < 8) {
+            errors.senha = "Senha deve ter pelo menos 8 caracteres";
         }
         setErrors(errors);
 
@@ -47,7 +47,7 @@ export default function Login({ navigation }) {
     }
 
     return (
-        <ImageBackground source={scheme == 'dark' ? require('../../assets/headerBG.jpg') : require('../../assets/headerBgLight.jpg')} style={styles.container} resizeMode='cover' >
+        <ImageBackground source={scheme == 'dark' ? require('../../assets/headerBG.jpg') : require('../../assets/headerBGLight.jpg')} style={styles.container} resizeMode='cover' >
 
             <BlurView style={styles.main} intensity={80}>
                 <View style={styles.tint}>
@@ -89,8 +89,7 @@ export default function Login({ navigation }) {
                     </View>
                     <ImageBackground source={require('../../assets/bemVindo.png')} style={styles.buttons}>
                         {/* Botão */}
-                        <TouchableOpacity onPress={() => navigation.navigate('Main')
-                        }>
+                        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
                             <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                                 end={{ x: 2, y: 1 }} style={styles.button} >
                                 <Text style={styles.buttonText}>Entrar</Text>

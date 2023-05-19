@@ -50,6 +50,29 @@ namespace proveit.Controllers
             return Ok(detalhesReceitas);
         }
 
+        [HttpGet]
+        public IActionResult ListarReceitasHome()
+        {
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarReceitasHome();
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
+
         [HttpPost]
         public IActionResult CadastrarRecetas([FromBody] ReceitaGeralDTO receita)
         {

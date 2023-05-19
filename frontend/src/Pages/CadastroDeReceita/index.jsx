@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, CheckBox, TouchableOpacity, ScrollView, Image, Picker, Appearance, useColorScheme } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Appearance, useColorScheme } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -9,10 +9,10 @@ import stylesLight from './cadastrodereceita.module';
 import stylesDark from './cadastrodereceita.moduleDark';
 import Toast from 'react-native-toast-message';
 import toastStyle from '../Toasts/toasts';
+import { Picker } from '@react-native-picker/picker';
 
 export default function CadastroDeReceita({ navigation, props }) {
 
-    {/* UseState errados nos MultipleSelectList */ }
     const [idReceita, setIdReceita] = useState(0);
     const [nomeReceita, setNomeReceita] = useState('');
     const [tempoPreparo, setTempoPreparo] = useState('');
@@ -62,54 +62,13 @@ export default function CadastroDeReceita({ navigation, props }) {
         setPassos(updatedSteps);
     }
 
-    const toastConfig = {
-        success: internalState => (
-            <View style={toastStyle.successToast}>
-                <FontAwesomeIcon icon={faCircleCheck} size={28} style={{ marginRight: 10 }} color='#fff' />
-                <Text style={toastStyle.toastText}>{internalState.text1}</Text>
-            </View>
-        ),
-
-        fail: internalState => (
-            <View style={toastStyle.failToast}>
-                <FontAwesomeIcon icon={faCircleXmark} size={28} style={{ marginRight: 10 }} color='#fff' />
-                <Text style={toastStyle.toastText}>{internalState.text1}</Text>
-            </View>
-        ),
-
-        error: () => { },
-        info: () => { },
-        any_custom_type: () => { },
-    }
-
-    const showSuccessToast = () => {
-        Toast.show({
-            type: 'success',
-            text1: 'Receita publicada',
-            position: 'bottom',
-            visibilityTime: 3000,
-            bottomOffset: 120
-        });
-    }
-
-    const showFailToast = () => {
-        Toast.show({
-            type: 'fail',
-            text1: 'Receita não publicada, foi mal!',
-            position: 'bottom',
-            visibilityTime: 3000,
-            bottomOffset: 120
-        });
-    }
-
-
     //Configurações das imagens
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 4],
-            quality: 0.7,
+            quality: 0.5,
         });
 
         console.log(result);
@@ -178,11 +137,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                 body: JSON.stringify(body)
             })
                 .then((response) => { alert('Receita cadastrada com sucesso!') })
-                .catch((error) => {
-                    console.log(error);
-                    showFailToast;
-                });
-
+                .catch((error) => { console.log(error) });
             console.log(body);
         }
     }
@@ -192,13 +147,11 @@ export default function CadastroDeReceita({ navigation, props }) {
         'Bebidas',
         'Bolos',
         'Carnes',
-        'Doces',
         'Frutos do Mar',
         'Japones',
         'Lanches',
         'LowCarb',
         'Massa',
-        'Molhos',
         'Rapidas',
         'Saladas',
         'Salgados',
@@ -213,7 +166,6 @@ export default function CadastroDeReceita({ navigation, props }) {
 
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
-
 
     return (
         <ScrollView style={styles.container} >
@@ -305,9 +257,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                 {/* CheckBox de Aproveitamento */}
                 <View style={styles.defaultInput}>
                     <View style={styles.checkboxContainer}>
-                        <CheckBox value={aproveitamento} onValueChange={setAproveitamento} style={styles.checkbox} />
                         <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
-                        <TouchableOpacity title="?" />
                     </View>
                 </View>
 
@@ -369,8 +319,9 @@ export default function CadastroDeReceita({ navigation, props }) {
                                     selectedValue={ingrediente.medida}
                                     onValueChange={valor => atualizarIngrediente(index, 'medida', valor)}
                                 >
-                                    <Picker.Item label="A gosto" value="a gosto" />
+                                    <Picker.Item label="Medida" value="" enabled="false" />
                                     <Picker.Item label="Gramas (g)" value="g" />
+                                    <Picker.Item label="A gosto" value="a gosto" />
                                     <Picker.Item label="Quilograma (kg)" value="kg" />
                                     <Picker.Item label="ML" value="ml" />
                                     <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
@@ -441,7 +392,6 @@ export default function CadastroDeReceita({ navigation, props }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
             <View style={{ paddingVertical: 50 }} />
         </ScrollView>
     );
