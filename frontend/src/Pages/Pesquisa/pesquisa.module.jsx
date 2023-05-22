@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
     textContainer: {
         marginTop: 20,
         textAlign: 'center',
-    },  
+    },
 
-    subText: { 
+    subText: {
         fontFamily: 'Raleway_800ExtraBold',
         color: '#FF7152',
         fontSize: 40

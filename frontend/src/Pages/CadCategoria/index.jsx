@@ -70,13 +70,13 @@ export default function CadastroDeCategoria({ navigation }) {
 
     function handleRegister() {
 
-        const body = {nome, foto}
+        const body = { nome, foto }
         fetch("https://localhost:7219/api/Categoria", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         })
-            .then((response) => { alert("Categoria cadastrado com sucesso!")})
+            .then((response) => { alert("Categoria cadastrado com sucesso!") })
             .catch((error) => {
                 console.log(error);
                 showFailToast;

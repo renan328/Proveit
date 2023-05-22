@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         marginTop: 19,
         marginLeft: 33
     },
-    
+
     ScreenSelect: {
         backgroundColor: '#cdcdcd',
         padding: 10,

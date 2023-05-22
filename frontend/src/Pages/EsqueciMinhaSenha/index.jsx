@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { TouchableOpacity } from 'react-native-web';
-import validator from 'validator';
 import styles from './esqueciminhasenha.module';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-
 const screenHeight = Dimensions.get('window').height;
 
 export default function EsqueciMinhaSenha({ navigation }) {
-
     return (
-
         <View style={{ maxHeight: screenHeight }}>
-            {/* Imagem fundo */}
             <View style={styles.imageContainer}>
                 <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}>
                     <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
@@ -23,11 +17,12 @@ export default function EsqueciMinhaSenha({ navigation }) {
                             style={styles.arrowleft}
                             color={'#fff'}
                             size={30}
-                            icon={faChevronLeft}></FontAwesomeIcon>
+                            icon={faChevronLeft}
+                        />
                     </TouchableOpacity>
                 </ImageBackground>
             </View>
-            {/* Container de componentes */}
+
             <View style={styles.main}>
                 <View style={styles.main2}>
                     <View style={styles.circuloIcon}>
@@ -47,12 +42,10 @@ export default function EsqueciMinhaSenha({ navigation }) {
                             <Text style={styles.Desc}>Digite o email cadastrado para que enviaremos um código de autenticação.</Text>
                         </View>
 
-                        {/* Input */}
                         <View style={styles.inputSingle}>
                             <TextInput style={styles.defaultInput} placeholder='E-mail'></TextInput>
                         </View>
 
-                        {/* Botão */}
                         <View style={styles.botoes}>
                             <TouchableOpacity onPress={() => navigation.navigate('Cod_EsqueciMinhaSenha')} >
                                 <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
@@ -69,5 +62,5 @@ export default function EsqueciMinhaSenha({ navigation }) {
                 />
             </View>
         </View>
-    );
+    )
 }

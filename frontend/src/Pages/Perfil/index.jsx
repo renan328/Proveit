@@ -11,7 +11,7 @@ import stylesDark from './perfil.moduleDark';
 export default function Perfil({ navigation }) {
 
     const scheme = useColorScheme();
-    const styles = scheme ==='dark' ? stylesDark : stylesLight;
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     return (
         // Container Geral

@@ -86,7 +86,7 @@ export default function Home({ navigation }) {
                     marginTop: 15,
                     alignSelf: 'center',
                     marginBottom: 20
-                    
+
                 }} />
             <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                 <Text style={{ color: '#505050', fontFamily: 'Raleway_500Medium' }}>Por enquanto é só!</Text>

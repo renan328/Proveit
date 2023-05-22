@@ -1,18 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, Appearance, useColorScheme, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
-import { faBookmark, faStar, faAngleLeft, faClock, faUtensils, faHeart, faEllipsisVertical, faCarrot, faKitchenSet } from '@fortawesome/free-solid-svg-icons';
 import PassoReceita from '../../components/PassoReceita/PassoReceita';
 import IngredienteReceita from '../../components/IngredienteReceita/IngredienteReceita';
 import ComentarioSingle from '../../components/ComentarioSingle/ComentarioSingle';
+import { LinearGradient } from 'expo-linear-gradient';
 import { AirbnbRating } from 'react-native-ratings';
+import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faBookmark, faStar, faAngleLeft, faClock, faUtensils, faHeart, faEllipsisVertical, faCarrot, faKitchenSet } from '@fortawesome/free-solid-svg-icons';
 import { useRoute } from '@react-navigation/native';
 import stylesDark from './receitasingle.moduleDark';
 import stylesLight from './receitasingle.module';
 import { BlurView } from 'expo-blur';
-import { counter } from '@fortawesome/fontawesome-svg-core';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -74,6 +73,7 @@ export default function ReceitaSingle({ navigation }) {
             console.log(body);
         }
     }
+
     function handleRatingChange(ratingValue) {
         setEstrelas(ratingValue)
     }
@@ -111,7 +111,7 @@ export default function ReceitaSingle({ navigation }) {
                 <BlurView style={styles.mainHeader}>
                     <View style={styles.mainHeaderWhite}>
                         <TouchableOpacity onPress={() => addSave()} style={styles.favButton} >
-                                <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={25} color={saved ? '#FF7152' : '#505050'} />
+                            <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={25} color={saved ? '#FF7152' : '#505050'} />
                         </TouchableOpacity>
                         <View style={styles.mainTexts}>
                             <View style={styles.starsContainer}>
@@ -122,25 +122,19 @@ export default function ReceitaSingle({ navigation }) {
                     </View>
                 </BlurView>
             </ImageBackground>
-
             <View style={styles.mainContainer}>
                 <Text style={styles.description}>{dadosReceita.receita?.descricao}</Text>
-                <View style={styles.caloryContainer}>
-                    <LinearGradient start={{ x: -1, y: 1 }}
-                        end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.caloryCounter}>
-                        <Text style={styles.caloryText}>Valor calórico: <Text style={{ fontFamily: 'Raleway_700Bold' }}>{dadosReceita.receita?.valCalorico}</Text></Text>
-                    </LinearGradient>
-                </View>
+
                 <LinearGradient start={{ x: -1, y: 1 }}
                     end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.detailsContainer}>
                     <View style={styles.subDetail}>
-                        <FontAwesomeIcon icon={faUtensils} size={70} style={styles.detailIcon} />
+                        <FontAwesomeIcon icon={faUtensils} size={40} style={styles.detailIcon} />
                         <Text style={styles.subDetailText}>Rendimento</Text>
                         <Text style={styles.detailText}>{dadosReceita.receita?.porcoes} porções</Text>
                     </View>
                     <View style={styles.divBar}></View>
                     <View style={styles.subDetail}>
-                        <FontAwesomeIcon icon={faClock} size={70} style={styles.detailIcon} />
+                        <FontAwesomeIcon icon={faClock} size={40} style={styles.detailIcon} />
                         <Text style={styles.subDetailText}>Preparo</Text>
                         <Text style={styles.detailText}>{dadosReceita.receita?.tempoPreparo} {dadosReceita.receita?.tempo}</Text>
                     </View>
@@ -155,18 +149,18 @@ export default function ReceitaSingle({ navigation }) {
                         <Text style={styles.linkUserText}>@{dadosReceita.receita?.nomeTag}</Text>
                     </View>
                 </TouchableOpacity>
+
                 <View
                     style={{
                         borderBottomColor: '#505050',
                         opacity: 0.4,
                         borderBottomWidth: StyleSheet.hairlineWidth,
-                        width: 330, height: 5,
+                        width: '80%', height: 5,
                         marginTop: 15,
                         alignSelf: 'center'
                     }} />
             </View>
             <View style={styles.ingredients}>
-
                 <View style={styles.ingredientsHeader}>
                     <FontAwesomeIcon icon={faCarrot} size={50} color='#FF7152' />
                     <Text style={styles.ingredientsTitle}>Ingredientes</Text>
@@ -177,12 +171,13 @@ export default function ReceitaSingle({ navigation }) {
                     ))}
                 </View>
             </View>
+
             <View
                 style={{
                     borderBottomColor: '#505050',
                     opacity: 0.4,
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: 330, height: 5,
+                    width: '80%', height: 5,
                     marginTop: 15,
                     alignSelf: 'center'
                 }} />
@@ -202,7 +197,7 @@ export default function ReceitaSingle({ navigation }) {
                     borderBottomColor: '#505050',
                     opacity: 0.4,
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: 330, height: 5,
+                    width: '80%', height: 5,
                     marginTop: 15,
                     alignSelf: 'center'
                 }} />
@@ -215,14 +210,13 @@ export default function ReceitaSingle({ navigation }) {
                     borderBottomColor: '#505050',
                     opacity: 0.4,
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: 330, height: 5,
+                    width: '80%', height: 5,
                     marginTop: 15,
                     alignSelf: 'center'
                 }} />
             <View style={styles.rating}>
                 <Text style={styles.ratePresentation}>O que <Text style={{ color: '#FF7152' }}>você</Text> achou?</Text>
-                <LinearGradient start={{ x: -1, y: 1 }}
-                    end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.ratingContainer}>
+                <LinearGradient start={{ x: -1, y: 1 }} end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.ratingContainer}>
                     <AirbnbRating
                         ratingColor='#fff'
                         count={5}
@@ -246,7 +240,8 @@ export default function ReceitaSingle({ navigation }) {
                         textAlignVertical="top"
                         multiline={true}
                         value={comentario}
-                        onChangeText={(texto) => setComentario(texto)} />
+                        onChangeText={(texto) => setComentario(texto)}
+                    />
                     <TouchableOpacity style={styles.rateButton} onPress={handleAssessment}>
                         <Text style={styles.rateButtonText}>Avaliar</Text>
                     </TouchableOpacity>
@@ -272,6 +267,6 @@ export default function ReceitaSingle({ navigation }) {
                         alignSelf: 'center'
                     }} />
             </View>
-        </ScrollView >
+        </ScrollView>
     )
 }

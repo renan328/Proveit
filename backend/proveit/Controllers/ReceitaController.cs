@@ -51,6 +51,7 @@ namespace proveit.Controllers
         }
 
         [HttpGet]
+        [Route("home")]
         public IActionResult ListarReceitasHome()
         {
             var ReceitaDAO = new ReceitaGeralDAO();

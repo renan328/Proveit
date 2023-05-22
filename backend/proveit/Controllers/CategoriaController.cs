@@ -37,5 +37,24 @@ namespace proveit.Controllers
 
             return Ok();
         }
+
+        [HttpPut]
+        public IActionResult AlterarCategoria([FromBody] CategoriaDTO categoria)
+        {
+            var dao = new CategoriaDAO();
+            dao.AlterarCategoria(categoria);
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Removercat([FromRoute] int id)
+        {
+            var dao = new CategoriaDAO();
+            dao.DeletarCat(id);
+
+            return Ok();
+        }
     }
 }

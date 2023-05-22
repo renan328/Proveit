@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         left: 0,
         top: 0,
         borderBottomLeftRadius: 65,
-        borderBottomRightRadius:65,
+        borderBottomRightRadius: 65,
 
         overflow: 'hidden',
         shadowColor: "rgba(0,0,0,0.5)",
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
 
     listamentoIcon: {

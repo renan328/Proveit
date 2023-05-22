@@ -1,8 +1,5 @@
 import React, { Component, useState, useRef } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { TouchableOpacity } from 'react-native-web';
-import validator from 'validator';
+import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import styles from './cod_esqueciminhasenha.module';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -59,9 +56,7 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
     }
 
     return (
-
         <View style={{ maxHeight: screenHeight }}>
-            {/* Imagem fundo */}
             <View style={styles.imageContainer}>
                 <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}>
                     <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
@@ -69,11 +64,11 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                             style={styles.arrowleft}
                             color={'#fff'}
                             size={30}
-                            icon={faChevronLeft}/>
+                            icon={faChevronLeft} />
                     </TouchableOpacity>
                 </ImageBackground>
             </View>
-            {/* Container de componentes */}
+
             <View style={styles.main}>
                 <View style={styles.main2}>
                     <View style={styles.circuloIcon}>
@@ -93,7 +88,6 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                             <Text style={styles.Desc}>Digite o código enviado para o seu email.</Text>
                         </View>
 
-                        {/* Input */}
                         <View style={styles.Inputs_container}>
                             <View style={styles.Inputs}>
                                 <TextInput
@@ -104,6 +98,7 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                                     onChangeText={(value) => handleCodeChange(0, value, setCode)}
                                     ref={input1}
                                 />
+
                                 <TextInput
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
@@ -112,6 +107,7 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                                     onChangeText={(value) => handleCodeChange(1, value, setCode)}
                                     ref={input2}
                                 />
+
                                 <TextInput
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
@@ -120,6 +116,7 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                                     onChangeText={(value) => handleCodeChange(2, value, setCode)}
                                     ref={input3}
                                 />
+
                                 <TextInput
                                     style={styles.Input_Styles}
                                     keyboardType="numeric"
@@ -130,8 +127,6 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                                 />
                             </View>
                         </View>
-
-                        {/* Reenviar código */}
                         <View style={styles.resend_code}>
                             <Text style={styles.code}>Reenviar código</Text>
                         </View>
@@ -143,5 +138,5 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                 />
             </View>
         </View>
-    );
+    )
 }

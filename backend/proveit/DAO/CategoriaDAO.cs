@@ -74,5 +74,38 @@ namespace proveit.DAO
             comando.ExecuteNonQuery();
             conexao.Close();
         }
+
+        public void AlterarCategoria(CategoriaDTO categoria)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = @"UPDATE Categorias SET 
+                        Nome = @nome,
+                        Foto = @foto
+                        WHERE idCategorria = @id";
+
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", categoria.Categoria_id);
+            comando.Parameters.AddWithValue("@nome", categoria.Nome);
+            comando.Parameters.AddWithValue("@foto", categoria.Foto);
+
+            comando.ExecuteNonQuery();
+            conexao.Close();
+        }
+
+        public void DeletarCat(int id)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = @"DELETE FROM Categorias WHERE idCategoria = @id ";
+
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", id);
+
+            comando.ExecuteNonQuery();
+            conexao.Close();
+        }
     }
 }

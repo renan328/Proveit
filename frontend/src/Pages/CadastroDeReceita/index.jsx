@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Appearance, useColorScheme } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
-import { MultipleSelectList, SelectList } from 'react-native-dropdown-select-list';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCamera, faPlus, faTrashAlt, faTrashCan, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import * as ImagePicker from 'expo-image-picker';
 import stylesLight from './cadastrodereceita.module';
 import stylesDark from './cadastrodereceita.moduleDark';
-import Toast from 'react-native-toast-message';
-import toastStyle from '../Toasts/toasts';
 import { Picker } from '@react-native-picker/picker';
 
 export default function CadastroDeReceita({ navigation, props }) {
@@ -62,7 +59,6 @@ export default function CadastroDeReceita({ navigation, props }) {
         setPassos(updatedSteps);
     }
 
-    //Configurações das imagens
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -143,8 +139,8 @@ export default function CadastroDeReceita({ navigation, props }) {
     }
 
     const categorias = [
-        'Aves',
         'Bebidas',
+        'Aves',
         'Bolos',
         'Carnes',
         'Frutos do Mar',
@@ -168,14 +164,13 @@ export default function CadastroDeReceita({ navigation, props }) {
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     return (
-        <ScrollView style={styles.container} >
-            {/* Header */}
+        <ScrollView style={styles.container}>
+
             <View style={styles.header}>
                 <Text style={styles.textAdd}>Adicionar</Text>
                 <Text style={styles.textReceitas} >Receita</Text>
             </View>
 
-            {/* Fotos */}
             <View style={{ display: 'flex', alignItems: "center" }}>
                 <Text style={styles.headerPic}> Foto </Text>
                 <TouchableOpacity style={[styles.BorderIcon, errors.foto && styles.BorderIconError]} onPress={pickImage}>
@@ -185,10 +180,8 @@ export default function CadastroDeReceita({ navigation, props }) {
                 {errors.foto && <Text style={styles.textError}>{errors.foto}</Text>}
             </View>
 
-            {/* Input "Pai" */}
             <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%' }}>
 
-                {/* Input Nome */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Nome</Text>
                     <TextInput
@@ -200,7 +193,6 @@ export default function CadastroDeReceita({ navigation, props }) {
                     {errors.nomeReceita && <Text style={styles.textError}>{errors.nomeReceita}</Text>}
                 </View>
 
-                {/* Input Categorias */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Categoria</Text>
                     {/* UseState errados nos MultipleSelectList */}
@@ -216,7 +208,6 @@ export default function CadastroDeReceita({ navigation, props }) {
                     {errors.categoria && <Text style={styles.textError}>{errors.categoria}</Text>}
                 </View>
 
-                {/* Input Tempo de Preparo */}
                 <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
                     <Text style={styles.TextInput}>Tempo de preparo</Text>
                 </View>
@@ -241,7 +232,6 @@ export default function CadastroDeReceita({ navigation, props }) {
 
                 {errors.tempo && <Text style={styles.textError}>{errors.tempo}</Text>}
 
-                {/* Input Porções */}
                 <View style={styles.defaultInput} >
 
                     <Text style={styles.TextInput}>Porções</Text>
@@ -254,14 +244,12 @@ export default function CadastroDeReceita({ navigation, props }) {
                     {errors.porcoes && <Text style={styles.textError}>{errors.porcoes}</Text>}
                 </View>
 
-                {/* CheckBox de Aproveitamento */}
                 <View style={styles.defaultInput}>
                     <View style={styles.checkboxContainer}>
                         <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
                     </View>
                 </View>
 
-                {/* Input Valor cal */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Valor Calórico</Text>
                     <TextInput
@@ -272,7 +260,6 @@ export default function CadastroDeReceita({ navigation, props }) {
                     />
                 </View>
 
-                {/* Input Pequena descrição */}
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Pequena descrição</Text>
                     <TextInput
@@ -284,7 +271,6 @@ export default function CadastroDeReceita({ navigation, props }) {
                     {errors.descricao && <Text style={styles.textError}>{errors.descricao}</Text>}
                 </View>
 
-                {/* Ingredientes */}
                 <View style={styles.addableComponent}>
                     {ingredientes.map((ingrediente, index) => (
                         <View key={index} style={styles.addableComponent}>
@@ -306,6 +292,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                             <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
                                 <Text style={styles.TextInput}>Quantidade e Medidas</Text>
                             </View>
+
                             <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
                                 <TextInput
                                     style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
@@ -313,25 +300,26 @@ export default function CadastroDeReceita({ navigation, props }) {
                                     value={ingrediente.quantidade}
                                     onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
                                 />
-
-                                <Picker
-                                    style={[styles.ListaInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
-                                    selectedValue={ingrediente.medida}
-                                    onValueChange={valor => atualizarIngrediente(index, 'medida', valor)}
-                                >
-                                    <Picker.Item label="Medida" value="" enabled="false" />
-                                    <Picker.Item label="Gramas (g)" value="g" />
-                                    <Picker.Item label="A gosto" value="a gosto" />
-                                    <Picker.Item label="Quilograma (kg)" value="kg" />
-                                    <Picker.Item label="ML" value="ml" />
-                                    <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
-                                    <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
-                                    <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />
-                                    <Picker.Item label="Colher (sopa)" value="Colher (sopa)" />
-                                    <Picker.Item label="Colher (chá)" value="Colher (chá)" />
-                                    <Picker.Item label="Unidade(s)" value="Unidade(s)" />
-                                    <Picker.Item label="Litro(s)" value="Litro(s)" />
-                                </Picker>
+                                
+                                <View style={styles.ViewListaInput}>
+                                    <Picker
+                                        style={[styles.ListaInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
+                                        selectedValue={ingrediente.medida}
+                                        onValueChange={valor => atualizarIngrediente(index, 'medida', valor)}
+                                    >
+                                        <Picker.Item label="Gramas (g)" value="g" />
+                                        <Picker.Item label="A gosto" value="a gosto" />
+                                        <Picker.Item label="Quilograma (kg)" value="kg" />
+                                        <Picker.Item label="ML" value="ml" />
+                                        <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
+                                        <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
+                                        <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />
+                                        <Picker.Item label="Colher (sopa)" value="Colher (sopa)" />
+                                        <Picker.Item label="Colher (chá)" value="Colher (chá)" />
+                                        <Picker.Item label="Unidade(s)" value="Unidade(s)" />
+                                        <Picker.Item label="Litro(s)" value="Litro(s)" />
+                                    </Picker>
+                                </View>
                             </View>
                         </View>
                     ))}
@@ -351,7 +339,6 @@ export default function CadastroDeReceita({ navigation, props }) {
                     </View>
                 </View>
 
-                {/* "Passos" Input */}
                 <View style={styles.defaultInput}>
                     {passos.map((step, index) => (
                         <View key={index} style={styles.addableComponent}>
@@ -392,7 +379,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{ paddingVertical: 50 }} />
+            <View style={{ paddingVertical: 30 }} />
         </ScrollView>
-    );
+    )
 }

@@ -7,8 +7,8 @@ export default function Pesquisar() {
 
     const results = '1';
     const footerText = '1';
-    
-    if (results == ''){
+
+    if (results == '') {
         const footerText = 'Não encontramos nada';
     }
 

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         height: 200,
         width: 300,
     },
-    
+
     containerInput: {
         display: 'flex',
         flexDirection: 'column',
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 
     buttons: {
         alignSelf: 'baseline',
-        display:  'flex',
+        display: 'flex',
         height: '70%',
         width: '100%',
         alignItems: 'center'
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
 
-    ou:{
+    ou: {
         fontFamily: 'Raleway_900Black',
         color: '#505050',
         marginVertical: 6
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         height: 35,
         paddingRight: 10,
-        borderBottomLeftRadius:  20,
+        borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     googleButtonText: {
         fontFamily: 'Raleway_700Bold',
         marginHorizontal: 10
-    },  
+    },
 
     headerSignText: {
         marginTop: 20,

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     logo: {
         margin: 100
     },
-    circle:{
+    circle: {
         display: 'flex',
         alignSelf: 'center'
     }

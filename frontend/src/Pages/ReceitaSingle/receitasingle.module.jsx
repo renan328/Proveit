@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         padding: 10,
         marginTop: 10,
-        flexGrow: true,
+        // flexGrow: true,
         height: 100
     },
 

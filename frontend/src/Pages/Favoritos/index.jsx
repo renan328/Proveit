@@ -18,8 +18,8 @@ export default function Favoritos() {
                 </View>
             </View>
             <View style={styles.ScreenSelect}>
-                <TouchableOpacity><Text style={{color: '#505050', fontFamily: 'Raleway_700Bold'}}>Histórico</Text></TouchableOpacity>
-                <TouchableOpacity><Text style={{color: '#FF7152', fontFamily: 'Raleway_700Bold'}}>Favoritos</Text></TouchableOpacity>
+                <TouchableOpacity><Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Histórico</Text></TouchableOpacity>
+                <TouchableOpacity><Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Favoritos</Text></TouchableOpacity>
             </View>
             <View style={styles.SubHeader}>
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Favoritos</Text>

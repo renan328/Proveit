@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import CartaoCategoria from './CartaoCategoria';
 
 export default function CarrosselCategorias() {
@@ -10,7 +10,6 @@ export default function CarrosselCategorias() {
         })
             .then((response) => response.json())
             .then((json) => {
-                console.log(json);
                 setCategorias(json);
             })
             .catch((error) => {
@@ -19,7 +18,7 @@ export default function CarrosselCategorias() {
     }, [])
 
     return (
-        <View style={styles.container}>
+        <View>
             <ScrollView horizontal={true} style={{ marginLeft: 10 }}>
                 {
                     categorias.map((categoria, index) => (
@@ -30,10 +29,3 @@ export default function CarrosselCategorias() {
         </View>
     )
 }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginVertical: 8,
-        paddingVertical: 2
-    }
-});

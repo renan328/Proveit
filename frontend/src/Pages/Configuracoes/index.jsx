@@ -7,7 +7,7 @@ import stylesLight from './configuracoes.module';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft, faUser, faRightFromBracket, faQuestionCircle, faPencil, faBrush, faScroll } from '@fortawesome/free-solid-svg-icons';
 
-export default function Configuracoes( {navigation} ) {
+export default function Configuracoes({ navigation }) {
 
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
@@ -16,7 +16,7 @@ export default function Configuracoes( {navigation} ) {
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
-                <TouchableOpacity style={styles.botao} onPress={() => navigation.goBack()}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.botao} >
                     <FontAwesomeIcon icon={faChevronLeft} color="#FF7152" size={30} />
                 </TouchableOpacity>
 
@@ -61,7 +61,7 @@ export default function Configuracoes( {navigation} ) {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style={styles.containerOpcoes}  onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity style={styles.containerOpcoes} onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.textOpcoesSair}>Sair da conta</Text>
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faRightFromBracket} size={25} color="#ff7152" />
                 </TouchableOpacity>

@@ -33,7 +33,7 @@ export default function CarrosselHome() {
     } else {
         return (
             <View>
-                <ScrollView horizontal={true} style={{ marginLeft: 10, }}>
+                <ScrollView horizontal={true} style={{ marginLeft: 10 }}>
                     {
                         dadosReceita.map((receita, index) => (
                             <CartaoReceita receita={receita} key={index} />
