@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 7,
-        /* top: "-70" */
+        marginTop:-1
     },
 
     main2: {

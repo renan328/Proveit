@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
     main2: {
         display: 'flex',
-        height: '70%',
+        height: '65%',
         marginTop: 15,
         flexDirection: 'column',
         justifyContent: 'space-around',
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     Texts1: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
 
     },
 
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 40,
+        marginLeft:-33
     },
 
     Desc: {

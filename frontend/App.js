@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <Routes />
+      <Cod_EsqueciMinhaSenha />
     </MenuProvider>
   )
 }
