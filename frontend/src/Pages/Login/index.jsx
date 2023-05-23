@@ -62,6 +62,7 @@ export default function Login({ navigation }) {
                             <TextInput
                                 style={[styles.input, errors.email && styles.inputError]}
                                 placeholder="E-mail"
+                                placeholderTextColor="#fff"
                                 value={email}
                                 onChangeText={(text) => setEmail(text)}
                                 keyboardType="email-address"
@@ -76,6 +77,7 @@ export default function Login({ navigation }) {
                             <TextInput
                                 style={[styles.input, errors.senha && styles.inputError]}
                                 placeholder="Senha"
+                                placeholderTextColor="#fff"
                                 value={senha}
                                 onChangeText={(text) => setSenha(text)}
                                 secureTextEntry={true}

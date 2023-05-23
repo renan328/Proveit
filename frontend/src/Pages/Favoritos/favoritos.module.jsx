@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     firstText: {
         fontFamily: 'Raleway_700Bold',
         color: '#505050',
-        fontSize: 20
+        fontSize: 20,
+        textAlign: 'center'
     },
     subText: {
         fontFamily: 'Raleway_800ExtraBold',

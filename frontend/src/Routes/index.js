@@ -48,7 +48,7 @@ function MainTabNavigator() {
                 elevation: 0,
                 borderRadius: 20,
                 height: 55,
-                border: 0,
+                borderTopColor: '#202020',
                 backgroundColor: scheme === 'dark' ? '#202020' : '#fff',
                 shadowColor: '#000',
                 shadowOffset: {

@@ -37,11 +37,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
         color: '#FF7152',
         fontSize: 28,
+        textAlign: 'center'
     },
     userName: {
         fontFamily: 'Raleway_700Bold',
         color: '#858585',
         fontSize: 12,
+        textAlign: 'center'
     },
     text: {
         fontFamily: 'Raleway_700Bold',

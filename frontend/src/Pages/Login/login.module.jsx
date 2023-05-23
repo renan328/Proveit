@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
 
     tint: {
-        backgroundColor: 'rgba(255,255,255,0.65)',
+        backgroundColor: 'rgba(255,255,255,0.85)',
         width: '100%',
         height: '100%',
         borderTopLeftRadius: 60,
@@ -78,6 +78,10 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
+    },
+
+    inputSingle: {
+        color: '#fff'
     },
 
     buttons: {

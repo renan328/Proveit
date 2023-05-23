@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import * as Font from "expo-font";
 import Toast from 'react-native-toast-message';
-import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, useFonts } from '@expo-google-fonts/raleway';
 
+import useFonts from './hooks/useFonts';
 import { StatusBar } from 'expo-status-bar';
 
 import AppLoading from 'expo-app-loading';
@@ -23,11 +24,26 @@ import { MenuProvider } from 'react-native-popup-menu';
 import Login from './src/Pages/Login';
 
 export default function App() {
-  const [fontsLoaded] = useFonts({ Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, });
+  const [IsReady, SetIsReady] = useState(false);
+
+  const LoadFonts = async () => {
+    await useFonts();
+  };
+
+  if (!IsReady) {
+    return (
+      <AppLoading
+        startAsync={LoadFonts}
+        onFinish={() => SetIsReady(true)}
+        onError={() => {}}
+      />
+    );
+  }
 
   return (
     <MenuProvider>
-      <Cod_EsqueciMinhaSenha />
+      <StatusBar hidden={true}/>
+      <Routes/>
     </MenuProvider>
   )
 }

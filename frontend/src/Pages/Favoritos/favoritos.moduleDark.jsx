@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     textContainer: {
         marginTop: 20,
@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     firstText: {
         fontFamily: 'Raleway_700Bold',
         color: '#fff',
-        fontSize: 20
+        fontSize: 20,
+        textAlign: 'center'
     },
     subText: {
         fontFamily: 'Raleway_800ExtraBold',

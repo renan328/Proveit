@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 35,
+        textAlign: 'center'
     },
 
     textReceitas: {

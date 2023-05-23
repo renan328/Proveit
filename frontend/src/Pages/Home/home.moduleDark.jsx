@@ -46,10 +46,9 @@ const styles = StyleSheet.create({
     },
 
     welcome: {
-        fontFamily: 'Raleway_700Bold',
+        fontFamily: 'Raleway_800ExtraBold',
         textAlign: 'left',
         fontSize: 22,
-        fontWeight: 700,
         color: '#FF7152',
         textShadowColor: 'rgba(0, 0, 0, 0.1)',
         textShadowOffset: { width: -1, height: 3 },
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_800ExtraBold',
         textAlign: 'left',
         fontSize: 37,
-        fontWeight: 700,
         color: '#FFF',
         textShadowColor: 'rgba(0, 0, 0, 0.1)',
         textShadowOffset: { width: -1, height: 3 },

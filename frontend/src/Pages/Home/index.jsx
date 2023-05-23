@@ -9,7 +9,7 @@ import StylesDark from './home.moduleDark';
 import StylesLight from './home.moduleLight';
 
 export default function Home({ navigation }) {
-    const username = "Convidado";
+    const username = "Finalmente";
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? StylesDark : StylesLight;
     return (

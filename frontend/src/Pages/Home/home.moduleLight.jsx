@@ -55,22 +55,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
         textAlign: 'left',
         fontSize: 22,
-        fontWeight: 700,
         color: '#FF7152',
-        textShadowColor: 'rgba(0, 0, 0, 0.1)',
-        textShadowOffset: { width: -1, height: 3 },
-        textShadowRadius: 3
     },
 
     username: {
         fontFamily: 'Raleway_800ExtraBold',
         textAlign: 'left',
         fontSize: 37,
-        fontWeight: 700,
         color: '#505050',
-        textShadowColor: 'rgba(0, 0, 0, 0.1)',
-        textShadowOffset: { width: -1, height: 3 },
-        textShadowRadius: 3
     },
 
     subTexto: {

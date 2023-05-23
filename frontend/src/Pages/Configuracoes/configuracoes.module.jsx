@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_800ExtraBold',
         color: '#FF7152',
         fontSize: 35,
+        textAlign: 'center'
     },
     textOpcoes: {
         fontFamily: 'Raleway_600SemiBold',
@@ -81,7 +82,9 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: 'Raleway_500Medium',
         color: '#505050',
-        width: '100%'
+        width: '100%',
+        marginTop: 20,
+        textAlign: 'center'
     }
 
 });
