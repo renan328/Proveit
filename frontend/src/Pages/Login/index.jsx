@@ -85,7 +85,7 @@ export default function Login({ navigation }) {
                             {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
                         </View>
                         <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
-                            <Text style={{ fontFamily: 'Raleway_500Medium', color: 'rgba(255,255,255,0.55)', textDecorationLine: 'underline', marginLeft: 6 }}>Esqueci minha senha</Text>
+                            <Text style={{ fontFamily: 'Raleway_600SemiBold', color: '#505050', textDecorationLine: 'underline', alignSelf: 'center'}}>Esqueci minha senha</Text>
                         </TouchableOpacity>
 
                     </View>

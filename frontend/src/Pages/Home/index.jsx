@@ -4,11 +4,36 @@ import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas'
 import CarrosselCategorias from '../../components/CartaoCategoria/CarrosselCategoria';
 import CartaoExplorar from '../../components/CarrosselExplorar/CartaoExplorar';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCircleExclamation, faCompass, faIdBadge, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faArrowAltCircleDown, faArrowTrendUp, faCake, faCandyCane, faCannabis, faCircleExclamation, faClock, faCompass, faHeart, faIdBadge, faMagnifyingGlass, faPeopleRoof, faSeedling, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import StylesDark from './home.moduleDark';
 import StylesLight from './home.moduleLight';
+import LottieView from 'lottie-react-native';
+import { useRef, useEffect, useState } from 'react';
 
 export default function Home({ navigation }) {
+
+    const [save, setSave] = useState(true);
+    const animation = useRef(null);
+    const firstRun = useRef(true);
+
+    useEffect(() => {
+        if (firstRun.current) {
+            if (save) {
+                animation.current.play(20, 20);
+            } else {
+                animation.current.play(0, 0);
+            }
+
+            firstRun.current = false;
+        } else if (save) {
+            animation.current.play(0, 20);
+        } else {
+            animation.current.play(20, 0);
+        }
+
+
+    }, [save])
+
     const username = "Finalmente";
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? StylesDark : StylesLight;
@@ -35,6 +60,14 @@ export default function Home({ navigation }) {
                     <View>
                         <CarrosselCategorias />
                     </View>
+                    <TouchableOpacity onPress={()=> setSave(!save)} style={{ height: 100, width: 100 }}>
+                        <LottieView
+                            source={require('../../assets/lottie/heart.json')} // Caminho para o arquivo JSON do Lottie
+                            autoPlay={false}
+                            ref={animation}
+                            loop={false}
+                        />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.inputContainer}>
                     <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput><FontAwesomeIcon icon={faMagnifyingGlass} style={{
@@ -58,24 +91,23 @@ export default function Home({ navigation }) {
                 <CartaoExplorar title={'Categoria nova'} image={require('../../assets/explore3.png')} />
             </ScrollView>
             <View style={styles.listamento}>
-                <Text style={styles.categoriaBig}>Popular <Text style={{ color: '#FF7152' }}>hoje</Text></Text>
+                <FontAwesomeIcon icon={faArrowTrendUp} style={styles.listamentoIcon} size={35}></FontAwesomeIcon><Text style={styles.categoriaBig}>Popular <Text style={{ color: '#FF7152' }}>hoje</Text></Text>
             </View>
             <View>
             </View>
             <View style={styles.listamento}>
-                <FontAwesomeIcon icon={faCircleExclamation}></FontAwesomeIcon><Text style={styles.categoria}>Novidades em <Text style={{ color: '#FF7152' }}>doces</Text></Text>
+                <FontAwesomeIcon icon={faSeedling} style={[styles.listamentoIcon, { color: '#66e660' }]} size={25}></FontAwesomeIcon><Text style={styles.categoria}>Receitas <Text style={{ color: '#FF7152' }}>reaproveitáveis</Text></Text>
             </View>
             <View>
             </View>
             <View style={styles.listamento}>
-                <Text style={styles.categoriaBig}>Baixas <Text style={{ color: '#FF7152' }}>calorias</Text></Text>
-            </View>
-            <View>
+                <FontAwesomeIcon icon={faCannabis} style={styles.listamentoIcon} size={35}></FontAwesomeIcon><Text style={styles.categoriaBig}>Baixas <Text style={{ color: '#FF7152' }}>calorias</Text></Text>
             </View>
             <View style={styles.listamento}>
-                <Text style={styles.categoria}>Sem <Text style={{ color: '#FF7152' }}>tempo</Text> perdido</Text>
+                <FontAwesomeIcon icon={faClock} style={styles.listamentoIcon} size={25}></FontAwesomeIcon><Text style={styles.categoria}>Sem <Text style={{ color: '#FF7152' }}>tempo</Text> perdido</Text>
             </View>
-            <View>
+            <View style={styles.listamento}>
+                <FontAwesomeIcon icon={faPeopleRoof} style={styles.listamentoIcon} size={25}></FontAwesomeIcon><Text style={styles.categoria}>Para a <Text style={{ color: '#FF7152' }}>família</Text> inteira</Text>
             </View>
             <View
                 style={{
@@ -89,7 +121,7 @@ export default function Home({ navigation }) {
 
                 }} />
             <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                <Text style={{ color: '#505050', fontFamily: 'Raleway_500Medium' }}>Por enquanto é só!</Text>
+                <Text style={{ color: '#50505060', fontFamily: 'Raleway_500Medium' }}>Por enquanto é só!</Text>
                 <Image
                     style={{ width: 52, height: 46, top: 15, marginBottom: 100 }}
                     source={require('../../assets/proveitGrey.png')}

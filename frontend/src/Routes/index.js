@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet, Appearance, useColorScheme } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
@@ -64,9 +63,10 @@ function MainTabNavigator() {
 
             <Tab.Screen name="Home" component={HomeStack} options={{
                 tabBarIcon: ({ focused }) => (
-                    <FontAwesomeIcon style={styles.button} icon={faHome} size={22} color={focused ? '#FF7152' : '#808080'} />
+                    <FontAwesomeIcon icon={faHome} size={22} color={focused ? '#FF7152' : '#808080'} />
                 ), headerShown: false,
             }} />
+
 
             <Tab.Screen name="Adicionar" component={CadastroDeReceitaStack} options={{
                 tabBarIcon: ({ focused }) => (

@@ -15,7 +15,7 @@ export default function CartaoReceitaBlank() {
             <View style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
-                    <FontAwesomeIcon icon={faBookmark} size={20} color="rgba(0,0,0,0.1)" style={styles.bookmarkIcon} />
+                    <FontAwesomeIcon icon={faBookmark} size={20} color="rgba(0,0,0,0.1)" style={[styles.bookmarkIcon, {padding: 10}]} />
                 </View>
 
                 {/* Container de imagem e texto */}

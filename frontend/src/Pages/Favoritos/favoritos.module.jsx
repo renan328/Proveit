@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
         color: '#505050',
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        top: 15,
     },
     subText: {
         fontFamily: 'Raleway_800ExtraBold',

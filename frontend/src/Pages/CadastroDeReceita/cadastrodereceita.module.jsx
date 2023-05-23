@@ -14,15 +14,16 @@ const styles = StyleSheet.create({
     header: {
         height: 103,
         width: '100%',
-        justifyContent: 'flex-end',
+        display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center',
-        flexWrap: 'wrap'
     },
 
     textAdd: {
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 35,
+        top: 15,
         textAlign: 'center'
     },
 

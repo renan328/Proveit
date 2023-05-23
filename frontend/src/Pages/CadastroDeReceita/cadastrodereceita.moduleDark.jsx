@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        flexWrap: 'wrap'
     },
 
     headerPic: {
@@ -31,6 +30,8 @@ const styles = StyleSheet.create({
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 35,
+        textAlign: 'center',
+        top: 15,
         textAlign: 'center'
     },
 
@@ -160,7 +161,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        width: '100%'
+        width: '100%',
+
     },
 
     categoriaInput: {

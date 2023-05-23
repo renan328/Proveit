@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
 
     container: {
         width: '100%',
-        backgroundColor: '#fff'
+        backgroundColor: '#202020'
     },
 
     header: {
@@ -39,9 +39,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
         marginRight: 15,
         paddingHorizontal: 7,
+        backgroundColor: '#303030',
         fontSize: 13,
         fontFamily: 'Raleway_700Bold',
-        color: '#505050',
+        color: '#fff',
         height: 45,
         minWidth: '75%',
         backgroundColor: '#fff',

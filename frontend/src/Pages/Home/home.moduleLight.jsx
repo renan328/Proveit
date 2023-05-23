@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
         top: 0,
         borderBottomLeftRadius: 65,
         borderBottomRightRadius: 65,
-
+        backgroundColor: '#fff',
         overflow: 'hidden',
-        shadowColor: "rgba(0,0,0,0.5)",
+        shadowColor: "#000",
         shadowOffset: {
             width: 0,
             height: 4,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         shadowRadius: 6,
         elevation: 4,
         paddingLeft: 20,
-        paddingBottom: 20
+        paddingBottom: 20,
     },
 
     subHeader: {
@@ -75,12 +75,12 @@ const styles = StyleSheet.create({
     inputContainer: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center'
     },
 
     ingredienteInput: {
-        marginHorizontal: 5,
+        marginHorizontal: 10,
         paddingHorizontal: 7,
         fontSize: 11,
         fontFamily: 'Raleway_600SemiBold',
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
             width: 0,
             height: 2,
         },
+        elevation: 4,
         shadowOpacity: 0.25,
         shadowRadius: 4,
         position: 'relative',
@@ -107,8 +108,17 @@ const styles = StyleSheet.create({
     //listas
     listamento: {
         textAlign: 'center',
-        marginVertical: 35,
-        marginHorizontal: 5
+        marginTop: 35,
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+
+    listamentoIcon: {
+        top: 2,
+        color: '#999',
+        marginRight: 10
     },
 
     categoria: {

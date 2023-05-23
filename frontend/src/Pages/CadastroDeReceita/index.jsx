@@ -379,7 +379,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{ paddingVertical: 30 }} />
+            <View style={{ paddingVertical: 50 }} />
         </ScrollView>
     )
 }

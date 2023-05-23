@@ -72,6 +72,7 @@ const stylesLight = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 5,
+        elevation: 4,
     },
 
     header: {
@@ -84,7 +85,7 @@ const stylesLight = StyleSheet.create({
     },
 
     bookmarkIcon: {
-        padding: 8,
+        padding: 10,
         backgroundColor: 'rgba(255,255,255,0.7)',
         borderRadius: 10,
         color: '#505050',
@@ -121,15 +122,12 @@ const stylesLight = StyleSheet.create({
     },
 
     titulo: {
-        display: 'flex',
         flexGrow: 1,
-        flexWrap: 'wrap',
         fontSize: 13,
         marginVertical: 10,
         fontFamily: 'Raleway_700Bold',
-        textAlign: 'center',
         color: '#505050',
-        textTransform: 'capitalize'
+        textAlign: 'center',
     },
 
 
@@ -156,6 +154,7 @@ const stylesDark = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 5,
+        elevation: 4,
     },
 
     header: {

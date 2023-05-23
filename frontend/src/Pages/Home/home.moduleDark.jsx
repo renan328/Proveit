@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
 
     welcome: {
-        fontFamily: 'Raleway_800ExtraBold',
+        fontFamily: 'Raleway_700Bold',
         textAlign: 'left',
         fontSize: 22,
         color: '#FF7152',
@@ -75,12 +75,12 @@ const styles = StyleSheet.create({
     inputContainer: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center'
     },
 
     ingredienteInput: {
-        marginHorizontal: 5,
+        marginHorizontal: 10,
         paddingHorizontal: 7,
         fontSize: 11,
         fontFamily: 'Raleway_600SemiBold',

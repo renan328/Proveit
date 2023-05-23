@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
 
     input: {
-        width: '88%',
+        minWidth: '80%',
         marginVertical: 5,
         marginHorizontal: 5,
         paddingHorizontal: 7,
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
         color: '#505050',
         height: 45,
-        minWidth: 265,
         backgroundColor: '#fff',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
@@ -78,6 +77,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
+        elevation: 4,
     },
 
     inputSingle: {
@@ -106,7 +106,8 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        textAlign: 'center'
+        textAlign: 'center',
+        elevation: 4,
     },
 
     buttonText: {
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
+        elevation: 4,
     },
 
     googleButtonText: {
@@ -159,7 +161,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingVertical: 10,
         paddingHorizontal: 30,
-        borderRadius: 15
+        borderRadius: 15,
+        elevation: 4,
     },
 
     textError: {
