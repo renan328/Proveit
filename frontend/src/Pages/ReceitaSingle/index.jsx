@@ -230,7 +230,7 @@ export default function ReceitaSingle({ navigation }) {
                         defaultRating={5}
                         size={35}
                         selectedColor='#fff'
-                        unSelectedColor='rgb(255,255,255,0.5)'
+                        unSelectedColor='#505050'
                         reviewColor='#fff'
                         onFinishRating={handleRatingChange}
                     />

@@ -23,7 +23,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
 import Login from './src/Pages/Login';
 
-export default function App() {
+export default function App(props) {
   const [IsReady, SetIsReady] = useState(false);
 
   const LoadFonts = async () => {
@@ -35,15 +35,16 @@ export default function App() {
       <AppLoading
         startAsync={LoadFonts}
         onFinish={() => SetIsReady(true)}
-        onError={() => {}}
+        onError={() => { }}
       />
     );
   }
 
   return (
     <MenuProvider>
-      <StatusBar hidden={true}/>
-      <Routes/>
+      <Routes />
+      <StatusBar hidden={true} />
+      <Toast />
     </MenuProvider>
   )
 }

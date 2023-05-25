@@ -7,7 +7,6 @@ import { faCamera, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-
 import Toast from 'react-native-toast-message';
 import styles from './cadcategoria.module';
 import * as ImagePicker from 'expo-image-picker';
-import toastStyle from '../Toasts/toasts';
 
 export default function CadastroDeCategoria({ navigation }) {
 

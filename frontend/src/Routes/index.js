@@ -1,4 +1,4 @@
-import { View, StyleSheet, Appearance, useColorScheme } from 'react-native';
+import { View, StyleSheet, Appearance, useColorScheme, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
 import { TransitionSpecs } from '@react-navigation/stack';
@@ -22,6 +22,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faBookmark, faMagnifyingGlass, faUser, faPlus } from '@fortawesome/free-solid-svg-icons';
 import CadastroDeCategoria from '../Pages/CadCategoria';
+import { useRef, useEffect, useState } from 'react';
+import LottieView from 'lottie-react-native';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -61,11 +64,13 @@ function MainTabNavigator() {
             }
         }}>
 
-            <Tab.Screen name="Home" component={HomeStack} options={{
+            <Tab.Screen name="Home" onPress={()=>(!save)} component={HomeStack} options={{
                 tabBarIcon: ({ focused }) => (
                     <FontAwesomeIcon icon={faHome} size={22} color={focused ? '#FF7152' : '#808080'} />
-                ), headerShown: false,
-            }} />
+                ), 
+                  headerShown: false,
+            }}
+            />
 
 
             <Tab.Screen name="Adicionar" component={CadastroDeReceitaStack} options={{

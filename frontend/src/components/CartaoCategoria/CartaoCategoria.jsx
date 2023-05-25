@@ -19,7 +19,8 @@ const stylesLight = StyleSheet.create({
     container: {
         flex: 1,
         marginVertical: 8,
-        paddingVertical: 2
+        paddingVertical: 2,
+        marginBottom: 10
     },
 
     imgCategoria: {
@@ -46,6 +47,7 @@ const stylesLight = StyleSheet.create({
         },
         shadowOpacity: 0.3,
         shadowRadius: 4.65,
+        elevation: 4,
         margin: 5
     },
 
@@ -57,7 +59,7 @@ const stylesLight = StyleSheet.create({
         borderTopRightRadius: 4,
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 24,
-        borderBottomRightRadius: 24
+        borderBottomRightRadius: 24,
     },
 
     titulo: {
@@ -67,13 +69,14 @@ const stylesLight = StyleSheet.create({
         color: '#000',
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(255,255,255, 0.65)',
+        backgroundColor: 'rgba(255,255,255, 0.9)',
         display: 'flex',
         alignSelf: 'center',
         borderTopRightRadius: 4,
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 24,
         borderBottomRightRadius: 24,
+        textAlign: 'center'
     },
 
     CarrosselContainer: {
@@ -109,6 +112,7 @@ const stylesDark = StyleSheet.create({
         },
         shadowOpacity: 0.3,
         shadowRadius: 4.65,
+        elevation: 4,
         margin: 5
     },
 
@@ -138,6 +142,7 @@ const stylesDark = StyleSheet.create({
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 24,
         borderBottomRightRadius: 24,
+        textAlign: 'center'
     },
 
     CarrosselContainer: {

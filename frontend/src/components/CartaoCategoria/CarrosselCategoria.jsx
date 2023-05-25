@@ -19,7 +19,7 @@ export default function CarrosselCategorias() {
 
     return (
         <View>
-            <ScrollView horizontal={true} style={{ marginLeft: 10 }}>
+            <ScrollView horizontal={true} style={{ marginLeft: 5, marginBottom: 4 }}>
                 {
                     categorias.map((categoria, index) => (
                         <CartaoCategoria categoria={categoria} key={index} />

@@ -135,7 +135,45 @@ const styles = StyleSheet.create({
         color: '#505050',
         marginVertical: 12,
 
-    }
+    },
+
+    receitaEsepecialContainer: {
+        paddingHorizontal: 20,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        overflow: 'hidden',
+        top: 10,
+    },
+
+    icon: {
+        alignSelf: 'center',
+        color: '#505050'
+    },
+
+    tituloEspecial: {
+        fontSize: 40,
+        color: '#505050',
+        fontFamily: 'Raleway_700Bold',
+        textAlign: 'center',
+    },
+
+    tituloEspecial2: {
+        top: -20,
+        fontSize: 55,
+        color: '#FF7152',
+        fontFamily: 'Raleway_900Black',
+        textAlign: 'center',
+        textTransform: 'uppercase'
+    },
+
+    tituloStars: {
+        top: -20,
+        color: '#FF7152',
+        textAlign: 'center',
+    },
 
 });
 

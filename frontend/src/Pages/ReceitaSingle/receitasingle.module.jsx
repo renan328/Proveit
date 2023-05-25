@@ -148,6 +148,8 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 5,
+        elevation: 4,
+        backgroundColor: '#fff'
     },
 
     subDetail: {
@@ -322,6 +324,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 5,
+        elevation: 4,
     },
 
     commentInput: {
@@ -340,6 +343,8 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 5,
+        elevation: 4,
+
         padding: 10,
         marginTop: 10,
         // flexGrow: true,
@@ -363,11 +368,13 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.20,
         shadowRadius: 5,
+        elevation: 4,
     },
 
     rateButtonText: {
         fontFamily: 'Raleway_700Bold',
-        color: '#FF7152'
+        color: '#FF7152',
+        textAlign: 'center'
     },
 
     comments: {
