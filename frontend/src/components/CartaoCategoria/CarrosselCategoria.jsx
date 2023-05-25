@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Toast from 'react-native-toast-message';
+import showToast from '../../../hooks/toasts';
 import { View, ScrollView } from 'react-native';
 import CartaoCategoria from './CartaoCategoria';
 import CartaoCategoriaBlank from './CartaoCategoriaBlank';
 
 export default function CarrosselCategorias() {
+
     const [categorias, setCategorias] = useState([]);
     useEffect(() => {
         fetch("https://cloudproveit.azurewebsites.net/api/categoria/todas", {
@@ -14,7 +17,7 @@ export default function CarrosselCategorias() {
                 setCategorias(json);
             })
             .catch((error) => {
-                alert("Erro ao buscar categoirias");
+                showToast('Foi mal!', 'Erro ao buscar categorias, tente novamente mais tarde.', 'error');
             });
     }, [])
 

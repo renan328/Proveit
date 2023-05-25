@@ -14,14 +14,6 @@ import { useRef, useEffect, useState } from 'react';
 
 export default function Home({ navigation, props }) {
 
-    const showToast = () => {
-        Toast.show({
-          type: 'success',
-          text1: 'Maravilha.',
-          text2: 'Toast funcionando!'
-        });
-      }
-
     const stars = 5;
     function StarCounter() {
         const starsBox = [];
@@ -37,7 +29,7 @@ export default function Home({ navigation, props }) {
         )
     }
 
-    const username = "Finalmente";
+    const username = "Convidado";
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? StylesDark : StylesLight;
     return (
@@ -109,7 +101,7 @@ export default function Home({ navigation, props }) {
                     <Text style={styles.tituloEspecial2}>ProveIt</Text>
                     <Text style={styles.tituloStars}>{StarCounter()}</Text>
                 </View>
-                <TouchableOpacity onPress={showToast}>
+                <TouchableOpacity>
                     <ReceitaEspecial />
                 </TouchableOpacity>
                 <LottieView

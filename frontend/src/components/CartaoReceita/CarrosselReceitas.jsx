@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Toast from 'react-native-toast-message';
+import showToast from '../../../hooks/toasts';
 import { View, ScrollView } from 'react-native';
 import CartaoReceita from "./CartãoReceita";
 import CartaoReceitaBlank from './CartãoReceitaBlank';
@@ -16,7 +18,7 @@ export default function CarrosselHome() {
                 setDadosReceita(json);
             })
             .catch((error) => {
-                alert("Erro ao buscar receitas");
+                showToast('Foi mal!', 'Erro ao buscar receitas, tente novamente mais tarde.', 'error');
             });
     }, []);
 
