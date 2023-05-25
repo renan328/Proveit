@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
 import CartaoCategoria from './CartaoCategoria';
+import CartaoCategoriaBlank from './CartaoCategoriaBlank';
 
 export default function CarrosselCategorias() {
     const [categorias, setCategorias] = useState([]);
@@ -17,15 +18,28 @@ export default function CarrosselCategorias() {
             });
     }, [])
 
-    return (
-        <View>
-            <ScrollView horizontal={true} style={{ marginLeft: 5, marginBottom: 4 }}>
-                {
-                    categorias.map((categoria, index) => (
-                        <CartaoCategoria categoria={categoria} key={index} />
-                    ))
-                }
-            </ScrollView>
-        </View>
-    )
+    if (categorias == '') {
+        return (
+            <View>
+                <ScrollView horizontal={true}>
+                    <CartaoCategoriaBlank />
+                    <CartaoCategoriaBlank />
+                    <CartaoCategoriaBlank />
+                </ScrollView>
+            </View>
+        )
+    } else {
+
+        return (
+            <View>
+                <ScrollView horizontal={true} style={{marginBottom: 4 }}>
+                    {
+                        categorias.map((categoria, index) => (
+                            <CartaoCategoria categoria={categoria} key={index} />
+                        ))
+                    }
+                </ScrollView>
+            </View>
+        )
+    }
 }

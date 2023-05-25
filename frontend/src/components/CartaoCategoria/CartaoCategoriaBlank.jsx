@@ -2,16 +2,16 @@ import React from 'react';
 import { ScrollView, View, Text, StyleSheet, ImageBackground, SectionList, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import { BlurView } from 'expo-blur';
 
-export default function CartaoCategoria({ categoria }) {
+export default function CartaoCategoriaBlank({ categoria }) {
     const scheme = useColorScheme()
     const styles = scheme === 'dark' ? stylesDark : stylesLight
     return (
         <View style={styles.caixaPrincipal}>
-            <ImageBackground source={{ uri: categoria?.foto }} style={styles.imgCategoria} resizeMode="cover" imageStyle={{ borderRadius: 24 }}>
+            <View style={styles.imgCategoria}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.titulo}>{categoria?.nome}</Text>
+                    <View style={styles.titulo}></View>
                 </View>
-            </ImageBackground>
+            </View>
         </View>
     )
 }
@@ -24,6 +24,7 @@ const stylesLight = StyleSheet.create({
     },
 
     imgCategoria: {
+        backgroundColor: '#dcdcdc',
         width: '100%',
         height: '100%',
         display: 'flex',
@@ -94,10 +95,15 @@ const stylesDark = StyleSheet.create({
     },
 
     imgCategoria: {
+        backgroundColor: '#181818',
         width: '100%',
         height: '100%',
         display: 'flex',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24
     },
 
     caixaPrincipal: {
@@ -117,7 +123,7 @@ const stylesDark = StyleSheet.create({
     },
 
     textContainer: {
-        backgroundColor: 'rgba(0,0,0,0.6)',
+        backgroundColor: 'rgba(0,0,0,0.1 )',
         height: 25,
         display: 'flex',
         justifyContent: 'center',
@@ -135,7 +141,7 @@ const stylesDark = StyleSheet.create({
         color: '#fff',
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(0,0,0, 0.65)',
+        backgroundColor: 'rgba(0,0,0, 0.1)',
         display: 'flex',
         alignSelf: 'center',
         borderTopRightRadius: 4,

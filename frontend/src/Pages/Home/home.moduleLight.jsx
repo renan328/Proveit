@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         position: 'relative',
         alignSelf: 'center',
+        marginTop: 5
     },
 
     //listas

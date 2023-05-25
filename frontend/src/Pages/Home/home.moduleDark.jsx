@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
     ingredienteInput: {
         marginHorizontal: 10,
         paddingHorizontal: 7,
-        fontSize: 11,
+        fontSize: 14,
         fontFamily: 'Raleway_600SemiBold',
-        color: '#505050',
+        color: '#fff',
         height: 40,
         width: '84%',
         left: -10,
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         position: 'relative',
         alignSelf: 'center',
+        marginTop: 5
     },
 
     //listas

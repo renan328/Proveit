@@ -1,19 +1,43 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Appearance, useColorScheme } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Appearance, useColorScheme, ScrollView } from "react-native";
 import { Raleway_800ExtraBold, Raleway_500Medium } from "@expo-google-fonts/raleway";
+import LottieView from 'lottie-react-native';
 import stylesDark from './configuracoes.moduleDark';
 import stylesLight from './configuracoes.module';
+import { useRef, useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft, faUser, faRightFromBracket, faQuestionCircle, faPencil, faBrush, faScroll } from '@fortawesome/free-solid-svg-icons';
 
 export default function Configuracoes({ navigation }) {
 
+    const [save, setSave] = useState(true);
+    const animation = useRef(null);
+    const firstRun = useRef(true);
+
     const scheme = useColorScheme();
-    const styles = scheme === 'dark' ? stylesDark : stylesLight;
+    var styles = scheme === 'dark' ? stylesDark : stylesLight;
+
+    useEffect(() => {
+        if (firstRun.current) {
+            if (save) {
+                animation.current.play(20, 20);
+            } else {
+                animation.current.play(0, 0);
+            }
+
+            firstRun.current = false;
+        } else if (save) {
+            animation.current.play(0, 95);
+            styles = stylesDark;
+        } else {
+            animation.current.play(95, 180);
+            styles = stylesLight;
+        }
+    });
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.botao} >
@@ -26,6 +50,19 @@ export default function Configuracoes({ navigation }) {
 
             {/* Lista de opções */}
             <View style={styles.opcoes}>
+
+            <View style={[styles.containerOpcoes, {backgroundColor: '#252525'}]}>
+                    <Text style={styles.textOpcoes}>Temas</Text>
+                    <TouchableOpacity onPress={() => setSave(!save)} style={{ height: 100, width: 100 }}>
+                        <LottieView
+                            source={require('../../assets/lottie/switchTheme.json')} // Caminho para o arquivo JSON do Lottie
+                            autoPlay={false}
+                            ref={animation}
+                            loop={false}
+                        />
+                    </TouchableOpacity>
+                </View>
+
                 <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Editar Perfil</Text>
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faUser} size={25} color="#606060" />
@@ -35,12 +72,6 @@ export default function Configuracoes({ navigation }) {
                 <TouchableOpacity style={styles.containerOpcoes}>
                     <Text style={styles.textOpcoes}>Editar receita</Text>
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={25} color="#606060" />
-                </TouchableOpacity>
-
-
-                <TouchableOpacity style={styles.containerOpcoes}>
-                    <Text style={styles.textOpcoes}>Temas</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faBrush} size={25} color="#606060" />
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.containerOpcoes}>
@@ -70,6 +101,6 @@ export default function Configuracoes({ navigation }) {
             <View style={styles.bottomTextContainer}>
                 <Text style={styles.bottomText}>© 2023-2023 Proveit.inc</Text>
             </View>
-        </View>
+        </ScrollView>
     );
 }

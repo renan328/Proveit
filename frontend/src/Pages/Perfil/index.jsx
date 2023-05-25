@@ -6,6 +6,7 @@ import { faRightFromBracket, faUser, faGear } from '@fortawesome/free-solid-svg-
 import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Regular, Raleway_500Medium, Raleway_600SemiBold, Raleway_700Bold, Raleway_800ExtraBold, Raleway_900Black, useFonts } from '@expo-google-fonts/raleway';
 import stylesLight from './perfil.module';
 import stylesDark from './perfil.moduleDark';
+import LottieView from 'lottie-react-native';
 
 
 export default function Perfil({ navigation }) {
@@ -45,6 +46,12 @@ export default function Perfil({ navigation }) {
             <View styles={styles.recipes}>
                 <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita, <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text></Text>
             </View>
+            <LottieView
+                    source={require('../../assets/lottie/heart.json')}
+                    autoPlay
+                    loop
+                    style={{ height: 15, alignSelf: 'center' }}
+                />
             <View
                 style={{
                     borderBottomColor: '#505050',
