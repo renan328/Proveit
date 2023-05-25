@@ -1,4 +1,4 @@
-# <img src="./frontend/src/assets/proveitGrey.png" height="50px"> ProveIt
+# <img src="./frontend/src/assets/proveitIcon.png" height="50px"> ProveIt
 👋 _Bem-vindo(a) ao nosso projeto!_
 
 
