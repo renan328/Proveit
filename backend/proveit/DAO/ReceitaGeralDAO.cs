@@ -190,6 +190,41 @@ namespace proveit.DAO
             return receitas;
         }
 
+        public List<ReceitaGeralDTO> Pesquisar(string nomeReceita, string ingrediente)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = "SELECT idReceita, R.Nome, R.Foto, I.Nome FROM Receitas R INNER JOIN Ingredientes_Receita I ON R.IdReceita = I.Receita_id WHERE R.Nome like '%@nomeReceita%' OR I.Nome LIKE '%@ingrediente%';";
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@nomeReceita", nomeReceita);
+            comando.Parameters.AddWithValue("@ingrediente", ingrediente);
+            var dataReader = comando.ExecuteReader();
+            var receitas = new List<ReceitaGeralDTO>();
+
+
+            while (dataReader.Read())
+            {
+                var idReceita = int.Parse(dataReader["idReceita"].ToString()); ;
+
+                if (receitas.Any(x => x.idReceita == idReceita) == false)
+                {
+                    //Não existe receita na lista
+
+                    var newReceita = new ReceitaGeralDTO();
+
+                    newReceita.idReceita = idReceita;
+                    newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
+                    newReceita.Foto = (dataReader["Foto"].ToString());
+
+                    receitas.Add(newReceita);
+                }
+            }
+
+            conexao.Close();
+            return receitas;
+        }
+
         public void CadastrarReceita(ReceitaGeralDTO receita)
         {
             var conexao = ConnectionFactory.Build();

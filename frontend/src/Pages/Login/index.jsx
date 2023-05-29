@@ -22,6 +22,11 @@ export default function Login({ navigation }) {
     const [senha, setSenha] = useState('');
     const [errors, setErrors] = useState({});
 
+    let inputStyle = [styles.input];
+    if (scheme === 'dark') {
+        inputStyle.push(styles.inputDark);
+    }
+    
     function handleSingIn() {
         const errors = {};
 
@@ -40,10 +45,9 @@ export default function Login({ navigation }) {
         const body = { email, senha };
 
         if (Object.keys(errors).length === 0) {
-
+            console.log(body)
+            navigation.navigate('Main')
         }
-        console.log(body)
-        navigation.navigate('Main')
     }
 
     return (
@@ -62,9 +66,7 @@ export default function Login({ navigation }) {
                             <TextInput
                                 style={[styles.input, errors.email && styles.inputError]}
                                 placeholder="E-mail"
-                                placeholderTextColor="#fff"
-                                value={email}
-                                onChangeText={(text) => setEmail(text)}
+                                placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                                 keyboardType="email-address"
                                 autoCapitalize="none"
                                 autoCorrect={false}
@@ -77,7 +79,7 @@ export default function Login({ navigation }) {
                             <TextInput
                                 style={[styles.input, errors.senha && styles.inputError]}
                                 placeholder="Senha"
-                                placeholderTextColor="#fff"
+                                placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                                 value={senha}
                                 onChangeText={(text) => setSenha(text)}
                                 secureTextEntry={true}
@@ -85,7 +87,7 @@ export default function Login({ navigation }) {
                             {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
                         </View>
                         <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
-                            <Text style={{ fontFamily: 'Raleway_600SemiBold', color: '#505050', textDecorationLine: 'underline', alignSelf: 'center'}}>Esqueci minha senha</Text>
+                            <Text style={{ fontFamily: 'Raleway_600SemiBold', color: '#505050', textDecorationLine: 'underline', alignSelf: 'center' }}>Esqueci minha senha</Text>
                         </TouchableOpacity>
 
                     </View>

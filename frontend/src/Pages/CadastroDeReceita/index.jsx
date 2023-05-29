@@ -163,6 +163,11 @@ export default function CadastroDeReceita({ navigation, props }) {
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
+    let inputStyle = [styles.input];
+    if (scheme === 'dark') {
+        inputStyle.push(styles.inputDark);
+    }
+
     return (
         <ScrollView style={styles.container}>
 
@@ -174,8 +179,7 @@ export default function CadastroDeReceita({ navigation, props }) {
             <View style={{ display: 'flex', alignItems: "center" }}>
                 <Text style={styles.headerPic}> Foto </Text>
                 <TouchableOpacity style={[styles.BorderIcon, errors.foto && styles.BorderIconError]} onPress={pickImage}>
-                    <FontAwesomeIcon style={[styles.IconCamera, errors.foto && styles.IconCameraError]} icon={faCamera} size={58} />
-                    {foto && <Image source={{ uri: foto }} style={styles.imagemReceita} />}
+                    {foto ? null : <FontAwesomeIcon style={[styles.IconCamera, errors.foto && styles.IconCameraError]} icon={faCamera} size={58} />}                    {foto && <Image source={{ uri: foto }} style={styles.imagemReceita} />}
                 </TouchableOpacity>
                 {errors.foto && <Text style={styles.textError}>{errors.foto}</Text>}
             </View>
@@ -187,6 +191,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <TextInput
                         style={[styles.allInput, errors.nomeReceita && styles.inputError]}
                         placeholder='Digite o nome da receita'
+                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                         value={nomeReceita}
                         onChangeText={(texto) => setNomeReceita(texto)}
                     />
@@ -215,6 +220,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <TextInput
                         style={[styles.inputTempo, errors.tempoPreparo && styles.inputError]}
                         placeholder='Ex: 10'
+                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                         value={tempoPreparo}
                         onChangeText={(texto) => setTempoPreparo(texto)}
                     />
@@ -238,6 +244,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <TextInput
                         style={[styles.allInput, errors.porcoes && styles.inputError]}
                         placeholder="Ex: 10"
+                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                         value={porcoes}
                         onChangeText={(texto) => setPorcoes(texto)}
                     />
@@ -255,6 +262,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <TextInput
                         style={styles.allInput}
                         placeholder='Ex: 150'
+                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                         value={valCalorico}
                         onChangeText={(texto) => setValCalorico(texto)}
                     />
@@ -265,6 +273,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <TextInput
                         style={[styles.allInput, errors.descricao && styles.inputError]}
                         placeholder='Ex: Coxinha de frango com catupiry'
+                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                         value={descricao}
                         onChangeText={(texto) => setDescricao(texto)}
                     />
@@ -283,6 +292,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                                 <TextInput
                                     style={[styles.allInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
                                     placeholder="Ex: farinha de trigo"
+                                    placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                                     value={ingrediente.nomeIngrediente}
                                     onChangeText={texto => atualizarIngrediente(index, 'nomeIngrediente', texto)}
                                 />
@@ -297,10 +307,11 @@ export default function CadastroDeReceita({ navigation, props }) {
                                 <TextInput
                                     style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
                                     placeholder="Ex: 10"
+                                    placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                                     value={ingrediente.quantidade}
                                     onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
                                 />
-                                
+
                                 <View style={styles.ViewListaInput}>
                                     <Picker
                                         style={[styles.ListaInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
@@ -350,6 +361,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                                 style={[styles.allInput, errors.passos && errors.passos[index] && styles.inputError]}
                                 value={step.PassoTexto}
                                 placeholder={"Digite o passo"}
+                                placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                                 onChangeText={(text) => handleStepTextChange(index, text)}
                             />
                             {errors.passos && errors.passos && <Text style={styles.textError}>{errors.passos}</Text>}

@@ -96,8 +96,7 @@ export default function CadastroDeUsuario({ navigation }) {
                     <Text style={styles.suafoto}>Foto de perfil</Text>
 
                     <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
-                        <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />
-                        {foto && <Image source={{ uri: foto }} style={styles.imagemUsu} />}
+                        {foto ? null : <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />}                        {foto && <Image source={{ uri: foto }} style={styles.imagemUsu} />}
                     </TouchableOpacity>
                 </View>
 

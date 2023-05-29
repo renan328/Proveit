@@ -141,3 +141,13 @@ SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Desc
 SELECT idAvaliacao, Estrelas, Comentario, Receita_id, Avaliacao.Usuario_id, Usuarios.Nome AS UsuarioNome, Usuarios.Foto AS UsuarioFoto FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Receita_id = 1;
 -- Select Receitas favoritas por usuário
 SELECT Receita_id FROM ReceitasFavoritas WHERE Usuario_id = 1;
+
+ SELECT idReceita, R.Nome, R.Foto, I.Nome FROM Receitas R
+INNER JOIN Ingredientes_Receita  I
+ON R.IdReceita = I.Receita_id
+WHERE R.Nome like '%mousse%'
+OR I.Nome LIKE '%morangos%' 
+OR I.Nome LIKE '%morangos%' 
+OR I.Nome LIKE '%tes%'
+OR I.Nome LIKE '%morangos%' 
+OR I.Nome LIKE '%morangos%';

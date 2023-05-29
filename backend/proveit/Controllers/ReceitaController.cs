@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using proveit.DAO;
 using proveit.DTO;
+using System.Text;
 
 namespace proveit.Controllers
 {
@@ -57,6 +58,29 @@ namespace proveit.Controllers
             var ReceitaDAO = new ReceitaGeralDAO();
             var AvaliacaoDAO = new AvaliacaoDAO();
             var receitas = ReceitaDAO.ListarReceitasHome();
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
+        [HttpGet]
+        [Route("pesquisa")]
+        public IActionResult Pesquisar(string nomeReceita, string ingrediente)
+        {
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.Pesquisar(nomeReceita, ingrediente);
             var detalhesReceitas = new List<DetalhesReceitaDTO>();
 
             foreach (var receita in receitas)
