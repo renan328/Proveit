@@ -162,7 +162,7 @@ export default function CadastroDeReceita({ navigation, props }) {
 
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
-
+    
     let inputStyle = [styles.input];
     if (scheme === 'dark') {
         inputStyle.push(styles.inputDark);
@@ -179,7 +179,8 @@ export default function CadastroDeReceita({ navigation, props }) {
             <View style={{ display: 'flex', alignItems: "center" }}>
                 <Text style={styles.headerPic}> Foto </Text>
                 <TouchableOpacity style={[styles.BorderIcon, errors.foto && styles.BorderIconError]} onPress={pickImage}>
-                    {foto ? null : <FontAwesomeIcon style={[styles.IconCamera, errors.foto && styles.IconCameraError]} icon={faCamera} size={58} />}                    {foto && <Image source={{ uri: foto }} style={styles.imagemReceita} />}
+                    <FontAwesomeIcon style={[styles.IconCamera, errors.foto && styles.IconCameraError]} icon={faCamera} size={58} />
+                    {foto && <Image source={{ uri: foto }} style={styles.imagemReceita} />}
                 </TouchableOpacity>
                 {errors.foto && <Text style={styles.textError}>{errors.foto}</Text>}
             </View>
