@@ -6,6 +6,34 @@ namespace proveit.DAO
 {
     public class UsuarioDAO
     {
+        public UsuarioDTO Login(UsuarioDTO dadosLogin)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = "SELECT*FROM Usuarios WHERE Email = @email AND Senha = @senha";
+
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@email", dadosLogin.Email);
+            comando.Parameters.AddWithValue("@senha", dadosLogin.Senha);
+
+            var dataReader = comando.ExecuteReader();
+
+            var usuario = new UsuarioDTO();
+            while (dataReader.Read())
+            {
+                usuario.idUsuario = int.Parse(dataReader["idUsuario"].ToString());
+                usuario.Nome = dataReader["Nome"].ToString();
+                usuario.NomeTag = dataReader["NomeTag"].ToString();
+                usuario.Email = dataReader["Email"].ToString();
+                usuario.Senha = dataReader["Senha"].ToString();
+                usuario.Foto = (dataReader["Foto"].ToString());
+            }
+
+            conexao.Close();
+            return usuario;
+
+        }
         public List<UsuarioDTO> ListarUsuarios()
         {
             var conexao = ConnectionFactory.Build();
