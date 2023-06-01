@@ -4,14 +4,18 @@ import showToast from '../../../hooks/toasts';
 import { View, ScrollView } from 'react-native';
 import CartaoReceita from "./CartãoReceita";
 import CartaoReceitaBlank from './CartãoReceitaBlank';
+import { HeaderRequisicao } from '../../AuthContext';
 
 export default function CarrosselHome() {
 
     const [dadosReceita, setDadosReceita] = useState([]);
 
-    useEffect(() => {
+    async function ListarReceitas() {
+        const headers = await HeaderRequisicao();
+
         fetch("https://cloudproveit.azurewebsites.net/api/receita", {
             method: "GET",
+            headers
         })
             .then((response) => response.json())
             .then((json) => {
@@ -20,6 +24,10 @@ export default function CarrosselHome() {
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao buscar receitas, tente novamente mais tarde.', 'error');
             });
+    }
+
+    useEffect(() => {
+        ListarReceitas();
     }, []);
 
     if (dadosReceita == '') {

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimensions, useColorScheme, Appearance } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser, width } from '@fortawesome/free-solid-svg-icons/faUser';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,6 +11,10 @@ import * as yup from 'yup';
 import stylesLight from './login.module';
 import stylesDark from './login.moduleDark';
 import { BlurView } from 'expo-blur';
+import '../../AuthContext';
+import jwtDecode from "jwt-decode";
+import { ChecarLoginUsuario, SalvarJWT } from "../../AuthContext";
+import showToast from '../../../hooks/toasts';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -22,12 +27,14 @@ export default function Login({ navigation }) {
     const [senha, setSenha] = useState('');
     const [errors, setErrors] = useState({});
 
-    let inputStyle = [styles.input];
-    if (scheme === 'dark') {
-        inputStyle.push(styles.inputDark);
-    }
-    
-    function handleSingIn() {
+    async function verificarLogin() {
+        const usuarioLogado = await ChecarLoginUsuario();
+        if (usuarioLogado) {
+            navigation.navigate("Main");
+        }
+    };
+
+    function Login() {
         const errors = {};
 
         if (!email.trim()) {
@@ -42,13 +49,38 @@ export default function Login({ navigation }) {
         }
         setErrors(errors);
 
-        const body = { email, senha };
-
         if (Object.keys(errors).length === 0) {
-            console.log(body)
-            navigation.navigate('Main')
+
+            fetch("https://cloudproveit.azurewebsites.net/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    email,
+                    senha,
+                }),
+            })
+                .then((response) => response.json())
+                .then((json) => {
+                    SalvarJWT(json.token);
+                })
+                .then(() => navigation.navigate("Main"))
+                .catch((error) => {
+                    console.log(error);
+                    showToast('Foi mal!', 'Erro ao fazer login, tente novamente mais tarde.', 'error');
+                });
         }
     }
+
+    let inputStyle = [styles.input];
+    if (scheme === 'dark') {
+        inputStyle.push(styles.inputDark);
+    }
+
+    useEffect(() => {
+        verificarLogin();
+    });
 
     return (
         <ImageBackground source={scheme == 'dark' ? require('../../assets/headerBG.jpg') : require('../../assets/headerBGLight.jpg')} style={styles.container} resizeMode='cover' >
@@ -68,6 +100,8 @@ export default function Login({ navigation }) {
                                 placeholder="E-mail"
                                 placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                                 keyboardType="email-address"
+                                value={email}
+                                onChangeText={(texto) => setEmail(texto)}
                                 autoCapitalize="none"
                                 autoCorrect={false}
                             />
@@ -93,7 +127,7 @@ export default function Login({ navigation }) {
                     </View>
                     <ImageBackground source={require('../../assets/bemVindo.png')} style={styles.buttons}>
                         {/* Botão */}
-                        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
+                        <TouchableOpacity onPress={Login}>
                             <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                                 end={{ x: 2, y: 1 }} style={styles.button} >
                                 <Text style={styles.buttonText}>Entrar</Text>

@@ -9,6 +9,12 @@ C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Google.Protobuf.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\K4os.Compression.LZ4.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\K4os.Compression.LZ4.Streams.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\K4os.Hash.xxHash.dll
+C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Logging.dll
+C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
+C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\MySql.Data.dll
@@ -19,6 +25,7 @@ C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetC
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\System.Data.SqlClient.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\System.Drawing.Common.dll
+C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\System.Security.Permissions.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\PubTmp\Out\System.Windows.Extensions.dll

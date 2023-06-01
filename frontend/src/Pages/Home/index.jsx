@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import Toast from 'react-native-toast-message';
 import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas';
@@ -10,7 +10,8 @@ import { faAward, faArrowTrendUp, faStar, faCandyCane, faCannabis, faCircleExcla
 import StylesDark from './home.moduleDark';
 import StylesLight from './home.moduleLight';
 import LottieView from 'lottie-react-native';
-import { useRef, useEffect, useState } from 'react';
+import { HeaderRequisicao } from "../../AuthContext";
+import { useRef, useState } from 'react';
 
 export default function Home({ navigation, props }) {
 

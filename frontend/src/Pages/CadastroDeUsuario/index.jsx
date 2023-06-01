@@ -59,8 +59,8 @@ export default function CadastroDeUsuario({ navigation }) {
         const body = { nome, foto, nomeTag, email, senha };
 
         if (Object.keys(errors).length === 0) {
-            // código de registro aqui
-            fetch("https://cloudproveit.azurewebsites.net/api/Usuario", {
+            // código de registro
+            fetch("https://cloudproveit.azurewebsites.net/api/CadUsuario", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)

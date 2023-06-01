@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using proveit.DAO;
 using proveit.DTO;
 using System.Text;
@@ -7,6 +8,7 @@ namespace proveit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ReceitaController : ControllerBase
     {
         [HttpGet]

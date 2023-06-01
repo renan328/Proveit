@@ -58,3 +58,10 @@ C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\refint\proveit.dll
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\proveit.pdb
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\proveit.genruntimeconfig.cache
 C:\TCC\ProveIt\backend\proveit\obj\Release\net6.0\ref\proveit.dll
+C:\TCC\ProveIt\backend\proveit\bin\Release\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\TCC\ProveIt\backend\proveit\bin\Release\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\TCC\ProveIt\backend\proveit\bin\Release\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\TCC\ProveIt\backend\proveit\bin\Release\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\TCC\ProveIt\backend\proveit\bin\Release\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\TCC\ProveIt\backend\proveit\bin\Release\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\TCC\ProveIt\backend\proveit\bin\Release\net6.0\System.IdentityModel.Tokens.Jwt.dll

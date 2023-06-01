@@ -4,13 +4,18 @@ import showToast from '../../../hooks/toasts';
 import { View, ScrollView } from 'react-native';
 import CartaoCategoria from './CartaoCategoria';
 import CartaoCategoriaBlank from './CartaoCategoriaBlank';
+import { HeaderRequisicao } from '../../AuthContext';
 
 export default function CarrosselCategorias() {
 
     const [categorias, setCategorias] = useState([]);
-    useEffect(() => {
+
+    async function ListarCategorias() {
+        const headers = await HeaderRequisicao();
+
         fetch("https://cloudproveit.azurewebsites.net/api/categoria/todas", {
             method: "GET",
+            headers
         })
             .then((response) => response.json())
             .then((json) => {
@@ -19,6 +24,10 @@ export default function CarrosselCategorias() {
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao buscar categorias, tente novamente mais tarde.', 'error');
             });
+    }
+
+    useEffect(() => {
+        ListarCategorias();
     }, [])
 
     if (categorias == '') {
@@ -35,7 +44,7 @@ export default function CarrosselCategorias() {
 
         return (
             <View>
-                <ScrollView horizontal={true} style={{marginBottom: 4 }}>
+                <ScrollView horizontal={true} style={{ marginBottom: 4 }}>
                     {
                         categorias.map((categoria, index) => (
                             <CartaoCategoria categoria={categoria} key={index} />
