@@ -11,7 +11,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT*FROM Usuarios WHERE Email = @email AND Senha = @senha";
+            var query = "SELECT * FROM Usuarios WHERE Email = @email AND Senha = @senha";
 
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@email", dadosLogin.Email);

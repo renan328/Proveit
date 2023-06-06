@@ -37,6 +37,7 @@ namespace proveit.Controllers
                 {
                     new Claim("ID", usuario.idUsuario.ToString()),
                     new Claim("Email", usuario.Email),
+                    new Claim("Nome", usuario.Nome),
                 };
 
                 var token = new JwtSecurityToken(
@@ -50,7 +51,16 @@ namespace proveit.Controllers
                 return new JwtSecurityTokenHandler().WriteToken(token);
 
             }
+        }
 
+        [HttpPost]
+        [Route("Cadastro")]
+        public IActionResult CadastrarUsuario(UsuarioDTO usuario)
+        {
+            var dao = new UsuarioDAO();
+            dao.CadastrarUsuario(usuario);
+
+            return Ok();
         }
     }
 }

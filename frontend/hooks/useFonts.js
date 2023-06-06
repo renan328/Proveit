@@ -1,6 +1,6 @@
 import * as Font from "expo-font";
  
-export default useFonts = async () =>
+export default async function useFonts (){
   await Font.loadAsync({
     'Raleway_100Thin': require('../src/assets/fonts/Raleway-Thin.ttf'),
     'Raleway_200ExtraLight': require('../src/assets/fonts/Raleway-ExtraLight.ttf'),
@@ -12,3 +12,4 @@ export default useFonts = async () =>
     'Raleway_800ExtraBold': require('../src/assets/fonts/Raleway-ExtraBold.ttf'),
     'Raleway_900Black': require('../src/assets/fonts/Raleway-Black.ttf'),
   });
+}

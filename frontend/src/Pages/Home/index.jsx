@@ -105,12 +105,12 @@ export default function Home({ navigation, props }) {
                 <TouchableOpacity>
                     <ReceitaEspecial />
                 </TouchableOpacity>
-                <LottieView
+                {/* <LottieView
                     source={require('../../assets/lottie/cooking.json')} // Caminho para o arquivo JSON do Lottie
                     autoPlay
                     loop
                     style={{ height: 250, alignSelf: 'center' }}
-                />
+                /> */}
                 <View
                     style={{
                         borderBottomColor: '#505050',

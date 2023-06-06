@@ -1,3 +1,4 @@
+import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt from "jwt-decode";
 import { useNavigation } from "@react-navigation/native";
@@ -19,6 +20,7 @@ export async function HeaderRequisicao() {
     }
 
     const token = await AsyncStorage.getItem("@jwt");
+    console.log(token); 
     return new Headers({
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",

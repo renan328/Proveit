@@ -40,26 +40,29 @@ export default function Login({ navigation }) {
         if (!email.trim()) {
             errors.email = "Email é obrigatório";
         } else if (!/\S+@\S+\.\S+/.test(email)) {
-            errors.email = "Email inválido";
+            // errors.email = "Email inválido";
         }
         if (!senha) {
             errors.senha = "Senha é obrigatória";
         } else if (senha.length < 8) {
-            errors.senha = "Senha deve ter pelo menos 8 caracteres";
+            // errors.senha = "Senha deve ter pelo menos 8 caracteres";
         }
         setErrors(errors);
 
         if (Object.keys(errors).length === 0) {
+            
+            const params = {
+                email: email,
+                senha: senha,
+            };
 
+            const body = new URLSearchParams(Object.entries(params));
             fetch("https://cloudproveit.azurewebsites.net/api/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
-                body: new URLSearchParams({
-                    email,
-                    senha,
-                }),
+                body: body,
             })
                 .then((response) => response.json())
                 .then((json) => {
@@ -148,6 +151,5 @@ export default function Login({ navigation }) {
                 </View>
             </BlurView >
         </ImageBackground >
-
     )
 }
