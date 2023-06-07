@@ -5,13 +5,15 @@ import { View, ScrollView } from 'react-native';
 import CartaoCategoria from './CartaoCategoria';
 import CartaoCategoriaBlank from './CartaoCategoriaBlank';
 import { HeaderRequisicao } from '../../AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
 export default function CarrosselCategorias() {
 
     const [categorias, setCategorias] = useState([]);
+    const navigation = useNavigation();
 
     async function ListarCategorias() {
-        const headers = await HeaderRequisicao();
+        const headers = await HeaderRequisicao(navigation);
 
         fetch("https://cloudproveit.azurewebsites.net/api/categoria/todas", {
             method: "GET",

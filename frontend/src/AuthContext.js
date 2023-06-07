@@ -1,8 +1,6 @@
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt from "jwt-decode";
-import { useNavigation } from "@react-navigation/native";
-
 
 export async function SalvarJWT(jwtData) {
     const userData = jwt(jwtData);
@@ -11,16 +9,15 @@ export async function SalvarJWT(jwtData) {
     await AsyncStorage.setItem("@userData", JSON.stringify(userData));
 }
 
-export async function HeaderRequisicao() {
+export async function HeaderRequisicao(navigation) {
     const usuarioLogado = await ChecarLoginUsuario();
-    const navigation = useNavigation();
 
     if (usuarioLogado == false) {
-        navigation.navigate('Login')
+        navigation.navigate('Login');
     }
 
     const token = await AsyncStorage.getItem("@jwt");
-    console.log(token); 
+    console.log(token);
     return new Headers({
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
@@ -30,11 +27,16 @@ export async function HeaderRequisicao() {
 export async function ChecarLoginUsuario() {
 
     const token = await AsyncStorage.getItem("@jwt");
+
+    console.log(token);
+
     if (!token) {
         return false;
     }
 
     const userData = JSON.parse(await AsyncStorage.getItem("@userData"));
+
+    console.log(userData);
     const actualDate = Date.parse(new Date()) / 1000;
 
     if (actualDate > userData.exp) {
@@ -44,4 +46,13 @@ export async function ChecarLoginUsuario() {
     }
 
     return true;
+}
+
+export async function Logout() {
+    await AsyncStorage.remove("@jwt");
+    return;
+}
+
+export async function DadosUsuario() {
+    return JSON.parse(await AsyncStorage.getItem("@userData"));
 }

@@ -15,6 +15,7 @@ import '../../AuthContext';
 import jwtDecode from "jwt-decode";
 import { ChecarLoginUsuario, SalvarJWT } from "../../AuthContext";
 import showToast from '../../../hooks/toasts';
+import axios from 'axios';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -28,13 +29,15 @@ export default function Login({ navigation }) {
     const [errors, setErrors] = useState({});
 
     async function verificarLogin() {
+        // debugger;
         const usuarioLogado = await ChecarLoginUsuario();
+        console.log(usuarioLogado);
         if (usuarioLogado) {
             navigation.navigate("Main");
         }
     };
 
-    function Login() {
+    async function Login() {
         const errors = {};
 
         if (!email.trim()) {
@@ -49,31 +52,32 @@ export default function Login({ navigation }) {
         }
         setErrors(errors);
 
-        if (Object.keys(errors).length === 0) {
-            
-            const params = {
-                email: email,
-                senha: senha,
-            };
-
-            const body = new URLSearchParams(Object.entries(params));
-            fetch("https://cloudproveit.azurewebsites.net/api/auth/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: body,
-            })
-                .then((response) => response.json())
-                .then((json) => {
-                    SalvarJWT(json.token);
-                })
-                .then(() => navigation.navigate("Main"))
-                .catch((error) => {
-                    console.log(error);
-                    showToast('Foi mal!', 'Erro ao fazer login, tente novamente mais tarde.', 'error');
-                });
+        if (Object.keys(errors).length > 0) {
+            return;
         }
+
+        const formData = new URLSearchParams();
+        formData.append('email', email);
+        formData.append('senha', senha);
+
+        axios.post("https://cloudproveit.azurewebsites.net/api/auth/login", formData.toString(), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        })
+            .then((response) => {
+                // debugger;
+                SalvarJWT(response.data.token);
+            })
+            .then(() => navigation.navigate("Main"))
+            .then(() => {
+                alert("Login Efetuado com sucesso!")
+            })
+            .catch((err) => {
+                console.log(err);
+                showToast('Foi mal!', 'Erro ao fazer login, tente novamente mais tarde.', 'error');
+            })
+
     }
 
     let inputStyle = [styles.input];
