@@ -6,6 +6,33 @@ namespace proveit.DAO
 {
     public class AvaliacaoDAO
     {
+
+        public AvaliacaoDTO ListarAvaliacaoUnica(int idAvaliacao)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = "SELECT idAvaliacao, Estrelas, Comentario, Receita_id, Avaliacao.Usuario_id, Receitas.Nome AS NomeReceita FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita WHERE idAvaliacao = @idAvaliacao";
+
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@idAvaliacao", idAvaliacao);
+            var dataReader = comando.ExecuteReader();
+
+            var avaliacao = new AvaliacaoDTO();
+            while (dataReader.Read())
+            {
+                avaliacao.idAvaliacao = int.Parse(dataReader["idAvaliacao"].ToString());
+                avaliacao.Estrelas = int.Parse(dataReader["Estrelas"].ToString());
+                avaliacao.Comentario = dataReader["Comentario"].ToString();
+                avaliacao.Receita_id = int.Parse(dataReader["Receita_id"].ToString());
+                avaliacao.Usuario_id = int.Parse(dataReader["Usuario_id"].ToString());
+                avaliacao.NomeReceita = dataReader["NomeReceita"].ToString();
+            }
+
+            conexao.Close();
+            return avaliacao;
+        }
+
         public List<AvaliacaoDTO> ListarAvaliacaoDeReceita(int id)
         {
             var conexao = ConnectionFactory.Build();
@@ -73,6 +100,37 @@ namespace proveit.DAO
             return avaliacoes;
         }
 
+        public List<AvaliacaoDTO> ListarAvaliacaosDoUsuario(int idUsuario)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = "SELECT idAvaliacao, Estrelas, Comentario, Receita_id, Avaliacao.Usuario_id, Usuarios.Nome AS UsuarioNome, Usuarios.Foto AS UsuarioFoto, Receitas.Nome AS NomeReceita FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Avaliacao.Usuario_id = @idUsuario;";
+
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+            var dataReader = comando.ExecuteReader();
+
+            var avaliacoes = new List<AvaliacaoDTO>();
+            while (dataReader.Read())
+            {
+                var avaliacao = new AvaliacaoDTO();
+                avaliacao.idAvaliacao = int.Parse(dataReader["idAvaliacao"].ToString());
+                avaliacao.Estrelas = int.Parse(dataReader["Estrelas"].ToString());
+                avaliacao.Comentario = dataReader["Comentario"].ToString();
+                avaliacao.Receita_id = int.Parse(dataReader["Receita_id"].ToString());
+                avaliacao.Usuario_id = int.Parse(dataReader["Usuario_id"].ToString());
+                avaliacao.UsuarioNome = dataReader["UsuarioNome"].ToString();
+                avaliacao.UsuarioFoto = dataReader["UsuarioFoto"].ToString();
+                avaliacao.NomeReceita = dataReader["NomeReceita"].ToString();
+
+                avaliacoes.Add(avaliacao);
+            }
+
+            conexao.Close();
+            return avaliacoes;
+        }
+
         public void CadastrarAvaliacao(CadAvaliacaoDTO avaliacao)
         {
             var conexao = ConnectionFactory.Build();
@@ -91,7 +149,7 @@ namespace proveit.DAO
             conexao.Close();
         }
 
-        public void AlterarAvaliacao(AvaliacaoDTO avaliacao)
+        public void AlterarAvaliacao(CadAvaliacaoDTO avaliacao)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();

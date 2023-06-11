@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ImageBackground, StyleSheet, TextInput, Alert, TouchableOpacity, Dimension, Appearance, useColorScheme } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TextInput, Alert, TouchableOpacity, Dimension, Appearance, useColorScheme } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRightFromBracket, faUser, faGear } from '@fortawesome/free-solid-svg-icons';
@@ -7,12 +7,58 @@ import { Raleway_100Thin, Raleway_200ExtraLight, Raleway_300Light, Raleway_400Re
 import stylesLight from './perfil.module';
 import stylesDark from './perfil.moduleDark';
 import LottieView from 'lottie-react-native';
+import { HeaderRequisicao } from '../../AuthContext';
+import { DadosUsuario } from '../../AuthContext';
+import CartaoReceita from '../../components/CartaoReceita/CartaoReceita';
 
 
 export default function Perfil({ navigation }) {
 
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
+    const [usuario, setUsuario] = useState();
+    const [dadosReceita, setDadosReceita] = useState([]);
+    const [mostrarMensagem, setMostrarMensagem] = useState(false);
+
+    async function Adicionados() {
+        const userDataJWT = await DadosUsuario();
+        const headers = await HeaderRequisicao(navigation);
+
+        fetch("https://cloudproveit.azurewebsites.net/api/receita/usuario/" + userDataJWT.ID, {
+            method: "GET",
+            headers
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setDadosReceita(json);
+                setMostrarMensagem(json.length === 0);
+            })
+            .catch((error) => {
+                showToast('Foi mal!', 'Erro ao buscar suas receitas, tente novamente mais tarde.', 'error');
+            });
+    }
+
+    async function BuscarUsuario() {
+
+        const userDataJWT = await DadosUsuario();
+        const headers = await HeaderRequisicao(navigation);
+
+        fetch("https://cloudproveit.azurewebsites.net/api/usuario/" + userDataJWT.ID, {
+            method: "GET",
+            headers
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setUsuario(json);
+            })
+            .catch((error) => {
+                showToast('Foi mal!', 'Erro ao buscar seu perfil, tente novamente mais tarde.', 'error');
+            });
+    }
+
+    useEffect(() => {
+        BuscarUsuario();
+    });
 
     return (
         // Container Geral
@@ -25,12 +71,14 @@ export default function Perfil({ navigation }) {
             <View>
                 {/* Imagem do Usuário e Dados */}
                 <View style={styles.userImage}>
-                    <FontAwesomeIcon icon={faUser} size={50} style={styles.userIcon} color='#606060' />
+                    <Image source={{ uri: usuario?.foto }} style={styles.imagemUsu} />
                 </View>
-                <Text style={styles.name}>User</Text>
-                <Text style={styles.userName}>@userName</Text>
+                <Text style={styles.name}>{usuario?.nome}</Text>
+                <Text style={styles.userName}>@{usuario?.nomeTag}</Text>
             </View>
-            <Text style={styles.text}>Adicionados</Text>
+            <TouchableOpacity onPress={Adicionados}>
+                <Text style={styles.text}>Adicionados</Text>
+            </TouchableOpacity>
 
             {/* Linha horizontal */}
             <View
@@ -43,15 +91,29 @@ export default function Perfil({ navigation }) {
                 }}
             />
 
-            <View styles={styles.recipes}>
-                <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita, <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text></Text>
-            </View>
-            <LottieView
-                    source={require('../../assets/lottie/heart.json')}
-                    autoPlay
-                    loop
-                    style={{ height: 15, alignSelf: 'center' }}
-                />
+            {mostrarMensagem &&
+                <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita,
+                    <TouchableOpacity onPress={() => navigation.navigate('CadastroDeReceita')} >
+                        <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text>
+                    </TouchableOpacity>
+                </Text>}
+
+            {!mostrarMensagem && (
+                <ScrollView horizontal={true} style={{ marginLeft: 10 }}>
+                    {
+                        dadosReceita.map((receita, index) => (
+                            <CartaoReceita receita={receita} key={index} />
+                        ))
+                    }
+                </ScrollView>
+            )}
+
+            {/* <LottieView
+                source={require('../../assets/lottie/heart.json')}
+                autoPlay
+                loop
+                style={{ height: 15, alignSelf: 'center' }}
+            /> */}
             <View
                 style={{
                     borderBottomColor: '#505050',

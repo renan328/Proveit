@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import Toast from 'react-native-toast-message';
 import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas';
@@ -11,7 +11,7 @@ import StylesDark from './home.moduleDark';
 import StylesLight from './home.moduleLight';
 import LottieView from 'lottie-react-native';
 import { HeaderRequisicao } from "../../AuthContext";
-import { useRef, useState } from 'react';
+import { DadosUsuario } from '../../AuthContext';
 
 export default function Home({ navigation, props }) {
 
@@ -29,10 +29,21 @@ export default function Home({ navigation, props }) {
             <View style={{ display: 'flex', flexDirection: 'row', marginStart: 5, marginTop: 5, }}>{starsBox}</View>
         )
     }
+    
+    const [username, setUsername] = useState();
 
-    const username = "Convidado";
+    async function BuscarUsuario() {
+        const userDataJWT = await DadosUsuario();
+        setUsername(userDataJWT.Nome);
+    }
+
+    useEffect(() => {
+        BuscarUsuario();
+    });
+
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? StylesDark : StylesLight;
+
     return (
         <ScrollView style={styles.main} showsVerticalScrollIndicator={false}>
             <View style={styles.header}>
@@ -105,12 +116,12 @@ export default function Home({ navigation, props }) {
                 <TouchableOpacity>
                     <ReceitaEspecial />
                 </TouchableOpacity>
-                <LottieView
+                {/* <LottieView
                     source={require('../../assets/lottie/cooking.json')} // Caminho para o arquivo JSON do Lottie
                     autoPlay
                     loop
                     style={{ height: 250, alignSelf: 'center' }}
-                />
+                /> */}
                 <View
                     style={{
                         borderBottomColor: '#505050',

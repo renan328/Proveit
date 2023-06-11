@@ -17,7 +17,7 @@ export async function HeaderRequisicao(navigation) {
     }
 
     const token = await AsyncStorage.getItem("@jwt");
-    console.log(token);
+    // console.log(token);
     return new Headers({
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export async function ChecarLoginUsuario() {
 
     const token = await AsyncStorage.getItem("@jwt");
 
-    console.log(token);
+    // console.log(token);
 
     if (!token) {
         return false;
@@ -36,7 +36,7 @@ export async function ChecarLoginUsuario() {
 
     const userData = JSON.parse(await AsyncStorage.getItem("@userData"));
 
-    console.log(userData);
+    // console.log(userData);
     const actualDate = Date.parse(new Date()) / 1000;
 
     if (actualDate > userData.exp) {
@@ -49,8 +49,7 @@ export async function ChecarLoginUsuario() {
 }
 
 export async function Logout() {
-    await AsyncStorage.remove("@jwt");
-    return;
+    await AsyncStorage.removeItem("@jwt");
 }
 
 export async function DadosUsuario() {

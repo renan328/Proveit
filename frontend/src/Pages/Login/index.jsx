@@ -154,6 +154,7 @@ export default function Login({ navigation }) {
                     </ImageBackground>
                 </View>
             </BlurView >
+            <View style={{ paddingVertical: 30 }} />
         </ImageBackground >
     )
 }

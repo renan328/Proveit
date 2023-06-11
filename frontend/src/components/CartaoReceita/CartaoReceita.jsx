@@ -36,9 +36,6 @@ export default function CartaoReceita({ receita }) {
             <ImageBackground source={{ uri: !receita.receita?.foto ?  '../../assets/proveitLogo.png' : receita.receita?.foto}} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
-                    <TouchableOpacity>
-                        <FontAwesomeIcon icon={faBookmark} size={20} style={styles.bookmarkIcon} />
-                    </TouchableOpacity>
                 </View>
 
                 {/* Container de imagem e texto */}

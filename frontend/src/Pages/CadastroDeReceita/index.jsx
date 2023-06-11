@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Appearance, useColorScheme } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -7,6 +7,8 @@ import * as ImagePicker from 'expo-image-picker';
 import stylesLight from './cadastrodereceita.module';
 import stylesDark from './cadastrodereceita.moduleDark';
 import { Picker } from '@react-native-picker/picker';
+import { HeaderRequisicao } from '../../AuthContext';
+import { DadosUsuario } from '../../AuthContext';
 
 export default function CadastroDeReceita({ navigation, props }) {
 
@@ -18,7 +20,7 @@ export default function CadastroDeReceita({ navigation, props }) {
     const [valCalorico, setValCalorico] = useState('');
     const [descricao, setDescricao] = useState('');
     const [nomeTag, setNomeTag] = useState('');
-    const [usuario_id, setUsuarios_id] = React.useState(1);
+    const [usuario_id, setUsuario_id] = React.useState();
     const [categoria, setCategoria] = React.useState('');
     const [aproveitamento, setAproveitamento] = useState(false);
     const [foto, setFoto] = useState(null);
@@ -61,10 +63,10 @@ export default function CadastroDeReceita({ navigation, props }) {
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 4],
-            quality: 0.5,
+            quality: 0.4,
         });
 
         console.log(result);
@@ -75,7 +77,12 @@ export default function CadastroDeReceita({ navigation, props }) {
         setFoto(result.assets[0].uri);
     }
 
-    function cadastrarReceita() {
+    async function BuscarUsuario() {
+        const userDataJWT = await DadosUsuario();
+        setUsuario_id(userDataJWT.ID);
+    }
+
+    async function CadastrarReceita() {
         const errors = {};
 
         if (!nomeReceita.trim()) {
@@ -123,19 +130,22 @@ export default function CadastroDeReceita({ navigation, props }) {
         }
         setErrors(errors);
 
-        const body = { idReceita, nomeReceita, tempoPreparo, tempo, porcoes, valCalorico, descricao, nomeTag, usuario_id, categoria, aproveitamento, foto, ingredientes, passos };
-
-        if (Object.keys(errors).length === 0) {
-
-            fetch("https://cloudproveit.azurewebsites.net/api/receita", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body)
-            })
-                .then((response) => { alert('Receita cadastrada com sucesso!') })
-                .catch((error) => { console.log(error) });
-            console.log(body);
+        if (Object.keys(errors).length > 0) {
+            return;
         }
+
+        const body = { idReceita, nomeReceita, tempoPreparo, tempo, porcoes, valCalorico, descricao, nomeTag, usuario_id, categoria, aproveitamento, foto, ingredientes, passos };
+        const headers = await HeaderRequisicao(navigation);
+
+        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
+            method: "POST",
+            headers,
+            body: JSON.stringify(body)
+        })
+            .then((response) => { alert('Receita cadastrada com sucesso!') })
+            .catch((error) => { console.log(error) });
+        console.log(body);
+
     }
 
     const categorias = [
@@ -168,6 +178,10 @@ export default function CadastroDeReceita({ navigation, props }) {
         inputStyle.push(styles.inputDark);
     }
 
+    useEffect(() => {
+        BuscarUsuario();
+    });
+
     return (
         <ScrollView style={styles.container}>
 
@@ -179,7 +193,7 @@ export default function CadastroDeReceita({ navigation, props }) {
             <View style={{ display: 'flex', alignItems: "center" }}>
                 <Text style={styles.headerPic}> Foto </Text>
                 <TouchableOpacity style={[styles.BorderIcon, errors.foto && styles.BorderIconError]} onPress={pickImage}>
-                    {foto ? null : <FontAwesomeIcon style={[styles.IconCamera, errors.foto && styles.IconCameraError]} icon={faCamera} size={58} />}                    
+                    {foto ? null : <FontAwesomeIcon style={[styles.IconCamera, errors.foto && styles.IconCameraError]} icon={faCamera} size={58} />}
                     {foto && <Image source={{ uri: foto }} style={styles.imagemReceita} />}
                 </TouchableOpacity>
                 {errors.foto && <Text style={styles.textError}>{errors.foto}</Text>}
@@ -384,7 +398,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                 </View>
 
                 <View>
-                    <TouchableOpacity onPress={cadastrarReceita} >
+                    <TouchableOpacity onPress={CadastrarReceita} >
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} style={styles.button} >
                             <Text style={styles.buttonText}>Publicar</Text>

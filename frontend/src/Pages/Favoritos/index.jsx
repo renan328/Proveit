@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, button, useColorScheme, Appearance, TouchableOp
 import stylesLight from "./favoritos.module";
 import stylesDark from "./favoritos.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
-import CartaoReceita from "../../components/CartaoReceita/CartãoReceita";
+import CartaoReceita from "../../components/CartaoReceita/CartaoReceita";
 
 export default function Favoritos() {
 

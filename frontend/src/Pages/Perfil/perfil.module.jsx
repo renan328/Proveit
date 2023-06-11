@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     },
     imagemUsu: {
         display: 'flex',
-        width: 140,
-        height: 140,
+        width: 120,
+        height: 120,
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomLeftRadius: 70,

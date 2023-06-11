@@ -12,6 +12,8 @@ import { useRoute } from '@react-navigation/native';
 import stylesDark from './receitasingle.moduleDark';
 import stylesLight from './receitasingle.module';
 import { BlurView } from 'expo-blur';
+import { HeaderRequisicao } from '../../AuthContext';
+import { DadosUsuario } from "../../AuthContext";
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -23,13 +25,18 @@ export default function ReceitaSingle({ navigation }) {
     const { id } = route.params;
     const [estrelas, setEstrelas] = useState(5);
     const [comentario, setComentario] = useState('');
-    const [usuario_id, setUsuario_id] = useState(1);
+    const [usuario_id, setUsuario_id] = useState();
     const [receita_id, setReceita_id] = useState(id);
     const [dadosReceita, setDadosReceita] = useState([]);
 
-    useEffect(() => {
-        fetch("https://cloudproveit.azurewebsites.net/api/receita/" + id, {
+    async function BuscarReceita() {
+        const headers = await HeaderRequisicao(navigation);
+        const userDataJWT = await DadosUsuario();
+        setUsuario_id(userDataJWT.ID);
+
+        fetch("https://localhost:7219/api/receita/" + id, {
             method: "GET",
+            headers
         })
             .then((response) => response.json())
             .then((json) => {
@@ -38,6 +45,10 @@ export default function ReceitaSingle({ navigation }) {
             .catch((error) => {
                 alert("Erro ao buscar receita");
             });
+    }
+
+    useEffect(() => {
+        BuscarReceita();
     }, [])
 
     const stars = dadosReceita.mediaEstrelas;
@@ -56,19 +67,21 @@ export default function ReceitaSingle({ navigation }) {
     }
 
     const [saved, setSaved] = useState(false);
-    const addSave = () => {
+    async function addSave() {
+        const headers = await HeaderRequisicao(navigation);
         setSaved(!saved);
+
         if (saved !== true) {
             const body = { usuario_id, receita_id };
-            fetch("https://cloudproveit.azurewebsites.net/api/ReceitaFavorita", {
+
+            fetch("https://localhost:7219/api/ReceitaFavorita", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers,
                 body: JSON.stringify(body)
             })
-                .then((response) => { showSuccessToast })
+                .then((response) => { alert("Receita favoritada com sucesso!"); })
                 .catch((error) => {
-                    console.log(error);
-                    showFailToast;
+                    alert("Erro ao favoritar receita");
                 });
             console.log(body);
         }
@@ -80,6 +93,7 @@ export default function ReceitaSingle({ navigation }) {
 
     function handleAssessment() {
         const body = { estrelas, comentario, usuario_id, receita_id };
+
         fetch("https://cloudproveit.azurewebsites.net/api/avaliacao", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -187,8 +201,8 @@ export default function ReceitaSingle({ navigation }) {
                     <Text style={styles.stepsTitle}>Passos</Text>
                 </View>
                 <View style={styles.stepList}>
-                    {dadosReceita.receita?.passos.map((passo) => (
-                        <PassoReceita numPasso={passo.numPasso} passoTexto={passo.passoTexto} />
+                    {dadosReceita.receita?.passos.map((passo, index) => (
+                        <PassoReceita numPasso={index + 1} passoTexto={passo.passoTexto} />
                     ))}
                 </View>
             </View>

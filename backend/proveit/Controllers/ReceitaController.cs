@@ -77,6 +77,52 @@ namespace proveit.Controllers
         }
 
         [HttpGet]
+        [Route("usuario/{idUsuario}")]
+        public IActionResult ListarReceitasDoUsuario([FromRoute] int idUsuario)
+        {
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarReceitasDoUsuario(idUsuario);
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
+        [HttpGet]
+        [Route("filtro/{filtro}")]
+        public IActionResult ListarReceitasComFiltro([FromRoute] string filtro)
+        {
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarReceitasComFiltro(filtro);
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
+        [HttpGet]
         [Route("pesquisa")]
         public IActionResult Pesquisar(string nomeReceita, string ingrediente)
         {

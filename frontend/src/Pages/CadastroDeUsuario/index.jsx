@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCamera, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faCircleCheck, faCircleXmark, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import * as ImagePicker from 'expo-image-picker';
 import styles from './cadastrodeusuario.module';
 
@@ -22,7 +22,7 @@ export default function CadastroDeUsuario({ navigation }) {
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 4],
-            quality: 0.7,
+            quality: 0.5,
         });
 
         if (!result.canceled) {
@@ -58,27 +58,35 @@ export default function CadastroDeUsuario({ navigation }) {
 
         const body = { nome, foto, nomeTag, email, senha };
 
-        if (Object.keys(errors).length === 0) {
-            // código de registro
-            fetch("https://cloudproveit.azurewebsites.net/api/auth/cadastro", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body)
-            })
-                .then((response) => { alert("Usuário cadastrado com sucesso!"); navigation.navigate('Main') })
-                .catch((error) => {
-                    console.log(error);
-                    showFailToast;
-                });
-
-            console.log(body);
+        if (Object.keys(errors).length > 0) {
+            return;
         }
+
+        // código de registro
+        fetch("https://cloudproveit.azurewebsites.net/api/auth/cadastro", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        })
+            .then((response) => { alert("Usuário cadastrado com sucesso!"); navigation.navigate('Main') })
+            .catch((error) => {
+                console.log(error);
+                showFailToast;
+            });
+
+        console.log(body);
+
     };
 
     return (
         <ScrollView>
             <View style={styles.container}>
                 <View style={styles.header}>
+
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.botao} >
+                        <FontAwesomeIcon icon={faChevronLeft} color="#FF7152" size={30} />
+                    </TouchableOpacity>
+
                     <Text style={styles.CadastreSe}>Cadastre-se</Text>
 
                     <View
@@ -86,7 +94,7 @@ export default function CadastroDeUsuario({ navigation }) {
                             borderBottomColor: '#505050',
                             opacity: 0.4,
                             borderBottomWidth: StyleSheet.hairlineWidth,
-                            width: 330, height: 5,
+                            width: '80%', height: 5,
                             marginTop: 15
                         }}
                     />
@@ -96,7 +104,8 @@ export default function CadastroDeUsuario({ navigation }) {
                     <Text style={styles.suafoto}>Foto de perfil</Text>
 
                     <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
-                        {foto ? null : <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />}                        {foto && <Image source={{ uri: foto }} style={styles.imagemUsu} />}
+                        {foto ? null : <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />}
+                        {foto && <Image source={{ uri: foto }} style={styles.imagemUsu} />}
                     </TouchableOpacity>
                 </View>
 

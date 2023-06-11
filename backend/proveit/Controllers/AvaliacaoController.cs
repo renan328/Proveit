@@ -10,12 +10,33 @@ namespace proveit.Controllers
     public class AvaliacaoController : ControllerBase
     {
 
+
+        [HttpGet]
+        [Route("unica/{idAvaliacao}")]
+        public IActionResult ListarAvaliacaoUnica([FromRoute]int idAvaliacao)
+        {
+            var dao = new AvaliacaoDAO();
+            var avaliacoes = dao.ListarAvaliacaoUnica(idAvaliacao);
+
+            return Ok(avaliacoes);
+        }
+
         [HttpGet]
         [Route("{id}")]
         public IActionResult ListarAvaliacaoDeReceita([FromRoute] int id)
         {
             var dao = new AvaliacaoDAO();
             var avaliacoes = dao.ListarAvaliacaoDeReceita(id);
+
+            return Ok(avaliacoes);
+        }
+
+        [HttpGet]
+        [Route("usuario/{idUsuario}")]
+        public IActionResult ListarAvaliacaoDoUsuario([FromRoute] int idUsuario)
+        {
+            var dao = new AvaliacaoDAO();
+            var avaliacoes = dao.ListarAvaliacaosDoUsuario(idUsuario);
 
             return Ok(avaliacoes);
         }
@@ -40,7 +61,7 @@ namespace proveit.Controllers
         }
 
         [HttpPut]
-        public IActionResult AlterarAvaliacao(AvaliacaoDTO avaliacao)
+        public IActionResult AlterarAvaliacao(CadAvaliacaoDTO avaliacao)
         {
             var dao = new AvaliacaoDAO();
             dao.AlterarAvaliacao(avaliacao);

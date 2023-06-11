@@ -5,28 +5,38 @@ namespace proveit.DTO
 {
     public class ReceitaFavoritaDAO
     {
-        public List<int> ListarFavoritos(int id)
+        public List<ReceitaGeralDTO> ListarReceitasFavoritas(int idUsuario)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT Receita_id FROM ReceitasFavoritas WHERE Usuario_id = @id;";
-
+            var query = "SELECT Receitas.idReceita, Receitas.Nome AS NomeReceita, Receitas.Foto, ReceitasFavoritas.Usuario_id FROM ReceitasFavoritas INNER JOIN Receitas On ReceitasFavoritas.Receita_id = Receitas.idReceita WHERE ReceitasFavoritas.Usuario_id = @id;";
             var comando = new MySqlCommand(query, conexao);
-            comando.Parameters.AddWithValue("@id", id);
+            comando.Parameters.AddWithValue("@id", idUsuario);
             var dataReader = comando.ExecuteReader();
 
-            var idReceitasFavoritas = new List<int>();
+            var receitas = new List<ReceitaGeralDTO>();
 
             while (dataReader.Read())
             {
-                int idReceitaFavorito = int.Parse(dataReader["Receita_id"].ToString());
+                var idReceita = int.Parse(dataReader["idReceita"].ToString()); ;
 
-                idReceitasFavoritas.Add(idReceitaFavorito);
+                if (receitas.Any(x => x.idReceita == idReceita) == false)
+                {
+                    //Não existe receita na lista
+
+                    var newReceita = new ReceitaGeralDTO();
+
+                    newReceita.idReceita = idReceita;
+                    newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
+                    newReceita.Foto = (dataReader["Foto"].ToString());
+
+                    receitas.Add(newReceita);
+                }
             }
 
             conexao.Close();
-            return idReceitasFavoritas;
+            return receitas;
         }
 
         public void CasastrarReceitasFavoritas(ReceitaFavoritaDTO receitaFavorita)

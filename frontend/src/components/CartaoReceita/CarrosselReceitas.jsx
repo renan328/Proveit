@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import showToast from '../../../hooks/toasts';
 import { View, ScrollView } from 'react-native';
-import CartaoReceita from "./CartãoReceita";
-import CartaoReceitaBlank from './CartãoReceitaBlank';
+import CartaoReceita from "./CartaoReceita";
+import CartaoReceitaBlank from './CartaoReceitaBlank';
 import { HeaderRequisicao } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,7 +14,7 @@ export default function CarrosselHome() {
     async function ListarReceitas() {
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
+        fetch("https://localhost:7219/api/receita/home", {
             method: "GET",
             headers
         })

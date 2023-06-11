@@ -15,16 +15,19 @@ import Configuracoes from '../Pages/Configuracoes';
 import EsqueciMinhaSenha from '../Pages/EsqueciMinhaSenha';
 import Cod_EsqueciMinhaSenha from '../Pages/Cod_EsqueciMinhaSenha';
 import Red_EsqueciMinhaSenha from '../Pages/Red_EsqueciMinhaSenha';
+import CadastroDeCategoria from '../Pages/CadCategoria';
+import EditarUsuario from '../Pages/EditarUsuario';
+import EditarReceita from '../Pages/EditarReceita';
+import ReceitasDoUsuario from '../Pages/ReceitasDoUsuario';
+import AvaliacoesDoUsuario from '../Pages/AvaliacoesDoUsuario';
+import EditarAvaliacao from '../Pages/EditarAvaliacao';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faBookmark, faMagnifyingGlass, faUser, faPlus } from '@fortawesome/free-solid-svg-icons';
-import CadastroDeCategoria from '../Pages/CadCategoria';
 import { useRef, useEffect, useState } from 'react';
 import LottieView from 'lottie-react-native';
-
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -136,7 +139,7 @@ function HomeStack() {
 function CadastroDeReceitaStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen options={{ headerShown: false }} name="Settings" component={CadastroDeReceita} />
+            <Stack.Screen options={{ headerShown: false }} name="CadastroDeReceita" component={CadastroDeReceita} />
         </Stack.Navigator>
     );
 }
@@ -162,6 +165,11 @@ function PerfilStack() {
         <Stack.Navigator>
             <Stack.Screen options={{ headerShown: false }} name="Perfil" component={Perfil} />
             <Stack.Screen options={{ headerShown: false }} name="Configuracoes" component={Configuracoes} />
+            <Stack.Screen options={{ headerShown: false }} name="EditarUsuario" component={EditarUsuario} />
+            <Stack.Screen options={{ headerShown: false }} name="EditarReceita" component={EditarReceita} />
+            <Stack.Screen options={{ headerShown: false }} name="ReceitasDoUsuario" component={ReceitasDoUsuario} />
+            <Stack.Screen options={{ headerShown: false }} name="AvaliacoesDoUsuario" component={AvaliacoesDoUsuario} />
+            <Stack.Screen options={{ headerShown: false }} name="EditarAvaliacao" component={EditarAvaliacao} />
         </Stack.Navigator>
     );
 }

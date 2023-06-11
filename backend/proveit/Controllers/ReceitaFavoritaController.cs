@@ -12,22 +12,27 @@ namespace proveit.Controllers
     public class ReceitaFavoritaController : ControllerBase
     {
         [HttpGet]
-        [Route("{idUsuario}")]
-         public IActionResult ListarReceitasFavoritas([FromRoute] int idUsuario)
-         {
-            var receitas = new List<ReceitaGeralDTO>();
-            var ReceitaDAO = new ReceitaGeralDAO();
-            var receitasFavoritasDAO = new ReceitaFavoritaDAO();
-            var receitasFavoritas = receitasFavoritasDAO.ListarFavoritos(idUsuario);
+        [Route("usuario/{idUsuario}")]
+        public IActionResult ListarReceitasDoUsuario([FromRoute] int idUsuario)
+        {
+            var ReceitaFavoritaDAO = new ReceitaFavoritaDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaFavoritaDAO.ListarReceitasFavoritas(idUsuario);
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
 
-            foreach (var receitaId in receitasFavoritas)
+            foreach (var receita in receitas)
             {
-                var receita = ReceitaDAO.ListarReceitaUnica(receitaId);
-                receitas.Add(receita);
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
             }
 
-            return Ok(receitas);
-         }
+            return Ok(detalhesReceitas);
+        }
 
         [HttpPost]
         public IActionResult CadastrarReceitasFavoritas(ReceitaFavoritaDTO receitaFavorita)
@@ -39,6 +44,7 @@ namespace proveit.Controllers
         }
 
         [HttpDelete]
+        [Route("{id}")]
         public IActionResult RemoverFavoritos([FromRoute] int id)
         {
             var dao = new ReceitaFavoritaDAO();
