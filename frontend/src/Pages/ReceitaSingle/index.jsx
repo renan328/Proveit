@@ -67,25 +67,51 @@ export default function ReceitaSingle({ navigation }) {
     }
 
     const [saved, setSaved] = useState(false);
+    const [numCliques, setNumCliques] = useState(0);
     async function addSave() {
         const headers = await HeaderRequisicao(navigation);
-        setSaved(!saved);
 
-        if (saved !== true) {
-            const body = { usuario_id, receita_id };
+        if (numCliques < 10) {
+            setNumCliques(numCliques + 1);
 
-            fetch("https://localhost:7219/api/ReceitaFavorita", {
-                method: "POST",
-                headers,
-                body: JSON.stringify(body)
-            })
-                .then((response) => { alert("Receita favoritada com sucesso!"); })
+            if (!saved) {
+                const body = { usuario_id, receita_id };
+
+                fetch("https://localhost:7219/api/ReceitaFavorita", {
+                    method: "POST",
+                    headers,
+                    body: JSON.stringify(body)
+                })
+                    .then((response) => { alert("Receita favoritada com sucesso!"); })
+                    .catch((error) => {
+                        alert("Erro ao favoritar receita");
+                    });
+                console.log(body);
+
+            } else {
+
+                fetch("https://localhost:7219/api/ReceitaFavorita/" + receita_id + "/" + usuario_id, {
+                    method: "DELETE",
+                    headers,
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        alert("Favorito removido com sucesso!");
+                    }
+                    else {
+                        alert("Erro ao remover favorito");
+                    }
+                })
                 .catch((error) => {
-                    alert("Erro ao favoritar receita");
+                    alert("Erro ao remover favorito");
                 });
-            console.log(body);
+            }
+
+            setSaved(!saved);
+        } else {
+            alert('Número máximo de cliques atingido!');
         }
-    }
+    };
 
     function handleRatingChange(ratingValue) {
         setEstrelas(ratingValue)
@@ -124,7 +150,7 @@ export default function ReceitaSingle({ navigation }) {
                 </View>
                 <BlurView style={styles.mainHeader}>
                     <View style={styles.mainHeaderWhite}>
-                        <TouchableOpacity onPress={() => addSave()} style={styles.favButton} >
+                        <TouchableOpacity onPress={addSave} style={styles.favButton} >
                             <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={25} color={saved ? '#FF7152' : '#505050'} />
                         </TouchableOpacity>
                         <View style={styles.mainTexts}>

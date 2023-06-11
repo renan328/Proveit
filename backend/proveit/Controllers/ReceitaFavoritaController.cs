@@ -44,11 +44,11 @@ namespace proveit.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public IActionResult RemoverFavoritos([FromRoute] int id)
+        [Route("{idReceita}/{idUsuario}")]
+        public IActionResult RemoverFavoritos([FromRoute] int idReceita, int idUsuario)
         {
             var dao = new ReceitaFavoritaDAO();
-            dao.RemoverFavoritos(id);
+            dao.RemoverFavoritos(idReceita, idUsuario);
 
             return Ok();
         }

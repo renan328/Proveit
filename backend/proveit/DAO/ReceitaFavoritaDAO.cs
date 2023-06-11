@@ -54,15 +54,16 @@ namespace proveit.DTO
             conexao.Close();
         }
 
-        public void RemoverFavoritos(int id)
+        public void RemoverFavoritos(int idReceita, int idUsuario)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = @"DELETE FROM ReceitasFavoritas WHERE Receita_id = @id";
+            var query = @"DELETE FROM ReceitasFavoritas WHERE Receita_id = @idReceita AND Usuario_id = @idUsuario";
 
             var comando = new MySqlCommand(query, conexao);
-            comando.Parameters.AddWithValue("@id", id);
+            comando.Parameters.AddWithValue("@idReceita", idReceita);
+            comando.Parameters.AddWithValue("@idUsuario", idUsuario);
 
             comando.ExecuteNonQuery();
             conexao.Close();
