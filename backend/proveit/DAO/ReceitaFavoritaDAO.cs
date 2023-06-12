@@ -39,6 +39,36 @@ namespace proveit.DTO
             return receitas;
         }
 
+        public bool VerificaoFavorito(int idReceita)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = "SELECT Receita_id FROM ReceitasFavoritas WHERE Receita_id = @id;";
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", idReceita);
+            var dataReader = comando.ExecuteReader();
+
+            bool favorito = false;
+
+            while (dataReader.Read())
+            {
+                var id = int.Parse(dataReader["Receita_id"].ToString());
+
+                if (id == idReceita)
+                {
+                    favorito = true;
+                }
+                else if (id == 0 || id == null)
+                {
+                    favorito = false;
+                }
+            }
+
+            conexao.Close();
+            return favorito;
+        }
+
         public void CasastrarReceitasFavoritas(ReceitaFavoritaDTO receitaFavorita)
         {
             var conexao = ConnectionFactory.Build();

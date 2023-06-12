@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import Toast from 'react-native-toast-message';
-import CarrosselReceitas from '../../components/CartaoReceita/CarrosselReceitas';
+import CarrosselHome from '../../components/CartaoReceita/CarrosselReceitas';
 import CarrosselCategorias from '../../components/CartaoCategoria/CarrosselCategoria';
 import CartaoExplorar from '../../components/CarrosselExplorar/CartaoExplorar';
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
@@ -29,7 +29,7 @@ export default function Home({ navigation, props }) {
             <View style={{ display: 'flex', flexDirection: 'row', marginStart: 5, marginTop: 5, }}>{starsBox}</View>
         )
     }
-    
+
     const [username, setUsername] = useState();
 
     async function BuscarUsuario() {
@@ -78,8 +78,9 @@ export default function Home({ navigation, props }) {
                 <FontAwesomeIcon icon={faCircleExclamation} style={styles.listamentoIcon} size={25}></FontAwesomeIcon><Text style={styles.categoria}>O que há de <Text style={{ color: '#FF7152' }}>novo?</Text></Text>
             </View>
             <View>
-                <CarrosselReceitas />
+                <CarrosselHome filtro={"ORDER BY idReceita DESC"} />
             </View>
+
             <View style={styles.listamento}>
                 <FontAwesomeIcon icon={faCompass} style={styles.listamentoIcon} size={35}></FontAwesomeIcon><Text style={styles.categoriaBig}>Explore<Text style={{ color: '#FF7152' }}>!</Text></Text>
             </View>
@@ -136,19 +137,39 @@ export default function Home({ navigation, props }) {
             </View>
 
             <View style={styles.listamento}>
-                <FontAwesomeIcon icon={faSeedling} style={[styles.listamentoIcon, { color: '#66e660' }]} size={25}></FontAwesomeIcon><Text style={styles.categoria}>Receitas <Text style={{ color: '#FF7152' }}>reaproveitáveis</Text></Text>
+                <FontAwesomeIcon icon={faSeedling} style={[styles.listamentoIcon, { color: '#66e660' }]} size={25}></FontAwesomeIcon>
+                <Text style={styles.categoria}>Receitas <Text style={{ color: '#FF7152' }}>reaproveitáveis</Text></Text>
             </View>
+            <View>
+                <CarrosselHome filtro={"WHERE Aproveitamento = true"} />
+            </View>
+
             <View>
             </View>
             <View style={styles.listamento}>
-                <FontAwesomeIcon icon={faCannabis} style={styles.listamentoIcon} size={35}></FontAwesomeIcon><Text style={styles.categoriaBig}>Baixas <Text style={{ color: '#FF7152' }}>calorias</Text></Text>
+                <FontAwesomeIcon icon={faCannabis} style={styles.listamentoIcon} size={35}></FontAwesomeIcon>
+                <Text style={styles.categoriaBig}>Baixas <Text style={{ color: '#FF7152' }}>calorias</Text></Text>
             </View>
+            <View>
+                <CarrosselHome filtro={"ORDER BY ValCalorico ASC"} />
+            </View>
+
             <View style={styles.listamento}>
-                <FontAwesomeIcon icon={faClock} style={styles.listamentoIcon} size={25}></FontAwesomeIcon><Text style={styles.categoria}>Sem <Text style={{ color: '#FF7152' }}>tempo</Text> perdido</Text>
+                <FontAwesomeIcon icon={faClock} style={styles.listamentoIcon} size={25}></FontAwesomeIcon>
+                <Text style={styles.categoria}>Sem <Text style={{ color: '#FF7152' }}>tempo</Text> perdido</Text>
             </View>
+            <View>
+                <CarrosselHome filtro={"WHERE Categoria = 'Rapidas'"} />
+            </View>
+
             <View style={styles.listamento}>
-                <FontAwesomeIcon icon={faPeopleRoof} style={styles.listamentoIcon} size={25}></FontAwesomeIcon><Text style={styles.categoria}>Para a <Text style={{ color: '#FF7152' }}>família</Text> inteira</Text>
+                <FontAwesomeIcon icon={faPeopleRoof} style={styles.listamentoIcon} size={25}></FontAwesomeIcon>
+                <Text style={styles.categoria}>Para a <Text style={{ color: '#FF7152' }}>família</Text> inteira</Text>
             </View>
+            <View>
+                <CarrosselHome filtro={"WHERE Porcoes > 5"} />
+            </View>
+            
             <View
                 style={{
                     borderBottomColor: '#505050',

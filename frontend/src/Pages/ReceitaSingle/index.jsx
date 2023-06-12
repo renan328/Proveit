@@ -19,15 +19,22 @@ const screenHeight = Dimensions.get('window').height;
 
 export default function ReceitaSingle({ navigation }) {
 
+    // estilos
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
+    // id da receieta
     const route = useRoute();
     const { id } = route.params;
+    // avaliação
     const [estrelas, setEstrelas] = useState(5);
     const [comentario, setComentario] = useState('');
     const [usuario_id, setUsuario_id] = useState();
     const [receita_id, setReceita_id] = useState(id);
+    // receita
     const [dadosReceita, setDadosReceita] = useState([]);
+    // favorito
+    const [saved, setSaved] = useState(false);
+    const [numCliques, setNumCliques] = useState(0);
 
     async function BuscarReceita() {
         const headers = await HeaderRequisicao(navigation);
@@ -47,8 +54,29 @@ export default function ReceitaSingle({ navigation }) {
             });
     }
 
+    async function VerificarFavorito() {
+        const headers = await HeaderRequisicao(navigation);
+
+        fetch("https://localhost:7219/api/ReceitaFavorita/verificar/" + id, {
+            method: "GET",
+            headers
+        })
+            .then((response) => response.text())
+            .then((text) => {
+                if (text === "true") {
+                    setSaved(true);
+                } else {
+                    setSaved(false);
+                }
+            })
+            .catch((error) => {
+                alert("Erro ao verificar se é favorito");
+            });
+    }
+
     useEffect(() => {
         BuscarReceita();
+        VerificarFavorito();
     }, [])
 
     const stars = dadosReceita.mediaEstrelas;
@@ -66,8 +94,6 @@ export default function ReceitaSingle({ navigation }) {
         )
     }
 
-    const [saved, setSaved] = useState(false);
-    const [numCliques, setNumCliques] = useState(0);
     async function addSave() {
         const headers = await HeaderRequisicao(navigation);
 
@@ -94,17 +120,17 @@ export default function ReceitaSingle({ navigation }) {
                     method: "DELETE",
                     headers,
                 })
-                .then((response) => {
-                    if (response.ok) {
-                        alert("Favorito removido com sucesso!");
-                    }
-                    else {
+                    .then((response) => {
+                        if (response.ok) {
+                            alert("Favorito removido com sucesso!");
+                        }
+                        else {
+                            alert("Erro ao remover favorito");
+                        }
+                    })
+                    .catch((error) => {
                         alert("Erro ao remover favorito");
-                    }
-                })
-                .catch((error) => {
-                    alert("Erro ao remover favorito");
-                });
+                    });
             }
 
             setSaved(!saved);

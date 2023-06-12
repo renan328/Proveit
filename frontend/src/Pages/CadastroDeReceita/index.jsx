@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Appearance, useColorScheme } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, useColorScheme } from "react-native";
+import Checkbox from 'expo-checkbox';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCamera, faPlus, faTrashAlt, faTrashCan, faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
@@ -268,6 +269,12 @@ export default function CadastroDeReceita({ navigation, props }) {
 
                 <View style={styles.defaultInput}>
                     <View style={styles.checkboxContainer}>
+                        <Checkbox
+                            style={styles.checkbox}
+                            value={aproveitamento}
+                            onValueChange={setAproveitamento}
+                            color={aproveitamento ? '#FF7152' : undefined}
+                        />
                         <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
                     </View>
                 </View>

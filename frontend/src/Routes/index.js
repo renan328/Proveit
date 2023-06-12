@@ -1,4 +1,4 @@
-import { View, StyleSheet, Appearance, useColorScheme, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Appearance, useColorScheme, TouchableOpacity, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
 import { TransitionSpecs } from '@react-navigation/stack';
@@ -21,6 +21,7 @@ import EditarReceita from '../Pages/EditarReceita';
 import ReceitasDoUsuario from '../Pages/ReceitasDoUsuario';
 import AvaliacoesDoUsuario from '../Pages/AvaliacoesDoUsuario';
 import EditarAvaliacao from '../Pages/EditarAvaliacao';
+import Historico from '../Pages/Historico';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -67,11 +68,11 @@ function MainTabNavigator() {
             }
         }}>
 
-            <Tab.Screen name="Home" onPress={()=>(!save)} component={HomeStack} options={{
+            <Tab.Screen name="Home" onPress={() => (!save)} component={HomeStack} options={{
                 tabBarIcon: ({ focused }) => (
                     <FontAwesomeIcon icon={faHome} size={22} color={focused ? '#FF7152' : '#808080'} />
-                ), 
-                  headerShown: false,
+                ),
+                headerShown: false,
             }}
             />
 
@@ -111,7 +112,7 @@ function MainTabNavigator() {
 
         </Tab.Navigator>
     );
-}
+};
 
 //Stack screen do login
 function LoginStackScreen() {

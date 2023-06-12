@@ -6,7 +6,7 @@ import CartaoReceitaBlank from './CartaoReceitaBlank';
 import { HeaderRequisicao } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
 
-export default function CarrosselHome() {
+export default function CarrosselHome({ filtro }) {
 
     const [dadosReceita, setDadosReceita] = useState([]);
     const navigation = useNavigation();
@@ -14,7 +14,7 @@ export default function CarrosselHome() {
     async function ListarReceitas() {
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://localhost:7219/api/receita/home", {
+        fetch("https://localhost:7219/api/receita/filtro/" + filtro, {
             method: "GET",
             headers
         })

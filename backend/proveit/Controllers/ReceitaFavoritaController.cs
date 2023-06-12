@@ -34,6 +34,17 @@ namespace proveit.Controllers
             return Ok(detalhesReceitas);
         }
 
+
+        [HttpGet]
+        [Route("verificar/{idReceita}")]
+        public IActionResult CadastrarReceitasFavoritas(int idReceita)
+        {
+            var dao = new ReceitaFavoritaDAO();
+            var favorito = dao.VerificaoFavorito(idReceita);
+
+            return Ok(favorito);
+        }
+
         [HttpPost]
         public IActionResult CadastrarReceitasFavoritas(ReceitaFavoritaDTO receitaFavorita)
         {

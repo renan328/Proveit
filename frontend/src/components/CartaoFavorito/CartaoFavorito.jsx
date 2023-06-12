@@ -6,9 +6,14 @@ import { faStar, faBookmark, faClock } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { BlurView } from "expo-blur";
 
-export default function CartaoReceita({ }) {
+export default function CartaoReceita({ dadosReceita }) {
+    const navigation = useNavigation();
 
-    const stars = 5;
+    const handleCardPress = (id) => {
+        navigation.navigate('ReceitaSingle', { id: dadosReceita?.receita.idReceita });
+    };
+
+    const stars = dadosReceita.mediaEstrelas;
     function StarCounter() {
         const starsBox = [];
         for (let index = 0; index < stars; index++) {
@@ -27,8 +32,8 @@ export default function CartaoReceita({ }) {
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     return (
-        <TouchableOpacity key={1}>
-            <ImageBackground source={require('../../assets/cat_frutosDoMar.jpg')} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
+        <TouchableOpacity onPress={handleCardPress}>
+            <ImageBackground source={{ uri: dadosReceita?.receita.foto }} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
                     <TouchableOpacity>
@@ -40,14 +45,13 @@ export default function CartaoReceita({ }) {
 
                 <View style={styles.containerTexto} >
                     <View style={styles.containerTextoWhite}>
-                            {StarCounter()}
-                        <Text style={styles.titulo}>Fruto do mar</Text>
+                        {StarCounter()}
+                        <Text style={styles.titulo}>{dadosReceita?.receita.nomeReceita}</Text>
                     </View>
                 </View>
 
             </ImageBackground>
         </TouchableOpacity >
-
     )
 }
 
@@ -173,7 +177,7 @@ const stylesDark = StyleSheet.create({
         color: '#fff',
 
     },
-    
+
     containerTexto: {
         width: '100%',
         height: 78,
