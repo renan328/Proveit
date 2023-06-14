@@ -58,9 +58,22 @@ namespace proveit.Controllers
         public IActionResult CadastrarUsuario(UsuarioDTO usuario)
         {
             var dao = new UsuarioDAO();
+
+            if (dao.VerificarEmailExistente(usuario.Email))
+            {
+                return Conflict("Este e-mail já está vinculado a uma conta.");
+            }
+
+            if (dao.VerificarNomeTagExistente(usuario.NomeTag))
+            {
+                return Conflict("Este nome de usuário já está em uso.");
+            }
+
             dao.CadastrarUsuario(usuario);
 
-            return Ok();
+            return Ok("Usuário cadastrado com sucesso.");
         }
+
+
     }
 }

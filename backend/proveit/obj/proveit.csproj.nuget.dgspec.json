@@ -44,13 +44,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNet.WebApi.Core": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.16, )"
             },
             "MySql.Data": {
               "target": "Package",
-              "version": "[8.0.32.1, )"
+              "version": "[8.0.33, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -59,6 +63,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"
+            },
+            "System.ServiceModel.Http": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "System.ServiceModel.Primitives": {
               "target": "Package",

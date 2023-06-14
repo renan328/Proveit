@@ -19,7 +19,7 @@ export default function Favoritos() {
         const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://localhost:7219/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
+        fetch("https://cloudproveit.azurewebsites.net/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })

@@ -30,7 +30,7 @@ export default function Historico() {
                 const filtro = `WHERE idReceita IN (${historicoReceitas.join(',')})`;
 
                 // Faz a solicitação à API usando o filtro
-                fetch(`https://localhost:7219/api/receita/filtro/${filtro}`, {
+                fetch(`https://cloudproveit.azurewebsites.net/api/receita/filtro/${filtro}`, {
                     method: 'GET',
                     headers
                 })

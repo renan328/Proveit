@@ -32,7 +32,7 @@ export default function Pesquisar() {
 
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://localhost:7219/api/Receita/pesquisa/" + textoPesquisa, {
+        fetch("https://cloudproveit.azurewebsites.net/api/Receita/pesquisa/" + textoPesquisa, {
             method: "GET",
             headers
         })

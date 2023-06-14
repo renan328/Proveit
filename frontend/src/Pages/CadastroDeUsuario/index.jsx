@@ -9,8 +9,8 @@ import styles from './cadastrodeusuario.module';
 export default function CadastroDeUsuario({ navigation }) {
 
     const [nome, setNome] = useState('');
-    const [nomeTag, setNomeTag] = useState('');
-    const [email, setEmail] = useState('');
+    const [nomeTagLower, setNomeTagLower] = useState('');
+    const [emailLower, setEmailLower] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmSenha, setConfirmSenha] = useState('');
     const [foto, setFoto] = useState(null);
@@ -36,26 +36,28 @@ export default function CadastroDeUsuario({ navigation }) {
         if (!nome.trim()) {
             errors.nome = "Nome é obrigatório";
         }
-        if (!nomeTag.trim()) {
+        if (!nomeTagLower.trim()) {
             errors.nomeTag = "Nome de usuário é obrigatório";
         }
-        if (!email.trim()) {
+        if (!emailLower.trim()) {
             errors.email = "Email é obrigatório";
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
+        } else if (!/\S+@\S+\.\S+/.test(emailLower)) {
             errors.email = "Email inválido";
         }
-        if (!senha) {
+        if (isNaN(String(senha).trim())) {
             errors.senha = "Senha é obrigatória";
         } else if (senha.length < 6) {
             errors.senha = "Senha deve ter pelo menos 6 caracteres";
         }
-        if (!confirmSenha) {
+        if (isNaN(String(confirmSenha).trim())) {
             errors.confirmSenha = "Confirmação de senha é obrigatória";
         } else if (confirmSenha !== senha) {
             errors.confirmSenha = "As senhas não coincidem";
         }
         setErrors(errors);
 
+        const nomeTag = nomeTagLower.toLowerCase();
+        const email = emailLower.toLowerCase();
         const body = { nome, foto, nomeTag, email, senha };
 
         if (Object.keys(errors).length > 0) {
@@ -68,10 +70,26 @@ export default function CadastroDeUsuario({ navigation }) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         })
-            .then((response) => { alert("Usuário cadastrado com sucesso!"); navigation.navigate('Main') })
+            .then((response) => {
+                if (response.ok) {
+                    alert("Usuário cadastrado com sucesso!");
+                    navigation.navigate('Login');
+                } else if (response.status === 409) {
+                    response.text().then((message) => {
+                        if (message.includes("email")) {
+                            errors.email = message;
+                        } else if (message.includes("nome de usuário")) {
+                            errors.nomeTag = message;
+                        } else {
+                            alert(message);
+                        }
+                    });
+                } else {
+                    alert("Erro desconhecido ao cadastrar o usuário.");
+                }
+            })
             .catch((error) => {
                 console.log(error);
-                showFailToast;
             });
 
         console.log(body);
@@ -126,8 +144,8 @@ export default function CadastroDeUsuario({ navigation }) {
                         <TextInput
                             style={[styles.defaultInput, errors.nomeTag && styles.inputError]}
                             placeholder="Nome de usuário"
-                            value={nomeTag}
-                            onChangeText={(text) => setNomeTag(text)}
+                            value={nomeTagLower}
+                            onChangeText={(text) => setNomeTagLower(text)}
                         />
                         {errors.nomeTag && <Text style={styles.textError}>{errors.nomeTag}</Text>}
                     </View>
@@ -137,8 +155,8 @@ export default function CadastroDeUsuario({ navigation }) {
                         <TextInput
                             style={[styles.defaultInput, errors.email && styles.inputError]}
                             placeholder="E-mail"
-                            value={email}
-                            onChangeText={(text) => setEmail(text)}
+                            value={emailLower}
+                            onChangeText={(text) => setEmailLower(text)}
                             keyboardType="email-address"
                             autoCapitalize="none"
                             autoCorrect={false}
