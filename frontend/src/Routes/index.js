@@ -24,16 +24,16 @@ import EditarAvaliacao from '../Pages/EditarAvaliacao';
 import Historico from '../Pages/Historico';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHome, faBookmark, faMagnifyingGlass, faUser, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faBookmark, faMagnifyingGlass, faUser, faPlus, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { useRef, useEffect, useState } from 'react';
 import LottieView from 'lottie-react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
-
+        
 // Tab navigator principal, a com todas as stacks screens
 function MainTabNavigator() {
 
@@ -156,7 +156,8 @@ function PesquisaStack() {
 function FavoritosStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen options={{ headerShown: false }} name="Settings" component={Favoritos} />
+            <Stack.Screen options={{ headerShown: false }} name="Favoritos" component={Favoritos} />
+            <Stack.Screen options={{ headerShown: false }} name="Historico" component={Historico} />
         </Stack.Navigator>
     );
 }

@@ -15,7 +15,7 @@ export default function CarrosselCategorias() {
     async function ListarCategorias() {
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/categoria/todas", {
+        fetch("https://localhost:7219/api/categoria/todas", {
             method: "GET",
             headers
         })

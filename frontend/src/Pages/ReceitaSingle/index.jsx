@@ -14,6 +14,7 @@ import stylesLight from './receitasingle.module';
 import { BlurView } from 'expo-blur';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from "../../AuthContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -72,12 +73,35 @@ export default function ReceitaSingle({ navigation }) {
             .catch((error) => {
                 alert("Erro ao verificar se é favorito");
             });
+    };
+
+    async function AdicionarIdReceitaAoHistorico(idReceita) {
+        try {
+            const historicoAntigo = await AsyncStorage.getItem('historicoReceitas') ?? '';
+
+            let novoHistorico = [];
+            try {
+                novoHistorico = JSON.parse(historicoAntigo);
+            } catch (error) {
+                console.log('Erro ao fazer o parse do histórico antigo:', error);
+            }
+
+            if (!novoHistorico.includes(idReceita)) {
+                novoHistorico.push(idReceita);
+                alert("salvo no histórico!!")
+            }
+
+            await AsyncStorage.setItem('historicoReceitas', JSON.stringify(novoHistorico));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
         BuscarReceita();
         VerificarFavorito();
-    }, [])
+        AdicionarIdReceitaAoHistorico(receita_id);
+    }, []);
 
     const stars = dadosReceita.mediaEstrelas;
     function StarCounter() {
@@ -92,51 +116,52 @@ export default function ReceitaSingle({ navigation }) {
         return (
             <View style={{ display: 'flex', flexDirection: 'row', marginLeft: 5, }}>{starsBox}</View>
         )
-    }
+    };
 
     async function addSave() {
         const headers = await HeaderRequisicao(navigation);
 
-        if (numCliques < 10) {
-            setNumCliques(numCliques + 1);
-
-            if (!saved) {
-                const body = { usuario_id, receita_id };
-
-                fetch("https://localhost:7219/api/ReceitaFavorita", {
-                    method: "POST",
-                    headers,
-                    body: JSON.stringify(body)
-                })
-                    .then((response) => { alert("Receita favoritada com sucesso!"); })
-                    .catch((error) => {
-                        alert("Erro ao favoritar receita");
-                    });
-                console.log(body);
-
-            } else {
-
-                fetch("https://localhost:7219/api/ReceitaFavorita/" + receita_id + "/" + usuario_id, {
-                    method: "DELETE",
-                    headers,
-                })
-                    .then((response) => {
-                        if (response.ok) {
-                            alert("Favorito removido com sucesso!");
-                        }
-                        else {
-                            alert("Erro ao remover favorito");
-                        }
-                    })
-                    .catch((error) => {
-                        alert("Erro ao remover favorito");
-                    });
-            }
-
-            setSaved(!saved);
-        } else {
+        if (numCliques > 10) {
             alert('Número máximo de cliques atingido!');
+            return;
         }
+
+        setNumCliques(numCliques + 1);
+
+        if (!saved) {
+            const body = { usuario_id, receita_id };
+
+            fetch("https://localhost:7219/api/ReceitaFavorita", {
+                method: "POST",
+                headers,
+                body: JSON.stringify(body)
+            })
+                .then((response) => { alert("Receita favoritada com sucesso!"); })
+                .catch((error) => {
+                    alert("Erro ao favoritar receita");
+                });
+            console.log(body);
+
+        } else {
+
+            fetch("https://localhost:7219/api/ReceitaFavorita/" + receita_id + "/" + usuario_id, {
+                method: "DELETE",
+                headers,
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        alert("Favorito removido com sucesso!");
+                    }
+                    else {
+                        alert("Erro ao remover favorito");
+                    }
+                })
+                .catch((error) => {
+                    alert("Erro ao remover favorito");
+                });
+        }
+
+        setSaved(!saved);
     };
 
     function handleRatingChange(ratingValue) {

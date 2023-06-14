@@ -1,36 +1,53 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, button, useColorScheme, Appearance, TouchableOpacity } from "react-native";
-// import stylesLight from "./favoritos.module";
-// import stylesDark from "./favoritos.moduleDark";
+import stylesLight from "./historico.module";
+import stylesDark from "./historico.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
-import CartaoReceita from "../../components/CartaoReceita/CartaoReceita";
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Historico() {
     const navigation = useNavigation();
 
-    const [dadosReceita, setDadosReceita] = useState([]);
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
+    const [dadosReceita, setDadosReceita] = useState([]);
+
     async function BuscarReceitas() {
-        const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://localhost:7219/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
-            method: "GET",
-            headers
-        })
-            .then((response) => response.json())
-            .then((json) => {
-                setDadosReceita(json);
-            })
-            .catch((error) => {
-                showToast('Foi mal!', 'Erro ao buscar suas receitas, tente novamente mais tarde.', 'error');
-            });
-    }
+        try {
+            // Obtenhe o histórico do AsyncStorage
+            const historico = await AsyncStorage.getItem('historicoReceitas');
+
+            if (historico !== null) {
+                const historicoReceitas = JSON.parse(historico);
+
+                // Constrói a string do filtro
+                const filtro = `WHERE idReceita IN (${historicoReceitas.join(',')})`;
+
+                // Faz a solicitação à API usando o filtro
+                fetch(`https://localhost:7219/api/receita/filtro/${filtro}`, {
+                    method: 'GET',
+                    headers
+                })
+                    .then(response => response.json())
+                    .then(json => {
+                        setDadosReceita(json);
+                    })
+                    .catch(error => {
+                        alert('Erro ao buscar receita');
+                    });
+                    
+            }
+        } catch (error) {
+            console.log(error);
+            showToast('Foi mal!', 'Erro ao buscar receitas, tente novamente mais tarde.', 'error');
+        }
+    };
 
     useEffect(() => {
         BuscarReceitas();
@@ -48,12 +65,12 @@ export default function Historico() {
                 <TouchableOpacity>
                     <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Favoritos</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.SubHeader}>
-                <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Favoritos</Text>
+                <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Visto recentemente</Text>
             </View>
             <View style={styles.CardsList}>
                 {

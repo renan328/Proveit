@@ -6,9 +6,10 @@ import stylesDark from './configuracoes.moduleDark';
 import stylesLight from './configuracoes.module';
 import { useRef, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faChevronLeft, faUser, faRightFromBracket, faQuestionCircle, faPencil, faStar, faScroll } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faUser, faRightFromBracket, faQuestionCircle, faPencil, faStar, faScroll, faBroom } from '@fortawesome/free-solid-svg-icons';
 import '../../AuthContext';
 import { Logout } from "../../AuthContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Configuracoes({ navigation }) {
 
@@ -19,9 +20,14 @@ export default function Configuracoes({ navigation }) {
     const scheme = useColorScheme();
     var styles = scheme === 'dark' ? stylesDark : stylesLight;
 
-    async function SairDaConta(){
+    async function SairDaConta() {
         await Logout();
         navigation.navigate('Login');
+    }
+
+    async function LimparHistorico() {
+        await AsyncStorage.removeItem("historicoReceitas");
+        alert("Limpo com sucesso")
     }
 
     useEffect(() => {
@@ -84,6 +90,12 @@ export default function Configuracoes({ navigation }) {
                 <TouchableOpacity style={styles.containerOpcoes} onPress={() => navigation.navigate('AvaliacoesDoUsuario')}>
                     <Text style={styles.textOpcoes}>Editar avaliaões</Text>
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faStar} size={25} color="#606060" />
+                </TouchableOpacity>
+
+
+                <TouchableOpacity style={styles.containerOpcoes} onPress={LimparHistorico}>
+                    <Text style={styles.textOpcoes}>Limpar histórico</Text>
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faBroom} size={25} color="#606060" />
                 </TouchableOpacity>
 
 

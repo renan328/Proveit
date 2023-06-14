@@ -45,7 +45,7 @@ export default function Favoritos() {
                 </View>
             </View>
             <View style={styles.ScreenSelect}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Historico')}>
                     <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>

@@ -1,67 +1,59 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView, Image, useColorScheme, Appearance } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, useColorScheme, TouchableOpacity } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import LottieView from 'lottie-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import stylesLight from "./pesquisa.module";
 import stylesDark from "./pesquisa.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
+import { HeaderRequisicao } from '../../AuthContext';
 
 export default function Pesquisar() {
 
-    function searchEngine() {
-        if (results == 1) {
-            return (
-                <View style={styles.cardList}>
-                    <CartaoFavorito />
-                    <CartaoFavorito />
-                    <CartaoFavorito />
-                    <CartaoFavorito />
-                    <CartaoFavorito />
-                    <CartaoFavorito />
-                    <View
-                        style={{
-                            borderBottomColor: '#505050',
-                            opacity: 0.4,
-                            borderBottomWidth: StyleSheet.hairlineWidth,
-                            width: 330, height: 5,
-                            marginTop: 15,
-                            alignSelf: 'center',
-                            marginBottom: 20
+    const [dadosReceita, setDadosReceita] = useState([]);
+    const [textoPesquisa, setTextoPesquisa] = useState('');
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
-                        }} />
-                    <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <Text style={{ color: '#50505060', fontFamily: 'Raleway_500Medium' }}>Por enquanto é só!</Text>
-                        <Image
-                            style={{ width: 52, height: 46, top: 15, marginBottom: 100 }}
-                            source={require('../../assets/proveitGrey.png')}
-                        />
-                    </View>
-                </View>)
-        } else {
-            return (
-                <View style={styles.cardList}>
+    async function Pesquisar() {
+        const errors = {};
+        setLoading(true);
 
-                    <LottieView
-                        source={require('../../assets/lottie/search.json')} // Caminho para o arquivo JSON do Lottie
-                        autoPlay
-                        loop
-                        style={{ height: 150, alignSelf: 'center' }}
-                    />
-                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050' , fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
-                </View>
-            )
+        if (!textoPesquisa.trim()) {
+            errors.textoPesquisa = "Preencha o campo corretamente"
         }
+        setErrors(errors);
+
+        if (Object.keys(errors).length > 0) {
+            setLoading(false); // Define o estado de carregamento como falso
+            return;
+        }
+
+        const headers = await HeaderRequisicao(navigation);
+
+        fetch("https://localhost:7219/api/Receita/pesquisa/" + textoPesquisa, {
+            method: "GET",
+            headers
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setDadosReceita(json);
+                setLoading(false); // Define o estado de carregamento como falso
+            })
+            .catch((error) => {
+                showToast('Foi mal!', 'Erro ao buscar receitas, tente novamente mais tarde.', 'error');
+                setLoading(false); // Define o estado de carregamento como falso em caso de erro
+            });
     }
 
-    const results = 0;
-    const footerText = '1';
 
     const scheme = useColorScheme()
     const styles = scheme === 'dark' ? stylesDark : stylesLight
 
-    if (results == '') {
-        const footerText = 'Não encontramos nada, foi mal!';
+    let inputStyle = [styles.input];
+    if (scheme === 'dark') {
+        inputStyle.push(styles.inputDark);
     }
 
     return (
@@ -70,11 +62,18 @@ export default function Pesquisar() {
                 <View style={styles.textContainer}>
                     <Text style={styles.subText}>Buscar</Text>
                     <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder='Qual é a sua fome?'></TextInput>
+                        <TextInput
+                            style={[styles.input, errors.textoPesquisa && styles.inputError]}
+                            placeholder='Qual é a sua fome?'
+                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                            value={textoPesquisa}
+                            onChangeText={(texto) => setTextoPesquisa(texto)}
+                        />
                         <FontAwesomeIcon icon={faMagnifyingGlass} style={{
                             color: '#505050'
                         }} size={20} />
                     </View>
+                    {errors.textoPesquisa && <Text style={styles.textError}>{errors.textoPesquisa}</Text>}
                     <View
                         style={{
                             borderBottomColor: '#505050',
@@ -86,9 +85,28 @@ export default function Pesquisar() {
                     />
                 </View>
             </View>
-
-            {searchEngine()}
-
+            <View style={styles.botoes}>
+                <TouchableOpacity onPress={Pesquisar} >
+                    <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
+                        end={{ x: 2, y: 2 }} style={styles.button} >
+                        <Text style={styles.buttonText}>Pesquisar</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
+            </View>
+            {loading ? (
+                <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>) : (
+                <>
+                    {dadosReceita.length > 0 ? (
+                        <>
+                            <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Resultados:</Text>
+                            {dadosReceita.map((receita, index) => (
+                                <CartaoFavorito dadosReceita={receita} key={index} />
+                            ))}
+                        </>
+                    ) : null}
+                </>
+            )}
+            {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Nenhum resultado encontrado.</Text>}
         </ScrollView>
 
     );

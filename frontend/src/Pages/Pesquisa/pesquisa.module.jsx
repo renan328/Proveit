@@ -74,6 +74,45 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_600SemiBold',
         color: 'rgba(0,0,0,0.4)',
         fontSize: 15
+    },
+
+    button: {
+        display: 'flex',
+        marginBottom: 50,
+        marginTop: 30,
+        width: 200,
+        backgroundColor: 'orange',
+        color: '#FFF',
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        padding: 15,
+        alignSelf: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+    },
+
+    buttonText: {
+        textAlign: 'center',
+        color: '#FFF',
+        fontFamily: 'Raleway_700Bold',
+    },
+
+    inputError: {
+        borderWidth: 1,
+        borderColor: '#ff375b'
+    },
+
+    textError: {
+        alignSelf: 'center',
+        color: '#ff375b',
+        marginBottom: 8
     }
 });
 

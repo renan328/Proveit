@@ -259,15 +259,13 @@ namespace proveit.DAO
             return receitas;
         }
 
-        public List<ReceitaGeralDTO> Pesquisar(string nomeReceita, string ingrediente)
+        public List<ReceitaGeralDTO> Pesquisar(string palavra)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT idReceita, R.Nome, R.Foto, I.Nome FROM Receitas R INNER JOIN Ingredientes_Receita I ON R.IdReceita = I.Receita_id WHERE R.Nome like '%@nomeReceita%' OR I.Nome LIKE '%@ingrediente%';";
+            var query = $"SELECT idReceita, R.Nome AS NomeReceita, R.Foto, I.Nome FROM Receitas R INNER JOIN Ingredientes_Receita I ON R.IdReceita = I.Receita_id WHERE R.Nome like '%{palavra}%' OR I.Nome LIKE '%{palavra}%';";
             var comando = new MySqlCommand(query, conexao);
-            comando.Parameters.AddWithValue("@nomeReceita", nomeReceita);
-            comando.Parameters.AddWithValue("@ingrediente", ingrediente);
             var dataReader = comando.ExecuteReader();
             var receitas = new List<ReceitaGeralDTO>();
 
@@ -532,4 +530,3 @@ namespace proveit.DAO
 
     }
 }
-

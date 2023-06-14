@@ -8,7 +8,7 @@ namespace proveit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    // [Authorize]
     public class ReceitaController : ControllerBase
     {
         [HttpGet]
@@ -123,12 +123,12 @@ namespace proveit.Controllers
         }
 
         [HttpGet]
-        [Route("pesquisa")]
-        public IActionResult Pesquisar(string nomeReceita, string ingrediente)
+        [Route("pesquisa/{palavra}")]
+        public IActionResult Pesquisar([FromRoute] string palavra)
         {
             var ReceitaDAO = new ReceitaGeralDAO();
             var AvaliacaoDAO = new AvaliacaoDAO();
-            var receitas = ReceitaDAO.Pesquisar(nomeReceita, ingrediente);
+            var receitas = ReceitaDAO.Pesquisar(palavra);
             var detalhesReceitas = new List<DetalhesReceitaDTO>();
 
             foreach (var receita in receitas)
