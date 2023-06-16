@@ -6,18 +6,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import stylesLight from './esqueciminhasenha.module';
 import stylesDark from './esqueciminhasenha.moduleDark';
+import headerBG4v2 from '../../assets/headerBG4v2.jpg';
+import headerBG2 from '../../assets/headerBG2.png';
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function EsqueciMinhaSenha({ navigation }) {
 
+
     const scheme = useColorScheme();
+    const backgroundImage = scheme === 'dark' ? headerBG2 : headerBG4v2;
     var styles = scheme === 'dark' ? stylesDark : stylesLight;
-    
+
     return (
         <View style={{ maxHeight: screenHeight }}>
             <View style={styles.imageContainer}>
-                <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}>
+                <ImageBackground source={backgroundImage} style={{ height: screenHeight * 0.6 }}>
                     <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
                         <FontAwesomeIcon
                             style={styles.arrowleft}

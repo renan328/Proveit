@@ -1,12 +1,28 @@
 import React, { Component, useState, useRef } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Appearance, useColorScheme, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import styles from './cod_esqueciminhasenha.module';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import stylesLight from './cod_esqueciminhasenha.module';
+import stylesDark from './cod_esqueciminhasenha.moduleDark';
+import headerBG4v2 from '../../assets/headerBG4v2.jpg';
+import headerBG2 from '../../assets/headerBG2.png';
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function Cod_EsqueciMinhaSenha({ navigation }) {
+
+ /* Tema escuro */
+    const scheme = useColorScheme();
+    const backgroundImage = scheme === 'dark' ? headerBG2 : headerBG4v2;
+    var styles = scheme === 'dark' ? stylesDark : stylesLight;
+
+/* Função para verificar se os 4 inputs estão preenchidos */
+    const checkInputsFilled = () => {
+        if (code[0] && code[1] && code[2] && code[3]) {
+            navigation.navigate('Red_EsqueciMinhaSenha');
+        }
+    };
 
     const [code, setCode] = useState(['', '', '', '']);
     const input1 = useRef(null);
@@ -58,7 +74,7 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
     return (
         <View style={{ maxHeight: screenHeight }}>
             <View style={styles.imageContainer}>
-                <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}>
+                <ImageBackground source={backgroundImage} style={{ height: screenHeight * 0.6 }}>
                     <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
                         <FontAwesomeIcon
                             style={styles.arrowleft}
@@ -95,7 +111,7 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                                     keyboardType="numeric"
                                     maxLength={1}
                                     value={code[0]}
-                                    onChangeText={(value) => handleCodeChange(0, value, setCode)}
+                                    onChangeText={(value) => handleCodeChange(0, value, setCode, checkInputsFilled())}
                                     ref={input1}
                                 />
 
@@ -104,7 +120,7 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                                     keyboardType="numeric"
                                     maxLength={1}
                                     value={code[1]}
-                                    onChangeText={(value) => handleCodeChange(1, value, setCode)}
+                                    onChangeText={(value) => handleCodeChange(1, value, setCode, checkInputsFilled())}
                                     ref={input2}
                                 />
 
@@ -113,7 +129,7 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                                     keyboardType="numeric"
                                     maxLength={1}
                                     value={code[2]}
-                                    onChangeText={(value) => handleCodeChange(2, value, setCode)}
+                                    onChangeText={(value) => handleCodeChange(2, value, setCode, checkInputsFilled())}
                                     ref={input3}
                                 />
 
@@ -122,7 +138,7 @@ export default function Cod_EsqueciMinhaSenha({ navigation }) {
                                     keyboardType="numeric"
                                     maxLength={1}
                                     value={code[3]}
-                                    onChangeText={(value) => handleCodeChange(3, value, setCode)}
+                                    onChangeText={(value) => handleCodeChange(3, value, setCode, checkInputsFilled())}
                                     ref={input4}
                                 />
                             </View>

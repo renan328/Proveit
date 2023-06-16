@@ -42,7 +42,7 @@ export default function App(props) {
 
   return (
     <MenuProvider>
-      <Routes />
+      <Routes/>
       <StatusBar hidden={true} />
       <Toast />
     </MenuProvider>

@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Appearance, useColorScheme, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import styles from './red_esqueciminhasenha.module';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import stylesLight from './red_esqueciminhasenha.module';
+import stylesDark from './red_esqueciminhasenha.moduleDark';
+import headerBG4v2 from '../../assets/headerBG4v2.jpg';
+import headerBG2 from '../../assets/headerBG2.png';
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function Red_EsqueciMinhaSenha({ navigation }) {
+
+    const scheme = useColorScheme();
+    const backgroundImage = scheme === 'dark' ? headerBG2 : headerBG4v2;
+    var styles = scheme === 'dark' ? stylesDark : stylesLight;
+
     return (
         <View style={{ maxHeight: screenHeight }}>
             <View style={styles.imageContainer}>
-                <ImageBackground source={require('../../assets/headerBG4v2.jpg')} style={{ height: screenHeight * 0.6 }}>
+                <ImageBackground source={backgroundImage} style={{ height: screenHeight * 0.6 }}>
                     <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
                         <FontAwesomeIcon
                             style={styles.arrowleft}

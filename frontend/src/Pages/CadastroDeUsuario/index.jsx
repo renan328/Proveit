@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, Appearance, useColorScheme, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCamera, faCircleCheck, faCircleXmark, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import * as ImagePicker from 'expo-image-picker';
-import styles from './cadastrodeusuario.module';
+import stylesLight from './cadastrodeusuario.module';
+import stylesDark from './cadastrodeusuario.moduleDark';
 
 export default function CadastroDeUsuario({ navigation }) {
+
+
+    const scheme = useColorScheme();
+    var styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     const [nome, setNome] = useState('');
     const [nomeTagLower, setNomeTagLower] = useState('');
