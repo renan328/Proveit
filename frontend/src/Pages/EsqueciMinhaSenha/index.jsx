@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, StatusBar, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TextInput, Appearance, useColorScheme, StatusBar, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import styles from './esqueciminhasenha.module';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import stylesLight from './esqueciminhasenha.module';
+import stylesDark from './esqueciminhasenha.moduleDark';
 
 const screenHeight = Dimensions.get('window').height;
 
 export default function EsqueciMinhaSenha({ navigation }) {
+
+    const scheme = useColorScheme();
+    var styles = scheme === 'dark' ? stylesDark : stylesLight;
+    
     return (
         <View style={{ maxHeight: screenHeight }}>
             <View style={styles.imageContainer}>
@@ -15,7 +21,7 @@ export default function EsqueciMinhaSenha({ navigation }) {
                     <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
                         <FontAwesomeIcon
                             style={styles.arrowleft}
-                            color={'#fff'}
+                            color={'rgba(255,255,255,0.8)'}
                             size={30}
                             icon={faChevronLeft}
                         />
