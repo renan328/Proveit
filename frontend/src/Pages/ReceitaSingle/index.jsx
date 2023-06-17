@@ -42,7 +42,7 @@ export default function ReceitaSingle({ navigation }) {
         const userDataJWT = await DadosUsuario();
         setUsuario_id(userDataJWT.ID);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita/" + id, {
+        fetch("https://localhost:7219/api/receita/" + id, {
             method: "GET",
             headers
         })
@@ -58,7 +58,7 @@ export default function ReceitaSingle({ navigation }) {
     async function VerificarFavorito() {
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/ReceitaFavorita/verificar/" + id, {
+        fetch("https://localhost:7219/api/ReceitaFavorita/verificar/" + id, {
             method: "GET",
             headers
         })
@@ -131,7 +131,7 @@ export default function ReceitaSingle({ navigation }) {
         if (!saved) {
             const body = { usuario_id, receita_id };
 
-            fetch("https://cloudproveit.azurewebsites.net/api/ReceitaFavorita", {
+            fetch("https://localhost:7219/api/ReceitaFavorita", {
                 method: "POST",
                 headers,
                 body: JSON.stringify(body)
@@ -144,7 +144,7 @@ export default function ReceitaSingle({ navigation }) {
 
         } else {
 
-            fetch("https://cloudproveit.azurewebsites.net/api/ReceitaFavorita/" + receita_id + "/" + usuario_id, {
+            fetch("https://localhost:7219/api/ReceitaFavorita/" + receita_id + "/" + usuario_id, {
                 method: "DELETE",
                 headers,
             })
@@ -171,7 +171,7 @@ export default function ReceitaSingle({ navigation }) {
     function handleAssessment() {
         const body = { estrelas, comentario, usuario_id, receita_id };
 
-        fetch("https://cloudproveit.azurewebsites.net/api/avaliacao", {
+        fetch("https://localhost:7219/api/avaliacao", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)

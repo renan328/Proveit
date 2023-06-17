@@ -60,7 +60,7 @@ export default function Login({ navigation }) {
         formData.append('email', email);
         formData.append('senha', senha);
 
-        axios.post("https://cloudproveit.azurewebsites.net/api/auth/login", formData.toString(), {
+        axios.post("https://localhost:7219/api/Auth/Login", formData.toString(), {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },

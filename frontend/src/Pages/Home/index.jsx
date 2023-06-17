@@ -78,7 +78,7 @@ export default function Home({ navigation, props }) {
                 <FontAwesomeIcon icon={faCircleExclamation} style={styles.listamentoIcon} size={25}></FontAwesomeIcon><Text style={styles.categoria}>O que há de <Text style={{ color: '#FF7152' }}>novo?</Text></Text>
             </View>
             <View>
-                <CarrosselHome filtro={"ORDER BY idReceita DESC"} />
+                <CarrosselHome filtro={"ordernar/idReceita"} />
             </View>
 
             <View style={styles.listamento}>
@@ -141,7 +141,7 @@ export default function Home({ navigation, props }) {
                 <Text style={styles.categoria}>Receitas <Text style={{ color: '#FF7152' }}>reaproveitáveis</Text></Text>
             </View>
             <View>
-                <CarrosselHome filtro={"WHERE Aproveitamento = true"} />
+                <CarrosselHome filtro={"onde/Aproveitamento"} />
             </View>
 
             <View>
@@ -151,7 +151,7 @@ export default function Home({ navigation, props }) {
                 <Text style={styles.categoriaBig}>Baixas <Text style={{ color: '#FF7152' }}>calorias</Text></Text>
             </View>
             <View>
-                <CarrosselHome filtro={"ORDER BY ValCalorico ASC"} />
+                <CarrosselHome filtro={"ordernar/ValCalorico"} />
             </View>
 
             <View style={styles.listamento}>
@@ -159,7 +159,7 @@ export default function Home({ navigation, props }) {
                 <Text style={styles.categoria}>Sem <Text style={{ color: '#FF7152' }}>tempo</Text> perdido</Text>
             </View>
             <View>
-                <CarrosselHome filtro={"WHERE Categoria = 'Rapidas'"} />
+                <CarrosselHome filtro={"categoria/Rapidas"} />
             </View>
 
             <View style={styles.listamento}>
@@ -167,7 +167,7 @@ export default function Home({ navigation, props }) {
                 <Text style={styles.categoria}>Para a <Text style={{ color: '#FF7152' }}>família</Text> inteira</Text>
             </View>
             <View>
-                <CarrosselHome filtro={"WHERE Porcoes > 5"} />
+                <CarrosselHome filtro={"onde/Porcoes"} />
             </View>
             
             <View

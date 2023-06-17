@@ -47,17 +47,23 @@ export default function EditarUsuario({ navigation }) {
     }, []);
 
     const pickImage = async () => {
+        
+        try {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [4, 4],
+                quality: 0.5,
+                base64: true
+            });
 
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            aspect: [4, 4],
-            quality: 0.5,
-        });
-
-        if (!result.canceled) {
-            setFoto(result.assets[0].uri);
+            if (!result.canceled) {
+                setFoto('data:image/jpeg;base64,' + result.assets[0].base64);
+            }
+        } catch (error) {
+            console.log(error)
         }
+
     };
 
     async function handleEdit() {
@@ -86,14 +92,14 @@ export default function EditarUsuario({ navigation }) {
         }
         setErrors(errors);
 
-        
+
         if (Object.keys(errors).length > 0) {
             return;
         }
         if (idUsuario === 0) {
             return;
         }
-        
+
         const body = { idUsuario, nome, foto, nomeTag, email, senha };
         const headers = await HeaderRequisicao(navigation);
 

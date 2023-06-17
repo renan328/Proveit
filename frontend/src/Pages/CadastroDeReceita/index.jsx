@@ -68,6 +68,7 @@ export default function CadastroDeReceita({ navigation, props }) {
             allowsEditing: true,
             aspect: [4, 4],
             quality: 0.4,
+            base64: true
         });
 
         console.log(result);
@@ -75,7 +76,7 @@ export default function CadastroDeReceita({ navigation, props }) {
         if (result.canceled) {
             return;
         }
-        setFoto(result.assets[0].uri);
+        setFoto('data:image/jpeg;base64,' + result.assets[0].uri);
     }
 
     async function BuscarUsuario() {

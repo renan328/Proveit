@@ -8,8 +8,10 @@ import stylesLight from "./pesquisa.module";
 import stylesDark from "./pesquisa.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
 import { HeaderRequisicao } from '../../AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Pesquisar() {
+    const navigation = useNavigation();
 
     const [dadosReceita, setDadosReceita] = useState([]);
     const [textoPesquisa, setTextoPesquisa] = useState('');
@@ -60,7 +62,17 @@ export default function Pesquisar() {
         <ScrollView style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.subText}>Buscar</Text>
+                    <Text style={styles.subText}>Buscar <Text style={[styles.subText, { color: '#fff' }]}>por</Text></Text>
+
+                    <View style={styles.ScreenSelect}>
+                        <TouchableOpacity>
+                            <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Receitas</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('PesquisaPorIngrediente')}>
+                            <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Ingredientes</Text>
+                        </TouchableOpacity>
+                    </View>
+
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={[styles.input, errors.textoPesquisa && styles.inputError]}

@@ -43,7 +43,7 @@ export default function Perfil({ navigation }) {
         const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/usuario/" + userDataJWT.ID, {
+        fetch("https://localhost:7219/api/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })

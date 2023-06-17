@@ -100,9 +100,84 @@ namespace proveit.Controllers
         }
 
         [HttpGet]
-        [Route("filtro/{filtro}")]
-        public IActionResult ListarReceitasComFiltro([FromRoute] string filtro)
+        [Route("onde/{chave}")]
+        public IActionResult ListarReceitasFiltroWhere([FromRoute] string chave)
         {
+            string filtro = "";
+            if (chave == "Aproveitamento")
+            {
+                filtro = "WHERE Aproveitamento = true";
+
+            } else if (chave == "Porcoes")
+            {
+                filtro = "WHERE Porcoes > 5";
+            } else
+            {
+                return BadRequest();
+            }
+
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarReceitasComFiltro(filtro);
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
+        [HttpGet]
+        [Route("categoria/{valor}")]
+        public IActionResult ListarReceitasCategoria([FromRoute] string valor)
+        {
+            string filtro = $"WHERE Categoria = '{valor}'";
+
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarReceitasComFiltro(filtro);
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
+        [HttpGet]
+        [Route("ordernar/{chave}")]
+        public IActionResult ListarReceitasOrderBy([FromRoute] string chave)
+        {
+            string filtro = "";
+            if (chave == "idReceita")
+            {
+                filtro = "ORDER BY idReceita DESC";
+
+            } else if (chave == "ValCalorico")
+            {
+                filtro = "ORDER BY ValCalorico ASC";
+            }
+            else
+            {
+                return BadRequest();    
+            }
+
             var ReceitaDAO = new ReceitaGeralDAO();
             var AvaliacaoDAO = new AvaliacaoDAO();
             var receitas = ReceitaDAO.ListarReceitasComFiltro(filtro);
@@ -145,6 +220,28 @@ namespace proveit.Controllers
             return Ok(detalhesReceitas);
         }
 
+        [HttpGet]
+        [Route("PesquisaPorIngredientes")]
+        public IActionResult PesquisarPorIngredientes([FromQuery] string[] ingredientes)
+        {
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.PesquisarPorIngredientes(ingredientes);
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
 
         [HttpPost]
         public IActionResult CadastrarRecetas([FromBody] ReceitaGeralDTO receita)

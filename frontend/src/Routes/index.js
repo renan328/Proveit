@@ -22,9 +22,9 @@ import ReceitasDoUsuario from '../Pages/ReceitasDoUsuario';
 import AvaliacoesDoUsuario from '../Pages/AvaliacoesDoUsuario';
 import EditarAvaliacao from '../Pages/EditarAvaliacao';
 import Historico from '../Pages/Historico';
+import PesquisaPorIngrediente from '../Pages/PesquisaPorIngrediente';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faBookmark, faMagnifyingGlass, faUser, faPlus, faHistory } from '@fortawesome/free-solid-svg-icons';
@@ -149,6 +149,7 @@ function PesquisaStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen options={{ headerShown: false }} name="Settings" component={Pesquisa} />
+            <Stack.Screen options={{ headerShown: false }} name="PesquisaPorIngrediente" component={PesquisaPorIngrediente} />
         </Stack.Navigator>
     );
 }
