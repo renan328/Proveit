@@ -363,7 +363,7 @@ namespace proveit.DAO
                         newReceita.idReceita = idReceita;
                         newReceita.NomeReceita = dataReaderSugestao["NomeReceita"].ToString();
                         newReceita.Foto = dataReaderSugestao["Foto"].ToString();
-                        newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
+                        newReceita.Aproveitamento = bool.Parse(dataReaderSugestao["Aproveitamento"].ToString());
 
                         receitas.Add(newReceita);
                     }
@@ -592,6 +592,11 @@ namespace proveit.DAO
             var comandoAvaliacao = new MySqlCommand(queryAvaliacao, conexao);
             comandoAvaliacao.Parameters.AddWithValue("@id", id);
             comandoAvaliacao.ExecuteNonQuery();
+            
+            var queryFavoritos= @"DELETE FROM Passos WHERE Receita_id = @id";
+            var comandoFavoritos = new MySqlCommand(queryFavoritos, conexao);
+            comandoFavoritos.Parameters.AddWithValue("@id", id);
+            comandoFavoritos.ExecuteNonQuery();
 
             var queryIngrediente = @"DELETE FROM Ingredientes_Receita WHERE Receita_id = @id";
             var comandoIngredientes = new MySqlCommand(queryIngrediente, conexao);

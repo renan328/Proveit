@@ -18,7 +18,7 @@ export default function CartaoAvalicaoDoUsuario({ avaliacao }) {
     async function RemoverAvaliacao() {
         const headers = await HeaderRequisicao();
 
-        fetch("https://cloudproveit.azurewebsites.net/api/avaliacao/" + avaliacao?.idAvaliacao, {
+        fetch("https://localhost:7219/api/avaliacao/" + avaliacao?.idAvaliacao, {
             method: "DELETE",
             headers
         })

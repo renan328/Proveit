@@ -78,7 +78,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         if (result.canceled) {
             return;
         }
-        setFoto('data:image/jpeg;base64,' + result.assets[0].uri);
+        setFoto('data:image/jpeg;base64,' + result.assets[0].base64);
     }
 
     const categorias = [
@@ -108,7 +108,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const userDataJWT = await DadosUsuario();
         setUsuario_id(userDataJWT.ID);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita/" + id, {
+        fetch("https://localhost:7219/api/receita/" + id, {
             method: "GET",
             headers
         })
@@ -188,7 +188,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const headers = await HeaderRequisicao(navigation);
         console.log(body);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
+        fetch("https://localhost:7219/api/receita", {
             method: "PUT",
             headers,
             body: JSON.stringify(body)

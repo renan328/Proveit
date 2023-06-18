@@ -39,14 +39,15 @@ namespace proveit.DTO
             return receitas;
         }
 
-        public bool VerificaoFavorito(int idReceita)
+        public bool VerificaoFavorito(int idReceita, int idUsuario)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT Receita_id FROM ReceitasFavoritas WHERE Receita_id = @id;";
+            var query = "SELECT Receita_id FROM ReceitasFavoritas WHERE Receita_id = @id AND Usuario_id = @idUsuario;";
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@id", idReceita);
+            comando.Parameters.AddWithValue("@idUsuario", idUsuario);
             var dataReader = comando.ExecuteReader();
 
             bool favorito = false;

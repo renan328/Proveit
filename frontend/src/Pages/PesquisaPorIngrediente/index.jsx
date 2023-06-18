@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView, Image, useColorScheme, TouchableOpacity } from "react-native";
-import SelectBox from 'react-native-multi-selectbox'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import LottieView from 'lottie-react-native';
@@ -10,6 +9,7 @@ import stylesDark from "./pesquisaporingrediente.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
 import { HeaderRequisicao } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
+import showToast from '../../../hooks/toasts';
 
 export default function PesquisaPorIngrediente() {
     const navigation = useNavigation();
@@ -29,7 +29,7 @@ export default function PesquisaPorIngrediente() {
         setErrors(errors);
 
         if (Object.keys(errors).length > 0) {
-            setLoading(false); // Define o estado de carregamento como falso
+            setLoading(false); 
             return;
         }
     
@@ -45,11 +45,11 @@ export default function PesquisaPorIngrediente() {
             .then((response) => response.json())
             .then((json) => {
                 setDadosReceita(json);
-                setLoading(false); // Define o estado de carregamento como falso
+                setLoading(false);
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao buscar receitas, tente novamente mais tarde.', 'error');
-                setLoading(false); // Define o estado de carregamento como falso em caso de erro
+                setLoading(false); 
             });
     }
 
@@ -102,6 +102,7 @@ export default function PesquisaPorIngrediente() {
                                     <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
                                     <Text style={styles.TextInput2}>Ingrediente</Text>
                                 </View>
+                                
                                 <TextInput
                                     style={[styles.allInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
                                     value={nomeIngrediente}
@@ -110,7 +111,7 @@ export default function PesquisaPorIngrediente() {
                                     onChangeText={(nome) => handleNomeIngredienteChange(index, nome)}
                                 />
                                 {errors.ingredientes && errors.ingredientes[index] && (
-                                    <Text style={styles.textError}>{errors.ingredientes[index]}</Text>
+                                    <Text style={styles.textError}>{errors.ingredientes}</Text>
                                 )}
                             </View>
                         ))}

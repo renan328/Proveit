@@ -32,7 +32,7 @@ export default function CadastroDeUsuario({ navigation }) {
         });
 
         if (!result.canceled) {
-            setFoto('data:image/jpeg;base64,' + result.assets[0].uri);
+            setFoto('data:image/jpeg;base64,' + result.assets[0].base64);
         }
     };
 
@@ -71,7 +71,7 @@ export default function CadastroDeUsuario({ navigation }) {
         }
 
         // código de registro
-        fetch("https://cloudproveit.azurewebsites.net/api/auth/cadastro", {
+        fetch("https://localhost:7219/api/auth/cadastro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)

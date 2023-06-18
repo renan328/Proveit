@@ -57,8 +57,9 @@ export default function ReceitaSingle({ navigation }) {
 
     async function VerificarFavorito() {
         const headers = await HeaderRequisicao(navigation);
+        const userDataJWT = await DadosUsuario();
 
-        fetch("https://localhost:7219/api/ReceitaFavorita/verificar/" + id, {
+        fetch("https://localhost:7219/api/ReceitaFavorita/verificar/" + id + "/" + userDataJWT.ID, {
             method: "GET",
             headers
         })
@@ -88,7 +89,6 @@ export default function ReceitaSingle({ navigation }) {
 
             if (!novoHistorico.includes(idReceita)) {
                 novoHistorico.push(idReceita);
-                alert("salvo no histórico!!")
             }
 
             await AsyncStorage.setItem('historicoReceitas', JSON.stringify(novoHistorico));
@@ -257,8 +257,8 @@ export default function ReceitaSingle({ navigation }) {
                     <Text style={styles.ingredientsTitle}>Ingredientes</Text>
                 </View>
                 <View style={styles.ingredientsList}>
-                    {dadosReceita.receita?.ingredientes.map((ingrediente) => (
-                        <IngredienteReceita id={ingrediente.idIngredientesReceita} quantidade={ingrediente.quantidade} medida={ingrediente.medida} nome={ingrediente.nomeIngrediente} />
+                    {dadosReceita.receita?.ingredientes.map((ingrediente, index) => (
+                        <IngredienteReceita key={index} id={ingrediente.idIngredientesReceita} quantidade={ingrediente.quantidade} medida={ingrediente.medida} nome={ingrediente.nomeIngrediente} />
                     ))}
                 </View>
             </View>
@@ -279,7 +279,7 @@ export default function ReceitaSingle({ navigation }) {
                 </View>
                 <View style={styles.stepList}>
                     {dadosReceita.receita?.passos.map((passo, index) => (
-                        <PassoReceita numPasso={index + 1} passoTexto={passo.passoTexto} />
+                        <PassoReceita key={index} numPasso={index + 1} passoTexto={passo.passoTexto} />
                     ))}
                 </View>
             </View>
@@ -343,8 +343,8 @@ export default function ReceitaSingle({ navigation }) {
                     <Text style={styles.commentsTitle}>Comentários</Text>
                 </View>
                 <View style={styles.commentsContainer}>
-                    {dadosReceita.avaliacoes?.map((avaliacoes) => (
-                        <ComentarioSingle userPicture={{ uri: avaliacoes.usuarioFoto }} userName={avaliacoes.usuarioNome} stars={avaliacoes.estrelas} comment={avaliacoes.comentario} />
+                    {dadosReceita.avaliacoes?.map((avaliacoes, index) => (
+                        <ComentarioSingle key={index} userPicture={{ uri: avaliacoes.usuarioFoto }} userName={avaliacoes.usuarioNome} stars={avaliacoes.estrelas} comment={avaliacoes.comentario} />
                     ))}
                 </View>
                 <View

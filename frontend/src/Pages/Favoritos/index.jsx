@@ -19,7 +19,7 @@ export default function Favoritos() {
         const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
+        fetch("https://localhost:7219/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })
@@ -45,11 +45,11 @@ export default function Favoritos() {
                 </View>
             </View>
             <View style={styles.ScreenSelect}>
-                <TouchableOpacity onPress={() => navigation.navigate('Historico')}>
-                    <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
-                </TouchableOpacity>
                 <TouchableOpacity>
                     <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Favoritos</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Historico')}>
+                    <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.SubHeader}>

@@ -36,11 +36,11 @@ namespace proveit.Controllers
 
 
         [HttpGet]
-        [Route("verificar/{idReceita}")]
-        public IActionResult CadastrarReceitasFavoritas(int idReceita)
+        [Route("verificar/{idReceita}/{idUsuario}")]
+        public IActionResult CadastrarReceitasFavoritas(int idReceita, int idUsuario)
         {
             var dao = new ReceitaFavoritaDAO();
-            var favorito = dao.VerificaoFavorito(idReceita);
+            var favorito = dao.VerificaoFavorito(idReceita, idUsuario);
 
             return Ok(favorito);
         }

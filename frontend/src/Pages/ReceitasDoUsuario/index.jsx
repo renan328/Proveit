@@ -22,7 +22,7 @@ export default function ReceitasDoUsuario() {
         const headers = await HeaderRequisicao(navigation);
         const userDataJWT = await DadosUsuario();
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita/usuario/" + userDataJWT.ID, {
+        fetch("https://localhost:7219/api/receita/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })

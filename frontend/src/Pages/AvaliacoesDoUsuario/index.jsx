@@ -22,7 +22,7 @@ export default function AvaliacoesDoUsuario() {
         const headers = await HeaderRequisicao(navigation);
         const userDataJWT = await DadosUsuario();
 
-        fetch("https://cloudproveit.azurewebsites.net/api/avaliacao/usuario/" + userDataJWT.ID, {
+        fetch("https://localhost:7219/api/avaliacao/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })

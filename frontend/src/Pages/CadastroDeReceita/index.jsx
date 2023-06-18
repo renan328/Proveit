@@ -76,7 +76,7 @@ export default function CadastroDeReceita({ navigation, props }) {
         if (result.canceled) {
             return;
         }
-        setFoto('data:image/jpeg;base64,' + result.assets[0].uri);
+        setFoto('data:image/jpeg;base64,' + result.assets[0].base64);
     }
 
     async function BuscarUsuario() {
@@ -114,6 +114,9 @@ export default function CadastroDeReceita({ navigation, props }) {
         if (!descricao.trim()) {
             errors.descricao = "Descrição da receita é obrigatória";
         }
+        if (descricao.trim().length < 5) {
+            newErrors.descricao = "A descrição deve ter no mínimo 5 caracteres";
+        }
 
         if (!categoria.trim()) {
             errors.categoria = "Categoria da receita é obrigatória";
@@ -136,10 +139,11 @@ export default function CadastroDeReceita({ navigation, props }) {
             return;
         }
 
+        debugger;
         const body = { idReceita, nomeReceita, tempoPreparo, tempo, porcoes, valCalorico, descricao, nomeTag, usuario_id, categoria, aproveitamento, foto, ingredientes, passos };
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
+        fetch("https://localhost:7219/api/receita", {
             method: "POST",
             headers,
             body: JSON.stringify(body)
@@ -217,7 +221,7 @@ export default function CadastroDeReceita({ navigation, props }) {
 
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Categoria</Text>
-                    {/* UseState errados nos MultipleSelectList */}
+
                     <Picker
                         style={[styles.allInput, errors.categoria && styles.inputError]}
                         selectedValue={categoria}
@@ -297,6 +301,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                         style={[styles.allInput, errors.descricao && styles.inputError]}
                         placeholder='Ex: Coxinha de frango com catupiry'
                         placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                        maxLength={400}
                         value={descricao}
                         onChangeText={(texto) => setDescricao(texto)}
                     />

@@ -198,6 +198,30 @@ namespace proveit.Controllers
         }
 
         [HttpGet]
+        [Route("historico")]
+        public IActionResult ListarHistorico(string idReceitas)
+        {
+            var filtro = $"WHERE idReceita IN ({idReceitas})";
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarReceitasComFiltro(filtro);
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
+        [HttpGet]
         [Route("pesquisa/{palavra}")]
         public IActionResult Pesquisar([FromRoute] string palavra)
         {

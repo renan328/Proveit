@@ -26,11 +26,10 @@ export default function Historico() {
             if (historico !== null) {
                 const historicoReceitas = JSON.parse(historico);
 
-                // Constrói a string do filtro
-                const filtro = `WHERE idReceita IN (${historicoReceitas.join(',')})`;
-
-                // Faz a solicitação à API usando o filtro
-                fetch(`https://cloudproveit.azurewebsites.net/api/receita/filtro/${filtro}`, {
+                const historicoReceitasString = historicoReceitas.join(',');
+                const url = `https://localhost:7219/api/receita/historico?idReceitas=${historicoReceitasString}`;
+                console.log(url);
+                fetch(url, {
                     method: 'GET',
                     headers
                 })
@@ -41,7 +40,7 @@ export default function Historico() {
                     .catch(error => {
                         alert('Erro ao buscar receita');
                     });
-                    
+
             }
         } catch (error) {
             console.log(error);
@@ -62,11 +61,11 @@ export default function Historico() {
                 </View>
             </View>
             <View style={styles.ScreenSelect}>
-                <TouchableOpacity>
-                    <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
-                </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Favoritos</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.SubHeader}>

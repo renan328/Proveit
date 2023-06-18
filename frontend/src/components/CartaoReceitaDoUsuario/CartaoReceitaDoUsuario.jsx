@@ -22,7 +22,7 @@ export default function CartaoReceitaDoUsuario({ receita }) {
     async function RemoverReceita() {
         const headers = await HeaderRequisicao();
            
-        fetch("https://cloudproveit.azurewebsites.net/api/receita/" + receita.receita?.idReceita, {
+        fetch("https://localhost:7219/api/receita/" + receita.receita?.idReceita, {
             method: "DELETE",
             headers
         })
@@ -81,7 +81,7 @@ export default function CartaoReceitaDoUsuario({ receita }) {
                 <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={25} color="#606060" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.containerOpcoesDelete} >
+            <TouchableOpacity style={styles.containerOpcoesDelete} onPress={RemoverReceita}>
                 <Text style={styles.textOpcoesDelete}>Excluir receita</Text>
                 <FontAwesomeIcon style={styles.botaoOpcoes} icon={faTrashCan} size={25} color="#eeeeee5e" />
             </TouchableOpacity>
