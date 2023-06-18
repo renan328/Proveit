@@ -85,7 +85,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, Foto FROM Receitas";
+            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, Foto, Aproveitamento FROM Receitas";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
 
@@ -103,7 +103,8 @@ namespace proveit.DAO
 
                     newReceita.idReceita = idReceita;
                     newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
-                    newReceita.Foto = (dataReader["Foto"].ToString());
+                    newReceita.Foto = dataReader["Foto"].ToString();
+                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                     receitas.Add(newReceita);
                 }
@@ -119,7 +120,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, Foto, Usuario_id FROM Receitas WHERE Usuario_id = @id;";
+            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, Foto, Usuario_id, Aproveitamento FROM Receitas WHERE Usuario_id = @id;";
             var comando = new MySqlCommand(query, conexao);
             comando.Parameters.AddWithValue("@id", idUsuario);
             var dataReader = comando.ExecuteReader();
@@ -138,7 +139,8 @@ namespace proveit.DAO
 
                     newReceita.idReceita = idReceita;
                     newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
-                    newReceita.Foto = (dataReader["Foto"].ToString());
+                    newReceita.Foto = dataReader["Foto"].ToString();
+                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                     receitas.Add(newReceita);
                 }
@@ -153,7 +155,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = $"SELECT idReceita, Receitas.Nome AS NomeReceita, Foto FROM Receitas {filtro};";
+            var query = $"SELECT idReceita, Receitas.Nome AS NomeReceita, Foto, Aproveitamento FROM Receitas {filtro};";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
 
@@ -171,7 +173,8 @@ namespace proveit.DAO
 
                     newReceita.idReceita = idReceita;
                     newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
-                    newReceita.Foto = (dataReader["Foto"].ToString());
+                    newReceita.Foto = dataReader["Foto"].ToString();
+                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                     receitas.Add(newReceita);
                 }
@@ -213,7 +216,7 @@ namespace proveit.DAO
                     newReceita.Categoria = dataReader["Categoria"].ToString();
                     newReceita.NomeTag = dataReader["NomeTag"].ToString();
                     newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
-                    newReceita.Foto = (dataReader["Foto"].ToString());
+                    newReceita.Foto = dataReader["Foto"].ToString();
 
                     newReceita.Ingredientes = new List<Ingredientes_ReceitaDTO>();
                     newReceita.Passos = new List<PassoDTO>();
@@ -264,7 +267,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = $"SELECT idReceita, R.Nome AS NomeReceita, R.Foto, I.Nome FROM Receitas R INNER JOIN Ingredientes_Receita I ON R.IdReceita = I.Receita_id WHERE R.Nome like '%{palavra}%' OR I.Nome LIKE '%{palavra}%';";
+            var query = $"SELECT idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, I.Nome FROM Receitas R INNER JOIN Ingredientes_Receita I ON R.IdReceita = I.Receita_id WHERE R.Nome like '%{palavra}%' OR I.Nome LIKE '%{palavra}%';";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
             var receitas = new List<ReceitaGeralDTO>();
@@ -283,7 +286,8 @@ namespace proveit.DAO
 
                     newReceita.idReceita = idReceita;
                     newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
-                    newReceita.Foto = (dataReader["Foto"].ToString());
+                    newReceita.Foto = dataReader["Foto"].ToString();
+                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                     receitas.Add(newReceita);
                 }
@@ -298,7 +302,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = $"SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto FROM Receitas R WHERE EXISTS ( SELECT 1 FROM Ingredientes_Receita I1 WHERE I1.Receita_id = R.IdReceita AND I1.Nome LIKE '%{ingredientes[0]}%' ) AND EXISTS ( SELECT 1 FROM Ingredientes_Receita I2 WHERE I2.Receita_id = R.IdReceita AND I2.Nome LIKE '%{ingredientes[1]}%' ) AND EXISTS ( SELECT 1 FROM Ingredientes_Receita I3 WHERE I3.Receita_id = R.IdReceita AND I3.Nome LIKE '%{ingredientes[2]}%') AND EXISTS ( SELECT 1 FROM Ingredientes_Receita I4 WHERE I4.Receita_id = R.IdReceita AND I4.Nome LIKE '%{ingredientes[3]}%' ) AND EXISTS ( SELECT 1 FROM Ingredientes_Receita I5 WHERE I5.Receita_id = R.IdReceita AND I5.Nome LIKE '%{ingredientes[4]}%' );";
+            var query = $"SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, Aproveitamento FROM Receitas R WHERE EXISTS ( SELECT 1 FROM Ingredientes_Receita I1 WHERE I1.Receita_id = R.IdReceita AND I1.Nome LIKE '%{ingredientes[0]}%' ) AND EXISTS ( SELECT 1 FROM Ingredientes_Receita I2 WHERE I2.Receita_id = R.IdReceita AND I2.Nome LIKE '%{ingredientes[1]}%' ) AND EXISTS ( SELECT 1 FROM Ingredientes_Receita I3 WHERE I3.Receita_id = R.IdReceita AND I3.Nome LIKE '%{ingredientes[2]}%') AND EXISTS ( SELECT 1 FROM Ingredientes_Receita I4 WHERE I4.Receita_id = R.IdReceita AND I4.Nome LIKE '%{ingredientes[3]}%' ) AND EXISTS ( SELECT 1 FROM Ingredientes_Receita I5 WHERE I5.Receita_id = R.IdReceita AND I5.Nome LIKE '%{ingredientes[4]}%' );";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
             var receitas = new List<ReceitaGeralDTO>();
@@ -316,7 +320,8 @@ namespace proveit.DAO
 
                     newReceita.idReceita = idReceita;
                     newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
-                    newReceita.Foto = (dataReader["Foto"].ToString());
+                    newReceita.Foto = dataReader["Foto"].ToString();
+                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                     receitas.Add(newReceita);
                 }
@@ -324,10 +329,25 @@ namespace proveit.DAO
 
             conexao.Close();
 
-            if (receitas.Count == 0)
+            if (receitas.Count == 0 && ingredientes.Any(ingrediente => !string.IsNullOrEmpty(ingrediente)))
             {
                 conexao.Open();
-                var querySugestao = $"SELECT idReceita, R.Nome AS NomeReceita, R.Foto, I.Nome FROM Receitas R INNER JOIN Ingredientes_Receita I ON R.IdReceita = I.Receita_id WHERE I.Nome like '%{ingredientes[0]}%' OR I.Nome LIKE '%{ingredientes[1]}%' OR I.Nome LIKE '%{ingredientes[2]}%' OR I.Nome LIKE '%{ingredientes[3]}%' OR I.Nome LIKE '%{ingredientes[4]}%';";
+                var querySugestao = "SELECT idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, I.Nome FROM Receitas R INNER JOIN Ingredientes_Receita I ON R.IdReceita = I.Receita_id WHERE";
+                var condicoes = new List<string>();
+
+                for (int i = 0; i < ingredientes.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(ingredientes[i]))
+                    {
+                        condicoes.Add($" I.Nome LIKE '%{ingredientes[i]}%'");
+                    }
+                }
+
+                if (condicoes.Count > 0)
+                {
+                    querySugestao += string.Join(" OR", condicoes);
+                }
+
                 var comandoSugestao = new MySqlCommand(querySugestao, conexao);
                 var dataReaderSugestao = comandoSugestao.ExecuteReader();
 
@@ -335,15 +355,15 @@ namespace proveit.DAO
                 {
                     var idReceita = int.Parse(dataReaderSugestao["idReceita"].ToString());
 
-                    if (receitas.Any(x => x.idReceita == idReceita) == false)
+                    if (!receitas.Any(x => x.idReceita == idReceita))
                     {
-                        //Não existe receita na lista
-
+                        // Não existe receita na lista
                         var newReceita = new ReceitaGeralDTO();
 
                         newReceita.idReceita = idReceita;
                         newReceita.NomeReceita = dataReaderSugestao["NomeReceita"].ToString();
-                        newReceita.Foto = (dataReaderSugestao["Foto"].ToString());
+                        newReceita.Foto = dataReaderSugestao["Foto"].ToString();
+                        newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                         receitas.Add(newReceita);
                     }

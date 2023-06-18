@@ -23,6 +23,7 @@ import AvaliacoesDoUsuario from '../Pages/AvaliacoesDoUsuario';
 import EditarAvaliacao from '../Pages/EditarAvaliacao';
 import Historico from '../Pages/Historico';
 import PesquisaPorIngrediente from '../Pages/PesquisaPorIngrediente';
+import ListagemCategoria from '../Pages/Categorias';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -132,6 +133,7 @@ function HomeStack() {
         <Stack.Navigator>
             <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
             <Stack.Screen options={{ headerShown: false }} name="ReceitaSingle" component={ReceitaSingle} />
+            <Stack.Screen options={{ headerShown: false }} name="ListagemCategoria" component={ListagemCategoria} />
         </Stack.Navigator>
     );
 }

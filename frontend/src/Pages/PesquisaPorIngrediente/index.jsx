@@ -24,7 +24,7 @@ export default function PesquisaPorIngrediente() {
         setLoading(true);
 
         if (!ingredientes.every((ingrediente) => ingrediente.trim())) {
-            errors.passos = "Todos os passos devem ser preenchidos";
+            errors.ingredientes = "Todos os ingredientes devem ser preenchidos";
         }
         setErrors(errors);
 
@@ -32,7 +32,7 @@ export default function PesquisaPorIngrediente() {
             setLoading(false); // Define o estado de carregamento como falso
             return;
         }
-
+    
         const headers = await HeaderRequisicao(navigation);
 
         const baseUrl = 'https://localhost:7219/api/Receita/PesquisaPorIngredientes';

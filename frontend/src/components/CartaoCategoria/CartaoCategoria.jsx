@@ -1,18 +1,27 @@
 import React from 'react';
 import { ScrollView, View, Text, StyleSheet, ImageBackground, SectionList, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { useNavigation } from '@react-navigation/native';
 
 export default function CartaoCategoria({ categoria }) {
+    const navigation = useNavigation();
+
+    const handleCardPress = (nome) => {
+        navigation.navigate('ListagemCategoria', { nomeCategoria: categoria?.nome });
+    };
+
     const scheme = useColorScheme()
     const styles = scheme === 'dark' ? stylesDark : stylesLight
+
+
     return (
-        <View style={styles.caixaPrincipal}>
+        <TouchableOpacity style={styles.caixaPrincipal} key={categoria.id} onPress={() => handleCardPress(categoria?.nome)}>
             <ImageBackground source={{ uri: categoria?.foto }} style={styles.imgCategoria} resizeMode="cover" imageStyle={{ borderRadius: 24 }}>
                 <View style={styles.textContainer}>
                     <Text style={styles.titulo}>{categoria?.nome}</Text>
                 </View>
             </ImageBackground>
-        </View>
+        </TouchableOpacity>
     )
 }
 const stylesLight = StyleSheet.create({
