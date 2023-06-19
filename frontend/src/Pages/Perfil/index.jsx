@@ -10,7 +10,7 @@ import LottieView from 'lottie-react-native';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import CartaoReceita from '../../components/CartaoReceita/CartaoReceita';
-
+import showToast from '../../../hooks/toasts';
 
 export default function Perfil({ navigation }) {
 
@@ -27,7 +27,7 @@ export default function Perfil({ navigation }) {
 
         setLoading(true);
 
-        fetch("https://localhost:7219/api/receita/usuario/" + userDataJWT.ID, {
+        fetch("https://cloudproveit.azurewebsites.net/api/receita/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })
@@ -48,7 +48,7 @@ export default function Perfil({ navigation }) {
         const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://localhost:7219/api/usuario/" + userDataJWT.ID, {
+        fetch("https://cloudproveit.azurewebsites.net/api/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })
@@ -97,8 +97,9 @@ export default function Perfil({ navigation }) {
             />
 
             {loading ? (
-                <View>
-                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!<ActivityIndicator size="large" color="#FF7152" /></Text>
+                <View style={{ display: "flex", alignSelf: "center" }}>
+                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
+                    <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
                 </View>
             ) : (
                 <>
@@ -117,7 +118,7 @@ export default function Perfil({ navigation }) {
                     ) : null}
                 </>
             )}
-            
+
             {mostrarMensagem &&
                 <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita,
                     <TouchableOpacity onPress={() => navigation.navigate('CadastroDeReceita')} >

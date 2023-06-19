@@ -70,7 +70,7 @@ export default function CadastroDeCategoria({ navigation }) {
     function handleRegister() {
 
         const body = { nome, foto }
-        fetch("https://localhost:7219/api/Categoria", {
+        fetch("https://cloudproveit.azurewebsites.net/api/Categoria", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)

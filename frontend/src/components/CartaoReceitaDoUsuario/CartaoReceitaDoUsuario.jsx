@@ -22,7 +22,7 @@ export default function CartaoReceitaDoUsuario({ receita }) {
     async function RemoverReceita() {
         const headers = await HeaderRequisicao();
            
-        fetch("https://localhost:7219/api/receita/" + receita.receita?.idReceita, {
+        fetch("https://cloudproveit.azurewebsites.net/api/receita/" + receita.receita?.idReceita, {
             method: "DELETE",
             headers
         })

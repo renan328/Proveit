@@ -24,7 +24,7 @@ export default function Favoritos() {
 
         setLoading(true);
 
-        fetch("https://localhost:7219/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
+        fetch("https://cloudproveit.azurewebsites.net/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })
@@ -65,8 +65,9 @@ export default function Favoritos() {
             <View style={styles.CardsList}>
 
                 {loading ? (
-                    <View>
-                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!<ActivityIndicator size="large" color="#FF7152" /></Text>
+                    <View style={{ display: "flex", alignSelf: "center" }}>
+                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
+                        <ActivityIndicator size="large" color="#FF7152" style={{marginTop: 10}} />
                     </View>
                 ) : (
                     <>
@@ -81,7 +82,8 @@ export default function Favoritos() {
                         ) : null}
                     </>
                 )}
-                {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Nenhum resultado encontrado.</Text>}
+                {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
+
 
             </View>
             <View style={{ paddingVertical: 50 }} />

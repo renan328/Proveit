@@ -404,6 +404,11 @@ namespace proveit.DAO
                 var queryIngrediente = @"INSERT INTO Ingredientes_Receita (Nome, Quantidade, Medida, Receita_id) VALUES
                         (@nome, @quantidade,@medida,@receita_id);";
 
+                if (ingrediente.Medida == "1/2 xícara (chá)" || ingrediente.Medida == "1/4 xícara (chá)" || ingrediente.Medida == "1/2" || ingrediente.Medida == "1/4" || ingrediente.Medida == "a gosto")
+                {
+                    ingrediente.Quantidade = 1;
+                }
+
                 var comandoIngrediente = new MySqlCommand(queryIngrediente, conexao);
                 comandoIngrediente.Parameters.AddWithValue("@nome", ingrediente.NomeIngrediente);
                 comandoIngrediente.Parameters.AddWithValue("@quantidade", ingrediente.Quantidade);
@@ -437,7 +442,6 @@ namespace proveit.DAO
 
             try
             {
-                // Atualiza os dados da receita
                 var queryAtualizarReceita = @"UPDATE Receitas SET Nome = @nome, TempoPreparo = @tempoPreparo, Tempo = @tempo, Porcoes = @porcoes, ValCalorico = @valCalorico, Descricao = @descricao, Categoria = @categoria, Aproveitamento = @aproveitamento, Foto = @foto WHERE idReceita = @idReceita";
 
                 var comandoAtualizarReceita = new MySqlCommand(queryAtualizarReceita, conexao);
@@ -454,13 +458,11 @@ namespace proveit.DAO
 
                 comandoAtualizarReceita.ExecuteNonQuery();
 
-                // Recupera os ingredientes existentes no banco de dados para a receita
                 var queryIngredientesExistentes = "SELECT idIngredientesReceita, Nome, Quantidade, Medida FROM Ingredientes_Receita WHERE Receita_id = @idReceita";
                 var comandoIngredientesExistentes = new MySqlCommand(queryIngredientesExistentes, conexao);
                 comandoIngredientesExistentes.Parameters.AddWithValue("@idReceita", receita.idReceita);
                 var dataReaderIngredientesExistentes = comandoIngredientesExistentes.ExecuteReader();
 
-                // Lista para armazenar os IDs dos ingredientes existentes
                 var ingredientesExistentesIds = new List<int>();
 
                 while (dataReaderIngredientesExistentes.Read())
@@ -471,12 +473,16 @@ namespace proveit.DAO
 
                 dataReaderIngredientesExistentes.Close();
 
-                // Adiciona ou atualiza os ingredientes da receita
                 foreach (var ingrediente in receita.Ingredientes)
                 {
+
+                    if (ingrediente.Medida == "1/2 xícara (chá)" || ingrediente.Medida == "1/4 xícara (chá)" || ingrediente.Medida == "1/2" || ingrediente.Medida == "1/4" || ingrediente.Medida == "a gosto")
+                    {
+                        ingrediente.Quantidade = 1;
+                    }
+
                     if (ingrediente.idIngredientesReceita == 0)
                     {
-                        // Novo ingrediente a ser adicionado
                         var queryInserirIngrediente = @"INSERT INTO Ingredientes_Receita (Nome, Quantidade, Medida, Receita_id) VALUES (@nome, @quantidade, @medida, @receita_id)";
 
                         var comandoInserirIngrediente = new MySqlCommand(queryInserirIngrediente, conexao);
@@ -489,7 +495,6 @@ namespace proveit.DAO
                     }
                     else
                     {
-                        // Ingrediente existente a ser atualizado
                         var queryAtualizarIngrediente = @"UPDATE Ingredientes_Receita SET Nome = @nome, Quantidade = @quantidade, Medida = @medida WHERE idIngredientesReceita = @idIngrediente";
 
                         var comandoAtualizarIngrediente = new MySqlCommand(queryAtualizarIngrediente, conexao);
@@ -500,12 +505,10 @@ namespace proveit.DAO
 
                         comandoAtualizarIngrediente.ExecuteNonQuery();
 
-                        // Remove o ID do ingrediente da lista de ingredientes existentes
                         ingredientesExistentesIds.Remove(ingrediente.idIngredientesReceita);
                     }
                 }
 
-                // Remove os ingredientes que foram removidos da lista de ingredientes da receita
                 foreach (var ingredienteId in ingredientesExistentesIds)
                 {
                     var queryRemoverIngrediente = "DELETE FROM Ingredientes_Receita WHERE idIngredientesReceita = @idIngrediente";
@@ -516,13 +519,11 @@ namespace proveit.DAO
                     comandoRemoverIngrediente.ExecuteNonQuery();
                 }
 
-                // Recupera os passos existentes no banco de dados para a receita
                 var queryPassosExistentes = "SELECT idPasso, NumPasso, PassoTexto FROM Passos WHERE Receita_id = @idReceita";
                 var comandoPassosExistentes = new MySqlCommand(queryPassosExistentes, conexao);
                 comandoPassosExistentes.Parameters.AddWithValue("@idReceita", receita.idReceita);
                 var dataReaderPassosExistentes = comandoPassosExistentes.ExecuteReader();
 
-                // Lista para armazenar os IDs dos passos existentes
                 var passosExistentesIds = new List<int>();
 
                 while (dataReaderPassosExistentes.Read())
@@ -533,12 +534,10 @@ namespace proveit.DAO
 
                 dataReaderPassosExistentes.Close();
 
-                // Adiciona ou atualiza os passos da receita
                 foreach (var passo in receita.Passos)
                 {
                     if (passo.idPasso == 0)
                     {
-                        // Novo passo a ser adicionado
                         var queryInserirPasso = @"INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (@receita_id, @numPasso, @passoTexto)";
 
                         var comandoInserirPasso = new MySqlCommand(queryInserirPasso, conexao);
@@ -550,7 +549,6 @@ namespace proveit.DAO
                     }
                     else
                     {
-                        // Passo existente a ser atualizado
                         var queryAtualizarPasso = @"UPDATE Passos SET NumPasso = @numPasso, PassoTexto = @passoTexto WHERE idPasso = @idPasso";
 
                         var comandoAtualizarPasso = new MySqlCommand(queryAtualizarPasso, conexao);
@@ -560,12 +558,10 @@ namespace proveit.DAO
 
                         comandoAtualizarPasso.ExecuteNonQuery();
 
-                        // Remove o ID do passo da lista de passos existentes
                         passosExistentesIds.Remove(passo.idPasso);
                     }
                 }
 
-                // Remove os passos que foram removidos da lista de passos da receita
                 foreach (var passoId in passosExistentesIds)
                 {
                     var queryRemoverPasso = "DELETE FROM Passos WHERE idPasso = @idPasso";

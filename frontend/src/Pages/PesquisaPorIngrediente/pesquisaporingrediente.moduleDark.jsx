@@ -30,9 +30,11 @@ const styles = StyleSheet.create({
     defaultInput: {
         marginTop: 25,
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: '80%'
+        alignSelf: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        width: '75%'
     },
 
     input: {
@@ -134,8 +136,6 @@ const styles = StyleSheet.create({
         marginTop: 25,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: '100%',
     },
     titleContainer: {
         width: '100%',
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     },
 
     TextInput2: {
-        color: 'rgba(255,255,255,0.8)',
+        color: '#ffffff7d',
         alignSelf: 'center',
         justifyContent: 'flex-start',
         fontSize: 18,

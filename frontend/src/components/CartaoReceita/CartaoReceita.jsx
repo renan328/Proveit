@@ -33,7 +33,7 @@ export default function CartaoReceita({ receita }) {
 
     return (
         <TouchableOpacity key={receita.id} onPress={() => handleCardPress(receita.id)}>
-            <ImageBackground source={{ uri: !receita.receita?.foto ?  '../../assets/proveitLogo.png' : receita.receita?.foto}} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
+            <ImageBackground source={{ uri: !receita.receita?.foto ? '../../assets/proveitLogo.png' : receita.receita?.foto }} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
                 </View>
@@ -41,8 +41,10 @@ export default function CartaoReceita({ receita }) {
                 {/* Container de imagem e texto */}
                 <View style={styles.containerTexto} >
                     <View style={styles.containerTextoWhite}>
-                        {StarCounter()}
-                        <Text style={styles.titulo}>{receita.receita?.nomeReceita}</Text>
+                        <View style={{ width: '100%', alignSelf: 'center' }}>
+                            {StarCounter()}
+                            <Text style={styles.titulo}>{receita.receita?.nomeReceita}</Text>
+                        </View>
                     </View>
                 </View>
 
@@ -182,7 +184,7 @@ const stylesDark = StyleSheet.create({
         color: '#fff',
 
     },
-    
+
     containerTexto: {
         width: '100%',
         height: 111,

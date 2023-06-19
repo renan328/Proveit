@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        width: '75%'
     },
     SubHeader: {
         position: 'relative',

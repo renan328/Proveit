@@ -18,7 +18,7 @@ export default function CartaoAvalicaoDoUsuario({ avaliacao }) {
     async function RemoverAvaliacao() {
         const headers = await HeaderRequisicao();
 
-        fetch("https://localhost:7219/api/avaliacao/" + avaliacao?.idAvaliacao, {
+        fetch("https://cloudproveit.azurewebsites.net/api/avaliacao/" + avaliacao?.idAvaliacao, {
             method: "DELETE",
             headers
         })
@@ -182,7 +182,8 @@ const stylesLight = StyleSheet.create({
         marginVertical: 5
     },
     containerOpcoes: {
-        width: '88%',
+        minWidth: 300,
+        maxWidth: 300,
         paddingVertical: 15,
         paddingHorizontal: 15,
         borderRadius: 10,
@@ -195,7 +196,8 @@ const stylesLight = StyleSheet.create({
     },
 
     containerOpcoesDelete: {
-        width: '88%',
+        minWidth: 300,
+        maxWidth: 300,
         paddingVertical: 15,
         paddingHorizontal: 15,
         borderRadius: 10,
@@ -307,7 +309,8 @@ const stylesDark = StyleSheet.create({
     },
 
     containerOpcoes: {
-        width: '88%',
+        minWidth: 300,
+        maxWidth: 300,
         paddingVertical: 15,
         paddingHorizontal: 15,
         borderRadius: 10,
@@ -319,9 +322,10 @@ const stylesDark = StyleSheet.create({
         marginTop: 20,
     },
 
-    
+
     containerOpcoesDelete: {
-        width: '88%',
+        minWidth: 300,
+        maxWidth: 300,
         paddingVertical: 15,
         paddingHorizontal: 15,
         borderRadius: 10,

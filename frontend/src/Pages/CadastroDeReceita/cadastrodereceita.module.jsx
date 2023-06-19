@@ -173,11 +173,12 @@ const styles = StyleSheet.create({
     categoriaListaInput: {
         width: '100%',
         shadowOffset: {
-            width: 0,
+            width: 2,
             height: 2,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4
+        shadowRadius: 4,
+        borderRadius: 10
     },
 
     inputTempo: {

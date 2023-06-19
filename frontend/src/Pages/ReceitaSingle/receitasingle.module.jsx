@@ -79,6 +79,24 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
 
+    favButton: {
+        padding: 10,
+        borderBottomLeftRadius: 10, borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10, borderTopRightRadius: 10,
+        alignSelf: 'flex-end',
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+        top: -23,
+        left: -25,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.40,
+        shadowRadius: 7,
+        elevation: 7
+    },
+
     starsContainer: {
         marginTop: 15
     },

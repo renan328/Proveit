@@ -30,9 +30,11 @@ const styles = StyleSheet.create({
     defaultInput: {
         marginTop: 25,
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: '80%'
+        alignSelf: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        width: '75%'
     },
 
     input: {
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
     },
 
     ScreenSelect: {
-        backgroundColor: '#cdcdcd',
+        backgroundColor: '#eee',
         padding: 10,
         borderRadius: 10,
         paddingHorizontal: 35,
@@ -150,7 +152,7 @@ const styles = StyleSheet.create({
     },
 
     TextInput2: {
-        color: '#505050',
+        color: '#7a7a7a',
         alignSelf: 'center',
         justifyContent: 'flex-start',
         fontSize: 18,

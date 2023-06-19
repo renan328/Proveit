@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#202020',
         height: '100%'
     },
-    
+
     header: {
         width: '100%',
         textAlign: 'center',
@@ -33,10 +33,11 @@ const styles = StyleSheet.create({
     },
     CardsList: {
         display: 'flex',
-        alignItems: 'center',
+        alignSelf: 'center',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        width: '75%'
     },
     SubHeader: {
         position: 'relative',

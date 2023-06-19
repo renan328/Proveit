@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, TouchableOpacity, useColorScheme } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCamera, faCircleCheck, faCircleXmark, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import * as ImagePicker from 'expo-image-picker';
-import styles from './editarusuario.module';
+import stylesLight from './editarusuario.module';
+import stylesDark from './editarusuario.moduleDark';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import showToast from '../../../hooks/toasts';
@@ -24,7 +25,7 @@ export default function EditarUsuario({ navigation }) {
         const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://localhost:7219/api/usuario/" + userDataJWT.ID, {
+        fetch("https://cloudproveit.azurewebsites.net/api/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })
@@ -47,7 +48,7 @@ export default function EditarUsuario({ navigation }) {
     }, []);
 
     const pickImage = async () => {
-        
+
         try {
             let result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -103,7 +104,7 @@ export default function EditarUsuario({ navigation }) {
         const body = { idUsuario, nome, foto, nomeTag, email, senha };
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://localhost:7219/api/usuario", {
+        fetch("https://cloudproveit.azurewebsites.net/api/usuario", {
             method: "PUT",
             headers,
             body: JSON.stringify(body)
@@ -118,6 +119,13 @@ export default function EditarUsuario({ navigation }) {
 
     };
 
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
+
+    let inputStyle = [styles.input];
+    if (scheme === 'dark') {
+        inputStyle.push(styles.inputDark);
+    }
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -156,6 +164,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.nome && styles.inputError]}
                             placeholder="Nome"
                             value={nome}
+                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                             onChangeText={(text) => setNome(text)}
                         />
                         {errors.nome && <Text style={styles.textError}>{errors.nome}</Text>}
@@ -167,6 +176,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.nomeTag && styles.inputError]}
                             placeholder="Nome de usuário"
                             value={nomeTag}
+                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                             onChangeText={(text) => setNomeTag(text)}
                         />
                         {errors.nomeTag && <Text style={styles.textError}>{errors.nomeTag}</Text>}
@@ -178,6 +188,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.email && styles.inputError]}
                             placeholder="E-mail"
                             value={email}
+                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                             onChangeText={(text) => setEmail(text)}
                             keyboardType="email-address"
                             autoCapitalize="none"
@@ -192,6 +203,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.senha && styles.inputError]}
                             placeholder="Senha"
                             value={senha}
+                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                             onChangeText={(text) => setSenha(text)}
                             secureTextEntry={true}
                         />
@@ -204,6 +216,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.confirmSenha && styles.inputError]}
                             placeholder="Confirmar Senha"
                             value={confirmSenha}
+                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                             onChangeText={(text) => setConfirmSenha(text)}
                             secureTextEntry={true}
                         />
@@ -220,7 +233,7 @@ export default function EditarUsuario({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{ paddingVertical: 30 }} />
+            <View style={{ paddingVertical: 30, backgroundColor: scheme === 'dark' ? '#202020' : '#ffffff' }} />
         </ScrollView>
     )
 }

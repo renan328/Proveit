@@ -26,12 +26,12 @@ export default function CadastroDeReceita({ navigation, props }) {
     const [categoria, setCategoria] = React.useState('');
     const [aproveitamento, setAproveitamento] = useState(false);
     const [foto, setFoto] = useState(null);
-    const [ingredientes, setIngredientes] = useState([{ nomeIngrediente: '', quantidade: '', medida: '' }]);
+    const [ingredientes, setIngredientes] = useState([{ nomeIngrediente: '', quantidade: 0, medida: '' }]);
     const [passos, setPassos] = useState([{ idPasso: 0, NumPasso: 1, PassoTexto: '' }]);
     const [errors, setErrors] = useState({});
 
     function adicionarIngrediente() {
-        setIngredientes([...ingredientes, { nomeIngrediente: '', quantidade: '', medida: '' }]);
+        setIngredientes([...ingredientes, { nomeIngrediente: '', quantidade: 0, medida: '' }]);
     }
 
     function removerIngrediente(index) {
@@ -131,16 +131,15 @@ export default function CadastroDeReceita({ navigation, props }) {
             const isMedidaEspecial = ['1/2 xícara (chá)', '1/4 xícara (chá)', '1/2', '1/4', 'a gosto'].includes(medida.trim());
             const isNomeIngredienteValido = nomeIngrediente.trim().length >= 3;
 
-            if (isMedidaEspecial) {
-                if (!quantidade.trim()) {
-                    ingrediente.quantidade = '1';
-                }
+            if (!isMedidaEspecial) {
+                return !isNomeIngredienteValido || quantidade.trim().length === 0 || medida.trim().length === 0;
             }
 
-            return !isNomeIngredienteValido || (!quantidade.trim() || !medida.trim());
+            return !isNomeIngredienteValido;
         })) {
             errors.ingredientes = 'Preencha a quantidade, medida e nome de todos os ingredientes corretamente';
         }
+
 
 
         console.log(ingredientes);
@@ -163,7 +162,7 @@ export default function CadastroDeReceita({ navigation, props }) {
         const body = { idReceita, nomeReceita, tempoPreparo, tempo, porcoes, valCalorico, descricao, nomeTag, usuario_id, categoria, aproveitamento, foto, ingredientes, passos };
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://localhost:7219/api/receita", {
+        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
             method: "POST",
             headers,
             body: JSON.stringify(body)
@@ -303,7 +302,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                             onValueChange={setAproveitamento}
                             color={aproveitamento ? '#FF7152' : undefined}
                         />
-                        <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
+                        <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold', color: scheme === 'dark' ? '#fff' : '#505050' }}>Receita com aproveitamento de alimentos?</Text>
                     </View>
                 </View>
 
@@ -378,6 +377,9 @@ export default function CadastroDeReceita({ navigation, props }) {
                                         <Picker.Item label="Caixa" value="caixa" />
                                         <Picker.Item label="Pacote" value="pacote" />
                                         <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
+                                        <Picker.Item label="Fio" value="fio" />
+                                        <Picker.Item label="Dentes" value="dentes" />
+                                        <Picker.Item label="Ramo" value="ramo" />
                                         <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
                                         <Picker.Item label="1/2 " value="1/2" />
                                         <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />

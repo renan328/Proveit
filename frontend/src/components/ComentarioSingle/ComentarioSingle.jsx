@@ -93,11 +93,11 @@ const stylesLight = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        borderBottomStartRadius: 15,
-        borderTopStartRadius: 15,
-        borderBottomEndRadius: 15,
-        borderTopEndRadius: 15,
         elevation: 5,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
     },
 
     textContainer: {
@@ -179,11 +179,11 @@ const stylesDark = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        borderBottomStartRadius: 15,
-        borderTopStartRadius: 15,
-        borderBottomEndRadius: 15,
-        borderTopEndRadius: 15,
         elevation: 5,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
     },
 
     textContainer: {

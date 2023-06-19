@@ -9,7 +9,7 @@ namespace proveit.DTO
     {
         public int idIngredientesReceita { get; set; }
         public string NomeIngrediente { get; set; }
-        public int Quantidade { get; set; }
+        public int? Quantidade { get; set; }
         public string Medida { get; set; }
         public int Receita_id { get; set; }
     }

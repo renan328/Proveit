@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
 
     ScreenSelect: {
-        backgroundColor: '#cdcdcd',
+        backgroundColor: '#eeeeee',
         padding: 10,
         borderRadius: 10,
         paddingHorizontal: 35,

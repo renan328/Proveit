@@ -28,12 +28,12 @@ export default function EdicaoDeReceita({ navigation, props }) {
     const [categoria, setCategoria] = React.useState('');
     const [aproveitamento, setAproveitamento] = useState(false);
     const [foto, setFoto] = useState(null);
-    const [ingredientes, setIngredientes] = useState([{ idIngredientesReceita: 0, nomeIngrediente: '', quantidade: '', medida: '', receita_id: id }]);
+    const [ingredientes, setIngredientes] = useState([{ idIngredientesReceita: 0, nomeIngrediente: '', quantidade: 0, medida: '', receita_id: id }]);
     const [passos, setPassos] = useState([{ idPasso: 0, numPasso: 1, passoTexto: '' }]);
     const [errors, setErrors] = useState({});
 
     function adicionarIngrediente() {
-        setIngredientes([...ingredientes, { nome: '', quantidade: '', medida: '' }]);
+        setIngredientes([...ingredientes, { nomeIngrediente: '', quantidade: 0, medida: '' }]);
     }
 
     function removerIngrediente(index) {
@@ -109,7 +109,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const userDataJWT = await DadosUsuario();
         setUsuario_id(userDataJWT.ID);
 
-        fetch("https://localhost:7219/api/receita/" + id, {
+        fetch("https://cloudproveit.azurewebsites.net/api/receita/" + id, {
             method: "GET",
             headers
         })
@@ -174,12 +174,14 @@ export default function EdicaoDeReceita({ navigation, props }) {
             const { quantidade, medida, nomeIngrediente } = ingrediente;
             const isMedidaEspecial = ['1/2 xícara (chá)', '1/4 xícara (chá)', '1/2', '1/4', 'a gosto'].includes(medida.trim());
             const isNomeIngredienteValido = nomeIngrediente.trim().length >= 3;
-            if (!quantidade.trim()) {
-                ingrediente.quantidade = "1"; // Define um valor padrão para a quantidade
+
+            if (!isMedidaEspecial) {
+                return !isNomeIngredienteValido || quantidade.trim().length === 0 || medida.trim().length === 0;
             }
-            return (!isMedidaEspecial && (!quantidade.trim() || !medida.trim() || !isNomeIngredienteValido));
+
+            return !isNomeIngredienteValido;
         })) {
-            errors.ingredientes = "Preencha a quantidade, medida e nome de todos os ingredientes corretamente";
+            errors.ingredientes = 'Preencha a quantidade, medida e nome de todos os ingredientes corretamente';
         }
 
         if (!passos.every((passo) => passo.passoTexto.trim())) {
@@ -201,7 +203,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const headers = await HeaderRequisicao(navigation);
         console.log(body);
 
-        fetch("https://localhost:7219/api/receita", {
+        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
             method: "PUT",
             headers,
             body: JSON.stringify(body)
@@ -314,7 +316,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
 
                 <View style={styles.defaultInput}>
                     <View style={styles.checkboxContainer}>
-                        <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold' }}>Receita com aproveitamento de alimentos?</Text>
+                        <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold', color: scheme === 'dark' ? '#fff' : '#505050' }}>Receita com aproveitamento de alimentos?</Text>
                     </View>
                 </View>
 
@@ -366,7 +368,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
 
                             <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
                                 {(ingrediente.medida !== '1/2 xícara (chá)' && ingrediente.medida !== '1/4 xícara (chá)' && ingrediente.medida !== '1/2' && ingrediente.medida !== '1/4' && ingrediente.medida !== 'a gosto') && (
-
+                                    
                                     <TextInput
                                         style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
                                         placeholder="Ex: 10"
@@ -375,7 +377,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
                                         onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
                                     />
                                 )}
-                                
+
                                 <View style={styles.ViewListaInput}>
                                     <Picker
                                         style={[styles.ListaInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
@@ -390,6 +392,9 @@ export default function EdicaoDeReceita({ navigation, props }) {
                                         <Picker.Item label="Pacote(s)" value="pacote(s)" />
                                         <Picker.Item label="Lata(s)" value="lata(s)" />
                                         <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
+                                        <Picker.Item label="Fio" value="fio" />
+                                        <Picker.Item label="Dentes" value="dentes" />
+                                        <Picker.Item label="Ramo" value="ramo" />
                                         <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
                                         <Picker.Item label="1/2 " value="1/2" />
                                         <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />

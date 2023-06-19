@@ -35,7 +35,7 @@ export default function PesquisaPorIngrediente() {
 
         const headers = await HeaderRequisicao(navigation);
 
-        const baseUrl = 'https://localhost:7219/api/Receita/PesquisaPorIngredientes';
+        const baseUrl = 'https://cloudproveit.azurewebsites.net/api/Receita/PesquisaPorIngredientes';
         const url = `${baseUrl}?ingredientes=${encodeURIComponent(ingredientes[0] || '')}&ingredientes=${encodeURIComponent(ingredientes[1] || '')}&ingredientes=${encodeURIComponent(ingredientes[2] || '')}&ingredientes=${encodeURIComponent(ingredientes[3] || '')}&ingredientes=${encodeURIComponent(ingredientes[4] || '')}`;
 
         fetch(url, {
@@ -84,7 +84,7 @@ export default function PesquisaPorIngrediente() {
         <ScrollView style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.subText}>Buscar <Text style={[styles.subText, { color: '#fff' }]}>por</Text></Text>
+                    <Text style={styles.subText}>Buscar <Text style={[styles.subText, { color: scheme === 'dark' ? '#fff' : '#505050' }]}>por</Text></Text>
 
                     <View style={styles.ScreenSelect}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -101,6 +101,7 @@ export default function PesquisaPorIngrediente() {
                                 <View style={styles.titleContainer}>
                                     <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
                                     <Text style={styles.TextInput2}>Ingrediente</Text>
+                                    {/* <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#505050' }} size={20} /> */}
                                 </View>
 
                                 <TextInput
@@ -110,6 +111,7 @@ export default function PesquisaPorIngrediente() {
                                     placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                                     onChangeText={(nome) => handleNomeIngredienteChange(index, nome)}
                                 />
+
                                 {errors.ingredientes && errors.ingredientes[index] && (
                                     <Text style={styles.textError}>{errors.ingredientes}</Text>
                                 )}
@@ -131,7 +133,7 @@ export default function PesquisaPorIngrediente() {
                             )}
                         </View>
                     </View>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#505050' }} size={20} />
+
                     <View
                         style={{
                             borderBottomColor: '#505050',
@@ -152,8 +154,9 @@ export default function PesquisaPorIngrediente() {
                 </TouchableOpacity>
             </View>
             {loading ? (
-                <View>
-                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!<ActivityIndicator size="large" color="#FF7152" /></Text>
+                <View style={{ display: "flex", alignSelf: "center" }}>
+                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
+                    <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
                 </View>
             ) : (
                 <>
@@ -167,7 +170,7 @@ export default function PesquisaPorIngrediente() {
                     ) : null}
                 </>
             )}
-            {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Nenhum resultado encontrado.</Text>}
+            {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
             <View style={{ paddingVertical: 50 }} />
         </ScrollView>
     );
