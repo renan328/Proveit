@@ -231,15 +231,11 @@ export default function ReceitaSingle({ navigation }) {
                     </View>
                 </LinearGradient>
 
-                <TouchableOpacity style={styles.detailsContainer} onPress={() => navigation.navigate('Perfil')}>
-                    <View>
-                        <Image source={require('../../assets/user.jpg')} style={styles.userPic}></Image>
-                    </View>
+                <View style={styles.detailsContainer}>
                     <View style={{ marginHorizontal: 8 }}>
-                        <Text style={styles.mainUserText}>User Name</Text>
-                        <Text style={styles.linkUserText}>@{dadosReceita.receita?.nomeTag}</Text>
+                        <Text style={styles.mainUserText}>@{dadosReceita.receita?.nomeTag}</Text>
                     </View>
-                </TouchableOpacity>
+                </View>
 
                 <View
                     style={{

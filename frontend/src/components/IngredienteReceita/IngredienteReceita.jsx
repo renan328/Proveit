@@ -7,11 +7,18 @@ export default function IngredienteReceita({ ID, nome, quantidade, medida }) {
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
+    let texto = '';
 
+    if (medida === '1/2 xícara (chá)' || medida === '1/4 xícara (chá)' || medida === '1/4' || medida === '1/2') {
+        texto = `${medida} de ${nome}`
+    } else if (medida === 'a gosto'){
+        texto = `${nome} ${medida}`
+    } else {
+        texto = `${quantidade} ${medida} de ${nome}`
+    }
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>• {quantidade} {medida} de {nome}</Text>
-
+            <Text style={styles.text}>• {texto}</Text>
         </View>
     );
 }

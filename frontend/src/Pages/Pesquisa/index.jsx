@@ -9,6 +9,7 @@ import stylesDark from "./pesquisa.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
 import { HeaderRequisicao } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
+import showToast from '../../../hooks/toasts';
 
 export default function Pesquisar() {
     const navigation = useNavigation();
@@ -41,11 +42,11 @@ export default function Pesquisar() {
             .then((response) => response.json())
             .then((json) => {
                 setDadosReceita(json);
-                setLoading(false); // Define o estado de carregamento como falso
+                setLoading(false);
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao buscar receitas, tente novamente mais tarde.', 'error');
-                setLoading(false); // Define o estado de carregamento como falso em caso de erro
+                setLoading(false);
             });
     }
 
@@ -106,7 +107,10 @@ export default function Pesquisar() {
                 </TouchableOpacity>
             </View>
             {loading ? (
-                <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>) : (
+                <View>
+                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!<ActivityIndicator size="large" color="#FF7152" /></Text>
+                </View>
+            ) : (
                 <>
                     {dadosReceita.length > 0 ? (
                         <>

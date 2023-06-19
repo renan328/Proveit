@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, button, useColorScheme, Appearance, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, useColorScheme, Appearance, TouchableOpacity } from "react-native";
 import stylesLight from "./favoritos.module";
 import stylesDark from "./favoritos.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
@@ -7,17 +7,22 @@ import CartaoReceita from "../../components/CartaoReceita/CartaoReceita";
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
+import showToast from '../../../hooks/toasts';
 
 export default function Favoritos() {
     const navigation = useNavigation();
 
-    const [dadosReceita, setDadosReceita] = useState([]);
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
+
+    const [dadosReceita, setDadosReceita] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     async function BuscarReceitas() {
         const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
+
+        setLoading(true);
 
         fetch("https://localhost:7219/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
             method: "GET",
@@ -26,9 +31,11 @@ export default function Favoritos() {
             .then((response) => response.json())
             .then((json) => {
                 setDadosReceita(json);
+                setLoading(false);
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao buscar suas receitas, tente novamente mais tarde.', 'error');
+                setLoading(false);
             });
     }
 
@@ -56,11 +63,26 @@ export default function Favoritos() {
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Favoritos</Text>
             </View>
             <View style={styles.CardsList}>
-                {
-                    dadosReceita.map((receita, index) =>
-                        <CartaoFavorito dadosReceita={receita} key={index} />
-                    )
-                }
+
+                {loading ? (
+                    <View>
+                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!<ActivityIndicator size="large" color="#FF7152" /></Text>
+                    </View>
+                ) : (
+                    <>
+                        {dadosReceita.length > 0 ? (
+                            <>
+                                {
+                                    dadosReceita.map((receita, index) =>
+                                        <CartaoFavorito dadosReceita={receita} key={index} />
+                                    )
+                                }
+                            </>
+                        ) : null}
+                    </>
+                )}
+                {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Nenhum resultado encontrado.</Text>}
+
             </View>
             <View style={{ paddingVertical: 50 }} />
         </View>

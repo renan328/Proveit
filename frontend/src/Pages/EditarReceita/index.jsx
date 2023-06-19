@@ -10,6 +10,7 @@ import { Picker } from '@react-native-picker/picker';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import { useRoute } from '@react-navigation/native';
+import showToast from '../../../hooks/toasts';
 
 export default function EdicaoDeReceita({ navigation, props }) {
 
@@ -127,6 +128,9 @@ export default function EdicaoDeReceita({ navigation, props }) {
                 setIngredientes(dadosReceita?.receita.ingredientes);
                 setPassos(dadosReceita?.receita.passos);
             })
+            .catch((error) => {
+                showToast('Foi mal!', 'Erro ao buscar a receita, tente novamente mais tarde.', 'error');
+            });
     }
 
     async function EditarReceita() {
@@ -166,8 +170,16 @@ export default function EdicaoDeReceita({ navigation, props }) {
             errors.categoria = "Categoria da receita é obrigatória";
         }
 
-        if (ingredientes.some((ingrediente) => isNaN(String(ingrediente.quantidade).trim()) || !String(ingrediente.quantidade).trim() || !ingrediente.medida.trim() || !ingrediente.nomeIngrediente.trim())) {
-            errors.ingredientes = "Preencha o nome, a quantidade e a medida de todos os ingredientes corretamente";
+        if (ingredientes.some((ingrediente) => {
+            const { quantidade, medida, nomeIngrediente } = ingrediente;
+            const isMedidaEspecial = ['1/2 xícara (chá)', '1/4 xícara (chá)', '1/2', '1/4', 'a gosto'].includes(medida.trim());
+            const isNomeIngredienteValido = nomeIngrediente.trim().length >= 3;
+            if (!quantidade.trim()) {
+                ingrediente.quantidade = "1"; // Define um valor padrão para a quantidade
+            }
+            return (!isMedidaEspecial && (!quantidade.trim() || !medida.trim() || !isNomeIngredienteValido));
+        })) {
+            errors.ingredientes = "Preencha a quantidade, medida e nome de todos os ingredientes corretamente";
         }
 
         if (!passos.every((passo) => passo.passoTexto.trim())) {
@@ -181,9 +193,10 @@ export default function EdicaoDeReceita({ navigation, props }) {
         setErrors(errors);
 
         if (Object.keys(errors).length > 0) {
+            showToast('Cuidado!', 'Preencha corretamente todos os campos', 'error');
             return;
         }
-
+        debugger;
         const body = { idReceita, nomeReceita, tempoPreparo, tempo, porcoes, valCalorico, descricao, nomeTag, usuario_id, categoria, aproveitamento, foto, ingredientes, passos };
         const headers = await HeaderRequisicao(navigation);
         console.log(body);
@@ -193,8 +206,12 @@ export default function EdicaoDeReceita({ navigation, props }) {
             headers,
             body: JSON.stringify(body)
         })
-            .then((response) => { alert('Receita editada com sucesso!') })
-            .catch((error) => { console.log(error) });
+            .then((response) => {
+                showToast('Obrigado!', 'Receita editada com sucesso!', 'success');
+            })
+            .catch((error) => {
+                showToast('Foi mal!', 'Erro ao editar a receita, tente novamente mais tarde.', 'error');
+            });
         console.log(body);
 
     }
@@ -348,14 +365,17 @@ export default function EdicaoDeReceita({ navigation, props }) {
                             </View>
 
                             <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
-                                <TextInput
-                                    style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
-                                    placeholder="Ex: 10"
-                                    placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
-                                    value={ingrediente.quantidade.toString()}
-                                    onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
-                                />
+                                {(ingrediente.medida !== '1/2 xícara (chá)' && ingrediente.medida !== '1/4 xícara (chá)' && ingrediente.medida !== '1/2' && ingrediente.medida !== '1/4' && ingrediente.medida !== 'a gosto') && (
 
+                                    <TextInput
+                                        style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
+                                        placeholder="Ex: 10"
+                                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                                        value={ingrediente.quantidade.toString()}
+                                        onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
+                                    />
+                                )}
+                                
                                 <View style={styles.ViewListaInput}>
                                     <Picker
                                         style={[styles.ListaInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
@@ -366,11 +386,16 @@ export default function EdicaoDeReceita({ navigation, props }) {
                                         <Picker.Item label="A gosto" value="a gosto" />
                                         <Picker.Item label="Quilograma (kg)" value="kg" />
                                         <Picker.Item label="ML" value="ml" />
+                                        <Picker.Item label="Caixa(s)" value="caixa(s)" />
+                                        <Picker.Item label="Pacote(s)" value="pacote(s)" />
+                                        <Picker.Item label="Lata(s)" value="lata(s)" />
                                         <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
                                         <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
+                                        <Picker.Item label="1/2 " value="1/2" />
                                         <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />
-                                        <Picker.Item label="Colher (sopa)" value="Colher (sopa)" />
-                                        <Picker.Item label="Colher (chá)" value="Colher (chá)" />
+                                        <Picker.Item label="1/4" value="1/4" />
+                                        <Picker.Item label="Colher(es) de sopa" value="Colher(es) de sopa" />
+                                        <Picker.Item label="Colher(es) de chá" value="Colher(es) de chá" />
                                         <Picker.Item label="Unidade(s)" value="Unidade(s)" />
                                         <Picker.Item label="Litro(s)" value="Litro(s)" />
                                     </Picker>

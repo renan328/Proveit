@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView, Image, useColorScheme, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, useColorScheme, TouchableOpacity, ActivityIndicator } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import LottieView from 'lottie-react-native';
@@ -29,10 +29,10 @@ export default function PesquisaPorIngrediente() {
         setErrors(errors);
 
         if (Object.keys(errors).length > 0) {
-            setLoading(false); 
+            setLoading(false);
             return;
         }
-    
+
         const headers = await HeaderRequisicao(navigation);
 
         const baseUrl = 'https://localhost:7219/api/Receita/PesquisaPorIngredientes';
@@ -49,7 +49,7 @@ export default function PesquisaPorIngrediente() {
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao buscar receitas, tente novamente mais tarde.', 'error');
-                setLoading(false); 
+                setLoading(false);
             });
     }
 
@@ -102,7 +102,7 @@ export default function PesquisaPorIngrediente() {
                                     <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
                                     <Text style={styles.TextInput2}>Ingrediente</Text>
                                 </View>
-                                
+
                                 <TextInput
                                     style={[styles.allInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
                                     value={nomeIngrediente}
@@ -152,7 +152,10 @@ export default function PesquisaPorIngrediente() {
                 </TouchableOpacity>
             </View>
             {loading ? (
-                <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>) : (
+                <View>
+                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!<ActivityIndicator size="large" color="#FF7152" /></Text>
+                </View>
+            ) : (
                 <>
                     {dadosReceita.length > 0 ? (
                         <>

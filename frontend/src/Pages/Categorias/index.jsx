@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, useColorScheme, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
+import { View, Text, useColorScheme, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 import stylesLight from "./categorias.module";
 import stylesDark from "./categorias.moduleDark";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -20,9 +20,11 @@ export default function ListagemCategoria({ categoria }) {
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     const [dadosReceita, setDadosReceita] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     async function ListarReceitas() {
         const headers = await HeaderRequisicao(navigation);
+        setLoading(true);
 
         fetch("https://localhost:7219/api/receita/categoria/" + nomeCategoria, {
             method: "GET",
@@ -31,9 +33,11 @@ export default function ListagemCategoria({ categoria }) {
             .then((response) => response.json())
             .then((json) => {
                 setDadosReceita(json);
+                setLoading(false);
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao buscar as receitas, tente novamente mais tarde.', 'error');
+                setLoading(false);
             });
     }
 
@@ -64,11 +68,26 @@ export default function ListagemCategoria({ categoria }) {
                 </View>
 
                 <View style={styles.CardsList}>
-                    {
-                        dadosReceita.map((receita, index) => (
-                            <CartaoReceita receita={receita} key={index} />
-                        ))
-                    }
+                    {loading ? (
+                        <View>
+                            <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!<ActivityIndicator size="large" color="#FF7152" /></Text>
+                        </View>
+                    ) : (
+                        <>
+                            {dadosReceita.length > 0 ? (
+                                <>
+                                    {
+                                        dadosReceita.map((receita, index) => (
+                                            <CartaoReceita receita={receita} key={index} />
+                                        ))
+                                    }
+                                </>
+                            ) : null}
+                        </>
+                    )}
+                    {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Nenhum resultado encontrado.</Text>}
+
+
                 </View>
                 <View style={{ paddingVertical: 40 }} />
             </ScrollView>

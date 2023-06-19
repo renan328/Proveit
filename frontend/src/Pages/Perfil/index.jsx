@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, TextInput, Alert, TouchableOpacity, Dimension, Appearance, useColorScheme } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TextInput, Alert, TouchableOpacity, Dimension, ActivityIndicator, useColorScheme } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faRightFromBracket, faUser, faGear } from '@fortawesome/free-solid-svg-icons';
@@ -19,10 +19,13 @@ export default function Perfil({ navigation }) {
     const [usuario, setUsuario] = useState();
     const [dadosReceita, setDadosReceita] = useState([]);
     const [mostrarMensagem, setMostrarMensagem] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     async function Adicionados() {
         const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
+
+        setLoading(true);
 
         fetch("https://localhost:7219/api/receita/usuario/" + userDataJWT.ID, {
             method: "GET",
@@ -32,9 +35,11 @@ export default function Perfil({ navigation }) {
             .then((json) => {
                 setDadosReceita(json);
                 setMostrarMensagem(json.length === 0);
+                setLoading(false);
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao buscar suas receitas, tente novamente mais tarde.', 'error');
+                setLoading(false);
             });
     }
 
@@ -91,22 +96,34 @@ export default function Perfil({ navigation }) {
                 }}
             />
 
+            {loading ? (
+                <View>
+                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!<ActivityIndicator size="large" color="#FF7152" /></Text>
+                </View>
+            ) : (
+                <>
+                    {dadosReceita.length > 0 ? (
+                        <>
+                            {!mostrarMensagem && (
+                                <ScrollView horizontal={true} style={{ marginLeft: 10 }}>
+                                    {
+                                        dadosReceita.map((receita, index) => (
+                                            <CartaoReceita receita={receita} key={index} />
+                                        ))
+                                    }
+                                </ScrollView>
+                            )}
+                        </>
+                    ) : null}
+                </>
+            )}
+            
             {mostrarMensagem &&
                 <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita,
                     <TouchableOpacity onPress={() => navigation.navigate('CadastroDeReceita')} >
                         <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text>
                     </TouchableOpacity>
                 </Text>}
-
-            {!mostrarMensagem && (
-                <ScrollView horizontal={true} style={{ marginLeft: 10 }}>
-                    {
-                        dadosReceita.map((receita, index) => (
-                            <CartaoReceita receita={receita} key={index} />
-                        ))
-                    }
-                </ScrollView>
-            )}
 
             {/* <LottieView
                 source={require('../../assets/lottie/heart.json')}

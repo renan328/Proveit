@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, button, useColorScheme, Appearance, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, useColorScheme, Appearance, TouchableOpacity } from "react-native";
 import stylesLight from "./historico.module";
 import stylesDark from "./historico.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
@@ -7,6 +7,7 @@ import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import showToast from '../../../hooks/toasts';
 
 export default function Historico() {
     const navigation = useNavigation();
@@ -15,9 +16,11 @@ export default function Historico() {
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     const [dadosReceita, setDadosReceita] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     async function BuscarReceitas() {
         const headers = await HeaderRequisicao(navigation);
+        setLoading(true);
 
         try {
             // Obtenhe o histórico do AsyncStorage
@@ -36,15 +39,18 @@ export default function Historico() {
                     .then(response => response.json())
                     .then(json => {
                         setDadosReceita(json);
+                        setLoading(false);
+
                     })
                     .catch(error => {
-                        alert('Erro ao buscar receita');
+                        showToast('Foi mal!', 'Erro ao buscar receitas, tente novamente mais tarde.', 'error');
+                        setLoading(false);
                     });
-
             }
         } catch (error) {
             console.log(error);
             showToast('Foi mal!', 'Erro ao buscar receitas, tente novamente mais tarde.', 'error');
+            setLoading(false);
         }
     };
 
@@ -72,11 +78,25 @@ export default function Historico() {
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Visto recentemente</Text>
             </View>
             <View style={styles.CardsList}>
-                {
-                    dadosReceita.map((receita, index) =>
-                        <CartaoFavorito dadosReceita={receita} key={index} />
-                    )
-                }
+                {loading ? (
+                    <View>
+                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!<ActivityIndicator size="large" color="#FF7152" /></Text>
+                    </View>
+                ) : (
+                    <>
+                        {dadosReceita.length > 0 ? (
+                            <>
+                                {
+                                    dadosReceita.map((receita, index) =>
+                                        <CartaoFavorito dadosReceita={receita} key={index} />
+                                    )
+                                }
+                            </>
+                        ) : null}
+                    </>
+                )}
+                {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Nenhum resultado encontrado.</Text>}
+
             </View>
             <View style={{ paddingVertical: 50 }} />
         </View>

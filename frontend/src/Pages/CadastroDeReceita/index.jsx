@@ -10,6 +10,7 @@ import stylesDark from './cadastrodereceita.moduleDark';
 import { Picker } from '@react-native-picker/picker';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
+import showToast from '../../../hooks/toasts';
 
 export default function CadastroDeReceita({ navigation, props }) {
 
@@ -25,12 +26,12 @@ export default function CadastroDeReceita({ navigation, props }) {
     const [categoria, setCategoria] = React.useState('');
     const [aproveitamento, setAproveitamento] = useState(false);
     const [foto, setFoto] = useState(null);
-    const [ingredientes, setIngredientes] = useState([{ idIngredientesReceita: 0, nomeIngrediente: '', quantidade: '', medida: '', receita_id: 0 }]);
+    const [ingredientes, setIngredientes] = useState([{ nomeIngrediente: '', quantidade: '', medida: '' }]);
     const [passos, setPassos] = useState([{ idPasso: 0, NumPasso: 1, PassoTexto: '' }]);
     const [errors, setErrors] = useState({});
 
     function adicionarIngrediente() {
-        setIngredientes([...ingredientes, { nome: '', quantidade: '', medida: '' }]);
+        setIngredientes([...ingredientes, { nomeIngrediente: '', quantidade: '', medida: '' }]);
     }
 
     function removerIngrediente(index) {
@@ -90,6 +91,9 @@ export default function CadastroDeReceita({ navigation, props }) {
         if (!nomeReceita.trim()) {
             errors.nomeReceita = "Nome da receita é obrigatório";
         }
+        if (!nomeReceita.trim().length < 3) {
+            errors.nomeReceita = "O nome da receita deve ter no mínimo 3 caracteres";
+        }
 
         if (!tempoPreparo.trim()) {
             errors.tempoPreparo = "Tempo de preparo é obrigatório";
@@ -115,16 +119,31 @@ export default function CadastroDeReceita({ navigation, props }) {
             errors.descricao = "Descrição da receita é obrigatória";
         }
         if (descricao.trim().length < 5) {
-            newErrors.descricao = "A descrição deve ter no mínimo 5 caracteres";
+            errors.descricao = "A descrição deve ter no mínimo 5 caracteres";
         }
 
         if (!categoria.trim()) {
             errors.categoria = "Categoria da receita é obrigatória";
         }
 
-        if (ingredientes.some((ingrediente) => !ingrediente.quantidade.trim() || !ingrediente.medida.trim() || !ingrediente.nomeIngrediente.trim())) {
-            errors.ingredientes = "Preencha o nome a quantidade e a medida de todos os ingredientes";
+        if (ingredientes.some((ingrediente) => {
+            const { quantidade, medida, nomeIngrediente } = ingrediente;
+            const isMedidaEspecial = ['1/2 xícara (chá)', '1/4 xícara (chá)', '1/2', '1/4', 'a gosto'].includes(medida.trim());
+            const isNomeIngredienteValido = nomeIngrediente.trim().length >= 3;
+
+            if (isMedidaEspecial) {
+                if (!quantidade.trim()) {
+                    ingrediente.quantidade = '1';
+                }
+            }
+
+            return !isNomeIngredienteValido || (!quantidade.trim() || !medida.trim());
+        })) {
+            errors.ingredientes = 'Preencha a quantidade, medida e nome de todos os ingredientes corretamente';
         }
+
+
+        console.log(ingredientes);
 
         if (!passos.every((passo) => passo.PassoTexto.trim())) {
             errors.passos = "Todos os passos devem ser preenchidos";
@@ -136,6 +155,7 @@ export default function CadastroDeReceita({ navigation, props }) {
         setErrors(errors);
 
         if (Object.keys(errors).length > 0) {
+            showToast('Cuidado!', 'Preencha corretamente todos os campos. Ou tente novamente', 'error');
             return;
         }
 
@@ -148,10 +168,13 @@ export default function CadastroDeReceita({ navigation, props }) {
             headers,
             body: JSON.stringify(body)
         })
-            .then((response) => { alert('Receita cadastrada com sucesso!') })
-            .catch((error) => { console.log(error) });
+            .then((response) => {
+                showToast('Obrigado!', 'Receita cadastrada com sucesso!', 'success');
+            })
+            .catch((error) => {
+                showToast('Foi mal!', 'Erro ao cadastrar a receita, tente novamente mais tarde.', 'error');
+            });
         console.log(body);
-
     }
 
     const categorias = [
@@ -330,15 +353,17 @@ export default function CadastroDeReceita({ navigation, props }) {
                             <View style={{ flexDirection: 'row', display: 'flex', marginTop: 25, alignItems: 'center', justifyContent: 'flex-start', width: '80%' }}>
                                 <Text style={styles.TextInput}>Quantidade e Medidas</Text>
                             </View>
-
                             <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
-                                <TextInput
-                                    style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
-                                    placeholder="Ex: 10"
-                                    placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
-                                    value={ingrediente.quantidade}
-                                    onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
-                                />
+
+                                {(ingrediente.medida !== '1/2 xícara (chá)' && ingrediente.medida !== '1/4 xícara (chá)' && ingrediente.medida !== '1/2' && ingrediente.medida !== '1/4' && ingrediente.medida !== 'a gosto') && (
+                                    <TextInput
+                                        style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
+                                        placeholder="Ex: 10"
+                                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                                        value={ingrediente.quantidade}
+                                        onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
+                                    />
+                                )}
 
                                 <View style={styles.ViewListaInput}>
                                     <Picker
@@ -350,11 +375,15 @@ export default function CadastroDeReceita({ navigation, props }) {
                                         <Picker.Item label="A gosto" value="a gosto" />
                                         <Picker.Item label="Quilograma (kg)" value="kg" />
                                         <Picker.Item label="ML" value="ml" />
+                                        <Picker.Item label="Caixa" value="caixa" />
+                                        <Picker.Item label="Pacote" value="pacote" />
                                         <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
                                         <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
+                                        <Picker.Item label="1/2 " value="1/2" />
                                         <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />
-                                        <Picker.Item label="Colher (sopa)" value="Colher (sopa)" />
-                                        <Picker.Item label="Colher (chá)" value="Colher (chá)" />
+                                        <Picker.Item label="1/4" value="1/4" />
+                                        <Picker.Item label="Colher(es) de sopa" value="Colher(es) de sopa" />
+                                        <Picker.Item label="Colher(es) de chá" value="Colher(es) de chá" />
                                         <Picker.Item label="Unidade(s)" value="Unidade(s)" />
                                         <Picker.Item label="Litro(s)" value="Litro(s)" />
                                     </Picker>
