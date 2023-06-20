@@ -30,7 +30,7 @@ export default function Historico() {
                 const historicoReceitas = JSON.parse(historico);
 
                 const historicoReceitasString = historicoReceitas.join(',');
-                const url = `https://cloudproveit.azurewebsites.net/api/receita/historico?idReceitas=${historicoReceitasString}`;
+                const url = `https://cloudproveit.azurewebsites.netzurewebsites.net/api/receita/historico?idReceitas=${historicoReceitasString}`;
                 console.log(url);
                 fetch(url, {
                     method: 'GET',
@@ -63,7 +63,7 @@ export default function Historico() {
             <View style={styles.header}>
                 <View style={styles.textContainer}>
                     <Text style={styles.firstText}>Meu</Text>
-                    <Text style={styles.subText}>Hitórico</Text>
+                    <Text style={styles.subText}>Histórico</Text>
                 </View>
             </View> 
             <View style={styles.ScreenSelect}>

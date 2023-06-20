@@ -95,33 +95,31 @@ export default function Perfil({ navigation }) {
                     marginTop: 15
                 }}
             />
+            <ScrollView style={{ marginLeft: 10 }}>
 
-            {loading ? (
-                <View style={{ display: "flex", alignSelf: "center" }}>
-                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
-                    <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
-                </View>
-            ) : (
-                <>
-                    {dadosReceita.length > 0 ? (
-                        <>
-                            {!mostrarMensagem && (
-                                <ScrollView horizontal={true} style={{ marginLeft: 10 }}>
-                                    {
-                                        dadosReceita.map((receita, index) => (
-                                            <CartaoReceita receita={receita} key={index} />
-                                        ))
-                                    }
-                                </ScrollView>
-                            )}
-                        </>
-                    ) : null}
-                </>
-            )}
+                {loading ? (
+                    <View style={{ display: "flex", alignSelf: "center" }}>
+                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
+                        <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
+                    </View>
+                ) : (
+                    <>
+                        {dadosReceita.length > 0 ? (
+                            <>
+                                {!mostrarMensagem && (
+                                    dadosReceita.map((receita, index) => (
+                                        <CartaoReceita receita={receita} key={index} />
+                                    ))
+                                )}
+                            </>
+                        ) : null}
+                    </>
+                )}
+            </ScrollView>
 
             {mostrarMensagem &&
                 <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita,
-                    <TouchableOpacity onPress={() => navigation.navigate('CadastroDeReceita')} >
+                    <TouchableOpacity onPress={() => navigation.navigate('Adicionar')}>
                         <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text>
                     </TouchableOpacity>
                 </Text>}
@@ -141,6 +139,7 @@ export default function Perfil({ navigation }) {
                     marginTop: 15
                 }}
             />
+            <View style={{ paddingVertical: 30}} />
         </View>
     );
 }

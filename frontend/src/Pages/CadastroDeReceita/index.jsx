@@ -26,12 +26,12 @@ export default function CadastroDeReceita({ navigation, props }) {
     const [categoria, setCategoria] = React.useState('');
     const [aproveitamento, setAproveitamento] = useState(false);
     const [foto, setFoto] = useState(null);
-    const [ingredientes, setIngredientes] = useState([{ nomeIngrediente: '', quantidade: 0, medida: '' }]);
+    const [ingredientes, setIngredientes] = useState([{ nomeIngrediente: '', quantidade: '', medida: '' }]);
     const [passos, setPassos] = useState([{ idPasso: 0, NumPasso: 1, PassoTexto: '' }]);
     const [errors, setErrors] = useState({});
 
     function adicionarIngrediente() {
-        setIngredientes([...ingredientes, { nomeIngrediente: '', quantidade: 0, medida: '' }]);
+        setIngredientes([...ingredientes, { nomeIngrediente: '', quantidade: '', medida: '' }]);
     }
 
     function removerIngrediente(index) {
@@ -91,9 +91,6 @@ export default function CadastroDeReceita({ navigation, props }) {
         if (!nomeReceita.trim()) {
             errors.nomeReceita = "Nome da receita é obrigatório";
         }
-        if (!nomeReceita.trim().length < 3) {
-            errors.nomeReceita = "O nome da receita deve ter no mínimo 3 caracteres";
-        }
 
         if (!tempoPreparo.trim()) {
             errors.tempoPreparo = "Tempo de preparo é obrigatório";
@@ -111,38 +108,55 @@ export default function CadastroDeReceita({ navigation, props }) {
             errors.porcoes = "Número de porções deve ser um número";
         }
 
-        if (!valCalorico.trim()) {
+        if (valCalorico && isNaN(Number(valCalorico))) {
             errors.valCalorico = "Valor calórico é obrigatório";
         }
 
         if (!descricao.trim()) {
             errors.descricao = "Descrição da receita é obrigatória";
         }
-        if (descricao.trim().length < 5) {
+        else if (descricao.trim().length < 5) {
             errors.descricao = "A descrição deve ter no mínimo 5 caracteres";
         }
 
         if (!categoria.trim()) {
             errors.categoria = "Categoria da receita é obrigatória";
         }
+        for (let i = 0; i < ingredientes.length; i++) {
+            const ingrediente = ingredientes[i];
+            const { nomeIngrediente, quantidade, medida } = ingrediente;
 
-        if (ingredientes.some((ingrediente) => {
-            const { quantidade, medida, nomeIngrediente } = ingrediente;
-            const isMedidaEspecial = ['1/2 xícara (chá)', '1/4 xícara (chá)', '1/2', '1/4', 'a gosto'].includes(medida.trim());
-            const isNomeIngredienteValido = nomeIngrediente.trim().length >= 3;
-
-            if (!isMedidaEspecial) {
-                return !isNomeIngredienteValido || quantidade.trim().length === 0 || medida.trim().length === 0;
+            if (
+                medida === '1/2 xícara (chá)' ||
+                medida === '1/4 xícara (chá)' ||
+                medida === '1/2' ||
+                medida === '1/4' ||
+                medida === 'a gosto'
+            ) {
+                ingrediente.quantidade = '1';
             }
-
-            return !isNomeIngredienteValido;
-        })) {
-            errors.ingredientes = 'Preencha a quantidade, medida e nome de todos os ingredientes corretamente';
         }
 
+        for (let i = 0; i < ingredientes.length; i++) {
+            const ingrediente = ingredientes[i];
+            const { nomeIngrediente, quantidade, medida } = ingrediente;
 
+            if (!nomeIngrediente || nomeIngrediente.trim() === '') {
+                errors.ingredientes = 'Preencha o nome de todos os ingredientes';
+            }
 
-        console.log(ingredientes);
+            if (medida === '') {
+                errors.ingredientes = 'Selecione uma medida para todos os ingredientes';
+            }
+
+            if (!quantidade) {
+                errors.ingredientes = 'Informe uma quantidade';
+            }
+
+            if (quantidade && isNaN(Number(quantidade))) {
+                errors.ingredientes = 'Quantidade inválida';
+            }
+        }
 
         if (!passos.every((passo) => passo.PassoTexto.trim())) {
             errors.passos = "Todos os passos devem ser preenchidos";
@@ -152,6 +166,7 @@ export default function CadastroDeReceita({ navigation, props }) {
             errors.foto = "Imagem é obrigatória";
         }
         setErrors(errors);
+        console.log(errors);
 
         if (Object.keys(errors).length > 0) {
             showToast('Cuidado!', 'Preencha corretamente todos os campos. Ou tente novamente', 'error');
@@ -162,7 +177,7 @@ export default function CadastroDeReceita({ navigation, props }) {
         const body = { idReceita, nomeReceita, tempoPreparo, tempo, porcoes, valCalorico, descricao, nomeTag, usuario_id, categoria, aproveitamento, foto, ingredientes, passos };
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
+        fetch("https://cloudproveit.azurewebsites.netzurewebsites.net/api/receita", {
             method: "POST",
             headers,
             body: JSON.stringify(body)
@@ -215,7 +230,7 @@ export default function CadastroDeReceita({ navigation, props }) {
 
             <View style={styles.header}>
                 <Text style={styles.textAdd}>Adicionar</Text>
-                <Text style={styles.textReceitas} >Receita</Text>
+                <Text style={styles.textReceitas}>Receita</Text>
             </View>
 
             <View style={{ display: 'flex', alignItems: "center" }}>
@@ -323,6 +338,8 @@ export default function CadastroDeReceita({ navigation, props }) {
                         style={[styles.allInput, errors.descricao && styles.inputError]}
                         placeholder='Ex: Coxinha de frango com catupiry'
                         placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                        textAlignVertical="top"
+                        multiline={true}
                         maxLength={400}
                         value={descricao}
                         onChangeText={(texto) => setDescricao(texto)}

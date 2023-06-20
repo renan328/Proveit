@@ -25,7 +25,7 @@ export default function EditarUsuario({ navigation }) {
         const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/usuario/" + userDataJWT.ID, {
+        fetch("https://cloudproveit.azurewebsites.netzurewebsites.netzurewebsites.net/api/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })
@@ -104,7 +104,7 @@ export default function EditarUsuario({ navigation }) {
         const body = { idUsuario, nome, foto, nomeTag, email, senha };
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/usuario", {
+        fetch("https://cloudproveit.azurewebsites.netzurewebsites.netzurewebsites.net/api/usuario", {
             method: "PUT",
             headers,
             body: JSON.stringify(body)

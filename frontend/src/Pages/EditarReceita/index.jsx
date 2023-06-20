@@ -109,7 +109,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const userDataJWT = await DadosUsuario();
         setUsuario_id(userDataJWT.ID);
 
-        fetch("https://occ9lhoa+:7219 id, {
+        fetch("https://cloudproveit.azurewebsites.netzurewebsites.netzurewebsites.netzurewebsites.netzurewebsites.net/api/receita/" + id, {
             method: "GET",
             headers
         })
@@ -140,58 +140,79 @@ export default function EdicaoDeReceita({ navigation, props }) {
             errors.nomeReceita = "Nome da receita é obrigatório";
         }
 
-        if (isNaN(String(tempoPreparo).trim())) {
-            errors.tempoPreparo = "Tempo de preparo deve ser um número";
-        } else if (!String(tempoPreparo).trim()) {
+        if (!tempoPreparo.trim()) {
             errors.tempoPreparo = "Tempo de preparo é obrigatório";
+        } else if (isNaN(tempoPreparo)) {
+            errors.tempoPreparo = "Tempo de preparo deve ser um número";
         }
 
         if (!tempo.trim()) {
             errors.tempo = "O tipo de tempo é obrigatório";
         }
 
-        if (isNaN(String(porcoes).trim())) {
-            errors.porcoes = "Número de porções deve ser um número";
-        } else if (!String(porcoes).trim()) {
+        if (!porcoes.trim()) {
             errors.porcoes = "Número de porções é obrigatório";
+        } else if (isNaN(porcoes)) {
+            errors.porcoes = "Número de porções deve ser um número";
         }
 
-        if (isNaN(String(valCalorico).trim())) {
-            errors.valCalorico = "Valor calórico deve ser um número";
-        } else if (!String(valCalorico).trim()) {
+        if (valCalorico && isNaN(Number(valCalorico))) {
             errors.valCalorico = "Valor calórico é obrigatório";
         }
 
         if (!descricao.trim()) {
             errors.descricao = "Descrição da receita é obrigatória";
         }
+        else if (descricao.trim().length < 5) {
+            errors.descricao = "A descrição deve ter no mínimo 5 caracteres";
+        }
 
         if (!categoria.trim()) {
             errors.categoria = "Categoria da receita é obrigatória";
         }
+        for (let i = 0; i < ingredientes.length; i++) {
+            const ingrediente = ingredientes[i];
+            const { nomeIngrediente, quantidade, medida } = ingrediente;
 
-        if (ingredientes.some((ingrediente) => {
-            const { quantidade, medida, nomeIngrediente } = ingrediente;
-            const isMedidaEspecial = ['1/2 xícara (chá)', '1/4 xícara (chá)', '1/2', '1/4', 'a gosto'].includes(medida.trim());
-            const isNomeIngredienteValido = nomeIngrediente.trim().length >= 3;
-
-            if (!isMedidaEspecial) {
-                return !isNomeIngredienteValido || quantidade.trim().length === 0 || medida.trim().length === 0;
+            if (
+                medida === '1/2 xícara (chá)' ||
+                medida === '1/4 xícara (chá)' ||
+                medida === '1/2' ||
+                medida === '1/4' ||
+                medida === 'a gosto'
+            ) {
+                ingrediente.quantidade = '1';
             }
-
-            return !isNomeIngredienteValido;
-        })) {
-            errors.ingredientes = 'Preencha a quantidade, medida e nome de todos os ingredientes corretamente';
         }
 
-        if (!passos.every((passo) => passo.passoTexto.trim())) {
+        for (let i = 0; i < ingredientes.length; i++) {
+            const ingrediente = ingredientes[i];
+            const { nomeIngrediente, quantidade, medida } = ingrediente;
+
+            if (!nomeIngrediente || nomeIngrediente.trim() === '') {
+                errors.ingredientes = 'Preencha o nome de todos os ingredientes';
+            }
+
+            if (medida === '') {
+                errors.ingredientes = 'Selecione uma medida para todos os ingredientes';
+            }
+
+            if (!quantidade) {
+                errors.ingredientes = 'Informe uma quantidade';
+            }
+
+            if (quantidade && isNaN(Number(quantidade))) {
+                errors.ingredientes = 'Quantidade inválida';
+            }
+        }
+
+        if (!passos.every((passo) => passo.PassoTexto.trim())) {
             errors.passos = "Todos os passos devem ser preenchidos";
         }
 
         if (!foto) {
             errors.foto = "Imagem é obrigatória";
         }
-
         setErrors(errors);
 
         if (Object.keys(errors).length > 0) {
@@ -203,7 +224,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const headers = await HeaderRequisicao(navigation);
         console.log(body);
 
-        fetch("https://occ9lhoa{:7219
+        fetch("https://cloudproveit.azurewebsites.netzurewebsites.netzurewebsites.netzurewebsites.netzurewebsites.net/api/receita", {
             method: "PUT",
             headers,
             body: JSON.stringify(body)
@@ -368,7 +389,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
 
                             <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
                                 {(ingrediente.medida !== '1/2 xícara (chá)' && ingrediente.medida !== '1/4 xícara (chá)' && ingrediente.medida !== '1/2' && ingrediente.medida !== '1/4' && ingrediente.medida !== 'a gosto') && (
-                                    
+
                                     <TextInput
                                         style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
                                         placeholder="Ex: 10"

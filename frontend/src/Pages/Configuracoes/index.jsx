@@ -88,7 +88,7 @@ export default function Configuracoes({ navigation }) {
 
 
                 <TouchableOpacity style={styles.containerOpcoes} onPress={() => navigation.navigate('AvaliacoesDoUsuario')}>
-                    <Text style={styles.textOpcoes}>Editar avaliaões</Text>
+                    <Text style={styles.textOpcoes}>Editar avaliações</Text>
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faStar} size={25} color="#606060" />
                 </TouchableOpacity>
 

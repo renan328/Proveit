@@ -326,6 +326,7 @@ export default function ReceitaSingle({ navigation }) {
                         style={styles.commentInput}
                         textAlignVertical="top"
                         multiline={true}
+                        maxLength={400}
                         value={comentario}
                         onChangeText={(texto) => setComentario(texto)}
                     />

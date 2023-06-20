@@ -24,7 +24,7 @@ export default function Favoritos() {
 
         setLoading(true);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
+        fetch("https://cloudproveit.azurewebsites.netzurewebsites.net/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })

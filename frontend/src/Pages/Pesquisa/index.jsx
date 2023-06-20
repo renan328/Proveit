@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView, Image, useColorScheme, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, useColorScheme, TouchableOpacity, ActivityIndicator  } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import LottieView from 'lottie-react-native';

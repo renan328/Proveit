@@ -50,12 +50,12 @@ export default function CadastroDeUsuario({ navigation }) {
         } else if (!/\S+@\S+\.\S+/.test(emailLower)) {
             errors.email = "Email inválido";
         }
-        if (isNaN(String(senha).trim())) {
+        if (!senha.trim()) {
             errors.senha = "Senha é obrigatória";
         } else if (senha.length < 6) {
             errors.senha = "Senha deve ter pelo menos 6 caracteres";
         }
-        if (isNaN(String(confirmSenha).trim())) {
+        if (!confirmSenha.trim()) {
             errors.confirmSenha = "Confirmação de senha é obrigatória";
         } else if (confirmSenha !== senha) {
             errors.confirmSenha = "As senhas não coincidem";
@@ -71,7 +71,7 @@ export default function CadastroDeUsuario({ navigation }) {
         }
 
         // código de registro
-        fetch("https://cloudproveit.azurewebsites.net/api/auth/cadastro", {
+        fetch("https://cloudproveit.azurewebsites.netzurewebsites.netzurewebsites.net/api/auth/cadastro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
