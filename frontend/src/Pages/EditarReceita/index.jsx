@@ -109,7 +109,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const userDataJWT = await DadosUsuario();
         setUsuario_id(userDataJWT.ID);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita/" + id, {
+        fetch("https://occ9lhoa+:7219 id, {
             method: "GET",
             headers
         })
@@ -203,7 +203,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const headers = await HeaderRequisicao(navigation);
         console.log(body);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita", {
+        fetch("https://occ9lhoa{:7219
             method: "PUT",
             headers,
             body: JSON.stringify(body)
