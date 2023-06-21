@@ -50,7 +50,10 @@ export default function EsqueciMinhaSenhaSimple({ navigation }) {
                             <Text style={styles.Desc}>Contate nosso suporte via email para podermos analisar sua situação.</Text>
                         </View>
                          <View style={styles.inputSingle}>
-                            <TextInput style={styles.defaultInput} placeholder='E-mail'></TextInput>
+                            <TextInput style={styles.defaultInput} 
+                            value="proveitadm@gmail.com"
+                            editable={false}
+                            />
                         </View>
                     </View>
                 </View>
