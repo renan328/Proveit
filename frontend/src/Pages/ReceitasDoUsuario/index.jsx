@@ -25,7 +25,7 @@ export default function ReceitasDoUsuario() {
 
         setLoading(true);
 
-        fetch("https://cloudproveit.azurewebsites.net/api/receita/usuario/" + userDataJWT.ID, {
+        fetch("https://localhost:7219/api/receita/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })

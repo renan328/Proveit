@@ -71,7 +71,7 @@ export default function CadastroDeUsuario({ navigation }) {
         }
 
         // código de registro
-        fetch("https://cloudproveit.azurewebsites.netzurewebsites.netzurewebsites.net/api/auth/cadastro", {
+        fetch("https://localhost:7219/api/auth/cadastro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)

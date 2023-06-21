@@ -35,7 +35,7 @@ export default function PesquisaPorIngrediente() {
 
         const headers = await HeaderRequisicao(navigation);
 
-        const baseUrl = 'https://cloudproveit.azurewebsites.net/api/Receita/PesquisaPorIngredientes';
+        const baseUrl = 'https://localhost:7219/api/Receita/PesquisaPorIngredientes';
         const url = `${baseUrl}?ingredientes=${encodeURIComponent(ingredientes[0] || '')}&ingredientes=${encodeURIComponent(ingredientes[1] || '')}&ingredientes=${encodeURIComponent(ingredientes[2] || '')}&ingredientes=${encodeURIComponent(ingredientes[3] || '')}&ingredientes=${encodeURIComponent(ingredientes[4] || '')}`;
 
         fetch(url, {
@@ -96,6 +96,7 @@ export default function PesquisaPorIngrediente() {
                     </View>
 
                     <View style={styles.defaultInput}>
+                        <View style={{flexDirection: 'column'}} >
                         {ingredientes.map((nomeIngrediente, index) => (
                             <View key={index} style={styles.addableComponent}>
                                 <View style={styles.titleContainer}>
@@ -107,7 +108,7 @@ export default function PesquisaPorIngrediente() {
                                 <TextInput
                                     style={[styles.allInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
                                     value={nomeIngrediente}
-                                    placeholder={"Digite o nome do ingrediente"}
+                                    placeholder={"Nome do seu ingrediente"}
                                     placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                                     onChangeText={(nome) => handleNomeIngredienteChange(index, nome)}
                                 />
@@ -117,7 +118,7 @@ export default function PesquisaPorIngrediente() {
                                 )}
                             </View>
                         ))}
-
+</View>
                         <View style={styles.addRemoveButtonsContainer}>
                             {ingredientes.length < 5 && (
                                 <TouchableOpacity onPress={addIngrediente} style={styles.addButton}>

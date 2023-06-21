@@ -169,6 +169,8 @@ const styles = StyleSheet.create({
     },
 
     tituloStars: {
+        alignSelf: 'center',
+        marginVertical: 10,
         top: -20,
         color: '#FF7152',
         textAlign: 'center',

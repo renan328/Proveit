@@ -63,7 +63,7 @@ export default function Configuracoes({ navigation }) {
             {/* Lista de opções */}
             <View style={styles.opcoes}>
 
-                <View style={[styles.containerOpcoes, { backgroundColor: '#252525' }]}>
+                {/* <View style={[styles.containerOpcoes, { backgroundColor: '#252525' }]}>
                     <Text style={styles.textOpcoes}>Temas</Text>
                     <TouchableOpacity onPress={() => setSave(!save)} style={{ height: 100, width: 100 }}>
                         {/* <LottieView
@@ -71,9 +71,9 @@ export default function Configuracoes({ navigation }) {
                             autoPlay={false}
                             ref={animation}
                             loop={false}
-                        /> */}
+                        /> 
                     </TouchableOpacity>
-                </View>
+                </View> */}
 
                 <TouchableOpacity style={styles.containerOpcoes} onPress={() => navigation.navigate('EditarUsuario')}>
                     <Text style={styles.textOpcoes}>Editar perfil</Text>
