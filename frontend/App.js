@@ -13,6 +13,7 @@ import Perfil from './src/Pages/Perfil';
 import Pesquisar from './src/Pages/Pesquisa';
 import CadastroDeReceita from './src/Pages/CadastroDeReceita';
 import CadastroDeUsuario from './src/Pages/CadastroDeUsuario';
+import EsqueciMinhaSenhaSimple from './src/Pages/EsqueciMinhaSenhaSimple';
 import EsqueciMinhaSenha from './src/Pages/EsqueciMinhaSenha';
 import Cod_EsqueciMinhaSenha from './src/Pages/Cod_EsqueciMinhaSenha';
 import Red_EsqueciMinhaSenha from './src/Pages/Red_EsqueciMinhaSenha';
@@ -42,7 +43,7 @@ export default function App(props) {
 
   return (
     <MenuProvider>
-      <Routes/>
+      <EsqueciMinhaSenhaSimple/>
       <StatusBar hidden={true} />
       <Toast />
     </MenuProvider>
