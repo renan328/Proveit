@@ -177,7 +177,7 @@ export default function CadastroDeReceita({ navigation, props }) {
         const body = { idReceita, nomeReceita, tempoPreparo, tempo, porcoes, valCalorico, descricao, nomeTag, usuario_id, categoria, aproveitamento, foto, ingredientes, passos };
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://cloudproveit.azurewebsites.netzurewebsites.net/api/receita", {
+        fetch("https://proveittestes.azurewebsites.net/api/receita", {
             method: "POST",
             headers,
             body: JSON.stringify(body)

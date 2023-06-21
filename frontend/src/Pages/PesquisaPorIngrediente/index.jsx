@@ -35,7 +35,7 @@ export default function PesquisaPorIngrediente() {
 
         const headers = await HeaderRequisicao(navigation);
 
-        const baseUrl = 'https://localhost:7219/api/Receita/PesquisaPorIngredientes';
+        const baseUrl = 'https://proveittestes.azurewebsites.net/api/Receita/PesquisaPorIngredientes';
         const url = `${baseUrl}?ingredientes=${encodeURIComponent(ingredientes[0] || '')}&ingredientes=${encodeURIComponent(ingredientes[1] || '')}&ingredientes=${encodeURIComponent(ingredientes[2] || '')}&ingredientes=${encodeURIComponent(ingredientes[3] || '')}&ingredientes=${encodeURIComponent(ingredientes[4] || '')}`;
 
         fetch(url, {

@@ -109,7 +109,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const userDataJWT = await DadosUsuario();
         setUsuario_id(userDataJWT.ID);
 
-        fetch("https://cloudproveit.azurewebsites.netzurewebsites.netzurewebsites.netzurewebsites.netzurewebsites.net/api/receita/" + id, {
+        fetch("https://proveittestes.azurewebsites.net/api/receita/" + id, {
             method: "GET",
             headers
         })
@@ -224,7 +224,7 @@ export default function EdicaoDeReceita({ navigation, props }) {
         const headers = await HeaderRequisicao(navigation);
         console.log(body);
 
-        fetch("https://cloudproveit.azurewebsites.netzurewebsites.netzurewebsites.netzurewebsites.netzurewebsites.net/api/receita", {
+        fetch("https://proveittestes.azurewebsites.net/api/receita", {
             method: "PUT",
             headers,
             body: JSON.stringify(body)

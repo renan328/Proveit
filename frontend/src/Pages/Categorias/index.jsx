@@ -26,7 +26,7 @@ export default function ListagemCategoria({ categoria }) {
         const headers = await HeaderRequisicao(navigation);
         setLoading(true);
 
-        fetch("https://cloudproveit.azurewebsites.netzurewebsites.net/api/receita/categoria/" + nomeCategoria, {
+        fetch("https://proveittestes.azurewebsites.net/api/receita/categoria/" + nomeCategoria, {
             method: "GET",
             headers
         })
