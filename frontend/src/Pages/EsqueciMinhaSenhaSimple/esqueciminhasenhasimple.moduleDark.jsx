@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
         padding: 6,
     },
 
+    IconCopy:{
+        marginLeft: -40
+    },
+
     main: {
         display: 'flex',
         backgroundColor: '#fff',
@@ -68,10 +72,11 @@ const styles = StyleSheet.create({
 
     main3: {
         width: '100%',
-        height: '50%',
+        height: '45%',
         justifyContent: 'space-around',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        top:-20
     },
 
     circuloIcon: {
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         width: '82%',
-        height: '50%',
+        height: '55%',
     },
 
     Esqueceusua: {
@@ -120,7 +125,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         textDecorationLine: 'underline',
-        marginTop: -9,
+        marginTop: -5,
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 35,
@@ -140,9 +145,10 @@ const styles = StyleSheet.create({
 
     inputSingle: {
         width: '80%',
+        height: 50,
         display: 'flex',
         flexDirection: 'row',
-        alignSelf: 'center',
+        alignItems: 'center',
     },
 
     defaultInput: {
@@ -166,38 +172,8 @@ const styles = StyleSheet.create({
         elevation: 3,
         fontFamily: 'Raleway_600SemiBold',
     },
-
-    botoes: {
-        width: '100%',
-    },
-
-    button: {
-        display: 'flex',
-        marginTop: 2,
-        width: "78%",
-        backgroundColor: 'orange',
-        color: '#FFF',
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-        padding: 8,
-        alignSelf: 'center',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-    },
-
-    buttonText: {
-        textAlign: 'center',
-        color: '#FFF',
-        fontFamily: 'Raleway_700Bold',
-    },
-
+    
+   
     balls: {
         marginTop: -44,
         width: 235,
