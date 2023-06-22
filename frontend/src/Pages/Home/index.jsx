@@ -12,7 +12,7 @@ import StylesLight from './home.moduleLight';
 import LottieView from 'lottie-react-native';
 import { HeaderRequisicao } from "../../AuthContext";
 import { DadosUsuario } from '../../AuthContext';
-
+import CarrosselExplorar from '../../components/CarrosselExplorar/CarrosselExplorar';
 export default function Home({ navigation, props }) {
 
     const stars = 5;
@@ -87,10 +87,8 @@ export default function Home({ navigation, props }) {
 
             <ScrollView horizontal={true}>
 
-                <CartaoExplorar title={'Melhor avaliadas'} image={require('../../assets/explore1.png')} />
-                <CartaoExplorar title={'Mais favoritadas'} image={require('../../assets/explore2.png')} />
-                <CartaoExplorar title={'Mais comentadas'} image={require('../../assets/explore3.png')} />
-                <CartaoExplorar title={'Categoria nova'} image={require('../../assets/explore3.png')} />
+                <CarrosselExplorar />
+
             </ScrollView>
             <View style={styles.listamento}>
                 <FontAwesomeIcon icon={faArrowTrendUp} style={styles.listamentoIcon} size={35}></FontAwesomeIcon><Text style={styles.categoriaBig}>Popular <Text style={{ color: '#FF7152' }}>hoje</Text></Text>
@@ -169,7 +167,7 @@ export default function Home({ navigation, props }) {
             <View>
                 <CarrosselHome filtro={"onde/Porcoes"} />
             </View>
-            
+
             <View
                 style={{
                     borderBottomColor: '#505050',

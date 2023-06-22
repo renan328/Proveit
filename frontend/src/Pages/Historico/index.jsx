@@ -60,7 +60,7 @@ export default function Historico() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
+            {/* <View style={styles.header}>
                 <View style={styles.textContainer}>
                     <Text style={styles.firstText}>Meu</Text>
                     <Text style={styles.subText}>Histórico</Text>
@@ -73,7 +73,7 @@ export default function Historico() {
                 <TouchableOpacity>
                     <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
             <View style={styles.SubHeader}>
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Visto recentemente</Text>
             </View>

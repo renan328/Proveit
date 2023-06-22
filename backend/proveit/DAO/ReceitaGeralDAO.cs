@@ -79,40 +79,6 @@ namespace proveit.DAO
             conexao.Close();
             return receita;
         }
-        
-        public List<ReceitaGeralDTO> ListarReceitasHome()
-        {
-            var conexao = ConnectionFactory.Build();
-            conexao.Open();
-
-            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, Foto, Aproveitamento FROM Receitas";
-            var comando = new MySqlCommand(query, conexao);
-            var dataReader = comando.ExecuteReader();
-
-            var receitas = new List<ReceitaGeralDTO>();
-
-            while (dataReader.Read())
-            {
-                var idReceita = int.Parse(dataReader["idReceita"].ToString()); ;
-
-                if (receitas.Any(x => x.idReceita == idReceita) == false)
-                {
-                    //Não existe receita na lista
-
-                    var newReceita = new ReceitaGeralDTO();
-
-                    newReceita.idReceita = idReceita;
-                    newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
-                    newReceita.Foto = dataReader["Foto"].ToString();
-                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
-
-                    receitas.Add(newReceita);
-                }
-            }
-
-            conexao.Close();
-            return receitas;
-        }
 
         public List<ReceitaGeralDTO> ListarReceitasDoUsuario(int idUsuario)
         {
@@ -184,13 +150,12 @@ namespace proveit.DAO
             return receitas;
         }
 
-        // Listar receitas
-        public List<ReceitaGeralDTO> ListarReceitas()
+        public List<ReceitaGeralDTO> ListarMelhoresAvaliadas()
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
-
-            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, TempoPreparo,Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario";
+            
+            var query = "SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, AVG(A.Estrelas) AS mediaEstrelas FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento ORDER BY mediaEstrelas DESC;";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
 
@@ -208,53 +173,78 @@ namespace proveit.DAO
 
                     newReceita.idReceita = idReceita;
                     newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
-                    newReceita.TempoPreparo = int.Parse(dataReader["TempoPreparo"].ToString());
-                    newReceita.Tempo = dataReader["Tempo"].ToString();
-                    newReceita.Porcoes = int.Parse(dataReader["Porcoes"].ToString());
-                    newReceita.ValCalorico = int.Parse(dataReader["ValCalorico"].ToString());
-                    newReceita.Descricao = dataReader["Descricao"].ToString();
-                    newReceita.Categoria = dataReader["Categoria"].ToString();
-                    newReceita.NomeTag = dataReader["NomeTag"].ToString();
-                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
                     newReceita.Foto = dataReader["Foto"].ToString();
-
-                    newReceita.Ingredientes = new List<Ingredientes_ReceitaDTO>();
-                    newReceita.Passos = new List<PassoDTO>();
+                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
 
                     receitas.Add(newReceita);
                 }
+            }
 
-                var receita = receitas.First(x => x.idReceita == idReceita);
+            conexao.Close();
+            return receitas;
+        }
 
-                var listaIngredientes = receita.Ingredientes;
-                var idIngrediente = int.Parse(dataReader["idIngredientesReceita"].ToString());
+        public List<ReceitaGeralDTO> ListarMaisComentadas()
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
 
-                if (listaIngredientes.Any(x => x.idIngredientesReceita == idIngrediente) == false)
+            var query = "SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, COUNT(A.Comentario) AS TotalComentarios FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento ORDER BY TotalComentarios DESC;";
+            var comando = new MySqlCommand(query, conexao);
+            var dataReader = comando.ExecuteReader();
+
+            var receitas = new List<ReceitaGeralDTO>();
+
+            while (dataReader.Read())
+            {
+                var idReceita = int.Parse(dataReader["idReceita"].ToString()); ;
+
+                if (receitas.Any(x => x.idReceita == idReceita) == false)
                 {
-                    //Não existe ingrediente na lista
+                    //Não existe receita na lista
 
-                    var ingredientes = new Ingredientes_ReceitaDTO();
-                    ingredientes.idIngredientesReceita = idIngrediente;
-                    ingredientes.NomeIngrediente = dataReader["NomeIngrediente"].ToString();
-                    ingredientes.Quantidade = int.Parse(dataReader["Quantidade"].ToString());
-                    ingredientes.Medida = dataReader["Medida"].ToString();
+                    var newReceita = new ReceitaGeralDTO();
 
-                    receita.Ingredientes.Add(ingredientes);
+                    newReceita.idReceita = idReceita;
+                    newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
+                    newReceita.Foto = dataReader["Foto"].ToString();
+                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
+
+                    receitas.Add(newReceita);
                 }
+            }
 
+            conexao.Close();
+            return receitas;
+        }
 
-                var listaPassos = receita.Passos;
-                var idPasso = int.Parse(dataReader["idPasso"].ToString());
+        public List<ReceitaGeralDTO> ListarMaisFavoritadas()
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
 
-                if (listaPassos.Any(x => x.idPasso == idPasso) == false)
+            var query = "SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, COUNT(F.Receita_id) AS TotalFavoritos FROM Receitas R INNER JOIN ReceitasFavoritas F ON R.idReceita = F.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento ORDER BY TotalFavoritos DESC;";
+            var comando = new MySqlCommand(query, conexao);
+            var dataReader = comando.ExecuteReader();
+
+            var receitas = new List<ReceitaGeralDTO>();
+
+            while (dataReader.Read())
+            {
+                var idReceita = int.Parse(dataReader["idReceita"].ToString()); ;
+
+                if (receitas.Any(x => x.idReceita == idReceita) == false)
                 {
-                    //Não existe passo na lista
+                    //Não existe receita na lista
 
-                    var passo = new PassoDTO();
-                    passo.idPasso = idPasso;
-                    passo.NumPasso = int.Parse(dataReader["NumPasso"].ToString());
-                    passo.PassoTexto = dataReader["PassoTexto"].ToString();
-                    receita.Passos.Add(passo);
+                    var newReceita = new ReceitaGeralDTO();
+
+                    newReceita.idReceita = idReceita;
+                    newReceita.NomeReceita = dataReader["NomeReceita"].ToString();
+                    newReceita.Foto = dataReader["Foto"].ToString();
+                    newReceita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
+
+                    receitas.Add(newReceita);
                 }
             }
 
@@ -375,6 +365,8 @@ namespace proveit.DAO
             return receitas;
         }
 
+
+
         public void CadastrarReceita(ReceitaGeralDTO receita)
         {
             var conexao = ConnectionFactory.Build();
@@ -403,11 +395,6 @@ namespace proveit.DAO
             {
                 var queryIngrediente = @"INSERT INTO Ingredientes_Receita (Nome, Quantidade, Medida, Receita_id) VALUES
                         (@nome, @quantidade,@medida,@receita_id);";
-
-                if (ingrediente.Medida == "1/2 xícara (chá)" || ingrediente.Medida == "1/4 xícara (chá)" || ingrediente.Medida == "1/2" || ingrediente.Medida == "1/4" || ingrediente.Medida == "a gosto")
-                {
-                    ingrediente.Quantidade = 1;
-                }
 
                 var comandoIngrediente = new MySqlCommand(queryIngrediente, conexao);
                 comandoIngrediente.Parameters.AddWithValue("@nome", ingrediente.NomeIngrediente);
@@ -475,11 +462,6 @@ namespace proveit.DAO
 
                 foreach (var ingrediente in receita.Ingredientes)
                 {
-
-                    if (ingrediente.Medida == "1/2 xícara (chá)" || ingrediente.Medida == "1/4 xícara (chá)" || ingrediente.Medida == "1/2" || ingrediente.Medida == "1/4" || ingrediente.Medida == "a gosto")
-                    {
-                        ingrediente.Quantidade = 1;
-                    }
 
                     if (ingrediente.idIngredientesReceita == 0)
                     {

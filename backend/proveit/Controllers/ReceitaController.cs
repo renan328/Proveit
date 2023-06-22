@@ -8,7 +8,7 @@ namespace proveit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    // [Authorize]
     public class ReceitaController : ControllerBase
     {
         [HttpGet]
@@ -29,51 +29,6 @@ namespace proveit.Controllers
             };
 
             return Ok(detalhesReceita);
-        }
-
-        [HttpGet]
-        public IActionResult ListarReceitas()
-        {
-            var ReceitaDAO = new ReceitaGeralDAO();
-            var AvaliacaoDAO = new AvaliacaoDAO();
-            var receitas = ReceitaDAO.ListarReceitas();
-            var detalhesReceitas = new List<DetalhesReceitaDTO>();
-
-            foreach (var receita in receitas)
-            {
-                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
-                var detalhesReceita = new DetalhesReceitaDTO
-                {
-                    Receita = receita,
-                    MediaEstrelas = mediaEstrelas
-                };
-                detalhesReceitas.Add(detalhesReceita);
-            }
-
-            return Ok(detalhesReceitas);
-        }
-
-        [HttpGet]
-        [Route("home")]
-        public IActionResult ListarReceitasHome()
-        {
-            var ReceitaDAO = new ReceitaGeralDAO();
-            var AvaliacaoDAO = new AvaliacaoDAO();
-            var receitas = ReceitaDAO.ListarReceitasHome();
-            var detalhesReceitas = new List<DetalhesReceitaDTO>();
-
-            foreach (var receita in receitas)
-            {
-                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
-                var detalhesReceita = new DetalhesReceitaDTO
-                {
-                    Receita = receita,
-                    MediaEstrelas = mediaEstrelas
-                };
-                detalhesReceitas.Add(detalhesReceita);
-            }
-
-            return Ok(detalhesReceitas);
         }
 
         [HttpGet]
@@ -98,6 +53,77 @@ namespace proveit.Controllers
 
             return Ok(detalhesReceitas);
         }
+
+        [HttpGet]
+        [Route("MelhoresAvaliadas")]
+        public IActionResult ListarMelhoresAvaliadas()
+        {
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarMelhoresAvaliadas();
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
+        [HttpGet]
+        [Route("ListarMaisComentadas")]
+        public IActionResult ListarMaisComentadas()
+        {
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarMaisComentadas();
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
+
+        [HttpGet]
+        [Route("ListarMaisFavoritadas")]
+        public IActionResult ListarMaisFavoritadas()
+        {
+            var ReceitaDAO = new ReceitaGeralDAO();
+            var AvaliacaoDAO = new AvaliacaoDAO();
+            var receitas = ReceitaDAO.ListarMaisFavoritadas();
+            var detalhesReceitas = new List<DetalhesReceitaDTO>();
+
+            foreach (var receita in receitas)
+            {
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    MediaEstrelas = mediaEstrelas
+                };
+                detalhesReceitas.Add(detalhesReceita);
+            }
+
+            return Ok(detalhesReceitas);
+        }
+
 
         [HttpGet]
         [Route("onde/{chave}")]

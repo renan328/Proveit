@@ -63,7 +63,7 @@ export default function Pesquisar() {
         <ScrollView style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.subText}>Buscar <Text style={[styles.subText, { color: scheme === 'dark' ? '#fff' : '#505050' }]}>por</Text></Text>
+                    {/* <Text style={styles.subText}>Buscar <Text style={[styles.subText, { color: scheme === 'dark' ? '#fff' : '#505050' }]}>por</Text></Text>
 
                     <View style={styles.ScreenSelect}>
                         <TouchableOpacity>
@@ -72,7 +72,7 @@ export default function Pesquisar() {
                         <TouchableOpacity onPress={() => navigation.navigate('PesquisaPorIngrediente')}>
                             <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Ingredientes</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
                     <View style={styles.inputContainer}>
                         <TextInput

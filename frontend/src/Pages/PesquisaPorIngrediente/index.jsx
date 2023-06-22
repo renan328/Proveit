@@ -84,7 +84,7 @@ export default function PesquisaPorIngrediente() {
         <ScrollView style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.subText}>Buscar <Text style={[styles.subText, { color: scheme === 'dark' ? '#fff' : '#505050' }]}>por</Text></Text>
+                    {/* <Text style={styles.subText}>Buscar <Text style={[styles.subText, { color: scheme === 'dark' ? '#fff' : '#505050' }]}>por</Text></Text>
 
                     <View style={styles.ScreenSelect}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -93,7 +93,7 @@ export default function PesquisaPorIngrediente() {
                         <TouchableOpacity>
                             <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Ingredientes</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
 
                     <View style={styles.defaultInput}>
                         <View style={{flexDirection: 'column'}} >

@@ -50,17 +50,17 @@ export default function EsqueciMinhaSenhaSimple({ navigation }) {
                             </View>
                             <Text style={styles.Desc}>Contate nosso suporte via email para podermos analisar sua situação.</Text>
                         </View>
-                         <View style={styles.inputSingle}>
-                            <TextInput style={styles.defaultInput} 
-                            value="proveitadm@gmail.com"
-                            editable={false}
+                        <View style={styles.inputSingle}>
+                            <TextInput style={styles.defaultInput}
+                                value="admproveit@gmail.com"
+                                editable={false}
                             />
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => Clipboard.setString('admproveit@gmail.com')}>
                                 <FontAwesomeIcon
-                                 style={styles.IconCopy}
-                                 color={'#FF7152'}
-                                 size={30}
-                                 icon={faCopy}
+                                    style={styles.IconCopy}
+                                    color={'#FF7152'}
+                                    size={30}
+                                    icon={faCopy}
                                 />
                             </TouchableOpacity>
                         </View>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, useColorScheme, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
-import stylesLight from "./categorias.module";
-import stylesDark from "./categorias.moduleDark";
+import stylesLight from "./explore.module";
+import stylesDark from "./explore.moduleDark";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import CartaoReceita from "../../components/CartaoReceita/CartaoReceita";
@@ -10,11 +10,11 @@ import { useNavigation } from '@react-navigation/native';
 import showToast from '../../../hooks/toasts';
 import { useRoute } from '@react-navigation/native';
 
-export default function ListagemCategoria({ categoria }) {
+export default function Explore({ categoriaExlorar }) {
     const navigation = useNavigation();
 
     const route = useRoute();
-    const { nomeCategoria } = route.params;
+    const { nomeExplorar } = route.params;
 
     const scheme = useColorScheme()
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
@@ -26,7 +26,7 @@ export default function ListagemCategoria({ categoria }) {
         const headers = await HeaderRequisicao(navigation);
         setLoading(true);
 
-        fetch("https://proveittestes.azurewebsites.net/api/receita/categoria/" + nomeCategoria, {
+        fetch("https://proveittestes.azurewebsites.net/api/receita/" + nomeExplorar, {
             method: "GET",
             headers
         })
@@ -41,7 +41,22 @@ export default function ListagemCategoria({ categoria }) {
             });
     }
 
+    const [titulo, setTitulo] = useState('');
+    function VerificarTitulo() {
+        
+        if (nomeExplorar === "MelhoresAvaliadas") {
+            setTitulo("Melhor avaliadas");
+        } else if (nomeExplorar === "ListarMaisFavoritadas") {
+            setTitulo("Mais favoritadas");
+        } else if (nomeExplorar === "ListarMaisComentadas") {
+            setTitulo("Mais comentadas");
+        }
+
+        return titulo;
+    }
+
     useEffect(() => {
+        VerificarTitulo();
         ListarReceitas();
     }, []);
 
@@ -55,7 +70,7 @@ export default function ListagemCategoria({ categoria }) {
 
                 <View style={styles.header}>
 
-                    <Text style={styles.subText}>{nomeCategoria}</Text>
+                    <Text style={styles.subText}>{titulo}</Text>
                     <View
                         style={{
                             borderBottomColor: '#505050',

@@ -45,20 +45,15 @@ export default function Favoritos() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.textContainer}>
-                    <Text style={styles.firstText}>Meus</Text>
-                    <Text style={styles.subText}>Favoritos</Text>
-                </View>
-            </View>
-            <View style={styles.ScreenSelect}>
+
+            {/* <View style={styles.ScreenSelect}>
                 <TouchableOpacity>
                     <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Favoritos</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Historico')}>
                     <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
             <View style={styles.SubHeader}>
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Favoritos</Text>
             </View>
@@ -67,7 +62,7 @@ export default function Favoritos() {
                 {loading ? (
                     <View style={{ display: "flex", alignSelf: "center" }}>
                         <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
-                        <ActivityIndicator size="large" color="#FF7152" style={{marginTop: 10}} />
+                        <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
                     </View>
                 ) : (
                     <>

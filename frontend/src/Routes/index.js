@@ -9,7 +9,7 @@ import ReceitaSingle from '../Pages/ReceitaSingle';
 import Perfil from '../Pages/Perfil';
 import CadastroDeUsuario from '../Pages/CadastroDeUsuario';
 import CadastroDeReceita from '../Pages/CadastroDeReceita';
-import Pesquisa from '../Pages/Pesquisa';
+import Pesquisa from '../Pages/PesquisaPorReceita';
 import Favoritos from '../Pages/Favoritos';
 import Configuracoes from '../Pages/Configuracoes';
 import EsqueciMinhaSenha from '../Pages/EsqueciMinhaSenha';
@@ -24,17 +24,102 @@ import EditarAvaliacao from '../Pages/EditarAvaliacao';
 import Historico from '../Pages/Historico';
 import PesquisaPorIngrediente from '../Pages/PesquisaPorIngrediente';
 import ListagemCategoria from '../Pages/Categorias';
+import Explore from '../Pages/Explore';
+import FavoritosHistorico from '../Pages/FavoritosHistorico';
+import Pesquisas from '../Pages/Pesquisas';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faBookmark, faMagnifyingGlass, faUser, faPlus, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { useRef, useEffect, useState } from 'react';
 import LottieView from 'lottie-react-native';
 
 const Tab = createBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator();
-        
+
+export function TopTabNavigator() {
+
+    const scheme = useColorScheme();
+
+    return (
+        <TopTab.Navigator screenOptions={{
+            activeTintColor: '#FF7152',
+            inactiveTintColor: '#505050',
+            tabBarShowLabel: false,
+            tabBarStyle: {
+                backgroundColor: scheme === 'dark' ? '#202020' : '#eeeeee',
+                padding: 10,
+                borderRadius: 10,
+                paddingHorizontal: 35,
+                width: 250,
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginTop: 19,
+                fontsize: 15,
+                alignSelf: 'center',
+                flexDirection: 'row',
+            }
+        }}>
+
+            <TopTab.Screen name="Favoritos" component={Favoritos} options={{
+                tabBarIcon: ({ focused }) => (
+                    <Text style={{ color: focused ? '#FF7152' : '#808080', fontFamily: 'Raleway_700Bold', alignContent: 'stretch' }}>Favoritos</Text>
+                ), headerShown: false
+            }} />
+
+            <TopTab.Screen name="Historico" component={Historico} options={{
+                tabBarIcon: ({ focused }) => (
+                    <Text style={{ color: focused ? '#FF7152' : '#808080', fontFamily: 'Raleway_700Bold', alignContent: 'stretch' }}>Histórico</Text>
+                ), headerShown: false
+            }} />
+
+        </TopTab.Navigator>
+    )
+}
+
+export function TopTabNavigatorPesquisas() {
+
+    const scheme = useColorScheme();
+
+    return (
+        <TopTab.Navigator screenOptions={{
+            activeTintColor: '#FF7152',
+            inactiveTintColor: '#505050',
+            tabBarShowLabel: false,
+            tabBarStyle: {
+                backgroundColor: scheme === 'dark' ? '#202020' : '#eeeeee',
+                padding: 10,
+                borderRadius: 10,
+                paddingHorizontal: 35,
+                width: 250,
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginTop: 19,
+                fontsize: 15,
+                alignSelf: 'center',
+                flexDirection: 'row',
+            }
+        }}>
+
+            <TopTab.Screen name="Pesquisa" component={Pesquisa} options={{
+                tabBarIcon: ({ focused }) => (
+                    <Text style={{ color: focused ? '#FF7152' : '#808080', fontFamily: 'Raleway_700Bold', alignContent: 'stretch' }}>Receitas</Text>
+                ), headerShown: false
+            }} />
+
+            <TopTab.Screen name="PesquisaPorIngrediente" component={PesquisaPorIngrediente} options={{
+                tabBarIcon: ({ focused }) => (
+                    <Text style={{ color: focused ? '#FF7152' : '#808080', fontFamily: 'Raleway_700Bold', alignContent: 'stretch' }}>Ingredientes</Text>
+                ), headerShown: false
+            }} />
+
+        </TopTab.Navigator>
+    )
+}
+
 // Tab navigator principal, a com todas as stacks screens
 function MainTabNavigator() {
 
@@ -84,7 +169,7 @@ function MainTabNavigator() {
                 ), headerShown: false
             }} />
 
-            <Tab.Screen name='Pesquisar' component={PesquisaStack} options={{
+            <Tab.Screen name='Pesquisar' component={Pesquisas} options={{
                 tabBarIcon: ({ focused }) => (
                     <LinearGradient start={{ x: -1, y: 1 }}
                         end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.searchButton}>
@@ -93,7 +178,7 @@ function MainTabNavigator() {
                 ), headerShown: false, tabBarLabel: ''
             }} />
 
-            <Tab.Screen name="Favoritos" component={FavoritosStack} options={{
+            <Tab.Screen name="Favoritos" component={FavoritosHistorico} options={{
                 tabBarIcon: ({ focused }) => (
                     <FontAwesomeIcon icon={faBookmark} size={22} color={focused ? '#FF7152' : '#808080'} />
                 ), headerShown: false
@@ -134,6 +219,7 @@ function HomeStack() {
             <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
             <Stack.Screen options={{ headerShown: false }} name="ReceitaSingle" component={ReceitaSingle} />
             <Stack.Screen options={{ headerShown: false }} name="ListagemCategoria" component={ListagemCategoria} />
+            <Stack.Screen options={{ headerShown: false }} name="Explore" component={Explore} />
         </Stack.Navigator>
     );
 }

@@ -13,7 +13,6 @@ export default function CartaoCategoria({ categoria }) {
     const scheme = useColorScheme()
     const styles = scheme === 'dark' ? stylesDark : stylesLight
 
-
     return (
         <TouchableOpacity style={styles.caixaPrincipal} key={categoria.id} onPress={() => handleCardPress(categoria?.nome)}>
             <ImageBackground source={{ uri: categoria?.foto }} style={styles.imgCategoria} resizeMode="cover" imageStyle={{ borderRadius: 24 }}>

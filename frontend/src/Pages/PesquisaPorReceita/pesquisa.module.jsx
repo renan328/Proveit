@@ -6,13 +6,14 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#fff'
     },
-
+    
     header: {
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#fff'
     },
 
     textContainer: {

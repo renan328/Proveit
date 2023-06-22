@@ -1,27 +1,33 @@
 import React from "react";
-import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet, Image, TouchableOpacity, useColorScheme } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faStar, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { BlurView } from "expo-blur";
 
-export default function CartaoExplorar({ title, image  }) {
+export default function CartaoExplorar({ categoriaExplorar }) {
+    const navigation = useNavigation();
     
+    const handleCardPress = (nome) => {
+        navigation.navigate('Explore', { nomeExplorar: categoriaExplorar?.nomeExplorar });
+    };
+
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
+
     return (
-            <TouchableOpacity>
-                <View style={styles.caixaPrincipal}>
-                    <View style={styles.imageContainer}>
-                        <Image source={image} style={styles.image} resizeMode='contain' />
-                    </View>
-                    <View style={styles.textContainer}>
-                        <Text style={styles.titulo}>{title}</Text>
-                    </View>
+        <TouchableOpacity key={categoriaExplorar.id} onPress={() => handleCardPress(categoriaExplorar?.nomeExplorar)}>
+            <View style={styles.caixaPrincipal}>
+                <View style={styles.imageContainer}>
+                    <Image source={{uri: categoriaExplorar?.image}} style={styles.image} resizeMode='contain' />
                 </View>
-            </TouchableOpacity >
+                <View style={styles.textContainer}>
+                    <Text style={styles.titulo}>{categoriaExplorar?.title}</Text>
+                </View>
+            </View>
+        </TouchableOpacity >
 
     )
 }

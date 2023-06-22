@@ -10,7 +10,7 @@ import Routes from './src/Routes';
 import ReceitaSingle from './src/Pages/ReceitaSingle'
 import Home from './src/Pages/Home';
 import Perfil from './src/Pages/Perfil';
-import Pesquisar from './src/Pages/Pesquisa';
+import Pesquisar from './src/Pages/Pesquisas';
 import CadastroDeReceita from './src/Pages/CadastroDeReceita';
 import CadastroDeUsuario from './src/Pages/CadastroDeUsuario';
 import EsqueciMinhaSenhaSimple from './src/Pages/EsqueciMinhaSenhaSimple';
@@ -43,7 +43,7 @@ export default function App(props) {
 
   return (
     <MenuProvider>
-      <EsqueciMinhaSenhaSimple/>
+      <Routes/>
       <StatusBar hidden={true} />
       <Toast />
     </MenuProvider>

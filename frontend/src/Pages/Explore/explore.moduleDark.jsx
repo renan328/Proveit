@@ -4,14 +4,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#202020',
         height: '100%'
     },
+    
     header: {
         width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#202020',
+        textAlign: 'center',
+        height: 130,
+        fontFamily: 'Raleway_800ExtraBold',
+        color: '#FF7152',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
     },
+
     textContainer: {
         marginTop: 20,
         textAlign: 'center',
@@ -56,5 +59,3 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
-
-

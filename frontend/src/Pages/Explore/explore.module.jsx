@@ -1,24 +1,26 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#202020',
-        height: '100%'
+        backgroundColor: '#fff'
     },
+    
     header: {
         width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#202020',
+        textAlign: 'center',
+        height: 130,
+        fontFamily: 'Raleway_800ExtraBold',
+        color: '#FF7152',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
     },
+
     textContainer: {
         marginTop: 20,
         textAlign: 'center',
     },
     firstText: {
         fontFamily: 'Raleway_700Bold',
-        color: '#fff',
+        color: '#505050',
         fontSize: 20,
         textAlign: 'center',
         top: 15,
@@ -40,8 +42,9 @@ const styles = StyleSheet.create({
         marginTop: 19,
         marginLeft: 33
     },
+
     ScreenSelect: {
-        backgroundColor: '#131313',
+        backgroundColor: '#cdcdcd',
         padding: 10,
         borderRadius: 10,
         paddingHorizontal: 35,
@@ -56,5 +59,3 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
-
-
