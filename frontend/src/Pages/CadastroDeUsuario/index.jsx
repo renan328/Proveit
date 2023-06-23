@@ -71,7 +71,7 @@ export default function CadastroDeUsuario({ navigation }) {
         }
 
         // código de registro
-        fetch("https://proveittestes.azurewebsites.net/api/auth/cadastro", {
+        fetch("https://serverproveit.azurewebsites.net/api/auth/cadastro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)

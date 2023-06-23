@@ -40,7 +40,7 @@ export default function EdicaoDeAvaliacao({ navigation, props }) {
         const headers = await HeaderRequisicao(navigation);
         const userDataJWT = await DadosUsuario();
 
-        fetch("https://proveittestes.azurewebsites.net/api/avaliacao/unica/" + id, {
+        fetch("https://serverproveit.azurewebsites.net/api/avaliacao/unica/" + id, {
             method: "GET",
             headers
         })
@@ -74,7 +74,7 @@ export default function EdicaoDeAvaliacao({ navigation, props }) {
         const body = { idAvaliacao, estrelas, comentario, usuario_id, receita_id };
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://proveittestes.azurewebsites.net/api/avaliacao", {
+        fetch("https://serverproveit.azurewebsites.net/api/avaliacao", {
             method: "PUT",
             headers,
             body: JSON.stringify(body)

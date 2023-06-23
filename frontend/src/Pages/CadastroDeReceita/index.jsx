@@ -72,12 +72,9 @@ export default function CadastroDeReceita({ navigation, props }) {
             base64: true
         });
 
-        console.log(result);
-
-        if (result.canceled) {
-            return;
+        if (!result.canceled) {
+            setFoto('data:image/jpeg;base64,' + result.assets[0].base64);
         }
-        setFoto('data:image/jpeg;base64,' + result.assets[0].base64);
     }
 
     async function BuscarUsuario() {
@@ -173,17 +170,17 @@ export default function CadastroDeReceita({ navigation, props }) {
             return;
         }
 
-        debugger;
         const body = { idReceita, nomeReceita, tempoPreparo, tempo, porcoes, valCalorico, descricao, nomeTag, usuario_id, categoria, aproveitamento, foto, ingredientes, passos };
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://proveittestes.azurewebsites.net/api/receita", {
+        fetch("https://serverproveit.azurewebsites.net/api/receita", {
             method: "POST",
             headers,
             body: JSON.stringify(body)
         })
             .then((response) => {
                 showToast('Obrigado!', 'Receita cadastrada com sucesso!', 'success');
+                navigation.navigate('Home');
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao cadastrar a receita, tente novamente mais tarde.', 'error');

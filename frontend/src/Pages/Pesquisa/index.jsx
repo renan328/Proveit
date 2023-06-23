@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView, Image, useColorScheme, TouchableOpacity, ActivityIndicator  } from "react-native";
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, useColorScheme, TouchableOpacity, ActivityIndicator } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import LottieView from 'lottie-react-native';
@@ -35,7 +35,7 @@ export default function Pesquisar() {
 
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://proveittestes.azurewebsites.net/api/Receita/pesquisa/" + textoPesquisa, {
+        fetch("https://serverproveit.azurewebsites.net/api/Receita/pesquisa/" + textoPesquisa, {
             method: "GET",
             headers
         })
@@ -63,7 +63,7 @@ export default function Pesquisar() {
         <ScrollView style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.textContainer}>
-                    {/* <Text style={styles.subText}>Buscar <Text style={[styles.subText, { color: scheme === 'dark' ? '#fff' : '#505050' }]}>por</Text></Text>
+                    <Text style={styles.subText}>Buscar <Text style={[styles.subText, { color: scheme === 'dark' ? '#fff' : '#505050' }]}>por</Text></Text>
 
                     <View style={styles.ScreenSelect}>
                         <TouchableOpacity>
@@ -72,7 +72,7 @@ export default function Pesquisar() {
                         <TouchableOpacity onPress={() => navigation.navigate('PesquisaPorIngrediente')}>
                             <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Ingredientes</Text>
                         </TouchableOpacity>
-                    </View> */}
+                    </View>
 
                     <View style={styles.inputContainer}>
                         <TextInput
@@ -106,24 +106,36 @@ export default function Pesquisar() {
                     </LinearGradient>
                 </TouchableOpacity>
             </View>
-            {loading ? (
-                <View style={{ display: "flex", alignSelf: "center" }}>
-                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
-                    <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
-                </View>
-            ) : (
-                <>
-                    {dadosReceita.length > 0 ? (
-                        <>
-                            <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Resultados:</Text>
-                            {dadosReceita.map((receita, index) => (
-                                <CartaoFavorito dadosReceita={receita} key={index} />
-                            ))}
-                        </>
-                    ) : null}
-                </>
-            )}
-            {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
+            <View style={styles.CardsList}>
+
+                {loading ? (
+                    <View style={{ display: "flex", alignSelf: "center" }}>
+                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
+
+                        <LottieView
+                            source={require('../../assets/lottie/search.json')} // Caminho para o arquivo JSON do Lottie
+                            autoPlay
+                            loop
+                            style={{ height: 150, alignSelf: 'center' }}
+                        />
+                    </View>
+                ) : (
+                    <>
+                        {dadosReceita.length > 0 ? (
+                            <>
+                                {/* <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Resultados:</Text> */}
+                                {
+                                    dadosReceita.map((receita, index) => (
+                                        <CartaoFavorito dadosReceita={receita} key={index} />
+                                    ))
+                                }
+                            </>
+                        ) : null}
+                    </>
+                )}
+                {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
+            </View>
+            <View style={{ paddingVertical: 50 }} />
 
         </ScrollView>
 

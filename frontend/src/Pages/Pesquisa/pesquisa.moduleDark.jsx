@@ -16,6 +16,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#202020'
     },
 
+    CardsList: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        flexWrap: 'wrap',
+        flexDirection: 'row'
+    },
+
     textContainer: {
         marginTop: 20,
         },

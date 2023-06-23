@@ -26,7 +26,7 @@ export default function AvaliacoesDoUsuario() {
         
         setLoading(true);
 
-        fetch("https://proveittestes.azurewebsites.net/api/avaliacao/usuario/" + userDataJWT.ID, {
+        fetch("https://serverproveit.azurewebsites.net/api/avaliacao/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })

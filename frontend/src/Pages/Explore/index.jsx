@@ -26,7 +26,7 @@ export default function Explore({ categoriaExlorar }) {
         const headers = await HeaderRequisicao(navigation);
         setLoading(true);
 
-        fetch("https://proveittestes.azurewebsites.net/api/receita/" + nomeExplorar, {
+        fetch("https://serverproveit.azurewebsites.net/api/receita/" + nomeExplorar, {
             method: "GET",
             headers
         })

@@ -22,7 +22,7 @@ export default function CartaoReceitaDoUsuario({ receita }) {
     async function RemoverReceita() {
         const headers = await HeaderRequisicao();
            
-        fetch("https://proveittestes.azurewebsites.net/api/receita/" + receita.receita?.idReceita, {
+        fetch("https://serverproveit.azurewebsites.net/api/receita/" + receita.receita?.idReceita, {
             method: "DELETE",
             headers
         })
@@ -224,7 +224,8 @@ const stylesLight = StyleSheet.create({
     opcoes: {
         display: 'flex',
         alignItems: 'center',
-        marginTop: 15
+        marginTop: 15,
+        width: '80%'
     },
 });
 
@@ -356,6 +357,7 @@ const stylesDark = StyleSheet.create({
     opcoes: {
         display: 'flex',
         alignItems: 'center',
-        marginTop: 15
+        marginTop: 15,
+        width: '80%'
     },
 });

@@ -24,7 +24,7 @@ export default function Favoritos() {
 
         setLoading(true);
 
-        fetch("https://proveittestes.azurewebsites.net/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
+        fetch("https://serverproveit.azurewebsites.net/api/ReceitaFavorita/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })
@@ -45,15 +45,21 @@ export default function Favoritos() {
 
     return (
         <View style={styles.container}>
+            <View style={styles.header}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.firstText}>Meus</Text>
+                    <Text style={styles.subText}>Favoritos</Text>
+                </View>
+            </View>
 
-            {/* <View style={styles.ScreenSelect}>
+            <View style={styles.ScreenSelect}>
                 <TouchableOpacity>
                     <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Favoritos</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Historico')}>
                     <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
                 </TouchableOpacity>
-            </View> */}
+            </View>
             <View style={styles.SubHeader}>
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Favoritos</Text>
             </View>

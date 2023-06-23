@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, useColorScheme, Appearance, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, useColorScheme, ScrollView, TouchableOpacity } from "react-native";
 import stylesLight from "./historico.module";
 import stylesDark from "./historico.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
@@ -30,8 +30,8 @@ export default function Historico() {
                 const historicoReceitas = JSON.parse(historico);
 
                 const historicoReceitasString = historicoReceitas.join(',');
-                const url = `https://proveittestes.azurewebsites.net/api/receita/historico?idReceitas=${historicoReceitasString}`;
-                console.log(url);
+                const url = `https://serverproveit.azurewebsites.net/api/receita/historico?idReceitas=${historicoReceitasString}`;
+                
                 fetch(url, {
                     method: 'GET',
                     headers
@@ -59,8 +59,8 @@ export default function Historico() {
     }, []);
 
     return (
-        <View style={styles.container}>
-            {/* <View style={styles.header}>
+        <ScrollView style={styles.container}>
+            <View style={styles.header}>
                 <View style={styles.textContainer}>
                     <Text style={styles.firstText}>Meu</Text>
                     <Text style={styles.subText}>Histórico</Text>
@@ -73,7 +73,7 @@ export default function Historico() {
                 <TouchableOpacity>
                     <Text style={{ color: '#FF7152', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
                 </TouchableOpacity>
-            </View> */}
+            </View>
             <View style={styles.SubHeader}>
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Visto recentemente</Text>
             </View>
@@ -101,6 +101,6 @@ export default function Historico() {
 
             </View>
             <View style={{ paddingVertical: 50 }} />
-        </View>
+        </ScrollView>
     )
 }

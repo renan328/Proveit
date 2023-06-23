@@ -25,7 +25,7 @@ export default function ReceitasDoUsuario() {
 
         setLoading(true);
 
-        fetch("https://localhost:7219/api/receita/usuario/" + userDataJWT.ID, {
+        fetch("https://serverproveit.azurewebsites.net/api/receita/usuario/" + userDataJWT.ID, {
             method: "GET",
             headers
         })
@@ -77,7 +77,6 @@ export default function ReceitasDoUsuario() {
                         <>
                             {dadosReceita.length > 0 ? (
                                 <>
-                                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Resultados:</Text>
                                     {
                                         dadosReceita.map((receita, index) => (
                                             <CartaoReceitaDoUsuario receita={receita} key={index} />

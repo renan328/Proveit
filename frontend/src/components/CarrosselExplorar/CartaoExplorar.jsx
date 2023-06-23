@@ -8,7 +8,7 @@ import { BlurView } from "expo-blur";
 
 export default function CartaoExplorar({ categoriaExplorar }) {
     const navigation = useNavigation();
-    
+
     const handleCardPress = (nome) => {
         navigation.navigate('Explore', { nomeExplorar: categoriaExplorar?.nomeExplorar });
     };
@@ -21,7 +21,7 @@ export default function CartaoExplorar({ categoriaExplorar }) {
         <TouchableOpacity key={categoriaExplorar.id} onPress={() => handleCardPress(categoriaExplorar?.nomeExplorar)}>
             <View style={styles.caixaPrincipal}>
                 <View style={styles.imageContainer}>
-                    <Image source={{uri: categoriaExplorar?.image}} style={styles.image} resizeMode='contain' />
+                    <Image source={categoriaExplorar?.image} style={styles.image} resizeMode='contain' />
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.titulo}>{categoriaExplorar?.title}</Text>

@@ -14,7 +14,7 @@ export default function CarrosselHome({ filtro }) {
     async function ListarReceitas() {
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://proveittestes.azurewebsites.net/api/receita/" + filtro, {
+        fetch("https://serverproveit.azurewebsites.net/api/receita/" + filtro, {
             method: "GET",
             headers
         })
