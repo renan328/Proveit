@@ -15,23 +15,30 @@ namespace proveit.Controllers
         [Route("usuario/{idUsuario}")]
         public IActionResult ListarReceitasDoUsuario([FromRoute] int idUsuario)
         {
-            var ReceitaFavoritaDAO = new ReceitaFavoritaDAO();
-            var AvaliacaoDAO = new AvaliacaoDAO();
-            var receitas = ReceitaFavoritaDAO.ListarReceitasFavoritas(idUsuario);
-            var detalhesReceitas = new List<DetalhesReceitaDTO>();
-
-            foreach (var receita in receitas)
+            try
             {
-                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
-                var detalhesReceita = new DetalhesReceitaDTO
-                {
-                    Receita = receita,
-                    MediaEstrelas = mediaEstrelas
-                };
-                detalhesReceitas.Add(detalhesReceita);
-            }
+                var ReceitaFavoritaDAO = new ReceitaFavoritaDAO();
+                var AvaliacaoDAO = new AvaliacaoDAO();
+                var receitas = ReceitaFavoritaDAO.ListarReceitasFavoritas(idUsuario);
+                var detalhesReceitas = new List<DetalhesReceitaDTO>();
 
-            return Ok(detalhesReceitas);
+                foreach (var receita in receitas)
+                {
+                    var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(receita.idReceita);
+                    var detalhesReceita = new DetalhesReceitaDTO
+                    {
+                        Receita = receita,
+                        MediaEstrelas = mediaEstrelas
+                    };
+                    detalhesReceitas.Add(detalhesReceita);
+                }
+
+                return Ok(detalhesReceitas);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
 
 
@@ -39,29 +46,54 @@ namespace proveit.Controllers
         [Route("verificar/{idReceita}/{idUsuario}")]
         public IActionResult CadastrarReceitasFavoritas(int idReceita, int idUsuario)
         {
-            var dao = new ReceitaFavoritaDAO();
-            var favorito = dao.VerificaoFavorito(idReceita, idUsuario);
+            try
+            {
+                var dao = new ReceitaFavoritaDAO();
+                var favorito = dao.VerificaoFavorito(idReceita, idUsuario);
 
-            return Ok(favorito);
+                return Ok(favorito);
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
+
         }
 
         [HttpPost]
         public IActionResult CadastrarReceitasFavoritas(ReceitaFavoritaDTO receitaFavorita)
         {
-            var dao = new ReceitaFavoritaDAO();
-            dao.CasastrarReceitasFavoritas(receitaFavorita);
+            try
+            {
+                var dao = new ReceitaFavoritaDAO();
+                dao.CasastrarReceitasFavoritas(receitaFavorita);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
+
         }
 
         [HttpDelete]
         [Route("{idReceita}/{idUsuario}")]
         public IActionResult RemoverFavoritos([FromRoute] int idReceita, int idUsuario)
         {
-            var dao = new ReceitaFavoritaDAO();
-            dao.RemoverFavoritos(idReceita, idUsuario);
+            try
+            {
+                var dao = new ReceitaFavoritaDAO();
+                dao.RemoverFavoritos(idReceita, idUsuario);
 
-            return Ok();
+                return Ok();
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
     }
 }

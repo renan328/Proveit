@@ -180,12 +180,11 @@ export default function CadastroDeReceita({ navigation, props }) {
         })
             .then((response) => {
                 showToast('Obrigado!', 'Receita cadastrada com sucesso!', 'success');
-                navigation.navigate('Home');
+                navigation.navigate('HomeScreen');
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao cadastrar a receita, tente novamente mais tarde.', 'error');
             });
-        console.log(body);
     }
 
     const categorias = [

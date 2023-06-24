@@ -20,8 +20,8 @@
     "android": {
       "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./src/assets/proveitIcon.png",
+        "backgroundColor": "#ff7152"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
@@ -29,7 +29,7 @@
       "package": "com.renandevs.ProveIt"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/assets/proveitIcon.png"
     },
     "plugins": [
       [

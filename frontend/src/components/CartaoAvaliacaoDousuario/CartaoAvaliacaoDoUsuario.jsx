@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { LinearGradient } from 'expo-linear-gradient';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Appearance, useColorScheme, Image } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Modal, useColorScheme, Image } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faStar, faPencil, faTrashCan, faQuoteLeft, faQuoteRight } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { BlurView } from "expo-blur";
 import { DadosUsuario } from "../../AuthContext";
 import { HeaderRequisicao } from '../../AuthContext';
+import { ActionModal } from '../../components/ActionModal/ActionModal'
+import showToast from '../../../hooks/toasts';
 
 export default function CartaoAvalicaoDoUsuario({ avaliacao }) {
     const navigation = useNavigation();
+
+    const [visibleModal, setVisibleModal] = useState(false);
 
     const GoToEdit = (id) => {
         navigation.navigate('EditarAvaliacao', { id: avaliacao?.idAvaliacao });
@@ -18,20 +22,20 @@ export default function CartaoAvalicaoDoUsuario({ avaliacao }) {
     async function RemoverAvaliacao() {
         const headers = await HeaderRequisicao();
 
-        fetch("https://localhost:7219/api/avaliacao/" + avaliacao?.idAvaliacao, {
+        fetch("https://serverproveit.azurewebsites.net/api/avaliacao/" + avaliacao?.idAvaliacao, {
             method: "DELETE",
             headers
         })
             .then((response) => {
                 if (response.ok) {
-                    alert("Avaliação removida com sucesso!");
+                    showToast('Sucesso!', 'Avaliação removida com sucesso!', 'success');
                 }
                 else {
-                    alert("Erro ao remover avaliação");
+                    showToast('Foi mal!', 'Erro ao remover avaliação, tente novamente mais tarde.', 'error');
                 }
             })
             .catch((error) => {
-                alert("Erro ao remover avaliação");
+                showToast('Foi mal!', 'Erro ao remover avaliação, tente novamente mais tarde.', 'error');
             });
     }
 
@@ -88,12 +92,24 @@ export default function CartaoAvalicaoDoUsuario({ avaliacao }) {
                 <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={25} color="#606060" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.containerOpcoesDelete} onPress={RemoverAvaliacao}>
+            <TouchableOpacity style={styles.containerOpcoesDelete} onPress={() => setVisibleModal(true)}>
                 <Text style={styles.textOpcoesDelete}>Excluir avaliação</Text>
                 <FontAwesomeIcon style={styles.botaoOpcoes} icon={faTrashCan} size={25} color="#eeeeee5e" />
             </TouchableOpacity>
             <View style={{ paddingTop: 50 }} />
 
+            <Modal
+                visible={visibleModal}
+                transparent={true}
+                onRequestClose={() => setVisibleModal(false)}
+            >
+                <ActionModal
+                    handleClose={() => setVisibleModal(false)}
+                    handleAction={() => RemoverAvaliacao()}
+                    status={'delete'}
+                />
+
+            </Modal>
         </View>
     )
 }
@@ -116,10 +132,10 @@ const stylesLight = StyleSheet.create({
         shadowOpacity: 0.45,
         shadowRadius: 3.84,
         elevation: 5,
-        borderBottomStartRadius: 10,
-        borderTopStartRadius: 10,
-        borderBottomEndRadius: 10,
-        borderTopEndRadius: 10,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
     },
 
     imgContainer: {
@@ -263,10 +279,10 @@ const stylesDark = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        borderBottomStartRadius: 15,
-        borderTopStartRadius: 15,
-        borderBottomEndRadius: 15,
-        borderTopEndRadius: 15,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
         elevation: 5,
     },
 

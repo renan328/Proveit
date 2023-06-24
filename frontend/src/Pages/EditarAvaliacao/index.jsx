@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Appearance, useColorScheme } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Modal, useColorScheme } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { AirbnbRating } from 'react-native-ratings';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -9,6 +9,7 @@ import stylesDark from './editaravaliacao.moduleDark';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import { useRoute } from '@react-navigation/native';
+import { ActionModal } from '../../components/ActionModal/ActionModal'
 
 export default function EdicaoDeAvaliacao({ navigation, props }) {
 
@@ -26,6 +27,7 @@ export default function EdicaoDeAvaliacao({ navigation, props }) {
     const [nomeReceita, setNomeReceita] = useState();
 
     const [errors, setErrors] = useState({});
+    const [visibleModal, setVisibleModal] = useState(false);
 
     let inputStyle = [styles.input];
     if (scheme === 'dark') {
@@ -122,13 +124,26 @@ export default function EdicaoDeAvaliacao({ navigation, props }) {
                         value={comentario}
                         onChangeText={(texto) => setComentario(texto)}
                     />
-                    <TouchableOpacity style={styles.rateButton} onPress={EditarAvaliacao}>
+                    <TouchableOpacity style={styles.rateButton} onPress={() => setVisibleModal(true)}>
                         <Text style={styles.rateButtonText}>Avaliar</Text>
                     </TouchableOpacity>
                 </LinearGradient>
             </View>
 
             <View style={{ paddingVertical: 50 }} />
+            
+            <Modal
+                visible={visibleModal}
+                transparent={true}
+                onRequestClose={() => setVisibleModal(false)}
+            >
+                <ActionModal
+                    handleClose={() => setVisibleModal(false)}
+                    handleAction={() => EditarAvaliacao()}
+                    status={'put'}
+                />
+
+            </Modal>
         </ScrollView>
     )
 }

@@ -15,68 +15,122 @@ namespace proveit.Controllers
         [Route("unica/{idAvaliacao}")]
         public IActionResult ListarAvaliacaoUnica([FromRoute]int idAvaliacao)
         {
-            var dao = new AvaliacaoDAO();
-            var avaliacoes = dao.ListarAvaliacaoUnica(idAvaliacao);
+            try
+            {
+                var dao = new AvaliacaoDAO();
+                var avaliacao = dao.ListarAvaliacaoUnica(idAvaliacao);
 
-            return Ok(avaliacoes);
+                if (avaliacao == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(avaliacao);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
 
         [HttpGet]
         [Route("{id}")]
         public IActionResult ListarAvaliacaoDeReceita([FromRoute] int id)
         {
-            var dao = new AvaliacaoDAO();
-            var avaliacoes = dao.ListarAvaliacaoDeReceita(id);
+            try
+            {
+                var dao = new AvaliacaoDAO();
+                var avaliacoes = dao.ListarAvaliacaoDeReceita(id);
 
-            return Ok(avaliacoes);
+                return Ok(avaliacoes);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
 
         [HttpGet]
         [Route("usuario/{idUsuario}")]
         public IActionResult ListarAvaliacaoDoUsuario([FromRoute] int idUsuario)
         {
-            var dao = new AvaliacaoDAO();
-            var avaliacoes = dao.ListarAvaliacaosDoUsuario(idUsuario);
+            try
+            {
+                var dao = new AvaliacaoDAO();
+                var avaliacoes = dao.ListarAvaliacaosDoUsuario(idUsuario);
 
-            return Ok(avaliacoes);
+                return Ok(avaliacoes);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
 
         [HttpGet]
         public IActionResult ListarAvaliacao()
         {
-            var dao = new AvaliacaoDAO();
-            var avaliacoes = dao.ListarAvaliacoes();
+            try
+            {
+                var dao = new AvaliacaoDAO();
+                var avaliacoes = dao.ListarAvaliacoes();
 
-            return Ok(avaliacoes);
+                return Ok(avaliacoes);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
 
         [HttpPost]
         public IActionResult CadastrarAvaliacao([FromBody] CadAvaliacaoDTO avaliacao)
         {
-            var dao = new AvaliacaoDAO();
-            dao.CadastrarAvaliacao(avaliacao);
+            try
+            {
+                var dao = new AvaliacaoDAO();
+                dao.CadastrarAvaliacao(avaliacao);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
 
         }
 
         [HttpPut]
         public IActionResult AlterarAvaliacao(CadAvaliacaoDTO avaliacao)
         {
-            var dao = new AvaliacaoDAO();
-            dao.AlterarAvaliacao(avaliacao);
+            try
+            {
+                var dao = new AvaliacaoDAO();
+                dao.AlterarAvaliacao(avaliacao);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
 
         [HttpDelete]
         [Route("{id}")]
         public IActionResult RemoverAvaliacao([FromRoute] int id)
         {
-            var dao = new AvaliacaoDAO();
-            dao.DeletarAvaliacao(id);
+            try
+            {
+                var dao = new AvaliacaoDAO();
+                dao.DeletarAvaliacao(id);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
     }
 }

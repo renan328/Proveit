@@ -6,12 +6,13 @@ import { faCamera, faCircleCheck, faCircleXmark, faChevronLeft } from '@fortawes
 import * as ImagePicker from 'expo-image-picker';
 import stylesLight from './cadastrodeusuario.module';
 import stylesDark from './cadastrodeusuario.moduleDark';
+import showToast from '../../../hooks/toasts';
 
 export default function CadastroDeUsuario({ navigation }) {
 
 
     const scheme = useColorScheme();
-    var styles = scheme === 'dark' ? stylesDark : stylesLight;
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     const [nome, setNome] = useState('');
     const [nomeTagLower, setNomeTagLower] = useState('');
@@ -78,28 +79,29 @@ export default function CadastroDeUsuario({ navigation }) {
         })
             .then((response) => {
                 if (response.ok) {
-                    alert("Usuário cadastrado com sucesso!");
-                    navigation.navigate('Login');
+                    showToast('Obrigado!', 'Você foi cadastrado com sucesso!', 'success');
+                    navigation.navigate('LoginScreen');
+
                 } else if (response.status === 409) {
                     response.text().then((message) => {
+
                         if (message.includes("email")) {
                             errors.email = message;
+
                         } else if (message.includes("nome de usuário")) {
                             errors.nomeTag = message;
+
                         } else {
-                            alert(message);
+                            showToast('Foi mal!', { message }, 'error');
                         }
                     });
                 } else {
-                    alert("Erro desconhecido ao cadastrar o usuário.");
+                    showToast('Foi mal!', 'Erro desconhecido ao cadastrar o usuário. Tente novamente mais tarde.', 'error');
                 }
             })
             .catch((error) => {
                 console.log(error);
             });
-
-        console.log(body);
-
     };
 
     return (

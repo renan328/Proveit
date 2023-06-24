@@ -1,41 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { LinearGradient } from 'expo-linear-gradient';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Modal, useColorScheme } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faStar, faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { BlurView } from "expo-blur";
 import { DadosUsuario } from "../../AuthContext";
 import { HeaderRequisicao } from '../../AuthContext';
+import { ActionModal } from '../../components/ActionModal/ActionModal'
+import showToast from '../../../hooks/toasts';
 
 export default function CartaoReceitaDoUsuario({ receita }) {
     const navigation = useNavigation();
-
-    const handleCardPress = (id) => {
-        navigation.navigate('ReceitaSingle', { id: receita.receita?.idReceita });
-    };
+    const [visibleModal, setVisibleModal] = useState(false);
 
     const GoToEdit = (id) => {
         navigation.navigate('EditarReceita', { id: receita.receita?.idReceita });
     };
-
+    
     async function RemoverReceita() {
         const headers = await HeaderRequisicao();
-           
+
         fetch("https://serverproveit.azurewebsites.net/api/receita/" + receita.receita?.idReceita, {
             method: "DELETE",
             headers
         })
             .then((response) => {
                 if (response.ok) {
-                    alert("Receita removida com sucesso!");
+                    showToast('Sucesso!', 'Receita removida com sucesso!', 'success');
                 }
                 else {
-                    alert("Erro ao remover receita");
+                    showToast('Foi mal!', 'Erro ao remover a receita, tente novamente mais tarde.', 'error');
                 }
             })
             .catch((error) => {
-                alert("Erro ao remover receita");
+                showToast('Foi mal!', 'Erro ao remover a receita, tente novamente mais tarde.', 'error');
             });
     }
 
@@ -81,12 +80,23 @@ export default function CartaoReceitaDoUsuario({ receita }) {
                 <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={25} color="#606060" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.containerOpcoesDelete} onPress={RemoverReceita}>
+            <TouchableOpacity style={styles.containerOpcoesDelete} onPress={() => setVisibleModal(true)}>
                 <Text style={styles.textOpcoesDelete}>Excluir receita</Text>
                 <FontAwesomeIcon style={styles.botaoOpcoes} icon={faTrashCan} size={25} color="#eeeeee5e" />
             </TouchableOpacity>
             <View style={{ paddingTop: 50 }} />
+            <Modal
+                visible={visibleModal}
+                transparent={true}
+                onRequestClose={() => setVisibleModal(false)}
+            >
+                <ActionModal
+                    handleClose={() => setVisibleModal(false)}
+                    handleAction={() => RemoverReceita()}
+                    status={'delete'}
+                />
 
+            </Modal>
         </View>
     )
 }
@@ -309,7 +319,7 @@ const stylesDark = StyleSheet.create({
         color: '#fff',
         textTransform: 'capitalize'
     },
-    
+
     containerOpcoes: {
         width: '88%',
         paddingVertical: 15,
@@ -323,7 +333,7 @@ const stylesDark = StyleSheet.create({
         marginTop: 20,
     },
 
-    
+
     containerOpcoesDelete: {
         width: '88%',
         paddingVertical: 15,

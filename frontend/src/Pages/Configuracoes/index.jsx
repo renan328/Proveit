@@ -18,7 +18,7 @@ export default function Configuracoes({ navigation }) {
     const firstRun = useRef(true);
 
     const scheme = useColorScheme();
-    var styles = scheme === 'dark' ? stylesDark : stylesLight;
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     async function SairDaConta() {
         await Logout();
@@ -27,7 +27,7 @@ export default function Configuracoes({ navigation }) {
 
     async function LimparHistorico() {
         await AsyncStorage.removeItem("historicoReceitas");
-        alert("Limpo com sucesso")
+        showToast('Limpo!', 'Limpo com sucesso!', 'success');
     }
 
     useEffect(() => {

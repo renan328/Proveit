@@ -14,29 +14,52 @@ namespace proveit.Controllers
         [HttpGet]
         public IActionResult ListarUsuarios()
         {
-            var dao = new UsuarioDAO();
-            var usuarios = dao.ListarUsuarios();
+            try
+            {
+                var dao = new UsuarioDAO();
+                var usuarios = dao.ListarUsuarios();
 
-            return Ok(usuarios);
+                return Ok(usuarios);
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
+
         }
         [HttpGet]
         [Route("{id}")]
         public IActionResult ListarPorID([FromRoute] int id)
         {
-            var dao = new UsuarioDAO();
-            var usuario = dao.ListarUsuarioPorId(id);
 
-            return Ok(usuario);
+            try
+            {
+                var dao = new UsuarioDAO();
+                var usuario = dao.ListarUsuarioPorId(id);
+
+                return Ok(usuario);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
 
         [HttpPut]
         public IActionResult AlterarUsuario(UsuarioDTO usuario)
         {
-            var dao = new UsuarioDAO();
-            dao.AlterarUsuario(usuario);
+            try
+            {
+                var dao = new UsuarioDAO();
+                dao.AlterarUsuario(usuario);
 
-            return Ok();
-
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+            }
         }
     }
 }
