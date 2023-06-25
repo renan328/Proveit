@@ -277,6 +277,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                         placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                         value={tempoPreparo}
                         onChangeText={(texto) => setTempoPreparo(texto)}
+                        keyboardType="numeric"
                     />
 
                     <Picker
@@ -301,6 +302,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                         placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                         value={porcoes}
                         onChangeText={(texto) => setPorcoes(texto)}
+                        keyboardType="numeric"
                     />
                     {errors.porcoes && <Text style={styles.textError}>{errors.porcoes}</Text>}
                 </View>
@@ -325,6 +327,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                         placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                         value={valCalorico}
                         onChangeText={(texto) => setValCalorico(texto)}
+                        keyboardType="numeric"
                     />
                 </View>
 
@@ -374,6 +377,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                                         placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                                         value={ingrediente.quantidade}
                                         onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
+                                        keyboardType="numeric"
                                     />
                                 )}
 

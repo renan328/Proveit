@@ -25,6 +25,7 @@ import Historico from '../Pages/Historico';
 import PesquisaPorIngrediente from '../Pages/PesquisaPorIngrediente';
 import ListagemCategoria from '../Pages/Categorias';
 import Explore from '../Pages/Explore';
+import PreCadReceita from '../Pages/PreCadastroDeReceita';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -144,6 +145,7 @@ function HomeStack() {
 function CadastroDeReceitaStack() {
     return (
         <Stack.Navigator>
+            <Stack.Screen options={{ headerShown: false }} name="PreCadReceita" component={PreCadReceita} />
             <Stack.Screen options={{ headerShown: false }} name="CadastroDeReceitaScreen" component={CadastroDeReceitaScreen} />
         </Stack.Navigator>
     );
