@@ -15,6 +15,7 @@ import { BlurView } from 'expo-blur';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from "../../AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import showToast from '../../../hooks/toasts';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -51,7 +52,7 @@ export default function ReceitaSingle({ navigation }) {
                 setDadosReceita(json);
             })
             .catch((error) => {
-                alert("Erro ao buscar receita");
+                showToast('Foi mal!', 'Erro ao buscar a receita, tente novamente mais tarde.', 'error');
             });
     }
 
@@ -72,7 +73,7 @@ export default function ReceitaSingle({ navigation }) {
                 }
             })
             .catch((error) => {
-                alert("Erro ao verificar se é favorito");
+                showToast('Foi mal!', 'Erro ao verificar se é favorito, tente novamente mais tarde.', 'error');
             });
     };
 
@@ -93,6 +94,7 @@ export default function ReceitaSingle({ navigation }) {
 
             await AsyncStorage.setItem('historicoReceitas', JSON.stringify(novoHistorico));
         } catch (error) {
+            showToast('Foi mal!', 'Erro ao adicionar receia ao histórico!', 'error');
             console.log(error);
         }
     }
@@ -122,8 +124,7 @@ export default function ReceitaSingle({ navigation }) {
         const headers = await HeaderRequisicao(navigation);
 
         if (numCliques > 10) {
-            wwww
-            alert('Número máximo de cliques atingido!');
+            showToast('Foi mal!', 'Número máximo de cliques atingido!', 'error');
             return;
         }
 
@@ -137,12 +138,12 @@ export default function ReceitaSingle({ navigation }) {
                 headers,
                 body: JSON.stringify(body)
             })
-                .then((response) => { alert("Receita favoritada com sucesso!"); })
+                .then((response) => {
+                    showToast('Sucesso!', 'Receita favoritada com sucesso!', 'error');
+                })
                 .catch((error) => {
-                    alert("Erro ao favoritar receita");
+                    showToast('Foi mal!', 'Erro ao favoritar receita', 'error');
                 });
-            console.log(body);
-
         } else {
 
             fetch("https://serverproveit.azurewebsites.net/api/ReceitaFavorita/" + receita_id + "/" + usuario_id, {
@@ -151,14 +152,14 @@ export default function ReceitaSingle({ navigation }) {
             })
                 .then((response) => {
                     if (response.ok) {
-                        alert("Favorito removido com sucesso!");
+                        showToast('Sucesso!', 'Favorito removido com sucesso!', 'error');
                     }
                     else {
-                        alert("Erro ao remover favorito");
+                        showToast('Foi mal!', 'Erro ao remover favorito', 'error');
                     }
                 })
                 .catch((error) => {
-                    alert("Erro ao remover favorito");
+                    showToast('Foi mal!', 'Erro ao remover favorito', 'error');
                 });
         }
 
@@ -177,12 +178,13 @@ export default function ReceitaSingle({ navigation }) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         })
-            .then((response) => { alert("Avaliação cadastrada com sucesso!"); })
+            .then((response) => {
+                showToast('Sucesso!', 'Avaliação cadastrada com sucesso!', 'success');
+            })
             .catch((error) => {
                 console.log(error);
-                showFailToast;
+                showToast('Foi mal!', 'Erro avaliar receita, tente novamente mais tarde.', 'error');
             })
-        console.log(body);
     }
 
     return (
@@ -196,7 +198,7 @@ export default function ReceitaSingle({ navigation }) {
                         </MenuTrigger>
                         <MenuOptions>
                             <MenuOption style={{ marginVertical: 10, marginHorizontal: 5 }} onSelect={() => alert(`Compartilhar`)} text='Compartilhar' />
-                            <MenuOption style={{ marginVertical: 10, marginHorizontal: 5 }} onSelect={() => alert(`Denunciar`)} text='Denunciar' />
+                            <MenuOption style={{ marginVertical: 10, marginHorizontal: 5 }} onSelect={() => alert(`Mande um email para o suporte fazendo a denuncia com o nome da receita. E-mail: admproveit@gmail.com`)} text='Denunciar' />
                         </MenuOptions>
                     </Menu>
                 </View>

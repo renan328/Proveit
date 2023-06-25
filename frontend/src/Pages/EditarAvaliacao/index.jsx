@@ -10,6 +10,7 @@ import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import { useRoute } from '@react-navigation/native';
 import { ActionModal } from '../../components/ActionModal/ActionModal'
+import showToast from '../../../hooks/toasts';
 
 export default function EdicaoDeAvaliacao({ navigation, props }) {
 
@@ -56,7 +57,7 @@ export default function EdicaoDeAvaliacao({ navigation, props }) {
                 setUsuario_id(avaliacao?.usuario_id);
             })
             .catch((error) => {
-                alert(error);
+                showToast('Foi mal!', 'Erro ao bsucar avaliação, tente novamente mais tarde.', 'error');
             });
     }
 
@@ -81,11 +82,12 @@ export default function EdicaoDeAvaliacao({ navigation, props }) {
             headers,
             body: JSON.stringify(body)
         })
-            .then((response) => { alert("Avaliação editada com sucesso!"); })
-            .catch((error) => {
-                console.log(error);
+            .then((response) => {
+                showToast('Sucesso!', 'Avaliação editada com sucesso!', 'success');
             })
-        console.log(body);
+            .catch((error) => {
+                showToast('Foi mal!', 'Erro ao editar avaliação, tente novamente mais tarde.', 'error');
+            })
     }
 
     useEffect(() => {
@@ -131,7 +133,7 @@ export default function EdicaoDeAvaliacao({ navigation, props }) {
             </View>
 
             <View style={{ paddingVertical: 50 }} />
-            
+
             <Modal
                 visible={visibleModal}
                 transparent={true}

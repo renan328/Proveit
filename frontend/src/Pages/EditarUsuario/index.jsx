@@ -109,14 +109,12 @@ export default function EditarUsuario({ navigation }) {
             headers,
             body: JSON.stringify(body)
         })
-            .then(() => { alert("Usuário editado com sucesso"); })
+            .then(() => {
+                showToast('Sucesso!', 'Usuário editado com sucesso!', 'success');
+            })
             .catch((error) => {
-                console.log(error);
-                alert("Erro ao editar resultado");
+                showToast('Foi mal!', 'Erro ao editar usuário!', 'error');
             });
-
-        console.log(body);
-
     };
 
     const scheme = useColorScheme();

@@ -63,10 +63,10 @@ export default function Login({ navigation }) {
             })
             .then(() => navigation.navigate("Main"))
             .then(() => {
-                alert("Login Efetuado com sucesso!")
+                showToast('Sucesso!', 'Login efetuado com sucesso!', 'success');
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((error) => {
+                console.log(error);
                 showToast('Foi mal!', 'Erro ao fazer login, tente novamente mais tarde.', 'error');
             })
 

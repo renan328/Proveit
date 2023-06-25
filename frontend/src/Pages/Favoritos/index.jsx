@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, useColorScheme, Appearance, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, useColorScheme, ScrollView, TouchableOpacity } from "react-native";
 import stylesLight from "./favoritos.module";
 import stylesDark from "./favoritos.moduleDark";
 import CartaoFavorito from "../../components/CartaoFavorito/CartaoFavorito";
@@ -44,7 +44,7 @@ export default function Favoritos() {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.textContainer}>
                     <Text style={styles.firstText}>Meus</Text>
@@ -59,7 +59,7 @@ export default function Favoritos() {
                 <TouchableOpacity onPress={() => navigation.navigate('Historico')}>
                     <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Histórico</Text>
                 </TouchableOpacity>
-            </View>
+            </View> 
             <View style={styles.SubHeader}>
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Favoritos</Text>
             </View>
@@ -85,9 +85,8 @@ export default function Favoritos() {
                 )}
                 {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
 
-
             </View>
             <View style={{ paddingVertical: 50 }} />
-        </View>
+        </ScrollView>
     )
 }

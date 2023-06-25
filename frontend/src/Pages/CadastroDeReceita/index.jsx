@@ -331,7 +331,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Pequena descrição</Text>
                     <TextInput
-                        style={[styles.allInput, errors.descricao && styles.inputError]}
+                        style={[styles.descricaoInput, errors.descricao && styles.inputError]}
                         placeholder='Ex: Coxinha de frango com catupiry'
                         placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
                         textAlignVertical="top"
