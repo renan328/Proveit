@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Appearance, useColorScheme } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faStar, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faSeedling } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { BlurView } from "expo-blur";
 
@@ -15,6 +15,7 @@ export default function CartaoReceita({ receita }) {
 
     const stars = receita.mediaEstrelas;
     function StarCounter() {
+
         const starsBox = [];
         for (let index = 0; index < stars; index++) {
             starsBox.push(
@@ -36,6 +37,12 @@ export default function CartaoReceita({ receita }) {
             <ImageBackground source={{ uri: !receita.receita?.foto ? '../../assets/proveitLogo.png' : receita.receita?.foto }} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
+                    {
+                        receita.receita?.aproveitamento == true &&
+                        <View style={styles.AproveitamentoTrue}>
+                            <FontAwesomeIcon icon={faSeedling} size={18} color="#FFF" />
+                        </View>
+                    }
                 </View>
 
                 {/* Container de imagem e texto */}
@@ -50,7 +57,6 @@ export default function CartaoReceita({ receita }) {
 
             </ImageBackground>
         </TouchableOpacity >
-
     )
 }
 
@@ -79,12 +85,21 @@ const stylesLight = StyleSheet.create({
     },
 
     header: {
-        padding: 7,
         width: '100%',
         display: 'flex',
-        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-end'
+    },
+
+
+    AproveitamentoTrue: {
+        display: 'flex',
+        alignSelf: 'center',
+        backgroundColor: '#52FF6E',
+        paddingHorizontal: 25,
+        paddingVertical: 5,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
     },
 
     bookmarkIcon: {
@@ -167,12 +182,20 @@ const stylesDark = StyleSheet.create({
     },
 
     header: {
-        padding: 10,
         width: '100%',
         display: 'flex',
-        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-end'
+    },
+
+    AproveitamentoTrue: {
+        display: 'flex',
+        alignSelf: 'center',
+        backgroundColor: '#52FF6E',
+        paddingHorizontal: 25,
+        paddingVertical: 5,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
     },
 
     bookmarkIcon: {
@@ -222,6 +245,5 @@ const stylesDark = StyleSheet.create({
         color: '#FFF',
         textTransform: 'capitalize'
     },
-
 
 });

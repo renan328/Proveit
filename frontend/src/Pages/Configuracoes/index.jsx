@@ -30,24 +30,6 @@ export default function Configuracoes({ navigation }) {
         showToast('Limpo!', 'Limpo com sucesso!', 'success');
     }
 
-    useEffect(() => {
-        // if (firstRun.current) {
-        //     if (save) {
-        //         animation.current.play(20, 20);
-        //     } else {
-        //         animation.current.play(0, 0);
-        //     }
-
-        //     firstRun.current = false;
-        // } else if (save) {
-        //     animation.current.play(0, 95);
-        //     styles = stylesDark;
-        // } else {
-        //     animation.current.play(95, 180);
-        //     styles = stylesLight;
-        // }
-    });
-
     return (
         <ScrollView style={styles.container}>
             {/* Header */}
@@ -62,18 +44,6 @@ export default function Configuracoes({ navigation }) {
 
             {/* Lista de opções */}
             <View style={styles.opcoes}>
-
-                {/* <View style={[styles.containerOpcoes, { backgroundColor: '#252525' }]}>
-                    <Text style={styles.textOpcoes}>Temas</Text>
-                    <TouchableOpacity onPress={() => setSave(!save)} style={{ height: 100, width: 100 }}>
-                        {/* <LottieView
-                            source={require('../../assets/lottie/switchTheme.json')} // Caminho para o arquivo JSON do Lottie
-                            autoPlay={false}
-                            ref={animation}
-                            loop={false}
-                        /> 
-                    </TouchableOpacity>
-                </View> */}
 
                 <TouchableOpacity style={styles.containerOpcoes} onPress={() => navigation.navigate('EditarUsuario')}>
                     <Text style={styles.textOpcoes}>Editar perfil</Text>
@@ -98,23 +68,11 @@ export default function Configuracoes({ navigation }) {
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faBroom} size={25} color="#606060" />
                 </TouchableOpacity>
 
-
-                <TouchableOpacity style={styles.containerOpcoes}>
+{/* 
+                <TouchableOpacity style={styles.containerOpcoes} onPress={() => navigation.navigate('EsqueciMinhaSenhaSimple')}>
                     <Text style={styles.textOpcoes}>Central de Ajuda</Text>
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faQuestionCircle} size={25} color="#606060" />
-                </TouchableOpacity>
-
-
-                <TouchableOpacity style={styles.containerOpcoes}>
-                    <Text style={styles.textOpcoes}>Termos e condições</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faScroll} size={25} color="#606060" />
-                </TouchableOpacity>
-
-
-                <TouchableOpacity style={styles.containerOpcoes}>
-                    <Text style={styles.textOpcoes}>Política de privacidade</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faScroll} size={25} color="#606060" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
 
                 <TouchableOpacity style={styles.containerOpcoes} onPress={SairDaConta}>

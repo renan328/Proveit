@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         left: '50%',
         transform: [{ translateX: -29 }, { translateY: -29 }],
     },
-    
+
     BorderIcon: {
         display: 'flex',
         width: 140,
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
         marginTop: 10,
-        fontFamily: 'Raleway_600SemiBold',
+        fontFamily: 'Raleway_500Medium',
     },
 
 

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, useColorScheme } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, useColorScheme } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import CarrosselHome from '../../components/CartaoReceita/CarrosselReceitas';
 import CarrosselCategorias from '../../components/CartaoCategoria/CarrosselCategoria';
 import ReceitaEspecial from '../../components/ReceitaEspecial/ReceitaEspecial';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faAward, faArrowTrendUp, faStar, faArrowTrendDown, faCircleExclamation, faClock, faCompass, faMagnifyingGlass, faPeopleRoof, faSeedling } from '@fortawesome/free-solid-svg-icons'
+import { faAward, faStar, faArrowTrendDown, faCircleExclamation, faClock, faCompass, faMagnifyingGlass, faPeopleRoof, faSeedling, faBowlFood } from '@fortawesome/free-solid-svg-icons'
 import StylesDark from './home.moduleDark';
 import StylesLight from './home.moduleLight';
 import LottieView from 'lottie-react-native';
 import { DadosUsuario } from '../../AuthContext';
 import CarrosselExplorar from '../../components/CarrosselExplorar/CarrosselExplorar';
+
 export default function Home({ navigation, props }) {
 
     const stars = 5;
@@ -67,9 +69,16 @@ export default function Home({ navigation, props }) {
                     </View>
                 </View>
                 <View style={styles.inputContainer}>
-                    <TextInput style={styles.ingredienteInput} placeholder='Pesquisa por ingredientes'></TextInput><FontAwesomeIcon icon={faMagnifyingGlass} style={{
-                        color: '#505050'
-                    }} size={20} />
+                    <TouchableOpacity onPress={() => navigation.navigate('Pesquisar')}>
+
+                        <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
+                            end={{ x: 2, y: 1 }} style={styles.ingredienteInput} >
+                            <FontAwesomeIcon icon={faBowlFood} style={{ color: '#FFF' }} size={20} />
+                            <Text style={{ color: '#FFF', fontFamily: 'Raleway_700Bold', fontSize: 12, marginHorizontal: 10, textAlign: 'center' }} >Algum ingrediente específico? Pesquise por ingrediente!</Text>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#FFF' }} size={20} />
+                        </LinearGradient>
+
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.listamento}>
@@ -132,7 +141,7 @@ export default function Home({ navigation, props }) {
             </View>
 
             <View style={styles.listamento}>
-                <FontAwesomeIcon icon={faSeedling} style={[styles.listamentoIcon, { color: '#66e660' }]} size={25}></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faSeedling} style={[styles.listamentoIcon, { color: '#52FF6E' }]} size={25}></FontAwesomeIcon>
                 <Text style={styles.categoria}>Receitas <Text style={{ color: '#FF7152' }}>reaproveitáveis</Text></Text>
             </View>
             <View>

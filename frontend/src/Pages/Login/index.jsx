@@ -35,12 +35,12 @@ export default function Login({ navigation }) {
         if (!email.trim()) {
             errors.email = "Email é obrigatório";
         } else if (!/\S+@\S+\.\S+/.test(email)) {
-            // errors.email = "Email inválido";
+            errors.email = "Email inválido";
         }
         if (!senha) {
             errors.senha = "Senha é obrigatória";
-        } else if (senha.length < 8) {
-            // errors.senha = "Senha deve ter pelo menos 8 caracteres";
+        } else if (senha.length < 6) {
+            errors.senha = "Senha deve ter pelo menos 6 caracteres";
         }
         setErrors(errors);
 
@@ -58,7 +58,6 @@ export default function Login({ navigation }) {
             },
         })
             .then((response) => {
-                // debugger;
                 SalvarJWT(response.data.token);
             })
             .then(() => navigation.navigate("Main"))
@@ -107,7 +106,6 @@ export default function Login({ navigation }) {
                             {errors.email && <Text style={styles.textError}>{errors.email}</Text>}
                         </View>
 
-
                         <View style={styles.inputSingle}>
                             <TextInput
                                 style={[styles.input, errors.senha && styles.inputError]}
@@ -119,35 +117,34 @@ export default function Login({ navigation }) {
                             />
                             {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
                         </View>
-                        {/* <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
                             <Text style={{ fontFamily: 'Raleway_600SemiBold', color: '#505050', textDecorationLine: 'underline', alignSelf: 'center' }}>Esqueci minha senha</Text>
-                        </TouchableOpacity> */}
-
-                    </View>
-                    <ImageBackground source={require('../../assets/bemVindo.png')} style={styles.buttons}>
-                        {/* Botão */}
-                        <TouchableOpacity onPress={Login}>
-                            <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
-                                end={{ x: 2, y: 1 }} style={styles.button} >
-                                <Text style={styles.buttonText}>Entrar</Text>
-                            </LinearGradient>
                         </TouchableOpacity>
+                    </View>
 
-                        {/* <Text style={styles.ou}>OU</Text>
+                    <TouchableOpacity onPress={Login}>
+                        <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
+                            end={{ x: 2, y: 1 }} style={styles.button} >
+                            <Text style={styles.buttonText}>Entrar</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('Main')} style={styles.googleButton}>
-                            <Image source={require('../../assets/googleIcon.png')} style={{ width: 27, height: 27 }} /><Text style={styles.googleButtonText}>Entrar com Google</Text>
-                        </TouchableOpacity> */}
 
+                    <ImageBackground source={require('../../assets/bemVindo.png')} style={styles.buttons}>
                         <Text style={styles.headerSignText}>Ainda não tem uma conta?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate("CadastroDeUsuario")} style={styles.signUpButton}>
                             <Text style={{ fontFamily: 'Raleway_700Bold', color: '#FF7152' }}>Cadastrar</Text>
                         </TouchableOpacity>
-                        <Text style={styles.textBy}>By</Text>
-                        <Image source={require('../../assets/devlare.png')} style={styles.logoDevlare} />
-                        <Text style={styles.textBeta}>Beta 0.7</Text>
-                    </ImageBackground>
 
+                        <View style={styles.footer}>
+                            <Text style={styles.textBy}>By</Text>
+                            <Image source={require('../../assets/devlare.png')} style={styles.logoDevlare} />
+                        </View>
+                        <View style={styles.footerContent}>
+                            <Text style={styles.textBeta}>Beta 0.7</Text>
+                            <Text style={styles.textPronuncia}>*Sim, se pronuncia <Text style={{ fontSize: 14, color: scheme === 'dark' ? '#rgba(255, 255, 255, 0.8)' : '#303030' }}>Provêit!</Text></Text>
+                        </View>
+                    </ImageBackground>
                 </View>
             </BlurView >
         </ImageBackground >

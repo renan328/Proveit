@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
         marginTop: 10,
-        fontFamily: 'Raleway_600SemiBold',
+        fontFamily: 'Raleway_500Medium',
     },
 
 

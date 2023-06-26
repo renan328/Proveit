@@ -264,7 +264,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                             selectedValue={categoria}
                             onValueChange={(itemValue) => setCategoria(itemValue)}
                         >
-                            <Picker.Item style={{ color: scheme === 'dark' ? '#DDD' : '#505050' }} label="Categorias:" value="" enabled={false} />
+                            <Picker.Item style={{ color: scheme === 'dark' ? '#DDD' : '#505050', fontFamily: 'Raleway_500Medium' }} label="Categorias:" value="" enabled={false} />
                             {categorias.map((categoria, index) => (
                                 <Picker.Item style={styles.PickerItem} key={index} label={categoria} value={categoria} />
                             ))}
@@ -292,7 +292,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                             selectedValue={tempo}
                             onValueChange={(itemValue) => setTempo(itemValue)}
                         >
-                            <Picker.Item style={{ color: scheme === 'dark' ? '#DDD' : '#505050' }} label="Tempos:" value="" enabled={false} />
+                            <Picker.Item style={{ color: scheme === 'dark' ? '#DDD' : '#505050', fontFamily: 'Raleway_500Medium' }} label="Tempos:" value="" enabled={false} />
                             <Picker.Item style={styles.PickerItem} label="Minuto(s)" value="Minuto(s)" />
                             <Picker.Item style={styles.PickerItem} label="Hora(s)" value="Hora(s)" />
                         </Picker>

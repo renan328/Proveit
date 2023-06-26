@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
         marginTop: 10,
-        fontFamily: 'Raleway_600SemiBold'
+        fontFamily: 'Raleway_500Medium',
     },
 
     defaultInput: {
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
         marginTop: 10,
-        fontFamily: 'Raleway_600SemiBold'
+        fontFamily: 'Raleway_500Medium',
     },
 
     horaInput: {
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
         marginTop: 10,
-        fontFamily: 'Raleway_600SemiBold'
+        fontFamily: 'Raleway_500Medium',
     },
 
     medidaInput: {
@@ -461,12 +461,13 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
         marginTop: 10,
-        fontFamily: 'Raleway_600SemiBold'
+        fontFamily: 'Raleway_500Medium',
     },
 
     PickerItem: {
         color: '#505050',
-        fontFamily: 'Raleway_600SemiBold'
+        fontFamily: 'Raleway_500Medium',
+
     }
 });
 

@@ -76,21 +76,23 @@ const styles = StyleSheet.create({
 
     inputContainer: {
         display: 'flex',
+        flexWrap:'wrap',
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+        top: 15
     },
-
+    
     ingredienteInput: {
+        flexWrap:'nowrap',
+        flexDirection: 'row',
+        alignItems: 'center',
         marginHorizontal: 10,
         paddingHorizontal: 7,
-        fontSize: 14,
-        fontFamily: 'Raleway_600SemiBold',
-        color: '#fff',
         height: 40,
-        width: '84%',
+        width: '95%',
         left: -10,
-        backgroundColor: '#404040',
+        backgroundColor: '#FF7152',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
         borderTopLeftRadius: 10,
@@ -100,12 +102,15 @@ const styles = StyleSheet.create({
             width: 0,
             height: 2,
         },
+        elevation: 4,
         shadowOpacity: 0.25,
         shadowRadius: 4,
         position: 'relative',
         alignSelf: 'center',
-        marginTop: 5
+        marginTop: 5,
+        justifyContent: 'center'
     },
+
 
     //listas
     listamento: {

@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
         alignItems: 'center',
-        backgroundColor: '#202020'
+        backgroundColor: '#202020',
+        height: '100%'
     },
 
     header: {

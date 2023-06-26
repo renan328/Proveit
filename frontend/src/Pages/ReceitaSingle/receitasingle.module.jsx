@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         flex: 1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
 
     headerIcon: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     },
 
     mainHeaderWhite: {
-        paddingTop: 20,
+        paddingTop: 21,
         paddingBottom: 20,
         display: 'flex',
         flex: 1,
@@ -104,6 +104,23 @@ const styles = StyleSheet.create({
 
     star: {
         marginBottom: 0
+    },
+
+    AproveitamentoTrue: {
+        display: 'flex',
+        height: 30,
+        width: 60,
+        backgroundColor: '#52FF6E',
+        marginHorizontal: 10,
+        marginVertical: 15,
+        paddingHorizontal: 18,
+        paddingVertical: 23,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     mainTexts: {
@@ -363,11 +380,8 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 5,
-        elevation: 4,
-
         padding: 10,
         marginTop: 10,
-        // flexGrow: true,
         height: 100
     },
 

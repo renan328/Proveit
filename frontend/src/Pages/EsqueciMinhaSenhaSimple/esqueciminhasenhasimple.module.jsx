@@ -10,29 +10,19 @@ const styles = StyleSheet.create({
 
     backbutton: {
         display: 'flex',
-        flexDirection: 'column',
-        alignContent: 'flex-start',
-        marginTop: 9,
-        marginLeft: 9,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        width: 40,
-        height: 50,
-        backgroundColor: 'rgba(255,255,255,0.6)',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 0,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 2,
-    },
-
-    arrowleft: {
-        marginTop: 4,
-        padding: 6,
+        height: 30,
+        width: 30,
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        marginHorizontal: 10,
+        marginVertical: 15,
+        paddingHorizontal: 18,
+        paddingVertical: 23,
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     main: {
@@ -54,7 +44,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 7,
-        marginTop:-1
+        marginTop: -1
     },
 
     main2: {

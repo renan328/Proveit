@@ -18,13 +18,13 @@ export default function EsqueciMinhaSenhaSimple({ navigation }) {
     var styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     return (
-        <View style={{ maxHeight: screenHeight }}>
+        <View style={{ maxHeight: screenHeight, width: '100%' }}>
             <View style={styles.imageContainer}>
-                <ImageBackground source={backgroundImage} style={{ height: screenHeight * 0.6 }}>
+                <ImageBackground source={backgroundImage} style={{ height: screenHeight * 0.6, width: '100%' }}>
                     <TouchableOpacity style={styles.backbutton} onPress={() => navigation.goBack()}>
                         <FontAwesomeIcon
                             style={styles.arrowleft}
-                            color={'rgba(255,255,255)'}
+                            color={'#FFF'}
                             size={30}
                             icon={faChevronLeft}
                         />
@@ -45,8 +45,8 @@ export default function EsqueciMinhaSenhaSimple({ navigation }) {
                     <View style={styles.main3}>
                         <View style={styles.Texts}>
                             <View>
-                                <Text style={styles.Esqueceusua}>Esqueceu sua</Text>
-                                <Text style={styles.Senha}>senha?</Text>
+                                <Text style={styles.Esqueceusua}>Suporte</Text>
+                                {/* <Text style={styles.Senha}>senha?</Text> */}
                             </View>
                             <Text style={styles.Desc}>Contate nosso suporte via email para podermos analisar sua situação.</Text>
                         </View>

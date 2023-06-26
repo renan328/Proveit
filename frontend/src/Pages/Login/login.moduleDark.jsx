@@ -41,38 +41,38 @@ const styles = StyleSheet.create({
     },
 
     logo: {
-        height: 100,
-        width: 100,
+        height: 90,
+        width: 90,
     },
 
-    textBy:{
+    textBy: {
         color: '#bbb',
         fontFamily: 'Raleway_500Medium',
-        marginTop: 30,
-        marginBottom: 10
+        marginTop: 10,
+        marginBottom: 10,
+        alignSelf: 'center'
     },
 
     logoDevlare: {
-        height: 62,
-        width: 200,
+        height: 31,
+        width: 100,
     },
 
     textBeta: {
-        color: '#fff',
+        color: 'rgba(255, 255, 255, 0.6)',
         fontFamily: 'Raleway_700Bold',
         marginTop: 10,
         textTransform: 'uppercase'
     },
 
     saboresImg: {
-        height: 200,
-        width: 300,
+        height: 160,
+        width: 260,
     },
 
     containerInput: {
         display: 'flex',
         flexDirection: 'column',
-        marginBottom: 20
     },
 
     input: {
@@ -100,11 +100,11 @@ const styles = StyleSheet.create({
     },
 
     buttons: {
-        alignSelf: 'baseline',
         display: 'flex',
+        alignSelf: 'baseline',
         height: '70%',
         width: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     button: {
@@ -122,7 +122,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 4,
-        textAlign: 'center'
+        textAlign: 'center',
+        top: 5
     },
 
     buttonText: {
@@ -189,6 +190,33 @@ const styles = StyleSheet.create({
     inputError: {
         borderWidth: 1,
         borderColor: '#ff375b'
+    },
+
+    footer: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        width: '10%',
+        top: 20,
+    },
+    footerContent: {
+        display: 'flex',
+        flexWrap: 'nowrap',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '90%'
+    },
+
+    textPronuncia: {
+        width: 100,
+        fontSize: 10,
+        fontFamily: 'Raleway_700Bold',
+        marginTop: 10,
+        textTransform: 'uppercase',
+        color: 'rgba(255, 255, 255, 0.6)',
+        textAlign: 'right',
     }
 
 });

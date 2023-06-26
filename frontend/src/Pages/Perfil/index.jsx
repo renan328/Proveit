@@ -67,7 +67,7 @@ export default function Perfil({ navigation }) {
 
     return (
         // Container Geral
-        <ScrollView style={{ backgroundColor: '#fff', height: '100%' }}>
+        <ScrollView style={{ backgroundColor: scheme === 'dark' ? '#202020' : '#FFF', height: '100%' }}>
             <View style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => navigation.navigate('Configuracoes')}>

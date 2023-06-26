@@ -86,13 +86,13 @@ export default function CartaoAvalicaoDoUsuario({ avaliacao }) {
                 </View>
 
             </View>
-            <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 50}}>
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 50 }}>
                 <TouchableOpacity style={styles.containerOpcoes} onPress={GoToEdit}>
-                    <FontAwesomeIcon style={{alignSelf: 'center'}} icon={faPencil} size={25} color="#606060" />
+                    <FontAwesomeIcon style={{ alignSelf: 'center' }} icon={faPencil} size={25} color="#606060" />
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.containerOpcoesDelete} onPress={() => setVisibleModal(true)}>
-                    <FontAwesomeIcon style={{alignSelf: 'center'}} icon={faTrashCan} size={25} color="#eeeeee5e" />
+                    <FontAwesomeIcon style={{ alignSelf: 'center' }} icon={faTrashCan} size={25} color="#eeeeee5e" />
                 </TouchableOpacity>
                 <View style={{ paddingTop: 50 }} />
             </View>
@@ -152,10 +152,10 @@ const stylesLight = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        borderBottomStartRadius: 15,
-        borderTopStartRadius: 15,
-        borderBottomEndRadius: 15,
-        borderTopEndRadius: 15,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
     },
 
     textContainer: {
