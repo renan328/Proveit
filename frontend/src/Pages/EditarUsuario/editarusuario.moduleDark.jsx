@@ -30,7 +30,20 @@ const styles = StyleSheet.create({
     },
 
     IconCamera: {
-        color: 'rgba(255, 113, 82, 0.75)'
+        color: '#FF7152'
+    },
+
+    ImagePencil: {
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    IconContainer: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: [{ translateX: -29 }, { translateY: -29 }],
     },
 
     BorderIcon: {
@@ -47,6 +60,11 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 70,
         borderTopLeftRadius: 70,
         borderTopRightRadius: 70
+    },
+
+    ImagePencil: {
+        display: 'flex',
+        alignSelf: 'center'
     },
 
     imagemUsu: {
@@ -81,7 +99,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
         fontSize: 15,
         marginTop: 26,
-        color:'rgba(255,255,255,0.7)'
+        color: 'rgba(255,255,255,0.7)'
     },
 
     cadastro_imagem: {

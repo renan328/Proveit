@@ -35,19 +35,18 @@ export default function CartaoReceita({ dadosReceita }) {
         <TouchableOpacity onPress={handleCardPress}>
             <ImageBackground source={{ uri: dadosReceita?.receita.foto }} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
 
-                <View style={styles.header}>
-                    
-                </View>
+                <View style={styles.header}></View>
 
                 {/* Container de imagem e texto */}
 
                 <View style={styles.containerTexto} >
                     <View style={styles.containerTextoWhite}>
                         {StarCounter()}
-                        <Text style={styles.titulo}>{dadosReceita?.receita.nomeReceita}</Text>
+                        <View style={{ width: '100%', alignSelf: 'center' }}>
+                            <Text style={styles.titulo}>{dadosReceita?.receita.nomeReceita}</Text>
+                        </View>
                     </View>
                 </View>
-
             </ImageBackground>
         </TouchableOpacity >
     )
@@ -60,8 +59,8 @@ const stylesLight = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         margin: 6,
-        width: 170,
-        height: 220,
+        width: 160,
+        height: 210,
         backgroundColor: '#fff',
         borderBottomLeftRadius: 32,
         borderBottomRightRadius: 32,
@@ -86,13 +85,6 @@ const stylesLight = StyleSheet.create({
         justifyContent: 'flex-end'
     },
 
-    bookmarkIcon: {
-        padding: 10,
-        backgroundColor: 'rgba(255,255,255,0.7)',
-        borderRadius: 10,
-        color: '#505050',
-    },
-
     containerTexto: {
         width: '100%',
         height: 78,
@@ -104,32 +96,34 @@ const stylesLight = StyleSheet.create({
     },
 
     containerTextoWhite: {
-        border: 0,
         flexWrap: 'wrap',
         textAlign: 'left',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         width: '100%',
         height: '100%',
         paddingHorizontal: 8,
-        backgroundColor: 'rgba(255,255,255,0.90)',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-        alignSelf: 'baseline',
+        paddingVertical: 4,
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
 
     },
 
     titulo: {
+        display: 'flex',
         flexGrow: 1,
+        flexWrap: 'wrap',
         fontSize: 13,
         marginVertical: 10,
         fontFamily: 'Raleway_700Bold',
-        color: '#505050',
         textAlign: 'center',
+        color: '#505050',
+        textTransform: 'capitalize'
     },
 
 
@@ -142,8 +136,8 @@ const stylesDark = StyleSheet.create({
         alignItems: 'center',
         margin: 6,
         justifyContent: 'space-between',
-        width: 170,
-        height: 220,
+        width: 160,
+        height: 210,
         backgroundColor: '#303030',
         borderBottomLeftRadius: 32,
         borderBottomRightRadius: 32,
@@ -166,14 +160,6 @@ const stylesDark = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-end'
-    },
-
-    bookmarkIcon: {
-        padding: 8,
-        backgroundColor: 'rgba(0,0,0,0.7)',
-        borderRadius: 13,
-        color: '#fff',
-
     },
 
     containerTexto: {
@@ -209,10 +195,10 @@ const stylesDark = StyleSheet.create({
         flexGrow: 1,
         flexWrap: 'wrap',
         fontSize: 13,
-        marginVertical: 7,
+        marginVertical: 10,
         fontFamily: 'Raleway_700Bold',
         textAlign: 'center',
-        color: '#fff',
+        color: '#FFF',
         textTransform: 'capitalize'
     },
 

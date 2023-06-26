@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        height: '100%'
     },
     
     header: {
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
         fontSize: 40
     },
     CardsList: {
+        marginTop: 10,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

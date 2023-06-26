@@ -17,7 +17,7 @@ import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from "../../AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import showToast from '../../../hooks/toasts';
-
+import { LoadingReceita } from '../../components/LoadingReceita/LoadingReceita'
 const screenHeight = Dimensions.get('window').height;
 
 export default function ReceitaSingle({ navigation }) {
@@ -38,73 +38,8 @@ export default function ReceitaSingle({ navigation }) {
     // favorito
     const [saved, setSaved] = useState(false);
     const [numCliques, setNumCliques] = useState(0);
+    const [loading, setLoading] = useState(false);
 
-    async function BuscarReceita() {
-        const headers = await HeaderRequisicao(navigation);
-        const userDataJWT = await DadosUsuario();
-        setUsuario_id(userDataJWT.ID);
-
-        fetch("https://serverproveit.azurewebsites.net/api/receita/" + id, {
-            method: "GET",
-            headers
-        })
-            .then((response) => response.json())
-            .then((json) => {
-                setDadosReceita(json);
-            })
-            .catch((error) => {
-                showToast('Foi mal!', 'Erro ao buscar a receita, tente novamente mais tarde.', 'error');
-            });
-    }
-
-    async function VerificarFavorito() {
-        const headers = await HeaderRequisicao(navigation);
-        const userDataJWT = await DadosUsuario();
-
-        fetch("https://serverproveit.azurewebsites.net/api/ReceitaFavorita/verificar/" + id + "/" + userDataJWT.ID, {
-            method: "GET",
-            headers
-        })
-            .then((response) => response.text())
-            .then((text) => {
-                if (text === "true") {
-                    setSaved(true);
-                } else {
-                    setSaved(false);
-                }
-            })
-            .catch((error) => {
-                showToast('Foi mal!', 'Erro ao verificar se é favorito, tente novamente mais tarde.', 'error');
-            });
-    };
-
-    async function AdicionarIdReceitaAoHistorico(idReceita) {
-        try {
-            const historicoAntigo = await AsyncStorage.getItem('historicoReceitas') ?? '';
-
-            let novoHistorico = [];
-            try {
-                novoHistorico = JSON.parse(historicoAntigo);
-            } catch (error) {
-                console.log('Erro ao fazer o parse do histórico antigo:', error);
-            }
-
-            if (!novoHistorico.includes(idReceita)) {
-                novoHistorico.push(idReceita);
-            }
-
-            await AsyncStorage.setItem('historicoReceitas', JSON.stringify(novoHistorico));
-        } catch (error) {
-            showToast('Foi mal!', 'Erro ao adicionar receia ao histórico!', 'error');
-            console.log(error);
-        }
-    }
-
-    useEffect(() => {
-        BuscarReceita();
-        VerificarFavorito();
-        AdicionarIdReceitaAoHistorico(receita_id);
-    }, []);
 
     const stars = dadosReceita.mediaEstrelas;
     function StarCounter() {
@@ -140,7 +75,7 @@ export default function ReceitaSingle({ navigation }) {
                 body: JSON.stringify(body)
             })
                 .then((response) => {
-                    showToast('Sucesso!', 'Receita favoritada com sucesso!', 'error');
+                    showToast('Sucesso!', 'Receita favoritada com sucesso!', 'success');
                 })
                 .catch((error) => {
                     showToast('Foi mal!', 'Erro ao favoritar receita', 'error');
@@ -153,7 +88,7 @@ export default function ReceitaSingle({ navigation }) {
             })
                 .then((response) => {
                     if (response.ok) {
-                        showToast('Sucesso!', 'Favorito removido com sucesso!', 'error');
+                        showToast('Sucesso!', 'Favorito removido com sucesso!', 'success');
                     }
                     else {
                         showToast('Foi mal!', 'Erro ao remover favorito', 'error');
@@ -172,6 +107,8 @@ export default function ReceitaSingle({ navigation }) {
     }
 
     function handleAssessment() {
+
+
         const body = { estrelas, comentario, usuario_id, receita_id };
 
         fetch("https://serverproveit.azurewebsites.net/api/avaliacao", {
@@ -188,18 +125,105 @@ export default function ReceitaSingle({ navigation }) {
             })
     }
 
+    async function AdicionarIdReceitaAoHistorico(idReceita) {
+        try {
+            const historicoAntigo = await AsyncStorage.getItem('historicoReceitas') ?? '';
+
+            let novoHistorico = [];
+            try {
+                novoHistorico = JSON.parse(historicoAntigo);
+            } catch (error) {
+                console.log('Erro ao fazer o parse do histórico antigo:', error);
+            }
+
+            if (!novoHistorico.includes(idReceita)) {
+                novoHistorico.push(idReceita);
+            }
+
+            await AsyncStorage.setItem('historicoReceitas', JSON.stringify(novoHistorico));
+        } catch (error) {
+            showToast('Foi mal!', 'Erro ao adicionar receia ao histórico!', 'error');
+            console.log(error);
+        }
+    }
+
+    async function BuscarReceita() {
+        const headers = await HeaderRequisicao(navigation);
+        const userDataJWT = await DadosUsuario();
+        setUsuario_id(userDataJWT.ID);
+        setLoading(true)
+
+        fetch("https://serverproveit.azurewebsites.net/api/receita/" + id, {
+            method: "GET",
+            headers
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setDadosReceita(json);
+                setLoading(false);
+                console.log(loading);
+            })
+            .catch((error) => {
+                showToast('Foi mal!', 'Erro ao buscar a receita, tente novamente mais tarde.', 'error');
+                setLoading(false);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }
+
+    async function VerificarFavorito() {
+        const headers = await HeaderRequisicao(navigation);
+        const userDataJWT = await DadosUsuario();
+        setLoading(true);
+
+        fetch("https://serverproveit.azurewebsites.net/api/ReceitaFavorita/verificar/" + id + "/" + userDataJWT.ID, {
+            method: "GET",
+            headers
+        })
+            .then((response) => response.text())
+            .then((text) => {
+                if (text === "true") {
+                    setSaved(true);
+                } else {
+                    setSaved(false);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                setLoading(false);
+                showToast('Foi mal!', 'Erro ao verificar se é favorito, tente novamente mais tarde.', 'error');
+            });
+    };
+
+    if (!dadosReceita) {
+        return (
+            <View>
+                <Text style={styles.mainTitle}>Falha ao carregar os dados.</Text>
+            </View>
+        );
+    }
+
+    useEffect(() => {
+        BuscarReceita();
+        VerificarFavorito();
+        AdicionarIdReceitaAoHistorico(receita_id);
+    }, []);
+
     return (
         <ScrollView style={styles.container}>
             <ImageBackground source={{ uri: dadosReceita.receita?.foto }} style={styles.mainImage} imageStyle={{ borderBottomLeftRadius: 50, borderBottomRightRadius: 50 }}>
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}><FontAwesomeIcon style={styles.headerIcon} icon={faAngleLeft} size={28} /></TouchableOpacity>
+                    <TouchableOpacity style={styles.headerIcon} onPress={() => navigation.goBack()}>
+                        <FontAwesomeIcon icon={faAngleLeft} size={28} style={{ color: scheme === 'dark' ? '#ddddddcf' : '#303030' }} />
+                    </TouchableOpacity>
                     <Menu>
-                        <MenuTrigger>
-                            <FontAwesomeIcon icon={faEllipsisVertical} style={styles.headerIcon} size={28} color={'#505050'} />
+                        <MenuTrigger style={styles.headerIcon}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} size={28} style={{ color: scheme === 'dark' ? '#ddddddcf' : '#303030' }} />
                         </MenuTrigger>
                         <MenuOptions>
-                            <MenuOption style={{ marginVertical: 10, marginHorizontal: 5 }} onSelect={() => alert(`Compartilhar`)} text='Compartilhar' />
-                            <MenuOption style={{ marginVertical: 10, marginHorizontal: 5 }} onSelect={() => alert(`Mande um email para o suporte fazendo a denuncia com o nome da receita. E-mail: admproveit@gmail.com`)} text='Denunciar' />
+                            <MenuOption style={styles.menuOption} onSelect={() => showToast('Que pena!', 'Ainda não disponível', 'error')} text='Compartilhar' />
+                            <MenuOption style={styles.menuOption} onSelect={() => alert(`Mande um email para o suporte fazendo a denuncia com o nome da receita. E-mail: admproveit@gmail.com`)} text='Denunciar' />
                         </MenuOptions>
                     </Menu>
                 </View>
@@ -236,7 +260,7 @@ export default function ReceitaSingle({ navigation }) {
                 </LinearGradient>
 
                 <View style={styles.detailsContainer}>
-                    <View style={{ marginHorizontal: 8 }}>
+                    <View style={{ marginHorizontal: 20 }}>
                         <Text style={styles.mainUserText}>@{dadosReceita.receita?.nomeTag}</Text>
                     </View>
                 </View>
@@ -325,7 +349,7 @@ export default function ReceitaSingle({ navigation }) {
                         unSelectedColor='#505050'
                         reviewColor='#ff7152'
                         onFinishRating={handleRatingChange}
-                        style={{fontFamily: 'Raleway_700Bold'}}
+                        style={{ fontFamily: 'Raleway_700Bold' }}
                     />
                     <TextInput
                         placeholder={'O que você tem a dizer?'}

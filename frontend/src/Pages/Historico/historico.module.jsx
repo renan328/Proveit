@@ -28,11 +28,12 @@ const styles = StyleSheet.create({
     },
     CardsList: {
         display: 'flex',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        flexDirection: 'row'
     },
+    
     SubHeader: {
         position: 'relative',
         marginTop: 19,

@@ -173,11 +173,12 @@ const styles = StyleSheet.create({
     categoriaListaInput: {
         width: '100%',
         shadowOffset: {
-            width: 0,
+            width: 2,
             height: 2,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4
+        shadowRadius: 4,
+        borderRadius: 10
     },
 
     inputTempo: {
@@ -226,10 +227,11 @@ const styles = StyleSheet.create({
     },
 
     ListaInput: {
-        width: 180,
+        width: 160,
         height: 50,
         fontSize: 13,
         color: '#505050',
+        backgroundColor: '#FFF',
         shadowOffset: {
             width: 0,
             height: 2,
@@ -436,6 +438,35 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: 'rgba(255, 55, 92, 0.6)',
         marginTop: 5
+    },
+
+    descricaoInput: {
+        marginHorizontal: 47,
+        padding: 10,
+        fontSize: 13,
+        color: '#505050',
+        height: 80,
+        width: '100%',
+        backgroundColor: '#FFF',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 3,
+        marginTop: 10,
+        fontFamily: 'Raleway_600SemiBold'
+    },
+
+    PickerItem: {
+        color: '#505050',
+        fontFamily: 'Raleway_600SemiBold'
     }
 });
 

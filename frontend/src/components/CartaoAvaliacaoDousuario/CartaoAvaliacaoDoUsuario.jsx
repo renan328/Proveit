@@ -156,7 +156,6 @@ const stylesLight = StyleSheet.create({
         borderTopStartRadius: 15,
         borderBottomEndRadius: 15,
         borderTopEndRadius: 15,
-        elevation: 5,
     },
 
     textContainer: {
@@ -291,7 +290,6 @@ const stylesDark = StyleSheet.create({
         borderBottomRightRadius: 15,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
-        elevation: 5,
     },
 
     textContainer: {

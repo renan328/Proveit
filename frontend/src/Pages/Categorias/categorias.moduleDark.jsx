@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         fontSize: 40
     },
     CardsList: {
+        marginTop: 10,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

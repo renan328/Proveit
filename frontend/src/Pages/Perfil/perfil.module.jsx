@@ -4,10 +4,10 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 
     container: {
-        flex: 1,
         textAlign: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        height: '100%'
     },
 
     header: {
@@ -73,9 +73,16 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 70,
         borderTopLeftRadius: 70,
         borderTopRightRadius: 70
-    }
+    },
 
-
+    CardsList: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        flexDirection: 'row'
+    },
+    
 });
 
 export default styles;

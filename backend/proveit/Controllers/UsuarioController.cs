@@ -52,6 +52,17 @@ namespace proveit.Controllers
             try
             {
                 var dao = new UsuarioDAO();
+
+                if (dao.VerificarEmailExistenteAoAlterar(usuario.idUsuario, usuario.Email))
+                {
+                    return Conflict("Este e-mail já está vinculado a uma conta.");
+                }
+
+                if (dao.VerificarNomeTagExistenteAoAlterar(usuario.idUsuario, usuario.NomeTag))
+                {
+                    return Conflict("Este nome de usuário já está em uso.");
+                }
+
                 dao.AlterarUsuario(usuario);
 
                 return Ok();
@@ -61,5 +72,6 @@ namespace proveit.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
             }
         }
+
     }
 }

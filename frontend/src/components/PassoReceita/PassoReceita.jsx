@@ -22,7 +22,7 @@ const stylesLight = StyleSheet.create({
         flexDirection: 'row',
         marginVertical: 10,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
     },
 
     step: {
@@ -33,7 +33,7 @@ const stylesLight = StyleSheet.create({
     },
 
     text: {
-        textAlign: 'justify',
+        textAlign: 'left',
         fontFamily: 'Raleway_600SemiBold',
         color: '#505050',
         fontSize: 15

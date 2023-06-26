@@ -72,7 +72,15 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 70,
         borderTopLeftRadius: 70,
         borderTopRightRadius: 70
-    }
+    },
+
+    CardsList: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        flexDirection: 'row'
+    },
 
 
 });

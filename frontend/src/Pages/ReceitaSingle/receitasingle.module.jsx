@@ -17,23 +17,24 @@ const styles = StyleSheet.create({
     },
 
     headerIcon: {
-        color: '#505050',
-        marginVertical: 20,
-        marginHorizontal: 12,
-        textShadowColor: 'rgba(0, 0, 0, 0.75)',
-        textShadowOffset: { width: -1, height: 1 },
-        textShadowRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 5,
-        backgroundColor: 'rgba(255, 255, 255, 0.7)',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
+        display: 'flex',
+        height: 30,
+        width: 30,
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        marginHorizontal: 10,
+        marginVertical: 15,
+        paddingHorizontal: 18,
+        paddingVertical: 23,
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
-    mainImage:{
-        height: screenHeight * 0.55, 
+    mainImage: {
+        height: screenHeight * 0.55,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'center',
         width: '100%',
-        backgroundColor: 'rgba(255,255,255,0.7)',
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
         borderBottomLeftRadius: 50, borderBottomRightRadius: 50,
         borderTopLeftRadius: 50, borderTopRightRadius: 50,
         paddingLeft: 20
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     mainTexts: {
         display: 'flex',
         textAlign: 'left',
-        top: -18,
+        top: -48,
         width: '100%'
     },
 
@@ -325,7 +326,7 @@ const styles = StyleSheet.create({
     },
 
     ratingContainer: {
-        backgroundColor: '#fff',
+        backgroundColor: '#FFF',
         marginTop: 20,
         width: '95%',
         display: 'flex',
@@ -338,10 +339,10 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
         shadowColor: "#000",
         shadowOffset: {
-            width: 0,
+            width: 2,
             height: 2,
         },
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.35,
         shadowRadius: 5,
         elevation: 4,
     },
@@ -441,6 +442,11 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         alignItems: 'center'
+    },
+
+    menuOption: {
+        marginVertical: 10,
+        marginHorizontal: 5,
     },
 
 });

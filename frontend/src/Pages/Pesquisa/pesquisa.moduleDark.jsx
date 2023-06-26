@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     CardsList: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         flexWrap: 'wrap',
         flexDirection: 'row'
     },

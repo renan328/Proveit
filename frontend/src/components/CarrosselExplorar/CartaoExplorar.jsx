@@ -77,7 +77,7 @@ const stylesLight = StyleSheet.create({
     titulo: {
         textAlign: 'left',
         fontSize: 15,
-        color: ' #505050',
+        color: '#505050',
         maxWidth: '90%',
         textTransform: 'uppercase',
         fontFamily: 'Raleway_800ExtraBold',

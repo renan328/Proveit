@@ -90,7 +90,7 @@ export default function ReceitasDoUsuario() {
 
                 </View>
             </ScrollView>
-            
+            <View style={{ paddingVertical: 40 }} />
         </View>
     )
 }

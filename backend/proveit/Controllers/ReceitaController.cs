@@ -258,7 +258,7 @@ namespace proveit.Controllers
                 }
                 else if (chave == "ValCalorico")
                 {
-                    filtro = "ORDER BY ValCalorico ASC";
+                    filtro = "ORDER BY ValCalorico DESC";
                 }
                 else
                 {

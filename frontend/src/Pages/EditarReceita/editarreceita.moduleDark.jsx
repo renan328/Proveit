@@ -89,6 +89,30 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
+    descricaoInput: {
+        marginHorizontal: 47,
+        padding: 10,
+        fontSize: 13,
+        color: '#fff',
+        height: 80,
+        width: '100%',
+        backgroundColor: '#303030',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 3,
+        marginTop: 10,
+        fontFamily: 'Raleway_600SemiBold'
+    },
+
     titleContainer: {
         width: '100%',
         display: 'flex',
@@ -162,6 +186,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '100%',
+
     },
 
     categoriaInput: {
@@ -236,7 +261,7 @@ const styles = StyleSheet.create({
     },
 
     ListaInput: {
-        width: 180,
+        width: 160,
         height: 50,
         fontSize: 13,
         color: '#fff',
@@ -448,6 +473,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: 'rgba(255, 55, 92, 0.6)',
         marginTop: 5
+    },
+
+    PickerItem: {
+        color: '#505050',
+        fontFamily: 'Raleway_600SemiBold',
     }
 });
 

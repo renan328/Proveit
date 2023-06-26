@@ -41,8 +41,8 @@ export default function CartaoReceita({ receita }) {
                 {/* Container de imagem e texto */}
                 <View style={styles.containerTexto} >
                     <View style={styles.containerTextoWhite}>
+                        {StarCounter()}
                         <View style={{ width: '100%', alignSelf: 'center' }}>
-                            {StarCounter()}
                             <Text style={styles.titulo}>{receita.receita?.nomeReceita}</Text>
                         </View>
                     </View>
@@ -61,8 +61,8 @@ const stylesLight = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         margin: 6,
-        width: 230,
-        height: 350,
+        width: 210,
+        height: 330,
         backgroundColor: '#fff',
         borderBottomLeftRadius: 32,
         borderBottomRightRadius: 32,
@@ -110,23 +110,21 @@ const stylesLight = StyleSheet.create({
     },
 
     containerTextoWhite: {
-        border: 0,
         flexWrap: 'wrap',
         textAlign: 'left',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         width: '100%',
         height: '100%',
         paddingHorizontal: 8,
-        backgroundColor: 'rgba(255,255,255,0.90)',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-        alignSelf: 'baseline',
-
+        paddingTop: 10,
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
 
     titulo: {
@@ -151,8 +149,8 @@ const stylesDark = StyleSheet.create({
         alignItems: 'center',
         margin: 6,
         justifyContent: 'space-between',
-        width: 230,
-        height: 350,
+        width: 215,
+        height: 335,
         backgroundColor: '#303030',
         borderBottomLeftRadius: 32,
         borderBottomRightRadius: 32,
@@ -205,7 +203,7 @@ const stylesDark = StyleSheet.create({
         width: '100%',
         height: '100%',
         paddingHorizontal: 8,
-        paddingVertical: 4,
+        paddingTop: 10,
         backgroundColor: 'rgba(20,20,20,0.9)',
         borderBottomLeftRadius: 32,
         borderBottomRightRadius: 32,
@@ -217,11 +215,11 @@ const stylesDark = StyleSheet.create({
         display: 'flex',
         flexGrow: 1,
         flexWrap: 'wrap',
-        fontSize: 17,
-        marginVertical: 7,
+        fontSize: 16,
+        marginVertical: 10,
         fontFamily: 'Raleway_700Bold',
-        textAlign: 'left',
-        color: '#fff',
+        textAlign: 'center',
+        color: '#FFF',
         textTransform: 'capitalize'
     },
 

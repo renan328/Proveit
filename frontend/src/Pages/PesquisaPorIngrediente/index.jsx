@@ -96,29 +96,29 @@ export default function PesquisaPorIngrediente() {
                     </View>
 
                     <View style={styles.defaultInput}>
-                        <View style={{flexDirection: 'column'}} >
-                        {ingredientes.map((nomeIngrediente, index) => (
-                            <View key={index} style={styles.addableComponent}>
-                                <View style={styles.titleContainer}>
-                                    <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
-                                    <Text style={styles.TextInput2}>Ingrediente</Text>
-                                    {/* <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#505050' }} size={20} /> */}
+                        <View style={{ flexDirection: 'column' }} >
+                            {ingredientes.map((nomeIngrediente, index) => (
+                                <View key={index} style={styles.addableComponent}>
+                                    <View style={styles.titleContainer}>
+                                        <Text style={styles.stepNumber}>{`#${index + 1}`}</Text>
+                                        <Text style={styles.TextInput2}>Ingrediente</Text>
+                                        {/* <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#505050' }} size={20} /> */}
+                                    </View>
+
+                                    <TextInput
+                                        style={[styles.allInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
+                                        value={nomeIngrediente}
+                                        placeholder={"Nome do seu ingrediente"}
+                                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                                        onChangeText={(nome) => handleNomeIngredienteChange(index, nome)}
+                                    />
+
+                                    {errors.ingredientes && errors.ingredientes[index] && (
+                                        <Text style={styles.textError}>{errors.ingredientes}</Text>
+                                    )}
                                 </View>
-
-                                <TextInput
-                                    style={[styles.allInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
-                                    value={nomeIngrediente}
-                                    placeholder={"Nome do seu ingrediente"}
-                                    placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
-                                    onChangeText={(nome) => handleNomeIngredienteChange(index, nome)}
-                                />
-
-                                {errors.ingredientes && errors.ingredientes[index] && (
-                                    <Text style={styles.textError}>{errors.ingredientes}</Text>
-                                )}
-                            </View>
-                        ))}
-</View>
+                            ))}
+                        </View>
                         <View style={styles.addRemoveButtonsContainer}>
                             {ingredientes.length < 5 && (
                                 <TouchableOpacity onPress={addIngrediente} style={styles.addButton}>
@@ -154,24 +154,26 @@ export default function PesquisaPorIngrediente() {
                     </LinearGradient>
                 </TouchableOpacity>
             </View>
-            {loading ? (
-                <View style={{ display: "flex", alignSelf: "center" }}>
-                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
-                    <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
-                </View>
-            ) : (
-                <>
-                    {dadosReceita.length > 0 ? (
-                        <>
-                            <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Resultados:</Text>
-                            {dadosReceita.map((receita, index) => (
-                                <CartaoFavorito dadosReceita={receita} key={index} />
-                            ))}
-                        </>
-                    ) : null}
-                </>
-            )}
-            {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
+            <View style={styles.CardsList}>
+
+                {loading ? (
+                    <View style={{ display: "flex", alignSelf: "center" }}>
+                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
+                        <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
+                    </View>
+                ) : (
+                    <>
+                        {dadosReceita.length > 0 ? (
+                            <>
+                                {dadosReceita.map((receita, index) => (
+                                    <CartaoFavorito dadosReceita={receita} key={index} />
+                                ))}
+                            </>
+                        ) : null}
+                    </>
+                )}
+                {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
+            </View>
             <View style={{ paddingVertical: 50 }} />
         </ScrollView>
     );

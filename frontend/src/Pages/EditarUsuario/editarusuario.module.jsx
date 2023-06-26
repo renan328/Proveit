@@ -33,6 +33,19 @@ const styles = StyleSheet.create({
         color: 'rgba(255, 113, 82, 0.75)'
     },
 
+    ImagePencil: {
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    IconContainer: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: [{ translateX: -29 }, { translateY: -29 }],
+    },
+    
     BorderIcon: {
         display: 'flex',
         width: 140,

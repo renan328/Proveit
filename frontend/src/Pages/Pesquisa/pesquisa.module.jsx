@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#fff'
     },
-    
+
     header: {
         width: '100%',
         display: 'flex',
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 
     textContainer: {
         marginTop: 20,
-        },
+    },
 
     subText: {
         fontFamily: 'Raleway_800ExtraBold',
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         color: '#ff375b',
         marginBottom: 8
     },
-    
+
     ScreenSelect: {
         backgroundColor: '#eee',
         padding: 10,

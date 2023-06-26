@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Image, TouchableOpacity, useColorScheme } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, TouchableOpacity, useColorScheme, Modal } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCamera, faCircleCheck, faCircleXmark, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faPencil, faCircleXmark, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import * as ImagePicker from 'expo-image-picker';
 import stylesLight from './editarusuario.module';
 import stylesDark from './editarusuario.moduleDark';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import showToast from '../../../hooks/toasts';
+import { ActionModal } from '../../components/ActionModal/ActionModal'
 
 export default function EditarUsuario({ navigation }) {
 
@@ -20,6 +21,16 @@ export default function EditarUsuario({ navigation }) {
     const [foto, setFoto] = useState(null);
     const [errors, setErrors] = useState({});
     const [idUsuario, setIdUsuario] = useState(0);
+
+    const [visibleModal, setVisibleModal] = useState(false);
+
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
+
+    let inputStyle = [styles.input];
+    if (scheme === 'dark') {
+        inputStyle.push(styles.inputDark);
+    }
 
     async function BuscarUsuario() {
         const userDataJWT = await DadosUsuario();
@@ -72,27 +83,30 @@ export default function EditarUsuario({ navigation }) {
 
         if (!nome.trim()) {
             errors.nome = "Nome é obrigatório";
+        } else if (nome.trim().length < 2) {
+            errors.nome = "O nome deve ter no mínimo 2 caracteres";
         }
         if (!nomeTag.trim()) {
             errors.nomeTag = "Nome de usuário é obrigatório";
+        } else if (nomeTag.trim().length < 2) {
+            errors.nomeTag = "O nome deve usuário deve ter no mínimo 2 caracteres";
         }
         if (!email.trim()) {
             errors.email = "Email é obrigatório";
         } else if (!/\S+@\S+\.\S+/.test(email)) {
             errors.email = "Email inválido";
         }
-        if (!senha) {
+        if (!senha.trim()) {
             errors.senha = "Senha é obrigatória";
         } else if (senha.length < 6) {
             errors.senha = "Senha deve ter pelo menos 6 caracteres";
         }
-        if (!confirmSenha) {
+        if (!confirmSenha.trim()) {
             errors.confirmSenha = "Confirmação de senha é obrigatória";
         } else if (confirmSenha !== senha) {
             errors.confirmSenha = "As senhas não coincidem";
         }
         setErrors(errors);
-
 
         if (Object.keys(errors).length > 0) {
             return;
@@ -109,21 +123,28 @@ export default function EditarUsuario({ navigation }) {
             headers,
             body: JSON.stringify(body)
         })
-            .then(() => {
-                showToast('Sucesso!', 'Usuário editado com sucesso!', 'success');
+            .then((response) => {
+                if (response.ok) {
+                    showToast('Sucesso!', 'Usuário editado com sucesso!', 'success');
+                    navigation.navigate('PerfilScreen');
+                } else if (response.status === 409) {
+                    response.text().then((message) => {
+
+                        if (message.includes("e-mail")) {
+                            showToast('Foi mal!', 'Este e-mail já está vinculado a uma conta.', 'error');
+                        } else if (message.includes("nome de usuário")) {
+                            showToast('Foi mal!', 'Este nome de usuário já está em uso.', 'error');
+                        }
+                    });
+                } else {
+                    showToast('Foi mal!', 'Erro desconhecido ao editar o usuário. Tente novamente mais tarde.', 'error');
+                }
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao editar usuário!', 'error');
             });
     };
 
-    const scheme = useColorScheme();
-    const styles = scheme === 'dark' ? stylesDark : stylesLight;
-
-    let inputStyle = [styles.input];
-    if (scheme === 'dark') {
-        inputStyle.push(styles.inputDark);
-    }
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -151,7 +172,14 @@ export default function EditarUsuario({ navigation }) {
 
                     <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
                         {foto ? null : <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />}
-                        {foto && <Image source={{ uri: foto }} style={styles.imagemUsu} />}
+                        {foto && (
+                            <View style={styles.ImagePencil}>
+                                <Image source={{ uri: foto }} style={styles.imagemUsu} />
+                                <View style={styles.IconContainer}>
+                                    <FontAwesomeIcon style={styles.IconPencil} icon={faPencil} size={58} color='#FF7152' />
+                                </View>
+                            </View>
+                        )}
                     </TouchableOpacity>
                 </View>
 
@@ -162,7 +190,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.nome && styles.inputError]}
                             placeholder="Nome"
                             value={nome}
-                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
                             onChangeText={(text) => setNome(text)}
                         />
                         {errors.nome && <Text style={styles.textError}>{errors.nome}</Text>}
@@ -174,7 +202,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.nomeTag && styles.inputError]}
                             placeholder="Nome de usuário"
                             value={nomeTag}
-                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
                             onChangeText={(text) => setNomeTag(text)}
                         />
                         {errors.nomeTag && <Text style={styles.textError}>{errors.nomeTag}</Text>}
@@ -186,7 +214,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.email && styles.inputError]}
                             placeholder="E-mail"
                             value={email}
-                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
                             onChangeText={(text) => setEmail(text)}
                             keyboardType="email-address"
                             autoCapitalize="none"
@@ -201,7 +229,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.senha && styles.inputError]}
                             placeholder="Senha"
                             value={senha}
-                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
                             onChangeText={(text) => setSenha(text)}
                             secureTextEntry={true}
                         />
@@ -214,7 +242,7 @@ export default function EditarUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.confirmSenha && styles.inputError]}
                             placeholder="Confirmar Senha"
                             value={confirmSenha}
-                            placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
                             onChangeText={(text) => setConfirmSenha(text)}
                             secureTextEntry={true}
                         />
@@ -223,7 +251,7 @@ export default function EditarUsuario({ navigation }) {
                 </View>
 
                 <View style={styles.botoes}>
-                    <TouchableOpacity onPress={handleEdit} >
+                    <TouchableOpacity onPress={() => setVisibleModal(true)} >
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 2 }} style={styles.button} >
                             <Text style={styles.buttonText}>Pronto</Text>
@@ -231,7 +259,20 @@ export default function EditarUsuario({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{ paddingVertical: 30, backgroundColor: scheme === 'dark' ? '#202020' : '#ffffff' }} />
+            <View style={{ paddingVertical: 30, backgroundColor: scheme === 'dark' ? '#202020' : '#FFFFFF' }} />
+
+            <Modal
+                visible={visibleModal}
+                transparent={true}
+                onRequestClose={() => setVisibleModal(false)}
+            >
+                <ActionModal
+                    handleClose={() => setVisibleModal(false)}
+                    handleAction={() => handleEdit()}
+                    status={'put'}
+                />
+            </Modal>
+
         </ScrollView>
     )
 }

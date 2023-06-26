@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Image, Appearance, useColorScheme, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, Modal, useColorScheme, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCamera, faCircleCheck, faCircleXmark, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -7,20 +7,27 @@ import * as ImagePicker from 'expo-image-picker';
 import stylesLight from './cadastrodeusuario.module';
 import stylesDark from './cadastrodeusuario.moduleDark';
 import showToast from '../../../hooks/toasts';
+import { ActionModal } from '../../components/ActionModal/ActionModal'
 
 export default function CadastroDeUsuario({ navigation }) {
-
 
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     const [nome, setNome] = useState('');
-    const [nomeTagLower, setNomeTagLower] = useState('');
-    const [emailLower, setEmailLower] = useState('');
+    const [nomeTag, setNomeTag] = useState('');
+    const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmSenha, setConfirmSenha] = useState('');
     const [foto, setFoto] = useState(null);
     const [errors, setErrors] = useState({});
+
+    const [visibleModal, setVisibleModal] = useState(false);
+
+    let inputStyle = [styles.input];
+    if (scheme === 'dark') {
+        inputStyle.push(styles.inputDark);
+    }
 
     const pickImage = async () => {
 
@@ -42,13 +49,17 @@ export default function CadastroDeUsuario({ navigation }) {
 
         if (!nome.trim()) {
             errors.nome = "Nome é obrigatório";
+        } else if (nome.trim().length < 2) {
+            errors.nome = "O nome deve ter no mínimo 2 caracteres";
         }
-        if (!nomeTagLower.trim()) {
+        if (!nomeTag.trim()) {
             errors.nomeTag = "Nome de usuário é obrigatório";
+        } else if (nomeTag.trim().length < 2) {
+            errors.nomeTag = "O nome dde usuário deve ter no mínimo 2 caracteres";
         }
-        if (!emailLower.trim()) {
+        if (!email.trim()) {
             errors.email = "Email é obrigatório";
-        } else if (!/\S+@\S+\.\S+/.test(emailLower)) {
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
             errors.email = "Email inválido";
         }
         if (!senha.trim()) {
@@ -63,8 +74,6 @@ export default function CadastroDeUsuario({ navigation }) {
         }
         setErrors(errors);
 
-        const nomeTag = nomeTagLower.toLowerCase();
-        const email = emailLower.toLowerCase();
         const body = { nome, foto, nomeTag, email, senha };
 
         if (Object.keys(errors).length > 0) {
@@ -85,14 +94,10 @@ export default function CadastroDeUsuario({ navigation }) {
                 } else if (response.status === 409) {
                     response.text().then((message) => {
 
-                        if (message.includes("email")) {
-                            errors.email = message;
-
+                        if (message.includes("e-mail")) {
+                            showToast('Foi mal!', 'Este e-mail já está vinculado a uma conta.', 'error');
                         } else if (message.includes("nome de usuário")) {
-                            errors.nomeTag = message;
-
-                        } else {
-                            showToast('Foi mal!', { message }, 'error');
+                            showToast('Foi mal!', 'Este nome de usuário já está em uso.', 'error');
                         }
                     });
                 } else {
@@ -100,7 +105,7 @@ export default function CadastroDeUsuario({ navigation }) {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                showToast('Foi mal!', 'Erro desconhecido ao cadastrar o usuário. Tente novamente mais tarde.', 'error');
             });
     };
 
@@ -141,8 +146,10 @@ export default function CadastroDeUsuario({ navigation }) {
                         <TextInput
                             style={[styles.defaultInput, errors.nome && styles.inputError]}
                             placeholder="Nome"
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                             value={nome}
                             onChangeText={(text) => setNome(text)}
+                            maxLength={200}
                         />
                         {errors.nome && <Text style={styles.textError}>{errors.nome}</Text>}
                     </View>
@@ -152,8 +159,10 @@ export default function CadastroDeUsuario({ navigation }) {
                         <TextInput
                             style={[styles.defaultInput, errors.nomeTag && styles.inputError]}
                             placeholder="Nome de usuário"
-                            value={nomeTagLower}
-                            onChangeText={(text) => setNomeTagLower(text)}
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
+                            value={nomeTag}
+                            onChangeText={(text) => setNomeTag(text)}
+                            maxLength={100}
                         />
                         {errors.nomeTag && <Text style={styles.textError}>{errors.nomeTag}</Text>}
                     </View>
@@ -163,11 +172,13 @@ export default function CadastroDeUsuario({ navigation }) {
                         <TextInput
                             style={[styles.defaultInput, errors.email && styles.inputError]}
                             placeholder="E-mail"
-                            value={emailLower}
-                            onChangeText={(text) => setEmailLower(text)}
+                            value={email.toLowerCase()}
+                            onChangeText={(text) => setEmail(text.replace(/\s+/g, '').toLowerCase())}
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                             keyboardType="email-address"
                             autoCapitalize="none"
                             autoCorrect={false}
+                            maxLength={300}
                         />
                         {errors.email && <Text style={styles.textError}>{errors.email}</Text>}
                     </View>
@@ -178,8 +189,11 @@ export default function CadastroDeUsuario({ navigation }) {
                             style={[styles.defaultInput, errors.senha && styles.inputError]}
                             placeholder="Senha"
                             value={senha}
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
+
                             onChangeText={(text) => setSenha(text)}
                             secureTextEntry={true}
+                            maxLength={20}
                         />
                         {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
                     </View>
@@ -189,9 +203,11 @@ export default function CadastroDeUsuario({ navigation }) {
                         <TextInput
                             style={[styles.defaultInput, errors.confirmSenha && styles.inputError]}
                             placeholder="Confirmar Senha"
+                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                             value={confirmSenha}
                             onChangeText={(text) => setConfirmSenha(text)}
                             secureTextEntry={true}
+                            maxLength={20}
                         />
                         {errors.confirmSenha && <Text style={styles.textError}>{errors.confirmSenha}</Text>}
                     </View>
@@ -206,6 +222,20 @@ export default function CadastroDeUsuario({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
+
+            <Modal
+                visible={visibleModal}
+                transparent={true}
+                onRequestClose={() => setVisibleModal(false)}
+            >
+                <ActionModal
+                    handleClose={() => setVisibleModal(false)}
+                    handleAction={() => handleRegister()}
+                    status={'post'}
+                />
+
+            </Modal>
+
         </ScrollView>
     )
 }

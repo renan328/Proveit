@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, useColorScheme } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, useColorScheme, Modal } from "react-native";
 import Checkbox from 'expo-checkbox';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -11,6 +11,7 @@ import { Picker } from '@react-native-picker/picker';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import showToast from '../../../hooks/toasts';
+import { ActionModal } from '../../components/ActionModal/ActionModal'
 
 export default function CadastroDeReceita({ navigation, props }) {
 
@@ -29,6 +30,11 @@ export default function CadastroDeReceita({ navigation, props }) {
     const [ingredientes, setIngredientes] = useState([{ nomeIngrediente: '', quantidade: '', medida: '' }]);
     const [passos, setPassos] = useState([{ idPasso: 0, NumPasso: 1, PassoTexto: '' }]);
     const [errors, setErrors] = useState({});
+    // estilos
+    const scheme = useColorScheme();
+    const styles = scheme === 'dark' ? stylesDark : stylesLight;
+
+    const [visibleModal, setVisibleModal] = useState(false);
 
     function adicionarIngrediente() {
         setIngredientes([...ingredientes, { nomeIngrediente: '', quantidade: '', medida: '' }]);
@@ -77,6 +83,33 @@ export default function CadastroDeReceita({ navigation, props }) {
         }
     }
 
+    const categorias = [
+        'Bebidas',
+        'Aves',
+        'Bolos',
+        'Carnes',
+        'Frutos do Mar',
+        'Japones',
+        'Lanches',
+        'LowCarb',
+        'Massa',
+        'Rapidas',
+        'Saladas',
+        'Salgados',
+        'Sanduiches',
+        'Snacks',
+        'Sobremesas',
+        'Sopas',
+        'Torta',
+        'Vegano',
+        'Vegetariano'
+    ];
+
+    let inputStyle = [styles.input];
+    if (scheme === 'dark') {
+        inputStyle.push(styles.inputDark);
+    }
+
     async function BuscarUsuario() {
         const userDataJWT = await DadosUsuario();
         setUsuario_id(userDataJWT.ID);
@@ -87,6 +120,8 @@ export default function CadastroDeReceita({ navigation, props }) {
 
         if (!nomeReceita.trim()) {
             errors.nomeReceita = "Nome da receita é obrigatório";
+        } else if (nomeReceita.trim().length < 2) {
+            errors.nomeReceita = "O nome da receita deve ter no mínimo 2 caracteres";
         }
 
         if (!tempoPreparo.trim()) {
@@ -106,7 +141,7 @@ export default function CadastroDeReceita({ navigation, props }) {
         }
 
         if (valCalorico && isNaN(Number(valCalorico))) {
-            errors.valCalorico = "Valor calórico é obrigatório";
+            errors.valCalorico = "Valor calórico deve ser um número";
         }
 
         if (!descricao.trim()) {
@@ -140,6 +175,8 @@ export default function CadastroDeReceita({ navigation, props }) {
 
             if (!nomeIngrediente || nomeIngrediente.trim() === '') {
                 errors.ingredientes = 'Preencha o nome de todos os ingredientes';
+            } else if (nomeIngrediente.trim().length < 2) {
+                errors.nomeIngrediente = "O ingrediente deve ter no mínimo 2 caracteres";
             }
 
             if (medida === '') {
@@ -148,9 +185,7 @@ export default function CadastroDeReceita({ navigation, props }) {
 
             if (!quantidade) {
                 errors.ingredientes = 'Informe uma quantidade';
-            }
-
-            if (quantidade && isNaN(Number(quantidade))) {
+            } else if (quantidade && isNaN(Number(quantidade))) {
                 errors.ingredientes = 'Quantidade inválida';
             }
         }
@@ -163,10 +198,9 @@ export default function CadastroDeReceita({ navigation, props }) {
             errors.foto = "Imagem é obrigatória";
         }
         setErrors(errors);
-        console.log(errors);
 
         if (Object.keys(errors).length > 0) {
-            showToast('Cuidado!', 'Preencha corretamente todos os campos. Ou tente novamente', 'error');
+            showToast('Cuidado!', 'Preencha corretamente todos os campos e tente novamente', 'error');
             return;
         }
 
@@ -185,36 +219,6 @@ export default function CadastroDeReceita({ navigation, props }) {
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao cadastrar a receita, tente novamente mais tarde.', 'error');
             });
-    }
-
-    const categorias = [
-        'Bebidas',
-        'Aves',
-        'Bolos',
-        'Carnes',
-        'Frutos do Mar',
-        'Japones',
-        'Lanches',
-        'LowCarb',
-        'Massa',
-        'Rapidas',
-        'Saladas',
-        'Salgados',
-        'Sanduiches',
-        'Snacks',
-        'Sobremesas',
-        'Sopas',
-        'Torta',
-        'Vegano',
-        'Vegetariano'
-    ];
-
-    const scheme = useColorScheme();
-    const styles = scheme === 'dark' ? stylesDark : stylesLight;
-
-    let inputStyle = [styles.input];
-    if (scheme === 'dark') {
-        inputStyle.push(styles.inputDark);
     }
 
     useEffect(() => {
@@ -245,8 +249,9 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <TextInput
                         style={[styles.allInput, errors.nomeReceita && styles.inputError]}
                         placeholder='Digite o nome da receita'
-                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                        placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                         value={nomeReceita}
+                        maxLength={150}
                         onChangeText={(texto) => setNomeReceita(texto)}
                     />
                     {errors.nomeReceita && <Text style={styles.textError}>{errors.nomeReceita}</Text>}
@@ -254,16 +259,17 @@ export default function CadastroDeReceita({ navigation, props }) {
 
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Categoria</Text>
-
-                    <Picker
-                        style={[styles.allInput, errors.categoria && styles.inputError]}
-                        selectedValue={categoria}
-                        onValueChange={(itemValue) => setCategoria(itemValue)}
-                    >
-                        {categorias.map((categoria, index) => (
-                            <Picker.Item key={index} label={categoria} value={categoria} />
-                        ))}
-                    </Picker>
+                    <View style={[styles.allInput, errors.categoria && styles.inputError]}>
+                        <Picker
+                            selectedValue={categoria}
+                            onValueChange={(itemValue) => setCategoria(itemValue)}
+                        >
+                            <Picker.Item style={{ color: scheme === 'dark' ? '#DDD' : '#505050' }} label="Categorias:" value="" enabled={false} />
+                            {categorias.map((categoria, index) => (
+                                <Picker.Item style={styles.PickerItem} key={index} label={categoria} value={categoria} />
+                            ))}
+                        </Picker>
+                    </View>
                     {errors.categoria && <Text style={styles.textError}>{errors.categoria}</Text>}
                 </View>
 
@@ -273,21 +279,24 @@ export default function CadastroDeReceita({ navigation, props }) {
                 <View style={{ flexDirection: 'row', display: 'flex', width: '80%', justifyContent: 'flex-start' }}>
                     <TextInput
                         style={[styles.inputTempo, errors.tempoPreparo && styles.inputError]}
-                        placeholder='Ex: 10'
-                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                        placeholder='Por exemplo: 10'
+                        placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                         value={tempoPreparo}
                         onChangeText={(texto) => setTempoPreparo(texto)}
                         keyboardType="numeric"
+                        maxLength={3}
                     />
 
-                    <Picker
-                        style={[styles.ListaInput, errors.tempo && styles.inputError]}
-                        selectedValue={tempo}
-                        onValueChange={(itemValue) => setTempo(itemValue)}
-                    >
-                        <Picker.Item label="Minuto(s)" value="Minuto(s)" />
-                        <Picker.Item label="Hora(s)" value="Hora(s)" />
-                    </Picker>
+                    <View style={[styles.ListaInput, errors.tempo && styles.inputError]}>
+                        <Picker
+                            selectedValue={tempo}
+                            onValueChange={(itemValue) => setTempo(itemValue)}
+                        >
+                            <Picker.Item style={{ color: scheme === 'dark' ? '#DDD' : '#505050' }} label="Tempos:" value="" enabled={false} />
+                            <Picker.Item style={styles.PickerItem} label="Minuto(s)" value="Minuto(s)" />
+                            <Picker.Item style={styles.PickerItem} label="Hora(s)" value="Hora(s)" />
+                        </Picker>
+                    </View>
                 </View>
                 {errors.tempoPreparo && <Text style={styles.textError}>{errors.tempoPreparo}</Text>}
 
@@ -298,11 +307,12 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <Text style={styles.TextInput}>Porções</Text>
                     <TextInput
                         style={[styles.allInput, errors.porcoes && styles.inputError]}
-                        placeholder="Ex: 10"
-                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                        placeholder="Por exemplo: 10"
+                        placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                         value={porcoes}
                         onChangeText={(texto) => setPorcoes(texto)}
                         keyboardType="numeric"
+                        maxLength={4}
                     />
                     {errors.porcoes && <Text style={styles.textError}>{errors.porcoes}</Text>}
                 </View>
@@ -315,7 +325,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                             onValueChange={setAproveitamento}
                             color={aproveitamento ? '#FF7152' : undefined}
                         />
-                        <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold', color: scheme === 'dark' ? '#fff' : '#505050' }}>Receita com aproveitamento de alimentos?</Text>
+                        <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold', color: scheme === 'dark' ? '#DDD' : '#505050' }}>Receita com aproveitamento de alimentos?</Text>
                     </View>
                 </View>
 
@@ -323,23 +333,25 @@ export default function CadastroDeReceita({ navigation, props }) {
                     <Text style={styles.TextInput}>Valor Calórico</Text>
                     <TextInput
                         style={styles.allInput}
-                        placeholder='Ex: 150'
-                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                        placeholder='Por exemplo: 150'
+                        placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                         value={valCalorico}
                         onChangeText={(texto) => setValCalorico(texto)}
                         keyboardType="numeric"
+                        maxLength={6}
                     />
+                    {errors.valCalorico && <Text style={styles.textError}>{errors.valCalorico}</Text>}
                 </View>
 
                 <View style={styles.defaultInput}>
                     <Text style={styles.TextInput}>Pequena descrição</Text>
                     <TextInput
                         style={[styles.descricaoInput, errors.descricao && styles.inputError]}
-                        placeholder='Ex: Coxinha de frango com catupiry'
-                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                        placeholder='Por exemplo: Coxinha de frango com catupiry'
+                        placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                         textAlignVertical="top"
                         multiline={true}
-                        maxLength={400}
+                        maxLength={500}
                         value={descricao}
                         onChangeText={(texto) => setDescricao(texto)}
                     />
@@ -357,10 +369,11 @@ export default function CadastroDeReceita({ navigation, props }) {
 
                                 <TextInput
                                     style={[styles.allInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
-                                    placeholder="Ex: farinha de trigo"
-                                    placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                                    placeholder="Por exemplo: Farinha de trigo"
+                                    placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                                     value={ingrediente.nomeIngrediente}
                                     onChangeText={texto => atualizarIngrediente(index, 'nomeIngrediente', texto)}
+                                    maxLength={150}
                                 />
 
                             </View>
@@ -373,38 +386,39 @@ export default function CadastroDeReceita({ navigation, props }) {
                                 {(ingrediente.medida !== '1/2 xícara (chá)' && ingrediente.medida !== '1/4 xícara (chá)' && ingrediente.medida !== '1/2' && ingrediente.medida !== '1/4' && ingrediente.medida !== 'a gosto') && (
                                     <TextInput
                                         style={[styles.inputQuantidade, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
-                                        placeholder="Ex: 10"
-                                        placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                                        placeholder="Por exemplo: 10"
+                                        placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                                         value={ingrediente.quantidade}
                                         onChangeText={texto => atualizarIngrediente(index, 'quantidade', texto)}
                                         keyboardType="numeric"
+                                        maxLength={4}
                                     />
                                 )}
 
-                                <View style={styles.ViewListaInput}>
+                                <View style={[styles.ListaInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}>
                                     <Picker
-                                        style={[styles.ListaInput, errors.ingredientes && errors.ingredientes[index] && styles.inputError]}
                                         selectedValue={ingrediente.medida}
                                         onValueChange={valor => atualizarIngrediente(index, 'medida', valor)}
                                     >
-                                        <Picker.Item label="Gramas (g)" value="g" />
-                                        <Picker.Item label="A gosto" value="a gosto" />
-                                        <Picker.Item label="Quilograma (kg)" value="kg" />
-                                        <Picker.Item label="ML" value="ml" />
-                                        <Picker.Item label="Caixa" value="caixa" />
-                                        <Picker.Item label="Pacote" value="pacote" />
-                                        <Picker.Item label="Xícara (chá)" value="Xícara (chá)" />
-                                        <Picker.Item label="Fio" value="fio" />
-                                        <Picker.Item label="Dentes" value="dentes" />
-                                        <Picker.Item label="Ramo" value="ramo" />
-                                        <Picker.Item label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
-                                        <Picker.Item label="1/2 " value="1/2" />
-                                        <Picker.Item label="1/4 xícara (chá)" value="1/4 xícara (chá)" />
-                                        <Picker.Item label="1/4" value="1/4" />
-                                        <Picker.Item label="Colher(es) de sopa" value="Colher(es) de sopa" />
-                                        <Picker.Item label="Colher(es) de chá" value="Colher(es) de chá" />
-                                        <Picker.Item label="Unidade(s)" value="Unidade(s)" />
-                                        <Picker.Item label="Litro(s)" value="Litro(s)" />
+                                        <Picker.Item style={{ color: scheme === 'dark' ? '#DDD' : '#505050' }} label="Medidas:" value="" enabled={false} />
+                                        <Picker.Item style={styles.PickerItem} label="Gramas (g)" value="g" />
+                                        <Picker.Item style={styles.PickerItem} label="A gosto" value="a gosto" />
+                                        <Picker.Item style={styles.PickerItem} label="Quilograma (kg)" value="kg" />
+                                        <Picker.Item style={styles.PickerItem} label="ML" value="ml" />
+                                        <Picker.Item style={styles.PickerItem} label="Caixa" value="caixa" />
+                                        <Picker.Item style={styles.PickerItem} label="Pacote" value="pacote" />
+                                        <Picker.Item style={styles.PickerItem} label="Xícara (chá)" value="Xícara (chá)" />
+                                        <Picker.Item style={styles.PickerItem} label="Fio" value="fio" />
+                                        <Picker.Item style={styles.PickerItem} label="Dentes" value="dentes" />
+                                        <Picker.Item style={styles.PickerItem} label="Ramo" value="ramo" />
+                                        <Picker.Item style={styles.PickerItem} label="1/2 xícara (chá)" value="1/2 xícara (chá)" />
+                                        <Picker.Item style={styles.PickerItem} label="1/2 " value="1/2" />
+                                        <Picker.Item style={styles.PickerItem} label="1/4 xícara (chá)" value="1/4 xícara (chá)" />
+                                        <Picker.Item style={styles.PickerItem} label="1/4" value="1/4" />
+                                        <Picker.Item style={styles.PickerItem} label="Colher(es) de sopa" value="Colher(es) de sopa" />
+                                        <Picker.Item style={styles.PickerItem} label="Colher(es) de chá" value="Colher(es) de chá" />
+                                        <Picker.Item style={styles.PickerItem} label="Unidade(s)" value="Unidade(s)" />
+                                        <Picker.Item style={styles.PickerItem} label="Litro(s)" value="Litro(s)" />
                                     </Picker>
                                 </View>
                             </View>
@@ -437,8 +451,9 @@ export default function CadastroDeReceita({ navigation, props }) {
                                 style={[styles.allInput, errors.passos && errors.passos[index] && styles.inputError]}
                                 value={step.PassoTexto}
                                 placeholder={"Digite o passo"}
-                                placeholderTextColor={scheme === 'dark' ? '#fff' : '#000'}
+                                placeholderTextColor={scheme === 'dark' ? '#DDD' : '#505050'}
                                 onChangeText={(text) => handleStepTextChange(index, text)}
+                                maxLength={600}
                             />
                             {errors.passos && errors.passos && <Text style={styles.textError}>{errors.passos}</Text>}
                         </View>
@@ -459,7 +474,7 @@ export default function CadastroDeReceita({ navigation, props }) {
                 </View>
 
                 <View>
-                    <TouchableOpacity onPress={CadastrarReceita} >
+                    <TouchableOpacity onPress={() => setVisibleModal(true)} >
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 1 }} style={styles.button} >
                             <Text style={styles.buttonText}>Publicar</Text>
@@ -468,6 +483,19 @@ export default function CadastroDeReceita({ navigation, props }) {
                 </View>
             </View>
             <View style={{ paddingVertical: 50 }} />
+
+            <Modal
+                visible={visibleModal}
+                transparent={true}
+                onRequestClose={() => setVisibleModal(false)}
+            >
+                <ActionModal
+                    handleClose={() => setVisibleModal(false)}
+                    handleAction={() => CadastrarReceita()}
+                    status={'post'}
+                />
+
+            </Modal>
         </ScrollView>
     )
 }

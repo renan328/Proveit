@@ -234,6 +234,15 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_700Bold',
         color: '#ff375b'
     },
+
+    CardsList: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        flexDirection: 'row'
+    },
+
 });
 
 export default styles;

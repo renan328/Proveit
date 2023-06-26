@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     },
 
     ListaInput: {
-        width: 180,
+        width: 160,
         height: 50,
         fontSize: 13,
         color: '#fff',
@@ -473,6 +473,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: 'rgba(255, 55, 92, 0.6)',
         marginTop: 5
+    },
+
+    PickerItem: {
+        color: '#505050',
+        fontFamily: 'Raleway_600SemiBold',
     }
 });
 

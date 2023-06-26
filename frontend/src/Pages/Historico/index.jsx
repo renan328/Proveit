@@ -31,7 +31,7 @@ export default function Historico() {
 
                 const historicoReceitasString = historicoReceitas.join(',');
                 const url = `https://serverproveit.azurewebsites.net/api/receita/historico?idReceitas=${historicoReceitasString}`;
-                
+
                 fetch(url, {
                     method: 'GET',
                     headers
@@ -65,7 +65,7 @@ export default function Historico() {
                     <Text style={styles.firstText}>Meu</Text>
                     <Text style={styles.subText}>Histórico</Text>
                 </View>
-            </View> 
+            </View>
             <View style={styles.ScreenSelect}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Text style={{ color: '#505050', fontFamily: 'Raleway_700Bold' }}>Favoritos</Text>
@@ -77,30 +77,27 @@ export default function Historico() {
             <View style={styles.SubHeader}>
                 <Text style={{ fontSize: 18, fontFamily: 'Raleway_800ExtraBold', color: '#606060', marginVertical: 18 }}>Visto recentemente</Text>
             </View>
-            <View style={styles.CardsList}>
-                {loading ? (
-                    <View style={{ display: "flex", alignSelf: "center" }}>
-                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
-                        <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
-                    </View>
-                ) : (
-                    <>
-                        {dadosReceita.length > 0 ? (
-                            <>
-                                {
-                                    dadosReceita.map((receita, index) =>
-                                        <CartaoFavorito dadosReceita={receita} key={index} />
-                                    )
-                                }
-                            </>
-                        ) : null}
-                    </>
-                )}
-                {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
+            {loading ? (
+                <View style={{ display: "flex", alignSelf: "center" }}>
+                    <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
+                    <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
+                </View>
+            ) : (
+                <View style={styles.CardsList}>
+                    {dadosReceita.length > 0 ? (
+                        <>
+                            {
+                                dadosReceita.map((receita, index) =>
+                                    <CartaoFavorito dadosReceita={receita} key={index} />
+                                )
+                            }
+                        </>
+                    ) : null}
+                </View>
+            )}
+            {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
 
-
-            </View>
             <View style={{ paddingVertical: 50 }} />
-        </ScrollView>
+        </ScrollView >
     )
 }

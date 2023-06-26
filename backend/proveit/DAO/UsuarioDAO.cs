@@ -105,6 +105,22 @@ namespace proveit.DAO
             return resultado > 0;
         }
 
+        public bool VerificarEmailExistenteAoAlterar(int id, string email)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = "SELECT COUNT(*) FROM Usuarios WHERE idUsuario != @id AND Email = @email";
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", id);
+            comando.Parameters.AddWithValue("@email", email);
+            var resultado = (long)comando.ExecuteScalar();
+
+            conexao.Close();
+
+            return resultado > 0;
+        }
+
         public bool VerificarNomeTagExistente(string nomeTag)
         {
             var conexao = ConnectionFactory.Build();
@@ -119,6 +135,23 @@ namespace proveit.DAO
 
             return resultado > 0;
         }
+
+        public bool VerificarNomeTagExistenteAoAlterar(int id, string nomeTag)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = "SELECT COUNT(*) FROM Usuarios WHERE idUsuario != @id AND NomeTag = @nomeTag";
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", id);
+            comando.Parameters.AddWithValue("@nomeTag", nomeTag);
+            var resultado = (long)comando.ExecuteScalar();
+
+            conexao.Close();
+
+            return resultado > 0;
+        }
+
 
         public void CadastrarUsuario(UsuarioDTO usuario)
         {

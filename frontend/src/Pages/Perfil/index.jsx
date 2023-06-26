@@ -9,7 +9,7 @@ import stylesDark from './perfil.moduleDark';
 import LottieView from 'lottie-react-native';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
-import CartaoReceita from '../../components/CartaoReceita/CartaoReceita';
+import CartaoReceita from '../../components/CartaoFavorito/CartaoFavorito';
 import showToast from '../../../hooks/toasts';
 
 export default function Perfil({ navigation }) {
@@ -67,79 +67,65 @@ export default function Perfil({ navigation }) {
 
     return (
         // Container Geral
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.navigate('Configuracoes')}>
-                    <FontAwesomeIcon icon={faGear} size={32} style={styles.configIcon} />
-                </TouchableOpacity>
-            </View>
-            <View>
-                {/* Imagem do Usuário e Dados */}
-                <View style={styles.userImage}>
-                    <Image source={{ uri: usuario?.foto }} style={styles.imagemUsu} />
-                </View>
-                <Text style={styles.name}>{usuario?.nome}</Text>
-                <Text style={styles.userName}>@{usuario?.nomeTag}</Text>
-            </View>
-            <TouchableOpacity onPress={Adicionados}>
-                <Text style={styles.text}>Adicionados</Text>
-            </TouchableOpacity>
-
-            {/* Linha horizontal */}
-            <View
-                style={{
-                    borderBottomColor: '#505050',
-                    opacity: 0.4,
-                    borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: 330, height: 5,
-                    marginTop: 15
-                }}
-            />
-            <ScrollView style={{ marginLeft: 10 }}>
-
-                {loading ? (
-                    <View style={{ display: "flex", alignSelf: "center" }}>
-                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
-                        <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
-                    </View>
-                ) : (
-                    <>
-                        {dadosReceita.length > 0 ? (
-                            <>
-                                {!mostrarMensagem && (
-                                    dadosReceita.map((receita, index) => (
-                                        <CartaoReceita receita={receita} key={index} />
-                                    ))
-                                )}
-                            </>
-                        ) : null}
-                    </>
-                )}
-            </ScrollView>
-
-            {mostrarMensagem &&
-                <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita,
-                    <TouchableOpacity onPress={() => navigation.navigate('Adicionar')}>
-                        <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text>
+        <ScrollView style={{ backgroundColor: '#fff', height: '100%' }}>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Configuracoes')}>
+                        <FontAwesomeIcon icon={faGear} size={32} style={styles.configIcon} />
                     </TouchableOpacity>
-                </Text>}
+                </View>
+                <View>
+                    {/* Imagem do Usuário e Dados */}
+                    <View style={styles.userImage}>
+                        <Image source={{ uri: usuario?.foto }} style={styles.imagemUsu} />
+                    </View>
+                    <Text style={styles.name}>{usuario?.nome}</Text>
+                    <Text style={styles.userName}>@{usuario?.nomeTag}</Text>
+                </View>
+                <TouchableOpacity onPress={Adicionados}>
+                    <Text style={styles.text}>Adicionados</Text>
+                </TouchableOpacity>
 
-            {/* <LottieView
-                source={require('../../assets/lottie/heart.json')}
-                autoPlay
-                loop
-                style={{ height: 15, alignSelf: 'center' }}
-            /> */}
-            <View
-                style={{
-                    borderBottomColor: '#505050',
-                    opacity: 0.4,
-                    borderBottomWidth: StyleSheet.hairlineWidth,
-                    width: 330, height: 5,
-                    marginTop: 15
-                }}
-            />
-            <View style={{ paddingVertical: 30}} />
-        </View>
+                {/* Linha horizontal */}
+                <View
+                    style={{
+                        borderBottomColor: '#505050',
+                        opacity: 0.4,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        width: 330, height: 5,
+                        marginTop: 15
+                    }}
+                />
+                <View style={styles.CardsList}>
+
+                    {loading ? (
+                        <View style={{ display: "flex", alignSelf: "center" }}>
+                            <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
+                            <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
+                        </View>
+                    ) : (
+                        <>
+                            {dadosReceita.length > 0 ? (
+                                <>
+                                    {!mostrarMensagem && (
+                                        dadosReceita.map((receita, index) => (
+                                            <CartaoReceita dadosReceita={receita} key={index} />
+                                        ))
+                                    )}
+                                </>
+                            ) : null}
+                        </>
+                    )}
+                </View>
+
+                {mostrarMensagem &&
+                    <Text style={styles.textUnder}>Você ainda não adicionou nehuma receita,
+                        <TouchableOpacity onPress={() => navigation.navigate('Adicionar')}>
+                            <Text style={{ color: '#FF7152' }}>que tal publicar uma nova?</Text>
+                        </TouchableOpacity>
+                    </Text>}
+                <View style={{ paddingVertical: 40 }} />
+            </View>
+        </ScrollView>
     );
 }

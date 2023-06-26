@@ -17,23 +17,24 @@ const styles = StyleSheet.create({
     },
 
     headerIcon: {
-        color: '#fff',
-        marginVertical: 20,
-        marginHorizontal: 12,
-        textShadowColor: 'rgba(0, 0, 0, 0.75)',
-        textShadowOffset: { width: -1, height: 1 },
-        textShadowRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 5,
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
+        display: 'flex',
+        height: 30,
+        width: 30,
+        backgroundColor: 'rgba(0, 0, 0, 0.50)',
+        marginHorizontal: 10,
+        marginVertical: 15,
+        paddingHorizontal: 18,
+        paddingVertical: 23,
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
-    mainImage:{
-        height: screenHeight * 0.55, 
+    mainImage: {
+        height: screenHeight * 0.55,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -96,7 +97,6 @@ const styles = StyleSheet.create({
         shadowRadius: 7,
         elevation: 7
     },
-
 
     starsContainer: {
         marginTop: 15
@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
             height: 2,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 5,        elevation: 4,
-
+        shadowRadius: 5,
+        elevation: 4,
     },
 
     subDetail: {
@@ -441,6 +441,11 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         alignItems: 'center'
+    },
+
+    menuOption: {
+        marginVertical: 10,
+        marginHorizontal: 5,
     },
 
 });
