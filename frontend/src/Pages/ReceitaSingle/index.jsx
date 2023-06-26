@@ -11,6 +11,7 @@ import { faBookmark, faStar, faAngleLeft, faClock, faUtensils, faHeart, faEllips
 import { useRoute } from '@react-navigation/native';
 import stylesDark from './receitasingle.moduleDark';
 import stylesLight from './receitasingle.module';
+import LottieView from 'lottie-react-native';
 import { BlurView } from 'expo-blur';
 import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from "../../AuthContext";
@@ -297,7 +298,7 @@ export default function ReceitaSingle({ navigation }) {
             </View>
             <View
                 style={{
-                    borderBottomColor: '#505050',
+                    borderBottomColor: '#606060',
                     opacity: 0.4,
                     borderBottomWidth: StyleSheet.hairlineWidth,
                     width: '80%', height: 5,
@@ -306,7 +307,8 @@ export default function ReceitaSingle({ navigation }) {
                 }} />
             <View style={styles.rating}>
                 <Text style={styles.ratePresentation}>O que <Text style={{ color: '#FF7152' }}>você</Text> achou?</Text>
-                <LinearGradient start={{ x: -1, y: 1 }} end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.ratingContainer}>
+                {/* <LinearGradient start={{ x: -1, y: 1 }} end={{ x: 2, y: 1 }} colors={['#FF7152', '#FFB649']} style={styles.ratingContainer}> */}
+                <View style={styles.ratingContainer}>
                     <AirbnbRating
                         ratingColor='#fff'
                         count={5}
@@ -317,12 +319,13 @@ export default function ReceitaSingle({ navigation }) {
                             'Ótimo',
                             'Sensacional!',
                         ]}
-                        defaultRating={5}
+                        defaultRating={0}
                         size={35}
-                        selectedColor='#fff'
+                        selectedColor='#ff7152'
                         unSelectedColor='#505050'
-                        reviewColor='#fff'
+                        reviewColor='#ff7152'
                         onFinishRating={handleRatingChange}
+                        style={{fontFamily: 'Raleway_700Bold'}}
                     />
                     <TextInput
                         placeholder={'O que você tem a dizer?'}
@@ -336,10 +339,17 @@ export default function ReceitaSingle({ navigation }) {
                     <TouchableOpacity style={styles.rateButton} onPress={handleAssessment}>
                         <Text style={styles.rateButtonText}>Avaliar</Text>
                     </TouchableOpacity>
-                </LinearGradient>
+                </View>
+                {/* </LinearGradient> */}
             </View>
             <View style={styles.comments}>
                 <View style={styles.commentsHeader}>
+                    <LottieView
+                        source={require('../../assets/lottie/comment.json')} // Caminho para o arquivo JSON do Lottie
+                        autoPlay
+                        loop
+                        style={{ height: 50, alignSelf: 'center', marginBottom: 10 }}
+                    />
                     <Text style={styles.commentsTitle}>Comentários</Text>
                 </View>
                 <View style={styles.commentsContainer}>

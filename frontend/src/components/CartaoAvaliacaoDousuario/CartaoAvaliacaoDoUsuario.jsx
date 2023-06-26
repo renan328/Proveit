@@ -62,7 +62,7 @@ export default function CartaoAvalicaoDoUsuario({ avaliacao }) {
 
     return (
         <View style={styles.opcoes}>
-            <Text style={styles.userName}>Receita: {avaliacao.nomeReceita}</Text>
+            <Text style={styles.recipeIdentifier}>Receita: <Text style={{ color: '#ff7152' }}>{avaliacao.nomeReceita}</Text></Text>
             <View style={styles.container}>
 
                 <View style={styles.imgContainer}>
@@ -86,17 +86,16 @@ export default function CartaoAvalicaoDoUsuario({ avaliacao }) {
                 </View>
 
             </View>
+            <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 50}}>
+                <TouchableOpacity style={styles.containerOpcoes} onPress={GoToEdit}>
+                    <FontAwesomeIcon style={{alignSelf: 'center'}} icon={faPencil} size={25} color="#606060" />
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.containerOpcoes} onPress={GoToEdit}>
-                <Text style={styles.textOpcoes}>Editar avaliação</Text>
-                <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={25} color="#606060" />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.containerOpcoesDelete} onPress={() => setVisibleModal(true)}>
-                <Text style={styles.textOpcoesDelete}>Excluir avaliação</Text>
-                <FontAwesomeIcon style={styles.botaoOpcoes} icon={faTrashCan} size={25} color="#eeeeee5e" />
-            </TouchableOpacity>
-            <View style={{ paddingTop: 50 }} />
+                <TouchableOpacity style={styles.containerOpcoesDelete} onPress={() => setVisibleModal(true)}>
+                    <FontAwesomeIcon style={{alignSelf: 'center'}} icon={faTrashCan} size={25} color="#eeeeee5e" />
+                </TouchableOpacity>
+                <View style={{ paddingTop: 50 }} />
+            </View>
 
             <Modal
                 visible={visibleModal}
@@ -178,7 +177,15 @@ const stylesLight = StyleSheet.create({
     userName: {
         fontFamily: 'Raleway_700Bold',
         color: '#505050',
-        fontSize: 16
+        fontSize: 16,
+        alignSelf: 'center'
+    },
+
+    recipeIdentifier: {
+        fontFamily: 'Raleway_700Bold',
+        color: '#707070',
+        fontSize: 16,
+        alignSelf: 'center'
     },
 
     quoteContainer: {
@@ -197,30 +204,31 @@ const stylesLight = StyleSheet.create({
         justifyContent: 'flex-end',
         marginVertical: 5
     },
+
     containerOpcoes: {
-        minWidth: 300,
-        maxWidth: 300,
+        width: '60%',
+
         paddingVertical: 15,
         paddingHorizontal: 15,
         borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         backgroundColor: '#eeeeee',
         marginTop: 20,
     },
 
     containerOpcoesDelete: {
-        minWidth: 300,
-        maxWidth: 300,
+        width: '30%',
+
         paddingVertical: 15,
         paddingHorizontal: 15,
         borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         backgroundColor: '#ff4848d1',
         color: '#fff',
         marginTop: 20,
@@ -301,11 +309,19 @@ const stylesDark = StyleSheet.create({
         justifyContent: 'space-between'
     },
 
+    recipeIdentifier: {
+        fontFamily: 'Raleway_700Bold',
+        color: '#707070',
+        fontSize: 16,
+        alignSelf: 'center'
+    },
+
     userName: {
         fontFamily: 'Raleway_700Bold',
         color: '#fff',
-        fontSize: 16
+        fontSize: 16,
     },
+
 
     quoteContainer: {
         marginVertical: 5
@@ -325,22 +341,21 @@ const stylesDark = StyleSheet.create({
     },
 
     containerOpcoes: {
-        minWidth: 300,
-        maxWidth: 300,
+        width: '60%',
         paddingVertical: 15,
         paddingHorizontal: 15,
         borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         backgroundColor: '#303030',
         marginTop: 20,
     },
 
 
     containerOpcoesDelete: {
-        minWidth: 300,
+        width: '30%',
         maxWidth: 300,
         paddingVertical: 15,
         paddingHorizontal: 15,
@@ -348,7 +363,7 @@ const stylesDark = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         backgroundColor: '#ff4848d1',
         color: '#fff',
         marginTop: 20,

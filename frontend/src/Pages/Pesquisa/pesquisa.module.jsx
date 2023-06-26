@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     },
 
     inputContainer: {
+        marginTop: 10,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
         marginRight: 15,
         paddingHorizontal: 7,
         fontSize: 13,
-        fontFamily: 'Raleway_700Bold',
+        fontFamily: 'Raleway_500Medium',
         color: '#505050',
         height: 45,
         minWidth: '75%',

@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    botao: {
+        marginTop: 20,
+        marginLeft: 20
+    },
+
     textContainer: {
         marginTop: 20,
         textAlign: 'center',
@@ -31,9 +36,10 @@ const styles = StyleSheet.create({
         fontSize: 40
     },
     CardsList: {
+        marginTop: 10,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         flexWrap: 'wrap',
         flexDirection: 'row'
     },

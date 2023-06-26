@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     header: {
         display: 'flex',
         width: '100%',
-        height: 400,
+        minHeight: 400,
         left: 0,
         top: 0,
         borderBottomLeftRadius: 65,
@@ -27,7 +27,9 @@ const styles = StyleSheet.create({
         shadowRadius: 6,
         elevation: 5,
         paddingLeft: 20,
-        paddingBottom: 20
+        paddingBottom: 20,
+        flexGrow: 1,
+        paddingBottom: 20,
     },
 
     subHeader: {

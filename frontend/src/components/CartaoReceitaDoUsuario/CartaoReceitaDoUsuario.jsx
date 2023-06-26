@@ -17,7 +17,7 @@ export default function CartaoReceitaDoUsuario({ receita }) {
     const GoToEdit = (id) => {
         navigation.navigate('EditarReceita', { id: receita.receita?.idReceita });
     };
-    
+
     async function RemoverReceita() {
         const headers = await HeaderRequisicao();
 
@@ -44,7 +44,7 @@ export default function CartaoReceitaDoUsuario({ receita }) {
         for (let index = 0; index < stars; index++) {
             starsBox.push(
                 <View key={index}>
-                    <FontAwesomeIcon style={styles.star} icon={faStar} size={15} color={'#FF7152'} />
+                    <FontAwesomeIcon style={styles.star} icon={faStar} size={10} color={'#FF7152'} />
                 </View>
             );
         }
@@ -58,32 +58,34 @@ export default function CartaoReceitaDoUsuario({ receita }) {
 
     return (
         <View style={styles.opcoes}>
-            {/* onPress={() => handleCardPress(receita.id)} */}
-            <TouchableOpacity key={receita.id}>
-                <ImageBackground source={{ uri: !receita.receita?.foto ? '../../assets/proveitLogo.png' : receita.receita?.foto }} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
+            <View style={styles.wrapper}>
+                {/* onPress={() => handleCardPress(receita.id)} */}
+                <TouchableOpacity key={receita.id}>
+                    <ImageBackground source={{ uri: !receita.receita?.foto ? '../../assets/proveitLogo.png' : receita.receita?.foto }} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
 
-                    <View style={styles.header}>
-                    </View>
-
-                    {/* Container de imagem e texto */}
-                    <View style={styles.containerTexto} >
-                        <View style={styles.containerTextoWhite}>
-                            {StarCounter()}
-                            <Text style={styles.titulo}>{receita.receita?.nomeReceita}</Text>
+                        <View style={styles.header}>
                         </View>
-                    </View>
-                </ImageBackground>
-            </TouchableOpacity >
 
-            <TouchableOpacity style={styles.containerOpcoes} onPress={GoToEdit}>
-                <Text style={styles.textOpcoes}>Editar receita</Text>
-                <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={25} color="#606060" />
-            </TouchableOpacity>
+                        {/* Container de imagem e texto */}
+                        <View style={styles.containerTexto} >
+                            <View style={styles.containerTextoWhite}>
+                                {StarCounter()}
+                                <Text style={styles.titulo}>{receita.receita?.nomeReceita}</Text>
+                            </View>
+                        </View>
+                    </ImageBackground>
+                </TouchableOpacity >
 
-            <TouchableOpacity style={styles.containerOpcoesDelete} onPress={() => setVisibleModal(true)}>
-                <Text style={styles.textOpcoesDelete}>Excluir receita</Text>
-                <FontAwesomeIcon style={styles.botaoOpcoes} icon={faTrashCan} size={25} color="#eeeeee5e" />
-            </TouchableOpacity>
+                <View style={styles.optionsContainer}>
+                    <TouchableOpacity style={styles.containerOpcoes} onPress={GoToEdit}>
+                        <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={25} color="#606060" />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.containerOpcoesDelete} onPress={() => setVisibleModal(true)}>
+                        <FontAwesomeIcon style={styles.botaoOpcoes} icon={faTrashCan} size={25} color="#eeeeee5e" />
+                    </TouchableOpacity>
+                </View>
+            </View>
             <View style={{ paddingTop: 50 }} />
             <Modal
                 visible={visibleModal}
@@ -95,159 +97,20 @@ export default function CartaoReceitaDoUsuario({ receita }) {
                     handleAction={() => RemoverReceita()}
                     status={'delete'}
                 />
-
             </Modal>
         </View>
     )
 }
 
-const stylesLight = StyleSheet.create({
-
-    caixaPrincipal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        margin: 6,
-        width: 200,
-        height: 320,
-        backgroundColor: '#fff',
-        borderBottomLeftRadius: 32,
-        borderBottomRightRadius: 32,
-        borderTopLeftRadius: 32,
-        borderTopRightRadius: 32,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 5,
-        elevation: 4,
-    },
-
-    header: {
-        padding: 7,
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-end'
-    },
-
-    bookmarkIcon: {
-        padding: 8,
-        backgroundColor: 'rgba(255,255,255,0.7)',
-        borderRadius: 10,
-        color: '#505050',
-    },
-
-    timeBadge: {
-
-    },
-
-    containerOpcoes: {
-        width: '88%',
-        paddingVertical: 15,
-        paddingHorizontal: 15,
-        borderRadius: 10,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: '#eeeeee',
-        marginTop: 20,
-    },
-
-    containerOpcoesDelete: {
-        width: '88%',
-        paddingVertical: 15,
-        paddingHorizontal: 15,
-        borderRadius: 10,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: '#ff4848d1',
-        color: '#fff',
-        marginTop: 20,
-    },
-
-    containerTexto: {
-        width: '100%',
-        height: 111,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-        border: 0,
-        alignSelf: 'baseline',
-    },
-
-    containerTextoWhite: {
-        border: 0,
-        flexWrap: 'wrap',
-        textAlign: 'left',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%',
-        paddingHorizontal: 8,
-        backgroundColor: 'rgba(255,255,255,0.90)',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-        alignSelf: 'baseline',
-
-    },
-
-    titulo: {
-        display: 'flex',
-        flexGrow: 1,
-        flexWrap: 'wrap',
-        fontSize: 16,
-        marginVertical: 10,
-        fontFamily: 'Raleway_700Bold',
-        textAlign: 'center',
-        color: '#505050',
-        textTransform: 'capitalize'
-    },
-
-    textOpcoes: {
-        fontFamily: 'Raleway_600SemiBold',
-        fontSize: 18,
-        color: '#505050',
-    },
-
-    textOpcoesDelete: {
-        fontFamily: 'Raleway_600SemiBold',
-        fontSize: 18,
-        color: '#eeeeee5e',
-    },
-
-    botaoOpcoes: {
-        alignSelf: 'flex-end',
-    },
-
-    opcoes: {
-        display: 'flex',
-        alignItems: 'center',
-        marginTop: 15,
-        width: '80%'
-    },
-});
 
 const stylesDark = StyleSheet.create({
 
     caixaPrincipal: {
         display: 'flex',
         alignItems: 'center',
-        margin: 6,
         justifyContent: 'space-between',
-        width: 200,
-        height: 320,
+        width: 350,
+        height: 170,
         backgroundColor: '#303030',
         borderBottomLeftRadius: 32,
         borderBottomRightRadius: 32,
@@ -282,7 +145,7 @@ const stylesDark = StyleSheet.create({
 
     containerTexto: {
         width: '100%',
-        height: 111,
+        height: 70,
         borderBottomLeftRadius: 32,
         borderBottomRightRadius: 32,
         borderTopLeftRadius: 5,
@@ -296,7 +159,7 @@ const stylesDark = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         width: '100%',
         height: '100%',
         paddingHorizontal: 8,
@@ -312,52 +175,177 @@ const stylesDark = StyleSheet.create({
         display: 'flex',
         flexGrow: 1,
         flexWrap: 'wrap',
-        fontSize: 17,
+        fontSize: 12,
+        width: '100%',
         marginVertical: 7,
         fontFamily: 'Raleway_700Bold',
-        textAlign: 'left',
+        textAlign: 'center',
         color: '#fff',
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        alignSelf: 'center'
     },
 
+    optionsContainer: {
+        flexDirection: 'row',
+        display: 'flex',
+        width: 340,
+        justifyContent: 'space-between'
+       },
+
     containerOpcoes: {
-        width: '88%',
+        width: '60%',
         paddingVertical: 15,
         paddingHorizontal: 15,
         borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         backgroundColor: '#303030',
         marginTop: 20,
     },
 
 
     containerOpcoesDelete: {
-        width: '88%',
+        width: '30%',
         paddingVertical: 15,
         paddingHorizontal: 15,
         borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         backgroundColor: '#ff4848d1',
         color: '#fff',
         marginTop: 20,
     },
 
-    textOpcoes: {
-        fontFamily: 'Raleway_600SemiBold',
-        fontSize: 18,
-        color: '#505050',
+    botaoOpcoes: {
+        alignSelf: 'flex-end',
     },
 
-    textOpcoesDelete: {
-        fontFamily: 'Raleway_600SemiBold',
-        fontSize: 18,
-        color: '#eeeeee5e',
+    opcoes: {
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: 15,
+        width: '80%'
+    },
+});
+const stylesLight = StyleSheet.create({
+
+    caixaPrincipal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: 350,
+        height: 170,
+        backgroundColor: '#303030',
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
+        elevation: 4,
+    },
+
+    header: {
+        padding: 10,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+
+    bookmarkIcon: {
+        padding: 8,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        borderRadius: 13,
+        color: '#fff',
+
+    },
+
+    containerTexto: {
+        width: '100%',
+        height: 70,
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
+
+    },
+
+    containerTextoWhite: {
+        flexWrap: 'wrap',
+        textAlign: 'left',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        backgroundColor: 'rgba(255,255,255,0.9)',
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+    },
+
+    titulo: {
+        display: 'flex',
+        flexGrow: 1,
+        flexWrap: 'wrap',
+        fontSize: 12,
+        marginVertical: 7,
+        width: '100%',
+        fontFamily: 'Raleway_700Bold',
+        textAlign: 'center',
+        color: '#303030',
+        textTransform: 'capitalize',
+        alignSelf: 'center'
+    },
+
+    optionsContainer: {
+        flexDirection: 'row',
+        display: 'flex',
+        width: 340,
+        justifyContent: 'space-between'
+       },
+
+    containerOpcoes: {
+        width: '60%',
+        paddingVertical: 15,
+        paddingHorizontal: 15,
+        borderRadius: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#eee',
+        marginTop: 20,
+    },
+
+
+    containerOpcoesDelete: {
+        width: '30%',
+        paddingVertical: 15,
+        paddingHorizontal: 15,
+        borderRadius: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ff4848d1',
+        color: '#fff',
+        marginTop: 20,
     },
 
     botaoOpcoes: {

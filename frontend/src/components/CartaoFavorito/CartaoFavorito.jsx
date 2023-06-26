@@ -36,9 +36,7 @@ export default function CartaoReceita({ dadosReceita }) {
             <ImageBackground source={{ uri: dadosReceita?.receita.foto }} imageStyle={{ borderBottomLeftRadius: 32, borderBottomRightRadius: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, }} style={styles.caixaPrincipal}>
 
                 <View style={styles.header}>
-                    <TouchableOpacity>
-                        <FontAwesomeIcon icon={faBookmark} size={20} style={styles.bookmarkIcon} />
-                    </TouchableOpacity>
+                    
                 </View>
 
                 {/* Container de imagem e texto */}

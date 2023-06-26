@@ -325,16 +325,17 @@ const styles = StyleSheet.create({
     },
 
     ratingContainer: {
+        backgroundColor: '#fff',
         marginTop: 20,
-        width: '90%',
+        width: '95%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: 20,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
+        padding: 15,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

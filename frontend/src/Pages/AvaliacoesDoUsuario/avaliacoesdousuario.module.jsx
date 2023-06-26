@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
         marginTop: 20,
         textAlign: 'center',
     },
+
+    botao:{
+        marginTop: 20,
+        marginLeft: 20
+    },
+    
     firstText: {
         fontFamily: 'Raleway_700Bold',
         color: '#505050',
@@ -36,7 +42,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexWrap: 'wrap',
         flexDirection: 'row',
-        width: '75%'
+        width: '75%',
+        alignSelf: 'center'
     },
     SubHeader: {
         position: 'relative',

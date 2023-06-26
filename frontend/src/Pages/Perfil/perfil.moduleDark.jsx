@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     },
 
     configIcon: {
-        marginTop: 10,
+        marginVertical: 20,
         color: '#909090',
     },
 

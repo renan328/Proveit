@@ -9,6 +9,7 @@ import { DadosUsuario } from "../../AuthContext";
 import { HeaderRequisicao } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import showToast from '../../../hooks/toasts';
+import LottieView from 'lottie-react-native';
 
 export default function AvaliacoesDoUsuario() {
 
@@ -53,8 +54,7 @@ export default function AvaliacoesDoUsuario() {
                     <FontAwesomeIcon icon={faChevronLeft} color="#FF7152" size={30} />
                 </TouchableOpacity>
 
-                <View style={styles.header}>
-
+                <View style={styles.header}> 
                     <Text style={styles.firstText}>Minhas</Text>
                     <Text style={styles.subText}>Avaliações</Text>
                     <View
@@ -63,10 +63,18 @@ export default function AvaliacoesDoUsuario() {
                             opacity: 0.4,
                             borderBottomWidth: StyleSheet.hairlineWidth,
                             width: "80%", height: 5,
-                            marginTop: 15
+                            marginTop: 15,
+                            marginBottom: 30
                         }}
                     />
                 </View>
+
+                <LottieView
+                    source={require('../../assets/lottie/comment.json')} // Caminho para o arquivo JSON do Lottie
+                    autoPlay
+                    loop
+                    style={{ height: 50, alignSelf: 'center', marginBottom: 10}}
+                />
 
                 <View style={styles.CardsList}>
 

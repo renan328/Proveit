@@ -8,6 +8,7 @@ import CartaoReceita from "../../components/CartaoReceita/CartaoReceita";
 import { HeaderRequisicao } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import showToast from '../../../hooks/toasts';
+import LottieView from 'lottie-react-native';
 import { useRoute } from '@react-navigation/native';
 
 export default function Explore({ categoriaExlorar }) {
@@ -84,9 +85,14 @@ export default function Explore({ categoriaExlorar }) {
 
                 <View style={styles.CardsList}>
                     {loading ? (
-                        <View style={{ display: "flex", alignSelf: "center" }}>
-                            <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
-                            <ActivityIndicator size="large" color="#FF7152" style={{ marginTop: 10 }} />
+                        <View style={{ display: "flex", alignSelf: "center", marginTop: 20 }}>
+                        <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium' }}>Um momento, estamos buscando!</Text>
+                        <LottieView
+                        source={require('../../assets/lottie/search.json')} // Caminho para o arquivo JSON do Lottie
+                        autoPlay
+                        loop
+                        style={{ height: 150, alignSelf: 'center' }}
+                    />
                         </View>
                     ) : (
                         <>

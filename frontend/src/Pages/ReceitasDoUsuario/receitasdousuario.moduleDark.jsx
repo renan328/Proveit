@@ -5,6 +5,11 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     
+    botao: {
+        marginTop: 20,
+        marginLeft: 20
+    },
+
     header: {
         width: '100%',
         textAlign: 'center',
@@ -32,6 +37,7 @@ const styles = StyleSheet.create({
         fontSize: 40
     },
     CardsList: {
+        marginTop: 10,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

@@ -6,17 +6,15 @@ const styles = StyleSheet.create({
 
     container: {
         display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'flex-end',
-        height: '100%',
         alignItems: 'center',
+        height: '100%',
         margin: 0
     },
     main: {
         backgroundColor: '#000',
         width: '92%',
-        height: '86%',
-        marginTop: 135,
+        height: '90%',
         borderTopLeftRadius: 60,
         borderTopRightRadius: 60,
         shadowColor: "#000",
@@ -27,10 +25,11 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 15,
         elevation: 6,
+        bottom: 0,
     },
 
     tint: {
-        backgroundColor: 'rgba(12,12,12,0.85)',
+        backgroundColor: 'rgba(12,12,12,0.90)',
         width: '100%',
         height: '100%',
         borderTopLeftRadius: 60,
@@ -46,6 +45,25 @@ const styles = StyleSheet.create({
         width: 100,
     },
 
+    textBy:{
+        color: '#bbb',
+        fontFamily: 'Raleway_500Medium',
+        marginTop: 30,
+        marginBottom: 10
+    },
+
+    logoDevlare: {
+        height: 62,
+        width: 200,
+    },
+
+    textBeta: {
+        color: '#fff',
+        fontFamily: 'Raleway_700Bold',
+        marginTop: 10,
+        textTransform: 'uppercase'
+    },
+
     saboresImg: {
         height: 200,
         width: 300,
@@ -58,12 +76,12 @@ const styles = StyleSheet.create({
     },
 
     input: {
-        minWidth: '80%',
+        minWidth: '85%',
         marginVertical: 5,
         marginHorizontal: 5,
         paddingHorizontal: 7,
         fontSize: 15,
-        fontFamily: 'Raleway_700Bold',
+        fontFamily: 'Raleway_500Medium',
         color: '#fff',
         height: 45,
         backgroundColor: '#303030',
@@ -93,7 +111,7 @@ const styles = StyleSheet.create({
         width: 200,
         backgroundColor: 'orange',
         color: '#FFF',
-        borderRadius: 15,
+        borderRadius: 12,
         padding: 10,
         alignSelf: 'center',
         shadowColor: "#000",
@@ -108,6 +126,7 @@ const styles = StyleSheet.create({
     },
 
     buttonText: {
+        fontSize: 18,
         color: '#FFF',
         fontFamily: 'Raleway_700Bold',
         textAlign: 'center',

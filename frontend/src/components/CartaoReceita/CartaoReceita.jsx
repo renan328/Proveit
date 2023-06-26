@@ -206,7 +206,7 @@ const stylesDark = StyleSheet.create({
         height: '100%',
         paddingHorizontal: 8,
         paddingVertical: 4,
-        backgroundColor: 'rgba(20,20,20,0.8)',
+        backgroundColor: 'rgba(20,20,20,0.9)',
         borderBottomLeftRadius: 32,
         borderBottomRightRadius: 32,
         borderTopLeftRadius: 20,

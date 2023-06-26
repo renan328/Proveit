@@ -321,6 +321,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 20,
         marginTop: 20,
+        alignSelf: 'center',
         color: '#505050'
     },
 

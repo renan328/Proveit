@@ -11,19 +11,22 @@ export default function CarrosselExplorar() {
         id: 1,
         title: 'Melhor avaliadas',
         image: require('../../assets/explore1.png'),
-        nomeExplorar: 'MelhoresAvaliadas'
+        nomeExplorar: 'MelhoresAvaliadas',
+        lottie: require('../../assets/lottie/cooking.json')
     },
     {
         id: 2,
         title: 'Mais favoritadas',
         image: require('../../assets/explore2.png'),
-        nomeExplorar: 'ListarMaisFavoritadas'
+        nomeExplorar: 'ListarMaisFavoritadas',
+        lottie: require('../../assets/lottie/cooking.json')
     },
     {
         id: 3,
         title: 'Mais comentadas',
         image: require('../../assets/explore3.png'),
-        nomeExplorar: 'ListarMaisComentadas'
+        nomeExplorar: 'ListarMaisComentadas',
+        lottie: require('../../assets/lottie/cooking.json')
     }];
 
 

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     main: {
         backgroundColor: '#000',
         width: '92%',
-        height: '86%',
+        height: '90%',
         marginTop: 135,
         borderTopLeftRadius: 60,
         borderTopRightRadius: 60,
@@ -26,10 +26,11 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 7,
+        bottom: 0,
     },
 
     tint: {
-        backgroundColor: 'rgba(255,255,255,0.85)',
+        backgroundColor: 'rgba(255,255,255,0.90)',
         width: '100%',
         height: '100%',
         borderTopLeftRadius: 60,
@@ -45,6 +46,25 @@ const styles = StyleSheet.create({
         width: 100,
     },
 
+    logoDevlare: {
+        height: 62,
+        width: 200,
+    },
+
+    textBy:{
+        color: '#505050',
+        fontFamily: 'Raleway_500Medium',
+        marginTop: 30,
+        marginBottom: 10
+    },
+
+    textBeta: {
+        color: '#303030',
+        fontFamily: 'Raleway_700Bold',
+        marginTop: 10,
+        textTransform: 'uppercase'
+    },
+
     saboresImg: {
         height: 200,
         width: 300,
@@ -57,12 +77,12 @@ const styles = StyleSheet.create({
     },
 
     input: {
-        minWidth: '80%',
+        minWidth: '85%',
         marginVertical: 5,
         marginHorizontal: 5,
         paddingHorizontal: 7,
         fontSize: 15,
-        fontFamily: 'Raleway_700Bold',
+        fontFamily: 'Raleway_500Medium',
         color: '#505050',
         height: 45,
         backgroundColor: '#fff',
@@ -96,7 +116,7 @@ const styles = StyleSheet.create({
         width: 200,
         backgroundColor: 'orange',
         color: '#FFF',
-        borderRadius: 15,
+        borderRadius: 12,
         padding: 10,
         alignSelf: 'center',
         shadowColor: "#000",
@@ -111,6 +131,7 @@ const styles = StyleSheet.create({
     },
 
     buttonText: {
+        fontSize: 18,
         color: '#FFF',
         fontFamily: 'Raleway_700Bold',
         textAlign: 'center',
@@ -152,7 +173,7 @@ const styles = StyleSheet.create({
 
     headerSignText: {
         marginTop: 20,
-        color: 'rgba(255,255,255,0.4)',
+        color: 'rgba(0,0,0,0.4)',
         fontFamily: 'Raleway_700Bold'
     },
 

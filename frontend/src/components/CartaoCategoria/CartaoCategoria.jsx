@@ -27,7 +27,6 @@ const stylesLight = StyleSheet.create({
     container: {
         flex: 1,
         marginVertical: 8,
-        paddingVertical: 2,
         marginBottom: 10
     },
 
@@ -68,6 +67,8 @@ const stylesLight = StyleSheet.create({
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 24,
         borderBottomRightRadius: 24,
+        top: 1,
+
     },
 
     titulo: {
@@ -98,7 +99,6 @@ const stylesDark = StyleSheet.create({
     container: {
         flex: 1,
         marginVertical: 8,
-        paddingVertical: 2
     },
 
     imgCategoria: {
@@ -125,7 +125,7 @@ const stylesDark = StyleSheet.create({
     },
 
     textContainer: {
-        backgroundColor: 'rgba(0,0,0,0.6)',
+        backgroundColor: 'rgba(20,20,20,0.7)',
         height: 25,
         display: 'flex',
         justifyContent: 'center',
@@ -133,7 +133,8 @@ const stylesDark = StyleSheet.create({
         borderTopRightRadius: 4,
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 24,
-        borderBottomRightRadius: 24
+        borderBottomRightRadius: 24,
+        top: 1,
     },
 
     titulo: {

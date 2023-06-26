@@ -4,6 +4,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#202020',
         height: '100%'
     },
+
+    botao: {
+        marginTop: 20,
+        marginLeft: 20
+    },
     
     header: {
         width: '100%',

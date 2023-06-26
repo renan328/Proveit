@@ -3,6 +3,11 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff'
     },
+
+    botao: {
+        marginTop: 20,
+        marginLeft: 20
+    },
     
     header: {
         width: '100%',

@@ -34,7 +34,8 @@ export default function Home({ navigation, props }) {
 
     async function BuscarUsuario() {
         const userDataJWT = await DadosUsuario();
-        setUsername(userDataJWT.Nome);
+        const nome = userDataJWT.Nome;
+        setUsername(nome.split(' ')[0]);
     }
 
     useEffect(() => {
@@ -115,12 +116,12 @@ export default function Home({ navigation, props }) {
                 <TouchableOpacity>
                     <ReceitaEspecial />
                 </TouchableOpacity>
-                {/* <LottieView
+                <LottieView
                     source={require('../../assets/lottie/cooking.json')} // Caminho para o arquivo JSON do Lottie
                     autoPlay
                     loop
                     style={{ height: 250, alignSelf: 'center' }}
-                /> */}
+                /> 
                 <View
                     style={{
                         borderBottomColor: '#505050',

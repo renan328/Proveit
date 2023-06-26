@@ -6,7 +6,7 @@ import stylesDark from './configuracoes.moduleDark';
 import stylesLight from './configuracoes.module';
 import { useRef, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faChevronLeft, faUser, faRightFromBracket, faQuestionCircle, faPencil, faStar, faScroll, faBroom } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faUser, faRightFromBracket, faQuestionCircle, faPencil, faStar, faScroll, faBroom, faBowlFood } from '@fortawesome/free-solid-svg-icons';
 import '../../AuthContext';
 import { Logout } from "../../AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -82,13 +82,13 @@ export default function Configuracoes({ navigation }) {
 
 
                 <TouchableOpacity style={styles.containerOpcoes} onPress={() => navigation.navigate('ReceitasDoUsuario')}>
-                    <Text style={styles.textOpcoes}>Editar receitas</Text>
-                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faPencil} size={25} color="#606060" />
+                    <Text style={styles.textOpcoes}>Minhas receitas</Text>
+                    <FontAwesomeIcon style={styles.botaoOpcoes} icon={faBowlFood} size={25} color="#606060" />
                 </TouchableOpacity>
 
 
                 <TouchableOpacity style={styles.containerOpcoes} onPress={() => navigation.navigate('AvaliacoesDoUsuario')}>
-                    <Text style={styles.textOpcoes}>Editar avaliações</Text>
+                    <Text style={styles.textOpcoes}>Minhas avaliações</Text>
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faStar} size={25} color="#606060" />
                 </TouchableOpacity>
 
@@ -124,7 +124,7 @@ export default function Configuracoes({ navigation }) {
 
             </View>
             <View style={styles.bottomTextContainer}>
-                <Text style={styles.bottomText}>© 2023-2023 Proveit.inc</Text>
+                <Text style={styles.bottomText}>© 2023-2023 Devlare</Text>
             </View>
             <View style={{ paddingVertical: 40 }} />
         </ScrollView>

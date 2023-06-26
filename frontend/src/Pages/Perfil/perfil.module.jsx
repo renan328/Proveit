@@ -32,6 +32,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+
+    configIcon: {
+        marginVertical: 20,
+        color: '#505050',
+    },
+
     name: {
         fontFamily: 'Raleway_800ExtraBold',
         marginTop: 10,

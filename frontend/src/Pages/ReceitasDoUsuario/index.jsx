@@ -89,7 +89,6 @@ export default function ReceitasDoUsuario() {
                     {dadosReceita.length === 0 && !loading && <Text style={{ color: scheme === 'dark' ? '#909090' : '#505050', fontFamily: 'Raleway_500Medium', alignSelf: 'center' }}>Nenhum resultado encontrado.</Text>}
 
                 </View>
-                <View style={{ paddingVertical: 40 }} />
             </ScrollView>
             
         </View>

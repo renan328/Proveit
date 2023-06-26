@@ -82,9 +82,9 @@ export default function Login({ navigation }) {
     });
 
     return (
-        <ImageBackground source={scheme == 'dark' ? require('../../assets/headerBG.jpg') : require('../../assets/headerBGLight.jpg')} style={styles.container} resizeMode='cover' >
+        <ImageBackground source={scheme == 'dark' ? require('../../assets/headerBGsided.jpg') : require('../../assets/headerBGLight.jpg')} style={styles.container} resizeMode='cover' >
 
-            <BlurView style={styles.main} intensity={80}>
+            <BlurView style={styles.main} intensity={90}>
                 <View style={styles.tint}>
 
                     <Image source={scheme == 'dark' ? require('../../assets/proveitWhiteFade.png') : require('../../assets/proveitGrey.png')} style={styles.logo} />
@@ -119,9 +119,9 @@ export default function Login({ navigation }) {
                             />
                             {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
                         </View>
-                        <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
+                        {/* <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
                             <Text style={{ fontFamily: 'Raleway_600SemiBold', color: '#505050', textDecorationLine: 'underline', alignSelf: 'center' }}>Esqueci minha senha</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                     </View>
                     <ImageBackground source={require('../../assets/bemVindo.png')} style={styles.buttons}>
@@ -133,20 +133,23 @@ export default function Login({ navigation }) {
                             </LinearGradient>
                         </TouchableOpacity>
 
-                        <Text style={styles.ou}>OU</Text>
+                        {/* <Text style={styles.ou}>OU</Text>
 
                         <TouchableOpacity onPress={() => navigation.navigate('Main')} style={styles.googleButton}>
                             <Image source={require('../../assets/googleIcon.png')} style={{ width: 27, height: 27 }} /><Text style={styles.googleButtonText}>Entrar com Google</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                         <Text style={styles.headerSignText}>Ainda não tem uma conta?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate("CadastroDeUsuario")} style={styles.signUpButton}>
                             <Text style={{ fontFamily: 'Raleway_700Bold', color: '#FF7152' }}>Cadastrar</Text>
                         </TouchableOpacity>
+                        <Text style={styles.textBy}>By</Text>
+                        <Image source={require('../../assets/devlare.png')} style={styles.logoDevlare} />
+                        <Text style={styles.textBeta}>Beta 0.7</Text>
                     </ImageBackground>
+
                 </View>
             </BlurView >
-            <View style={{ paddingVertical: 30 }} />
         </ImageBackground >
     )
 }

@@ -15,6 +15,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    botao:{
+        marginTop: 20,
+        marginLeft: 20
+    },
+
     textContainer: {
         marginTop: 20,
         textAlign: 'center',
