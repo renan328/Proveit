@@ -15,6 +15,7 @@ import Configuracoes from '../Pages/Configuracoes';
 import EsqueciMinhaSenha from '../Pages/EsqueciMinhaSenha';
 import Cod_EsqueciMinhaSenha from '../Pages/Cod_EsqueciMinhaSenha';
 import Red_EsqueciMinhaSenha from '../Pages/Red_EsqueciMinhaSenha';
+import EsqueciMinhaSenhaSimple from '../Pages/EsqueciMinhaSenhaSimple';
 import CadastroDeCategoria from '../Pages/CadCategoria';
 import EditarUsuario from '../Pages/EditarUsuario';
 import EditarReceita from '../Pages/EditarReceita';
@@ -26,7 +27,6 @@ import PesquisaPorIngrediente from '../Pages/PesquisaPorIngrediente';
 import ListagemCategoria from '../Pages/Categorias';
 import Explore from '../Pages/Explore';
 import PreCadReceita from '../Pages/PreCadastroDeReceita';
-import EsqueciMinhaSenhaSimple from '../Pages/EsqueciMinhaSenhaSimple';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -180,7 +180,6 @@ function PerfilStack() {
             <Stack.Screen options={{ headerShown: false }} name="ReceitasDoUsuario" component={ReceitasDoUsuario} />
             <Stack.Screen options={{ headerShown: false }} name="AvaliacoesDoUsuario" component={AvaliacoesDoUsuario} />
             <Stack.Screen options={{ headerShown: false }} name="EditarAvaliacao" component={EditarAvaliacao} />
-            <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenhaSimple" component={EsqueciMinhaSenhaSimple} />
         </Stack.Navigator>
     );
 }
@@ -188,8 +187,9 @@ function PerfilStack() {
 function EsqueciMinhaSenhaStack() {
     return (
         <Stack.Navigator>
-            {/* <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} />
-            <Stack.Screen options={{ headerShown: false }} name="Cod_EsqueciMinhaSenha" component={Cod_EsqueciMinhaSenha} />
+            <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenhaSimple" component={EsqueciMinhaSenhaSimple} />
+           {/*  <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} />
+           <Stack.Screen options={{ headerShown: false }} name="Cod_EsqueciMinhaSenha" component={Cod_EsqueciMinhaSenha} />
             <Stack.Screen options={{ headerShown: false }} name="Red_EsqueciMinhaSenha" component={Red_EsqueciMinhaSenha} /> */}
         </Stack.Navigator>
     );
@@ -214,7 +214,7 @@ export default function Routes() {
                 }}
             >
                 <Stack.Screen name="Login" component={LoginStackScreen} />
-                {/* <Stack.Screen name="EsqueciMinhaSenhaStack" component={EsqueciMinhaSenhaStack} /> */}
+                <Stack.Screen name="EsqueciMinhaSenhaStack" component={EsqueciMinhaSenhaStack} />
                 <Stack.Screen name="Main" component={MainTabNavigator} />
             </Stack.Navigator>
         </NavigationContainer>

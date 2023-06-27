@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         height: 30,
         width: 30,
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: 'rgba(32, 32, 32, 0.5)',
         marginHorizontal: 10,
         marginVertical: 15,
         paddingHorizontal: 18,
@@ -31,15 +31,10 @@ const styles = StyleSheet.create({
 
     main: {
         display: 'flex',
-        backgroundColor: '#fff',
+        backgroundColor: '#202020',
         width: '100%',
         height: '85%',
-        display: 'flex',
-        marginTop: 100,
         flexDirection: 'column',
-        /* justifyContent: 'center',
-        alignItems:'center', */
-        textAlign: 'justify-content',
         borderTopRightRadius: 90,
         shadowColor: "#000",
         shadowOffset: {
@@ -97,7 +92,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        width: '82%',
+        width: '80%',
         height: '55%',
     },
 
@@ -105,8 +100,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        color: '#505050',
-        fontFamily: 'Raleway_800ExtraBold',
+        color: '#fff',
+        opacity: 0.5,
+        fontFamily: 'Raleway_700Bold',
         fontSize: 40,
     },
 
@@ -122,13 +118,11 @@ const styles = StyleSheet.create({
     },
 
     Desc: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        color: '#505050',
+        textAlign: 'justify',
+        color: '#fff',
         fontFamily: 'Raleway_600SemiBold',
         fontSize: 14,
-        opacity: 0.8,
+        opacity: 0.7,
     },
 
 
@@ -143,11 +137,11 @@ const styles = StyleSheet.create({
 
     defaultInput: {
         paddingHorizontal: 7,
-        fontSize: 13,
-        color: '#505050',
+        fontSize: 14,
+        color: '#fff',
         height: 50,
         width: '100%',
-        backgroundColor: '#fff',
+        backgroundColor: '#303030',
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
         borderTopLeftRadius: 10,
@@ -160,7 +154,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 3,
-        fontFamily: 'Raleway_600SemiBold',
+        fontFamily: 'Raleway_800ExtraBold',
     },
 
 

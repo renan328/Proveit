@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
+    IconCopy: {
+        marginLeft: -40
+    },
+
     main: {
         display: 'flex',
         backgroundColor: '#fff',
@@ -58,10 +62,11 @@ const styles = StyleSheet.create({
 
     main3: {
         width: '100%',
-        height: '50%',
+        height: '45%',
         justifyContent: 'space-around',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        top: -20
     },
 
     circuloIcon: {
@@ -92,34 +97,32 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        width: '82%',
-        height: '50%',
+        width: '80%',
+        height: '55%',
     },
 
-    Qualeoseu: {
+    Esqueceusua: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
         color: '#505050',
-        fontFamily: 'Raleway_800ExtraBold',
+        fontFamily: 'Raleway_700Bold',
         fontSize: 40,
     },
 
-    Email: {
+    Senha: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
         textDecorationLine: 'underline',
-        marginTop: -9,
+        marginTop: -7,
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 35,
     },
 
     Desc: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
+        textAlign: 'justify',
         color: '#505050',
         fontFamily: 'Raleway_600SemiBold',
         fontSize: 14,
@@ -130,15 +133,16 @@ const styles = StyleSheet.create({
 
     inputSingle: {
         width: '80%',
+        height: 50,
         display: 'flex',
         flexDirection: 'row',
-        alignSelf: 'center',
+        alignItems: 'center',
     },
 
     defaultInput: {
         paddingHorizontal: 7,
         fontSize: 13,
-        color: '#505050',
+        color: '#303030',
         height: 50,
         width: '100%',
         backgroundColor: '#fff',
@@ -154,43 +158,13 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 3,
-        fontFamily: 'Raleway_600SemiBold',
+        fontFamily: 'Raleway_800ExtraBold',
     },
 
-    botoes: {
-        width: '100%',
-    },
-
-    button: {
-        display: 'flex',
-        marginTop: 2,
-        width: "78%",
-        backgroundColor: 'orange',
-        color: '#FFF',
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
-        padding: 8,
-        alignSelf: 'center',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-    },
-
-    buttonText: {
-        textAlign: 'center',
-        color: '#FFF',
-        fontFamily: 'Raleway_700Bold',
-    },
 
     balls: {
         marginTop: -44,
-        width: 235,
+        width: 250,
         height: 200,
         transform: [{ rotate: '180deg' }]
     },

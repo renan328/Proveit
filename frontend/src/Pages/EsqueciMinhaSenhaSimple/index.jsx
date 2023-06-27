@@ -17,6 +17,15 @@ export default function EsqueciMinhaSenhaSimple({ navigation }) {
     const backgroundImage = scheme === 'dark' ? headerBG2 : headerBG4v2;
     var styles = scheme === 'dark' ? stylesDark : stylesLight;
 
+    const handleCopyToClipboard = () => {
+        try {
+            Clipboard.setString('admproveit@gmail.com');
+
+        } catch (error) {
+            console.log('Erro ao copiar para a área de transferência:', error);
+        }
+    };
+
     return (
         <View style={{ maxHeight: screenHeight, width: '100%' }}>
             <View style={styles.imageContainer}>
@@ -45,8 +54,8 @@ export default function EsqueciMinhaSenhaSimple({ navigation }) {
                     <View style={styles.main3}>
                         <View style={styles.Texts}>
                             <View>
-                                <Text style={styles.Esqueceusua}>Suporte</Text>
-                                {/* <Text style={styles.Senha}>senha?</Text> */}
+                                <Text style={styles.Esqueceusua}>Esqueceu sua</Text>
+                                <Text style={styles.Senha}>senha?</Text>
                             </View>
                             <Text style={styles.Desc}>Contate nosso suporte via email para podermos analisar sua situação.</Text>
                         </View>
@@ -55,7 +64,7 @@ export default function EsqueciMinhaSenhaSimple({ navigation }) {
                                 value="admproveit@gmail.com"
                                 editable={false}
                             />
-                            <TouchableOpacity onPress={() => Clipboard.setString('admproveit@gmail.com')}>
+                            <TouchableOpacity onPress={handleCopyToClipboard}>
                                 <FontAwesomeIcon
                                     style={styles.IconCopy}
                                     color={'#FF7152'}
