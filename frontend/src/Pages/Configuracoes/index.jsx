@@ -68,11 +68,11 @@ export default function Configuracoes({ navigation }) {
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faBroom} size={25} color="#606060" />
                 </TouchableOpacity>
 
-{/* 
+
                 <TouchableOpacity style={styles.containerOpcoes} onPress={() => navigation.navigate('EsqueciMinhaSenhaSimple')}>
                     <Text style={styles.textOpcoes}>Central de Ajuda</Text>
                     <FontAwesomeIcon style={styles.botaoOpcoes} icon={faQuestionCircle} size={25} color="#606060" />
-                </TouchableOpacity> */}
+                </TouchableOpacity>
 
 
                 <TouchableOpacity style={styles.containerOpcoes} onPress={SairDaConta}>

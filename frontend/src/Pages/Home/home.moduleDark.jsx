@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        top: 15
+        top: 15,
+        paddingHorizontal: 10,
     },
     
     ingredienteInput: {

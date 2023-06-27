@@ -17,9 +17,9 @@ export default function PreCadReceita() {
                     style={{ width: 52, height: 46 }}
                     source={require('../../assets/proveitOrange.png')}
                 />
-                <Image source={scheme == 'dark' ? require('../../assets/algumaReceitaDark.png') : require('../../assets/algumaReceitaLight.png')} style={styles.title} resizeMode='contain' />
-                {/* <Text style={styles.textReceitas}>Alguma receita</Text>
-                <Text style={styles.textAdd}>incrível para compartilhar?</Text> */}
+                {/* <Image source={scheme == 'dark' ? require('../../assets/algumaReceitaDark.png') : require('../../assets/algumaReceitaLight.png')} style={styles.title} resizeMode='contain' /> */}
+                <Text style={styles.textReceitas}>Alguma receita</Text>
+                <Text style={styles.textAdd}>incrível<Text style={{fontFamily: 'Raleway_600SemiBold'}}> para compartilhar?</Text></Text>
             </View>
             <View stylr={styles.ConfirmContent}>
                 <Text style={styles.AlertText}>Ao adicionar suas receitas, você não apenas compartilha seus pratos saborosos no ProveIt, mas também contribui com a comunidade, compartilhando suas criações culinárias.</Text>
@@ -69,16 +69,17 @@ const StylesLight = StyleSheet.create({
     textAdd: {
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
-        fontSize: 45,
+        fontSize: 37,
         textAlign: 'center',
         textAlign: 'center'
     },
 
     textReceitas: {
-        color: '#fff',
-        fontFamily: 'Raleway_700Bold',
-        fontSize: 38,
+        color: '#505050',
+        fontFamily: 'Raleway_600SemiBold',
+        fontSize: 30,
         textAlign: 'center',
+        top: 13
     },
 
     algumaReceita: {
@@ -167,16 +168,17 @@ const StylesDark = StyleSheet.create({
     textAdd: {
         color: '#FF7152',
         fontFamily: 'Raleway_800ExtraBold',
-        fontSize: 45,
+        fontSize: 37,
         textAlign: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
     },
 
     textReceitas: {
         color: '#fff',
-        fontFamily: 'Raleway_700Bold',
-        fontSize: 38,
+        fontFamily: 'Raleway_600SemiBold',
+        fontSize: 30,
         textAlign: 'center',
+        top: 13
     },
 
     algumaReceita: {

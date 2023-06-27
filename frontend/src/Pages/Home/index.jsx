@@ -33,8 +33,7 @@ export default function Home({ navigation, props }) {
 
     async function BuscarUsuario() {
         const userDataJWT = await DadosUsuario();
-        const nome = userDataJWT.Nome;
-        setUsername(nome.split(' ')[0]);
+        setUsername(userDataJWT.Nome);
     }
 
     useEffect(() => {

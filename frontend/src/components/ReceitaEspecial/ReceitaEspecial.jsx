@@ -1,22 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground, useColorScheme, Appearance } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { faUtensils, faStar, faAward } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { HeaderRequisicao } from '../../AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
 function ReceitaEspecial() {
+    const navigation = useNavigation();
 
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
+
+    const [dadosReceita, setDadosReceita] = useState([]);
+
+    const handleCardPress = (id) => {
+        navigation.navigate('ReceitaSingle', { id: dadosReceita?.receita.idReceita });
+    };
+
+    async function BuscarReceita() {
+        const headers = await HeaderRequisicao(navigation);
+
+        fetch("https://serverproveit.azurewebsites.net/api/receita/proveit/31", {
+            method: "GET",
+            headers
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setDadosReceita(json);
+            })
+            .catch((error) => {
+                showToast('Foi mal!', 'Erro ao buscar a receita, tente novamente mais tarde.', 'error');
+            })
+    }
+
+    useEffect(() => {
+        BuscarReceita();
+    }, []);
+
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleCardPress}>
             <ImageBackground style={styles.containerReceita}
-                source={require('../../assets/xeggGourmet.jpg')} imageStyle={{ borderRadius: 25 }}>
+                source={{ uri: dadosReceita.receita?.foto }} imageStyle={{ borderRadius: 25 }}>
                 <View style={styles.containerTitulo}>
-                    <Text style={styles.tituloReceita}>X-Egg gourmet (não, essa receita não existe).</Text>
+                    <Text style={styles.tituloReceita}>{dadosReceita.receita?.nomeReceita}</Text>
                 </View>
             </ImageBackground>
-        </TouchableOpacity>
+        </TouchableOpacity >
     )
 
 }

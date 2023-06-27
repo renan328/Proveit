@@ -7,7 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { AirbnbRating } from 'react-native-ratings';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBookmark, faStar, faAngleLeft, faClock, faUtensils, faSeedling, faEllipsisVertical, faCarrot, faKitchenSet } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faStar, faAngleLeft, faClock, faUtensils, faSeedling, faEllipsisVertical, faCarrot, faKitchenSet } from '@fortawesome/free-solid-svg-icons';
 import { useRoute } from '@react-navigation/native';
 import stylesDark from './receitasingle.moduleDark';
 import stylesLight from './receitasingle.module';
@@ -18,6 +18,7 @@ import { DadosUsuario } from "../../AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import showToast from '../../../hooks/toasts';
 import { LoadingReceita } from '../../components/LoadingReceita/LoadingReceita'
+
 const screenHeight = Dimensions.get('window').height;
 
 export default function ReceitaSingle({ navigation }) {
@@ -237,7 +238,7 @@ export default function ReceitaSingle({ navigation }) {
                     <BlurView style={styles.mainHeader}>
                         <View style={styles.mainHeaderWhite}>
                             <TouchableOpacity onPress={addSave} style={styles.favButton} >
-                                <FontAwesomeIcon icon={faBookmark} style={styles.markIcon} size={25} color={saved ? '#FF7152' : '#505050'} />
+                                <FontAwesomeIcon icon={faHeart} style={styles.markIcon} size={25} color={saved ? '#FF7152' : '#505050'} />
                             </TouchableOpacity>
 
                             <View style={styles.mainTexts}>

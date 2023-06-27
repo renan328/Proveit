@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
     },
 
     ratingContainer: {
-        backgroundColor: '#FFF',
+        backgroundColor: '#EEE',
         marginTop: 20,
         width: '95%',
         display: 'flex',
@@ -375,11 +375,12 @@ const styles = StyleSheet.create({
         width: '100%',
         shadowColor: "#000",
         shadowOffset: {
-            width: 0,
-            height: 2,
+            width: 1,
+            height: 1,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 5,
+        shadowOpacity: 0.35,
+        shadowRadius: 2,
+        elevation: 2,
         padding: 10,
         marginTop: 10,
         height: 100

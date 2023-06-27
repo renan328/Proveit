@@ -82,7 +82,6 @@ export default function Login({ navigation }) {
 
     return (
         <ImageBackground source={scheme == 'dark' ? require('../../assets/headerBGsided.jpg') : require('../../assets/headerBGLight.jpg')} style={styles.container} resizeMode='cover' >
-
             <BlurView style={styles.main} intensity={90}>
                 <View style={styles.tint}>
 
@@ -91,8 +90,7 @@ export default function Login({ navigation }) {
                     <Image source={scheme == 'dark' ? require('../../assets/sabores.png') : require('../../assets/saboresLight.png')} style={styles.saboresImg} />
 
                     <View style={styles.containerInput}>
-
-                        <View style={styles.inputSingle}>
+                        <View>
                             <TextInput
                                 style={[styles.input, errors.email && styles.inputError]}
                                 placeholder="E-mail"
@@ -106,7 +104,7 @@ export default function Login({ navigation }) {
                             {errors.email && <Text style={styles.textError}>{errors.email}</Text>}
                         </View>
 
-                        <View style={styles.inputSingle}>
+                        <View>
                             <TextInput
                                 style={[styles.input, errors.senha && styles.inputError]}
                                 placeholder="Senha"
@@ -117,10 +115,11 @@ export default function Login({ navigation }) {
                             />
                             {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
                         </View>
-                        <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaStack")}>
-                            <Text style={{ fontFamily: 'Raleway_600SemiBold', color: '#505050', textDecorationLine: 'underline', alignSelf: 'center' }}>Esqueci minha senha</Text>
-                        </TouchableOpacity>
+
                     </View>
+                    <TouchableOpacity onPress={() => navigation.navigate("EsqueciMinhaSenhaSimple")} style={{ marginVertical: 5 }}>
+                        <Text style={{ fontFamily: 'Raleway_600SemiBold', color: '#505050', textDecorationLine: 'underline', alignSelf: 'center', }}>Esqueci minha senha</Text>
+                    </TouchableOpacity>
 
                     <TouchableOpacity onPress={Login}>
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
@@ -128,7 +127,6 @@ export default function Login({ navigation }) {
                             <Text style={styles.buttonText}>Entrar</Text>
                         </LinearGradient>
                     </TouchableOpacity>
-
 
                     <ImageBackground source={require('../../assets/bemVindo.png')} style={styles.buttons}>
                         <Text style={styles.headerSignText}>Ainda não tem uma conta?</Text>
@@ -138,15 +136,21 @@ export default function Login({ navigation }) {
 
                         <View style={styles.footer}>
                             <Text style={styles.textBy}>By</Text>
-                            <Image source={require('../../assets/devlare.png')} style={styles.logoDevlare} />
+                            <View style={{width: '100%', alignItems: 'center'}}>
+                                <Image source={require('../../assets/devlare.png')} style={styles.logoDevlare} />
+                            </View>
+                            <View style={styles.footerContent}>
+                                <Text style={styles.textBeta}>Beta 0.8</Text>
+                                <Text style={styles.textPronuncia}>*Sim, se pronuncia <Text style={{ fontSize: 14, color: scheme === 'dark' ? '#rgba(255, 255, 255, 0.8)' : '#303030' }}>Provêit!</Text></Text>
+                            </View>
                         </View>
-                        <View style={styles.footerContent}>
-                            <Text style={styles.textBeta}>Beta 0.7</Text>
-                            <Text style={styles.textPronuncia}>*Sim, se pronuncia <Text style={{ fontSize: 14, color: scheme === 'dark' ? '#rgba(255, 255, 255, 0.8)' : '#303030' }}>Provêit!</Text></Text>
-                        </View>
+
                     </ImageBackground>
+
                 </View>
-            </BlurView >
-        </ImageBackground >
+
+
+            </BlurView>
+        </ImageBackground>
     )
 }

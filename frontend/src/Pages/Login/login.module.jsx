@@ -1,5 +1,4 @@
 
-import { width } from '@fortawesome/free-solid-svg-icons/faUser';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -12,6 +11,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 0
     },
+
     main: {
         backgroundColor: '#000',
         width: '92%',
@@ -38,37 +38,16 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         paddingTop: 40,
-
     },
 
     logo: {
-        height: 90,
-        width: 90,
-    },
-
-    logoDevlare: {
-        height: 31,
-        width: 100,
-    },
-
-    textBy: {
-        color: '#505050',
-        fontFamily: 'Raleway_500Medium',
-        marginTop: 10,
-        marginBottom: 10,
-        alignSelf: 'center'
-    },
-
-    textBeta: {
-        color: '#303030',
-        fontFamily: 'Raleway_700Bold',
-        marginTop: 10,
-        textTransform: 'uppercase'
+        height: 80,
+        width: 80,
     },
 
     saboresImg: {
-        height: 160,
-        width: 260,
+        height: 150,
+        width: 250,
     },
 
     containerInput: {
@@ -78,8 +57,7 @@ const styles = StyleSheet.create({
 
     input: {
         minWidth: '85%',
-        marginVertical: 5,
-        marginHorizontal: 5,
+        margin: 5,
         paddingHorizontal: 7,
         fontSize: 15,
         fontFamily: 'Raleway_500Medium',
@@ -104,16 +82,8 @@ const styles = StyleSheet.create({
         color: '#fff'
     },
 
-    buttons: {
-        display: 'flex',
-        alignSelf: 'baseline',
-        height: '70%',
-        width: '100%',
-        alignItems: 'center',
-    },
-
     button: {
-        width: 200,
+        width: 180,
         backgroundColor: 'orange',
         color: '#FFF',
         borderRadius: 12,
@@ -132,44 +102,19 @@ const styles = StyleSheet.create({
     },
 
     buttonText: {
-        fontSize: 18,
+        fontSize: 17,
         color: '#FFF',
         fontFamily: 'Raleway_700Bold',
         textAlign: 'center',
         borderRadius: 50
     },
 
-    ou: {
-        fontFamily: 'Raleway_900Black',
-        color: '#505050',
-        marginVertical: 6
-    },
-
-    googleButton: {
+    buttons: {
         display: 'flex',
+        alignSelf: 'baseline',
+        height: '70%',
+        width: '100%',
         alignItems: 'center',
-        flexDirection: 'row',
-        backgroundColor: '#fff',
-        height: 35,
-        paddingRight: 10,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        padding: 5,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 4,
-    },
-
-    googleButtonText: {
-        fontFamily: 'Raleway_700Bold',
-        marginHorizontal: 10
     },
 
     headerSignText: {
@@ -179,7 +124,6 @@ const styles = StyleSheet.create({
     },
 
     signUpButton: {
-        marginTop: 5,
         backgroundColor: '#fff',
         paddingVertical: 10,
         paddingHorizontal: 30,
@@ -187,14 +131,23 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
 
-    textError: {
-        alignSelf: 'center',
-        color: '#ff375b',
-        marginBottom: 8
+    logoDevlare: {
+        height: 31,
+        width: 100,
     },
-    inputError: {
-        borderWidth: 1,
-        borderColor: '#ff375b'
+
+    textBy: {
+        color: '#505050',
+        fontFamily: 'Raleway_500Medium',
+        alignSelf: 'center',
+        marginVertical: 5
+    },
+
+    textBeta: {
+        color: '#303030',
+        fontFamily: 'Raleway_700Bold',
+        marginTop: 10,
+        textTransform: 'uppercase'
     },
 
     footer: {
@@ -202,7 +155,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        width: '10%',
+        width: '100%',
         top: 20,
     },
     footerContent: {
@@ -222,7 +175,17 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         color: 'rgba(48, 48, 48, 0.705)',
         textAlign: 'right',
-    }
+    },
+
+    textError: {
+        alignSelf: 'center',
+        color: '#ff375b',
+        marginBottom: 8
+    },
+    inputError: {
+        borderWidth: 1,
+        borderColor: '#ff375b'
+    },
 
 });
 

@@ -214,7 +214,7 @@ export default function CadastroDeUsuario({ navigation }) {
                 </View>
 
                 <View style={styles.botoes}>
-                    <TouchableOpacity onPress={handleRegister} >
+                    <TouchableOpacity onPress={() => setVisibleModal(true)} >
                         <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
                             end={{ x: 2, y: 2 }} style={styles.button} >
                             <Text style={styles.buttonText}>Pronto</Text>
@@ -231,7 +231,7 @@ export default function CadastroDeUsuario({ navigation }) {
                 <ActionModal
                     handleClose={() => setVisibleModal(false)}
                     handleAction={() => handleRegister()}
-                    status={'post'}
+                    status={'postUsuario'}
                 />
 
             </Modal>

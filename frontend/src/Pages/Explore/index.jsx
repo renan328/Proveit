@@ -4,7 +4,7 @@ import stylesLight from "./explore.module";
 import stylesDark from "./explore.moduleDark";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import CartaoReceita from "../../components/CartaoReceita/CartaoReceita";
+import CartaoReceita from '../../components/CartaoFavorito/CartaoFavorito'
 import { HeaderRequisicao } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import showToast from '../../../hooks/toasts';
@@ -100,7 +100,7 @@ export default function Explore({ categoriaExlorar }) {
                                 <>
                                     {
                                         dadosReceita.map((receita, index) => (
-                                            <CartaoReceita receita={receita} key={index} />
+                                            <CartaoReceita dadosReceita={receita} key={index} />
                                         ))
                                     }
                                 </>

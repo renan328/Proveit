@@ -116,12 +116,41 @@ namespace proveit.DAO
             return receitas;
         }
 
+        public ReceitaGeralDTO ListarReceitaDoProveit(int id)
+        {
+            var conexao = ConnectionFactory.Build();
+            conexao.Open();
+
+            var query = "SELECT idReceita, Receitas.Nome AS NomeReceita, Foto, Usuario_id, Aproveitamento FROM Receitas WHERE idReceita = @id;";
+            var comando = new MySqlCommand(query, conexao);
+            comando.Parameters.AddWithValue("@id", id);
+            var dataReader = comando.ExecuteReader();
+
+            var receita = new ReceitaGeralDTO();
+
+            while (dataReader.Read())
+            {
+                var idReceita = int.Parse(dataReader["idReceita"].ToString()); ;
+
+                //Não existe receita na lista
+
+                receita.idReceita = idReceita;
+                receita.NomeReceita = dataReader["NomeReceita"].ToString();
+                receita.Foto = dataReader["Foto"].ToString();
+                receita.Aproveitamento = bool.Parse(dataReader["Aproveitamento"].ToString());
+
+            }
+
+            conexao.Close();
+            return receita;
+        }
+
         public List<ReceitaGeralDTO> ListarReceitasComFiltro(string filtro)
         {
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = $"SELECT idReceita, Receitas.Nome AS NomeReceita, Foto, Aproveitamento FROM Receitas {filtro};";
+            var query = $"SELECT idReceita, Receitas.Nome AS NomeReceita, Foto, Aproveitamento FROM Receitas {filtro} LIMIT 15;";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
 
@@ -155,7 +184,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
             
-            var query = "SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, AVG(A.Estrelas) AS mediaEstrelas FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento ORDER BY mediaEstrelas DESC;";
+            var query = "SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, AVG(A.Estrelas) AS mediaEstrelas FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento ORDER BY mediaEstrelas DESC LIMIT 15;";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
 
@@ -189,7 +218,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, COUNT(A.Comentario) AS TotalComentarios FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento ORDER BY TotalComentarios DESC;";
+            var query = "SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, COUNT(A.Comentario) AS TotalComentarios FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento ORDER BY TotalComentarios DESC LIMIT 15;";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
 
@@ -223,7 +252,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = "SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, COUNT(F.Receita_id) AS TotalFavoritos FROM Receitas R INNER JOIN ReceitasFavoritas F ON R.idReceita = F.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento ORDER BY TotalFavoritos DESC;";
+            var query = "SELECT R.idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, COUNT(F.Receita_id) AS TotalFavoritos FROM Receitas R INNER JOIN ReceitasFavoritas F ON R.idReceita = F.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento ORDER BY TotalFavoritos DESC LIMIT 15;";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
 
@@ -257,7 +286,7 @@ namespace proveit.DAO
             var conexao = ConnectionFactory.Build();
             conexao.Open();
 
-            var query = $"SELECT idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, I.Nome FROM Receitas R INNER JOIN Ingredientes_Receita I ON R.IdReceita = I.Receita_id WHERE R.Nome like '%{palavra}%' OR I.Nome LIKE '%{palavra}%';";
+            var query = $"SELECT idReceita, R.Nome AS NomeReceita, R.Foto, R.Aproveitamento, I.Nome FROM Receitas R INNER JOIN Ingredientes_Receita I ON R.IdReceita = I.Receita_id WHERE R.Nome like '%{palavra}%' OR I.Nome LIKE '%{palavra}%' LIMIT 15;";
             var comando = new MySqlCommand(query, conexao);
             var dataReader = comando.ExecuteReader();
             var receitas = new List<ReceitaGeralDTO>();

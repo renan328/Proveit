@@ -1,10 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, useColorScheme } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faStar, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
-import { BlurView } from "expo-blur";
 
 export default function CartaoExplorar({ categoriaExplorar }) {
     const navigation = useNavigation();

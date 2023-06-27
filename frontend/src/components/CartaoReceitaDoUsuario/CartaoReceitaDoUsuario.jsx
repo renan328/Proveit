@@ -95,7 +95,7 @@ export default function CartaoReceitaDoUsuario({ receita }) {
                 <ActionModal
                     handleClose={() => setVisibleModal(false)}
                     handleAction={() => RemoverReceita()}
-                    status={'delete'}
+                    status={'deleteReceita'}
                 />
             </Modal>
         </View>

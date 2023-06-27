@@ -131,7 +131,7 @@ INSERT INTO ReceitasFavoritas (Receita_id, Usuario_id) VALUES (1, 1);
 SELECT * FROM Receitas INNER JOIN Ingredientes_Receita ON Receitas.idReceita = Ingredientes_Receita.Receita_id  WHERE Ingredientes_Receita.Nome  = "Nome" OR Ingredientes_Receita.Nome = "Nome"  OR Ingredientes_Receita.Nome = "Nome" ;
 
 -- Select tabela unica (testes)
-SELECT * FROM Usuarios where idUsuario = 2;
+SELECT *  FROM Usuarios;
 
 -- Select receita single
 SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario WHERE idReceita = 1;
@@ -142,6 +142,20 @@ SELECT idAvaliacao, Estrelas, Comentario, Receita_id, Avaliacao.Usuario_id, Usua
 -- Select Receitas favoritas por usuário
 SELECT Receita_id FROM ReceitasFavoritas WHERE Usuario_id = 1;
 
+SELECT idAvaliacao, Estrelas, Comentario, Receita_id, Avaliacao.Usuario_id, Usuarios.Nome AS UsuarioNome, Usuarios.Foto AS UsuarioFoto, Receitas.Nome AS NomeReceita FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Avaliacao.Usuario_id = @idUsuario;
+
+UPDATE Avaliacao SET 
+                        Estrelas = @estrelas,
+                        Comentario = @comentario,
+                        Usuario_id = @usuario_id,
+                        Receita_id = @receita_id
+                        WHERE idAvaliacao = 1;
+
+-- DELETE FROM ReceitasFavoritas WHERE Receita_id = 17;
+-- DELETE FROM Passos WHERE Receita_id = 17;
+-- DELETE FROM Receitas WHERE idReceita = 17;
+
+SELECT * FROM Receitas WHERE idReceita = 6;
  SELECT idReceita, R.Nome, R.Foto, I.Nome FROM Receitas R
 INNER JOIN Ingredientes_Receita  I
 ON R.IdReceita = I.Receita_id
@@ -151,3 +165,10 @@ OR I.Nome LIKE '%morangos%'
 OR I.Nome LIKE '%tes%'
 OR I.Nome LIKE '%morangos%' 
 OR I.Nome LIKE '%morangos%';
+
+	SELECT R.idReceita, R.Nome, R.Foto, R.Aproveitamento, COUNT(F.Receita_id) AS TotalFavoritos FROM Receitas R INNER JOIN ReceitasFavoritas F ON R.idReceita = F.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento		
+	ORDER BY TotalFavoritos DESC;
+    SELECT R.idReceita, R.Nome, R.Foto, R.Aproveitamento, COUNT(A.Comentario) AS TotalComentarios FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento		
+ORDER BY TotalComentarios DESC;
+    SELECT R.idReceita, R.Nome, R.Foto, R.Aproveitamento, AVG(A.Estrelas) AS mediaEstrelas FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento		
+ORDER BY mediaEstrelas DESC;

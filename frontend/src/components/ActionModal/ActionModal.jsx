@@ -1,24 +1,26 @@
 import React from 'react';
 import { View, StyleSheet, SafeAreaView, Text, TouchableOpacity, useColorScheme } from 'react-native';
 
-
 export function ActionModal({ handleClose, handleAction, status }) {
   let message = '';
   let confirmButtonColor = '';
 
   if (status === 'post') {
     message = 'Certeza que a receita está correta? Se sim, confirme.';
-    confirmButtonColor = '#22ff6c';
+    confirmButtonColor = '#00ff5583';
   } else if (status === 'put') {
-    message = 'Atenção! Esta operação pode ser arriscada.';
+    message = 'Atenção! Esta ação pode ser arriscada.';
     confirmButtonColor = '#ffb936';
-  } else if (status === 'delete') {
+  } else if (status === 'deleteReceita') {
     message = 'Tem certeza de que deseja excluir essa receita?';
     confirmButtonColor = '#ff4848d1';
+  } else if (status === 'delete') {
+    message = 'Tem certeza de que deseja excluir?';
+    confirmButtonColor = '#ff4848d1';
+  } else if (status === 'postUsuario') {
+    message = 'Certeza que seus dados estão corretos? Se sim, confirme.';
+    confirmButtonColor = '#4879ffd1';
   }
-
-  console.log(handleAction);
-
 
   const scheme = useColorScheme()
   const styles = scheme === 'dark' ? StylesDark : StylesLight;

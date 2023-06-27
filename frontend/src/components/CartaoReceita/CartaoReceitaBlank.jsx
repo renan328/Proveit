@@ -1,8 +1,5 @@
 import React from "react";
-import { LinearGradient } from 'expo-linear-gradient';
-import { View, StyleSheet, Appearance, useColorScheme } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { View, StyleSheet, useColorScheme } from 'react-native';
 import { BlurView } from "expo-blur";
 
 export default function CartaoReceitaBlank() {

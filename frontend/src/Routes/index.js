@@ -16,7 +16,6 @@ import EsqueciMinhaSenha from '../Pages/EsqueciMinhaSenha';
 import Cod_EsqueciMinhaSenha from '../Pages/Cod_EsqueciMinhaSenha';
 import Red_EsqueciMinhaSenha from '../Pages/Red_EsqueciMinhaSenha';
 import EsqueciMinhaSenhaSimple from '../Pages/EsqueciMinhaSenhaSimple';
-import CadastroDeCategoria from '../Pages/CadCategoria';
 import EditarUsuario from '../Pages/EditarUsuario';
 import EditarReceita from '../Pages/EditarReceita';
 import ReceitasDoUsuario from '../Pages/ReceitasDoUsuario';
@@ -31,7 +30,7 @@ import PreCadReceita from '../Pages/PreCadastroDeReceita';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHome, faBookmark, faMagnifyingGlass, faUser, faPlus, faHistory } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faHeart, faMagnifyingGlass, faUser, faPlus, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { useRef, useEffect, useState } from 'react';
 import LottieView from 'lottie-react-native';
 
@@ -98,7 +97,7 @@ function MainTabNavigator() {
 
             <Tab.Screen name="FavoritosStack" component={FavoritosStack} options={{
                 tabBarIcon: ({ focused }) => (
-                    <FontAwesomeIcon icon={faBookmark} size={22} color={focused ? '#FF7152' : '#808080'} />
+                    <FontAwesomeIcon icon={faHeart} size={22} color={focused ? '#FF7152' : '#808080'} />
                 ), headerShown: false
             }} />
 
@@ -107,12 +106,6 @@ function MainTabNavigator() {
                     <FontAwesomeIcon icon={faUser} size={22} color={focused ? '#FF7152' : '#808080'} />
                 ), headerShown: false
             }} />
-
-            {/* <Tab.Screen name="EsqueciMinhaSenha" component={EsqueciMinhaSenhaStack} options={{
-                tabBarIcon: ({ focused }) => (
-                    <FontAwesomeIcon icon={faUser} size={22} color={focused ? '#FF7152' : '#505050'} />
-                ), headerShown: false
-            }} /> */}
 
         </Tab.Navigator>
     );
@@ -124,8 +117,7 @@ function LoginStackScreen() {
         <Stack.Navigator>
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
             <Stack.Screen name="CadastroDeUsuario" component={CadastroDeUsuario} options={{ headerShown: false }} />
-            <Stack.Screen name="CadastroDeCategoria" component={CadastroDeCategoria} options={{ headerShown: false }} />
-
+            <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenhaSimple" component={EsqueciMinhaSenhaSimple} />
         </Stack.Navigator>
     );
 }
@@ -180,6 +172,7 @@ function PerfilStack() {
             <Stack.Screen options={{ headerShown: false }} name="ReceitasDoUsuario" component={ReceitasDoUsuario} />
             <Stack.Screen options={{ headerShown: false }} name="AvaliacoesDoUsuario" component={AvaliacoesDoUsuario} />
             <Stack.Screen options={{ headerShown: false }} name="EditarAvaliacao" component={EditarAvaliacao} />
+            <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenhaSimple" component={EsqueciMinhaSenhaSimple} />
         </Stack.Navigator>
     );
 }
@@ -187,8 +180,8 @@ function PerfilStack() {
 function EsqueciMinhaSenhaStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenhaSimple" component={EsqueciMinhaSenhaSimple} />
-           {/*  <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} />
+            {/* <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenhaSimple" component={EsqueciMinhaSenhaSimple} /> */}
+            {/*  <Stack.Screen options={{ headerShown: false }} name="EsqueciMinhaSenha" component={EsqueciMinhaSenha} />
            <Stack.Screen options={{ headerShown: false }} name="Cod_EsqueciMinhaSenha" component={Cod_EsqueciMinhaSenha} />
             <Stack.Screen options={{ headerShown: false }} name="Red_EsqueciMinhaSenha" component={Red_EsqueciMinhaSenha} /> */}
         </Stack.Navigator>
@@ -214,7 +207,7 @@ export default function Routes() {
                 }}
             >
                 <Stack.Screen name="Login" component={LoginStackScreen} />
-                <Stack.Screen name="EsqueciMinhaSenhaStack" component={EsqueciMinhaSenhaStack} />
+                {/* <Stack.Screen name="EsqueciMinhaSenhaStack" component={EsqueciMinhaSenhaStack} /> */}
                 <Stack.Screen name="Main" component={MainTabNavigator} />
             </Stack.Navigator>
         </NavigationContainer>

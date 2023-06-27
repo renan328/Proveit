@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "ProveIt",
-    "slug": "ProveIt",
-    "version": "0.7.1",
+    "name": "Proveit",
+    "slug": "Proveit",
+    "version": "0.8",
     "orientation": "portrait",
     "icon": "./src/assets/proveitIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/proveitSplash.png",
+      "image": "./src/assets/proveitIcon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ff7152"
     },

@@ -40,6 +40,34 @@ namespace proveit.Controllers
         }
 
         [HttpGet]
+        [Route("proveit/{id}")]
+        public IActionResult ListarReceitaProveit([FromRoute] int id)
+        {
+            try
+            {
+                var ReceitaDAO = new ReceitaGeralDAO();
+                var AvaliacaoDAO = new AvaliacaoDAO();
+                var receita = ReceitaDAO.ListarReceitaDoProveit(id);
+                var avaliacoes = AvaliacaoDAO.ListarAvaliacaoDeReceita(id);
+                var mediaEstrelas = AvaliacaoDAO.CalcularMediaEstrelas(id);
+
+                var detalhesReceita = new DetalhesReceitaDTO
+                {
+                    Receita = receita,
+                    Avaliacoes = avaliacoes,
+                    MediaEstrelas = mediaEstrelas
+                };
+
+                return Ok(detalhesReceita);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno. Entre em contato com o suporte: admproveit@gmail.com");
+
+            }
+        }
+
+        [HttpGet]
         [Route("usuario/{idUsuario}")]
         public IActionResult ListarReceitasDoUsuario([FromRoute] int idUsuario)
         {
