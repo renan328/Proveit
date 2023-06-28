@@ -314,7 +314,8 @@ const styles = StyleSheet.create({
     checkboxContainer: {
         flexDirection: 'row',
         width: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
 
     checkbox: {
@@ -479,7 +480,29 @@ const styles = StyleSheet.create({
     PickerItem: {
         color: '#505050',
         fontFamily: 'Raleway_500Medium',
-    }
+    },
+
+    BoxInfo: {
+        width: 35,
+        height: 35,
+        backgroundColor: '#303030',
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 3,
+      },
+      ButtonText: {
+        color: '#DDD',
+        fontFamily: 'Raleway_700Bold',
+        fontSize: 24,
+      },
 });
 
 export default styles;

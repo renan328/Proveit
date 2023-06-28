@@ -83,7 +83,7 @@ export default function EdicaoDeAvaliacao({ navigation, props }) {
             body: JSON.stringify(body)
         })
             .then((response) => {
-                showToast('Sucesso!', 'Avaliação editada com sucesso!', 'success');
+                showToast('Avaliação editada!', 'Sua avaliação foi editada com sucesso!', 'success');
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao editar avaliação, tente novamente mais tarde.', 'error');

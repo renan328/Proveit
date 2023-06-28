@@ -246,7 +246,12 @@ export default function EdicaoDeReceita({ navigation, props }) {
             body: JSON.stringify(body)
         })
             .then((response) => {
-                showToast('Obrigado!', 'Receita editada com sucesso!', 'success');
+                if (response.ok) {
+                    showToast('Receita editada!', 'Sua receita foi editada com sucesso!', 'success');
+                    navigation.navigate('HomeScreen');
+                } else {
+                    showToast('Foi mal!', 'Erro ao editar a receita, tente novamente mais tarde.', 'error');
+                }
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao editar a receita, tente novamente mais tarde.', 'error');

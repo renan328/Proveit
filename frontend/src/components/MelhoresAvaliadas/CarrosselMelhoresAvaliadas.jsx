@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import showToast from '../../../hooks/toasts';
 import { View, ScrollView } from 'react-native';
-import CartaoReceita from "./CartaoReceita";
-import CartaoReceitaBlank from './CartaoReceitaBlank';
+import CartaoReceitaMelhorAvaliado from './MelhoresAValiadas';
+import CartaoReceitaBlank from '../CartaoReceita/CartaoReceitaBlank';
 import { HeaderRequisicao } from '../../AuthContext';
 import { useNavigation } from '@react-navigation/native';
 
-export default function CarrosselHome({ filtro }) {
+export default function CarrosselHome() {
 
     const [dadosReceita, setDadosReceita] = useState([]);
     const navigation = useNavigation();
@@ -14,7 +14,7 @@ export default function CarrosselHome({ filtro }) {
     async function ListarReceitas() {
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://serverproveit.azurewebsites.net/api/receita/" + filtro, {
+        fetch("https://serverproveit.azurewebsites.net/api/receita/ListarMaisComentadas", {
             method: "GET",
             headers
         })
@@ -47,7 +47,7 @@ export default function CarrosselHome({ filtro }) {
                 <ScrollView horizontal={true} style={{ marginLeft: 10 }}>
                     {
                         dadosReceita.map((receita, index) => (
-                            <CartaoReceita receita={receita} key={index} />
+                            <CartaoReceitaMelhorAvaliado receita={receita} key={index} />
                         ))
                     }
                 </ScrollView>

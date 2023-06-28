@@ -75,7 +75,7 @@ export default function ReceitaSingle({ navigation }) {
                 body: JSON.stringify(body)
             })
                 .then((response) => {
-                    showToast('Sucesso!', 'Receita favoritada com sucesso!', 'success');
+                    showToast('Favoritado!', 'Você salvou essa receita!', 'success');
                 })
                 .catch((error) => {
                     showToast('Foi mal!', 'Erro ao favoritar receita', 'error');
@@ -117,7 +117,7 @@ export default function ReceitaSingle({ navigation }) {
             body: JSON.stringify(body)
         })
             .then((response) => {
-                showToast('Sucesso!', 'Avaliação cadastrada com sucesso!', 'success');
+                showToast('Avaliação cadastrada!', 'Sua avaliação foi cadastrada!', 'success');
             })
             .catch((error) => {
                 console.log(error);
@@ -231,7 +231,7 @@ export default function ReceitaSingle({ navigation }) {
                             </MenuTrigger>
                             <MenuOptions>
                                 <MenuOption style={styles.menuOption} onSelect={() => showToast('Que pena!', 'Ainda não disponível', 'error')} text='Compartilhar' />
-                                <MenuOption style={styles.menuOption} onSelect={() => alert(`Mande um email para o suporte fazendo a denuncia com o nome da receita. E-mail: admproveit@gmail.com`)} text='Denunciar' />
+                                <MenuOption style={styles.menuOption} onSelect={() => alert(`Por favor, mande um email para o suporte fazendo a denuncia com o nome da receita. E-mail: admproveit@gmail.com`)} text='Denunciar' />
                             </MenuOptions>
                         </Menu>
                     </View>

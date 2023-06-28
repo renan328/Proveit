@@ -62,7 +62,7 @@ export default function Login({ navigation }) {
             })
             .then(() => navigation.navigate("Main"))
             .then(() => {
-                showToast('Sucesso!', 'Login efetuado com sucesso!', 'success');
+                showToast('Sucesso!', 'Login efetuado com sucesso! Aproveite o app!', 'success');
             })
             .catch((error) => {
                 console.log(error);

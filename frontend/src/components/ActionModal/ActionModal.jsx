@@ -11,6 +11,9 @@ export function ActionModal({ handleClose, handleAction, status }) {
   } else if (status === 'put') {
     message = 'Atenção! Esta ação pode ser arriscada.';
     confirmButtonColor = '#ffb936';
+  } else if (status === 'putUsuario') {
+    message = 'Atenção! Você realmente quer alterar seu perfil?.';
+    confirmButtonColor = '#ffb936';
   } else if (status === 'deleteReceita') {
     message = 'Tem certeza de que deseja excluir essa receita?';
     confirmButtonColor = '#ff4848d1';
@@ -57,7 +60,6 @@ const StylesLight = StyleSheet.create({
     flex: 1,
   },
 
-
   content: {
     shadowColor: "#000",
     shadowOffset: {
@@ -81,6 +83,7 @@ const StylesLight = StyleSheet.create({
     padding: 10,
     paddingVertical: 10
   },
+
   confirmText: {
     textAlign: 'center',
     fontFamily: 'Raleway_700Bold',

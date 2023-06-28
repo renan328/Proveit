@@ -11,6 +11,7 @@ import StylesLight from './home.moduleLight';
 import LottieView from 'lottie-react-native';
 import { DadosUsuario } from '../../AuthContext';
 import CarrosselExplorar from '../../components/CarrosselExplorar/CarrosselExplorar';
+import CarrosselMelhoresAvaliadas from '../../components/MelhoresAvaliadas/CarrosselMelhoresAvaliadas';
 
 export default function Home({ navigation, props }) {
 
@@ -80,12 +81,15 @@ export default function Home({ navigation, props }) {
                     </TouchableOpacity>
                 </View>
             </View>
+
             <View style={styles.listamento}>
-                <FontAwesomeIcon icon={faCircleExclamation} style={styles.listamentoIcon} size={25}></FontAwesomeIcon><Text style={styles.categoria}>O que há de <Text style={{ color: '#FF7152' }}>novo?</Text></Text>
+                <FontAwesomeIcon icon={faStar} style={[styles.listamentoIcon, { color: '#FF7152' }]} size={25}></FontAwesomeIcon>
+                <Text style={styles.categoria}>Mais<Text style={{ color: '#FF7152' }}> acessadas</Text></Text>
             </View>
             <View>
-                <CarrosselHome filtro={"ordernar/idReceita"} />
+                <CarrosselMelhoresAvaliadas />
             </View>
+
 
             <View style={styles.listamento}>
                 <FontAwesomeIcon icon={faCompass} style={styles.listamentoIcon} size={35}></FontAwesomeIcon><Text style={styles.categoriaBig}>Explore<Text style={{ color: '#FF7152' }}>!</Text></Text>
@@ -171,6 +175,13 @@ export default function Home({ navigation, props }) {
             </View>
             <View>
                 <CarrosselHome filtro={"onde/Porcoes"} />
+            </View>
+
+            <View style={styles.listamento}>
+                <FontAwesomeIcon icon={faCircleExclamation} style={styles.listamentoIcon} size={25}></FontAwesomeIcon><Text style={styles.categoria}>O que há de <Text style={{ color: '#FF7152' }}>novo?</Text></Text>
+            </View>
+            <View>
+                <CarrosselHome filtro={"ordernar/idReceita"} />
             </View>
 
             <View

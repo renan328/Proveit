@@ -27,7 +27,7 @@ export default function CartaoReceitaDoUsuario({ receita }) {
         })
             .then((response) => {
                 if (response.ok) {
-                    showToast('Sucesso!', 'Receita removida com sucesso!', 'success');
+                    showToast('Receita removida!', 'Você removeu essa receita!', 'success');
                 }
                 else {
                     showToast('Foi mal!', 'Erro ao remover a receita, tente novamente mais tarde.', 'error');

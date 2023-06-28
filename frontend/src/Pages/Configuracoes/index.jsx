@@ -27,7 +27,7 @@ export default function Configuracoes({ navigation }) {
 
     async function LimparHistorico() {
         await AsyncStorage.removeItem("historicoReceitas");
-        showToast('Limpo!', 'Limpo com sucesso!', 'success');
+        showToast('Limpo!', 'Seu histórico foi limpo!', 'success');
     }
 
     return (

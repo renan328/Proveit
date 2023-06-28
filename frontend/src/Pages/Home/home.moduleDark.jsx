@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway_800ExtraBold',
         fontSize: 20,
         color: '#dcdcdc',
-        marginBottom: 10
+        marginBottom: 10,
+        top: 5
     },
 
     categoriaBig: {

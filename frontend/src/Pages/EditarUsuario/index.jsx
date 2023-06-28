@@ -10,6 +10,7 @@ import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import showToast from '../../../hooks/toasts';
 import { ActionModal } from '../../components/ActionModal/ActionModal'
+import { LoadingReceita } from '../../components/LoadingReceita/LoadingReceita'
 
 export default function EditarUsuario({ navigation }) {
 
@@ -23,6 +24,7 @@ export default function EditarUsuario({ navigation }) {
     const [idUsuario, setIdUsuario] = useState(0);
 
     const [visibleModal, setVisibleModal] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const scheme = useColorScheme();
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
@@ -35,6 +37,7 @@ export default function EditarUsuario({ navigation }) {
     async function BuscarUsuario() {
         const userDataJWT = await DadosUsuario();
         const headers = await HeaderRequisicao(navigation);
+        setLoading(true);
 
         fetch("https://serverproveit.azurewebsites.net/api/usuario/" + userDataJWT.ID, {
             method: "GET",
@@ -48,8 +51,11 @@ export default function EditarUsuario({ navigation }) {
                 setSenha(usuario.senha);
                 setFoto(usuario.foto);
                 setIdUsuario(usuario.idUsuario);
+
+                setLoading(false);
             })
             .catch((error) => {
+                setLoading(false);
                 showToast('Foi mal!', 'Erro ao buscar seus dados, tente novamente mais tarde.', 'error');
             });
     }
@@ -125,7 +131,7 @@ export default function EditarUsuario({ navigation }) {
         })
             .then((response) => {
                 if (response.ok) {
-                    showToast('Sucesso!', 'Usuário editado com sucesso!', 'success');
+                    showToast('Peril editado!', 'Você editou seu perfil com sucesso!', 'success');
                     navigation.navigate('PerfilScreen');
                 } else if (response.status === 409) {
                     response.text().then((message) => {
@@ -145,134 +151,139 @@ export default function EditarUsuario({ navigation }) {
             });
     };
 
-    return (
-        <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.header}>
+    if (!loading) {
+        return (
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={styles.header}>
 
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.botao} >
-                        <FontAwesomeIcon icon={faChevronLeft} color="#FF7152" size={30} />
-                    </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.botao} >
+                            <FontAwesomeIcon icon={faChevronLeft} color="#FF7152" size={30} />
+                        </TouchableOpacity>
 
-                    <Text style={styles.CadastreSe}>Edite seu perfil</Text>
+                        <Text style={styles.CadastreSe}>Edite seu perfil</Text>
 
-                    <View
-                        style={{
-                            borderBottomColor: '#505050',
-                            opacity: 0.4,
-                            borderBottomWidth: StyleSheet.hairlineWidth,
-                            width: 330, height: 5,
-                            marginTop: 15
-                        }}
-                    />
-                </View>
+                        <View
+                            style={{
+                                borderBottomColor: '#505050',
+                                opacity: 0.4,
+                                borderBottomWidth: StyleSheet.hairlineWidth,
+                                width: 330, height: 5,
+                                marginTop: 15
+                            }}
+                        />
+                    </View>
 
-                <View style={styles.cadastro}>
-                    <Text style={styles.suafoto}>Foto de perfil</Text>
+                    <View style={styles.cadastro}>
+                        <Text style={styles.suafoto}>Foto de perfil</Text>
 
-                    <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
-                        {foto ? null : <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />}
-                        {foto && (
-                            <View style={styles.ImagePencil}>
-                                <Image source={{ uri: foto }} style={styles.imagemUsu} />
-                                <View style={styles.IconContainer}>
-                                    <FontAwesomeIcon style={styles.IconPencil} icon={faPencil} size={58} color='#FF7152' />
+                        <TouchableOpacity style={styles.BorderIcon} onPress={pickImage}>
+                            {foto ? null : <FontAwesomeIcon style={styles.IconCamera} icon={faCamera} size={58} />}
+                            {foto && (
+                                <View style={styles.ImagePencil}>
+                                    <Image source={{ uri: foto }} style={styles.imagemUsu} />
+                                    <View style={styles.IconContainer}>
+                                        <FontAwesomeIcon style={styles.IconPencil} icon={faPencil} size={58} color='#FF7152' />
+                                    </View>
                                 </View>
-                            </View>
-                        )}
-                    </TouchableOpacity>
+                            )}
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.inputs}>
+                        <View style={styles.inputSingle}>
+                            <Text style={styles.inputTitle}>Nome</Text>
+                            <TextInput
+                                style={[styles.defaultInput, errors.nome && styles.inputError]}
+                                placeholder="Nome"
+                                value={nome}
+                                placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
+                                onChangeText={(text) => setNome(text)}
+                            />
+                            {errors.nome && <Text style={styles.textError}>{errors.nome}</Text>}
+                        </View>
+
+                        <View style={styles.inputSingle}>
+                            <Text style={styles.inputTitle}>Nome de usuário</Text>
+                            <TextInput
+                                style={[styles.defaultInput, errors.nomeTag && styles.inputError]}
+                                placeholder="Nome de usuário"
+                                value={nomeTag}
+                                placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
+                                onChangeText={(text) => setNomeTag(text)}
+                            />
+                            {errors.nomeTag && <Text style={styles.textError}>{errors.nomeTag}</Text>}
+                        </View>
+
+                        <View style={styles.inputSingle}>
+                            <Text style={styles.inputTitle}>E-mail</Text>
+                            <TextInput
+                                style={[styles.defaultInput, errors.email && styles.inputError]}
+                                placeholder="E-mail"
+                                value={email}
+                                placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
+                                onChangeText={(text) => setEmail(text)}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                            />
+                            {errors.email && <Text style={styles.textError}>{errors.email}</Text>}
+                        </View>
+
+                        <View style={styles.inputSingle}>
+                            <Text style={styles.inputTitle}>Senha</Text>
+                            <TextInput
+                                style={[styles.defaultInput, errors.senha && styles.inputError]}
+                                placeholder="Senha"
+                                value={senha}
+                                placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
+                                onChangeText={(text) => setSenha(text)}
+                                secureTextEntry={true}
+                            />
+                            {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
+                        </View>
+
+                        <View style={styles.inputSingle}>
+                            <Text style={styles.inputTitle}>Confirme sua senha</Text>
+                            <TextInput
+                                style={[styles.defaultInput, errors.confirmSenha && styles.inputError]}
+                                placeholder="Confirmar Senha"
+                                value={confirmSenha}
+                                placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
+                                onChangeText={(text) => setConfirmSenha(text)}
+                                secureTextEntry={true}
+                            />
+                            {errors.confirmSenha && <Text style={styles.textError}>{errors.confirmSenha}</Text>}
+                        </View>
+                    </View>
+
+                    <View style={styles.botoes}>
+                        <TouchableOpacity onPress={() => setVisibleModal(true)} >
+                            <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
+                                end={{ x: 2, y: 2 }} style={styles.button} >
+                                <Text style={styles.buttonText}>Pronto</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+                <View style={{ paddingVertical: 30, backgroundColor: scheme === 'dark' ? '#202020' : '#FFFFFF' }} />
 
-                <View style={styles.inputs}>
-                    <View style={styles.inputSingle}>
-                        <Text style={styles.inputTitle}>Nome</Text>
-                        <TextInput
-                            style={[styles.defaultInput, errors.nome && styles.inputError]}
-                            placeholder="Nome"
-                            value={nome}
-                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
-                            onChangeText={(text) => setNome(text)}
-                        />
-                        {errors.nome && <Text style={styles.textError}>{errors.nome}</Text>}
-                    </View>
+                <Modal
+                    visible={visibleModal}
+                    transparent={true}
+                    onRequestClose={() => setVisibleModal(false)}
+                >
+                    <ActionModal
+                        handleClose={() => setVisibleModal(false)}
+                        handleAction={() => handleEdit()}
+                        status={'putUsuario'}
+                    />
+                </Modal>
 
-                    <View style={styles.inputSingle}>
-                        <Text style={styles.inputTitle}>Nome de usuário</Text>
-                        <TextInput
-                            style={[styles.defaultInput, errors.nomeTag && styles.inputError]}
-                            placeholder="Nome de usuário"
-                            value={nomeTag}
-                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
-                            onChangeText={(text) => setNomeTag(text)}
-                        />
-                        {errors.nomeTag && <Text style={styles.textError}>{errors.nomeTag}</Text>}
-                    </View>
+            </ScrollView>
+        )
+    } else {
+        return <LoadingReceita message={"Buscando seu perfil..."} />
+    }
 
-                    <View style={styles.inputSingle}>
-                        <Text style={styles.inputTitle}>E-mail</Text>
-                        <TextInput
-                            style={[styles.defaultInput, errors.email && styles.inputError]}
-                            placeholder="E-mail"
-                            value={email}
-                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
-                            onChangeText={(text) => setEmail(text)}
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                        />
-                        {errors.email && <Text style={styles.textError}>{errors.email}</Text>}
-                    </View>
-
-                    <View style={styles.inputSingle}>
-                        <Text style={styles.inputTitle}>Senha</Text>
-                        <TextInput
-                            style={[styles.defaultInput, errors.senha && styles.inputError]}
-                            placeholder="Senha"
-                            value={senha}
-                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
-                            onChangeText={(text) => setSenha(text)}
-                            secureTextEntry={true}
-                        />
-                        {errors.senha && <Text style={styles.textError}>{errors.senha}</Text>}
-                    </View>
-
-                    <View style={styles.inputSingle}>
-                        <Text style={styles.inputTitle}>Confirme sua senha</Text>
-                        <TextInput
-                            style={[styles.defaultInput, errors.confirmSenha && styles.inputError]}
-                            placeholder="Confirmar Senha"
-                            value={confirmSenha}
-                            placeholderTextColor={scheme === 'dark' ? '#DDD' : '#000'}
-                            onChangeText={(text) => setConfirmSenha(text)}
-                            secureTextEntry={true}
-                        />
-                        {errors.confirmSenha && <Text style={styles.textError}>{errors.confirmSenha}</Text>}
-                    </View>
-                </View>
-
-                <View style={styles.botoes}>
-                    <TouchableOpacity onPress={() => setVisibleModal(true)} >
-                        <LinearGradient colors={['#FF7152', '#FFB649']} start={{ x: -1, y: 1 }}
-                            end={{ x: 2, y: 2 }} style={styles.button} >
-                            <Text style={styles.buttonText}>Pronto</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <View style={{ paddingVertical: 30, backgroundColor: scheme === 'dark' ? '#202020' : '#FFFFFF' }} />
-
-            <Modal
-                visible={visibleModal}
-                transparent={true}
-                onRequestClose={() => setVisibleModal(false)}
-            >
-                <ActionModal
-                    handleClose={() => setVisibleModal(false)}
-                    handleAction={() => handleEdit()}
-                    status={'put'}
-                />
-            </Modal>
-
-        </ScrollView>
-    )
 }

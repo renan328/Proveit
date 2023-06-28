@@ -24,7 +24,7 @@ export default function CarrosselCategorias() {
                 setCategorias(json);
             })
             .catch((error) => {
-                showToast('Foi mal!', 'Erro ao buscar categorias, tente novamente mais tarde.', 'error');
+                showToast('Foi mal!', 'Erro ao buscar as categorias, tente novamente mais tarde.', 'error');
             });
     }
 

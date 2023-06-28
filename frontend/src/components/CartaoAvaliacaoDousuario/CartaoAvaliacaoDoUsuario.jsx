@@ -28,7 +28,7 @@ export default function CartaoAvalicaoDoUsuario({ avaliacao }) {
         })
             .then((response) => {
                 if (response.ok) {
-                    showToast('Sucesso!', 'Avaliação removida com sucesso!', 'success');
+                    showToast('Avaliação removida!', 'Você removeu essa avaliação!', 'success');
                 }
                 else {
                     showToast('Foi mal!', 'Erro ao remover avaliação, tente novamente mais tarde.', 'error');

@@ -21,7 +21,7 @@ function ReceitaEspecial() {
     async function BuscarReceita() {
         const headers = await HeaderRequisicao(navigation);
 
-        fetch("https://serverproveit.azurewebsites.net/api/receita/proveit/31", {
+        fetch("https://serverproveit.azurewebsites.net/api/receita/proveit/34", {
             method: "GET",
             headers
         })

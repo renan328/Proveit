@@ -12,6 +12,7 @@ import { HeaderRequisicao } from '../../AuthContext';
 import { DadosUsuario } from '../../AuthContext';
 import showToast from '../../../hooks/toasts';
 import { ActionModal } from '../../components/ActionModal/ActionModal'
+import { InfoAproveitamento } from '../../components/InfoAproveitamento/InfoAproveitamento'
 
 export default function CadastroDeReceita({ navigation, props }) {
 
@@ -35,6 +36,8 @@ export default function CadastroDeReceita({ navigation, props }) {
     const styles = scheme === 'dark' ? stylesDark : stylesLight;
 
     const [visibleModal, setVisibleModal] = useState(false);
+    const [infoModal, setInfoModal] = useState(false);
+
 
     function adicionarIngrediente() {
         setIngredientes([...ingredientes, { nomeIngrediente: '', quantidade: '', medida: '' }]);
@@ -213,8 +216,12 @@ export default function CadastroDeReceita({ navigation, props }) {
             body: JSON.stringify(body)
         })
             .then((response) => {
-                showToast('Obrigado!', 'Receita cadastrada com sucesso!', 'success');
-                navigation.navigate('HomeScreen');
+                if (response.ok) {
+                    showToast('Obrigado!', 'Sua receita foi cadastrada com sucesso!', 'success');
+                    navigation.navigate('HomeScreen');
+                } else {
+                    showToast('Foi mal!', 'Erro ao cadastrar a receita, tente novamente mais tarde.', 'error');
+                }
             })
             .catch((error) => {
                 showToast('Foi mal!', 'Erro ao cadastrar a receita, tente novamente mais tarde.', 'error');
@@ -326,6 +333,11 @@ export default function CadastroDeReceita({ navigation, props }) {
                             color={aproveitamento ? '#FF7152' : undefined}
                         />
                         <Text style={{ margin: 5, fontSize: 15, fontFamily: 'Raleway_600SemiBold', color: scheme === 'dark' ? '#DDD' : '#505050' }}>Receita com aproveitamento de alimentos?</Text>
+                        <View>
+                            <TouchableOpacity style={styles.BoxInfo} onPress={() => setInfoModal(true)}>
+                                <Text style={styles.ButtonText}>?</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
 
@@ -493,6 +505,17 @@ export default function CadastroDeReceita({ navigation, props }) {
                     handleClose={() => setVisibleModal(false)}
                     handleAction={() => CadastrarReceita()}
                     status={'post'}
+                />
+
+            </Modal>
+
+            <Modal
+                visible={infoModal}
+                transparent={true}
+                onRequestClose={() => setInfoModal(false)}
+            >
+                <InfoAproveitamento
+                    handleClose={() => setInfoModal(false)}
                 />
 
             </Modal>

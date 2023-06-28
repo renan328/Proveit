@@ -30,7 +30,7 @@ export default function PreCadReceita() {
             </View>
             <View style={styles.AlertContent}>
 
-                <Text style={styles.AlertTextLast}>Agradecemos sua participação!</Text>
+                <Text style={styles.AlertTextLast}>Agradecemos por sua participação!</Text>
             </View>
             <LottieView
                 source={require('../../assets/lottie/addReceita.json')} // Caminho para o arquivo JSON do Lottie

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Proveit",
-    "slug": "Proveit",
+    "slug": "ProveIt",
     "version": "0.8",
     "orientation": "portrait",
     "icon": "./src/assets/proveitIcon.png",

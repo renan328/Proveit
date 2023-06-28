@@ -88,7 +88,7 @@ export default function CadastroDeUsuario({ navigation }) {
         })
             .then((response) => {
                 if (response.ok) {
-                    showToast('Obrigado!', 'Você foi cadastrado com sucesso!', 'success');
+                    showToast('Cadastro concluido!', 'Você foi cadastrado! Faça seu login e desfrute do app!!', 'success');
                     navigation.navigate('LoginScreen');
 
                 } else if (response.status === 409) {
