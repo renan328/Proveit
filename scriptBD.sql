@@ -67,35 +67,6 @@ CREATE TABLE Avaliacao (
     PRIMARY KEY (idAvaliacao)
 );
 
-CREATE TABLE Dicas (
-    idDicas INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    Titulo INTEGER UNSIGNED NULL,
-    Categorias_id INTEGER UNSIGNED NULL,
-    Texto_dica INTEGER UNSIGNED NULL,
-    Receita_id INTEGER UNSIGNED NULL,
-    Usuario_id INTEGER UNSIGNED NULL,
-    Aproveitamento BOOL NULL,
-    FOREIGN KEY (Usuario_id)
-        REFERENCES Usuarios (idUsuario),
-    FOREIGN KEY (Receita_id)
-        REFERENCES Receitas (idReceita),
-    FOREIGN KEY (Categorias_id)
-        REFERENCES Categorias (idCategoria),
-    PRIMARY KEY (idDicas)
-);
-
-
-CREATE TABLE Receitas_vistas (
-    idReceitas_vistas INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    Receita_id INTEGER UNSIGNED NULL,
-    Usuario_id INTEGER UNSIGNED NULL,
-    FOREIGN KEY (Usuario_id)
-        REFERENCES Usuarios (idUsuario),
-    FOREIGN KEY (Receita_id)
-        REFERENCES Receitas (idReceita),
-    PRIMARY KEY (idReceitas_vistas)
-);
-
 CREATE TABLE ReceitasFavoritas (
     idReceitasFavoritas INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     Receita_id INTEGER UNSIGNED NOT NULL,
@@ -106,69 +77,3 @@ CREATE TABLE ReceitasFavoritas (
         REFERENCES Receitas (idReceita),
     PRIMARY KEY (idReceitasFavoritas)
 );
-
--- SELECTS UNICOS
-
--- SELECT Receitas.Nome , TempoPreparo,Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento FROM Receitas INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario INNER JOIN Categorias ON Categorias.idCategoria = Receitas.Categorias_id;
--- SELECT PassoTexto, NumPasso, Receita_id FROM Passos INNER JOIN Receitas on Receitas.idReceita = Passos.Receita_id WHERE Receita_id = 2;
--- SELECT Ingredientes.Nome, Quantidade, Medida FROM Ingredientes_Receita INNER JOIN Ingredientes ON Ingredientes.idIngredientes = Ingredientes_receita.Ingredientes_id INNER JOIN Receitas on Receitas.idReceita = Ingredientes_Receita.Receita_id WHERE Receita_id = 2;
--- SELECT * FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Receita_id = 1;
-
--- insert padrão de receita
-/*
-INSERT INTO Usuarios (Nome, NomeTag, Email, Senha) VALUES ('renan', 'renan123', 're@gamil', '123');
-INSERT INTO Receitas (Nome, TempoPreparo, Tempo, Porcoes, ValCalorico, Descricao, Usuario_id, Categoria, Aproveitamento, Foto) VALUES ('pao e queijo', 2, "minutos", 1, 255, 'pao', 1, "Lanches", FALSE, "base46");
-INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (1, 1, 'coma o pao');
-INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (1, 2, 'coma o queijo');
-INSERT INTO Passos (Receita_id, NumPasso, PassoTexto) VALUES (1, 3, 'coma tudo');
-INSERT INTO Ingredientes_Receita (Nome, Quantidade , Medida, Receita_id) VALUES ("Pão", 1, 'unidade', 1);
-INSERT INTO Ingredientes_Receita (Nome, Quantidade , Medida, Receita_id) VALUES ("queijo", 1, 'unidade', 1);
-INSERT INTO Avaliacao (Estrelas, Comentario, Receita_id, Usuario_id) VALUES (5 ,"muito bom",1 ,1);
-INSERT INTO ReceitasFavoritas (Receita_id, Usuario_id) VALUES (1, 1);
-*/
-
--- Select receitas por ingredientes
-SELECT * FROM Receitas INNER JOIN Ingredientes_Receita ON Receitas.idReceita = Ingredientes_Receita.Receita_id  WHERE Ingredientes_Receita.Nome  = "Nome" OR Ingredientes_Receita.Nome = "Nome"  OR Ingredientes_Receita.Nome = "Nome" ;
-
--- Select tabela unica (testes)
-SELECT *  FROM Usuarios;
-
--- Select receita single
-SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario WHERE idReceita = 1;
--- Select all receitas
-SELECT idReceita, Receitas.Nome , TempoPreparo, Tempo, Porcoes,ValCalorico, Descricao, Usuarios.NomeTag, Aproveitamento, Receitas.Foto, Passos.PassoTexto, Passos.NumPasso, Passos.idPasso, Ingredientes_Receita.idIngredientesReceita, Ingredientes_Receita.Nome AS NomeIngrediente, Ingredientes_Receita.Quantidade, Ingredientes_Receita.Medida, Categoria FROM Receitas INNER JOIN Passos ON Passos.Receita_id = Receitas.idReceita INNER JOIN Ingredientes_Receita ON Ingredientes_Receita.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Receitas.Usuario_id = Usuarios.idUsuario;
-
-SELECT idAvaliacao, Estrelas, Comentario, Receita_id, Avaliacao.Usuario_id, Usuarios.Nome AS UsuarioNome, Usuarios.Foto AS UsuarioFoto FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Receita_id = 1;
--- Select Receitas favoritas por usuário
-SELECT Receita_id FROM ReceitasFavoritas WHERE Usuario_id = 1;
-
-SELECT idAvaliacao, Estrelas, Comentario, Receita_id, Avaliacao.Usuario_id, Usuarios.Nome AS UsuarioNome, Usuarios.Foto AS UsuarioFoto, Receitas.Nome AS NomeReceita FROM Avaliacao INNER JOIN Receitas ON Avaliacao.Receita_id = Receitas.idReceita INNER JOIN Usuarios ON Avaliacao.Usuario_id = Usuarios.idUsuario WHERE Avaliacao.Usuario_id = @idUsuario;
-
-UPDATE Avaliacao SET 
-                        Estrelas = @estrelas,
-                        Comentario = @comentario,
-                        Usuario_id = @usuario_id,
-                        Receita_id = @receita_id
-                        WHERE idAvaliacao = 1;
-
--- DELETE FROM ReceitasFavoritas WHERE Receita_id = 17;
--- DELETE FROM Passos WHERE Receita_id = 17;
--- DELETE FROM Receitas WHERE idReceita = 17;
-
-SELECT * FROM Receitas WHERE idReceita = 6;
- SELECT idReceita, R.Nome, R.Foto, I.Nome FROM Receitas R
-INNER JOIN Ingredientes_Receita  I
-ON R.IdReceita = I.Receita_id
-WHERE R.Nome like '%mousse%'
-OR I.Nome LIKE '%morangos%' 
-OR I.Nome LIKE '%morangos%' 
-OR I.Nome LIKE '%tes%'
-OR I.Nome LIKE '%morangos%' 
-OR I.Nome LIKE '%morangos%';
-
-	SELECT R.idReceita, R.Nome, R.Foto, R.Aproveitamento, COUNT(F.Receita_id) AS TotalFavoritos FROM Receitas R INNER JOIN ReceitasFavoritas F ON R.idReceita = F.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento		
-	ORDER BY TotalFavoritos DESC;
-    SELECT R.idReceita, R.Nome, R.Foto, R.Aproveitamento, COUNT(A.Comentario) AS TotalComentarios FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento		
-ORDER BY TotalComentarios DESC;
-    SELECT R.idReceita, R.Nome, R.Foto, R.Aproveitamento, AVG(A.Estrelas) AS mediaEstrelas FROM Receitas R INNER JOIN Avaliacao A ON R.idReceita = A.Receita_id GROUP BY R.idReceita, R.Nome, R.Foto, R.Aproveitamento		
-ORDER BY mediaEstrelas DESC;
